@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La lettera successiva · Simulazioni</title>
+<link rel="stylesheet" href="../sim.css?v=3">
+<style>
+  .stage { flex-direction: column; }
+  .controls { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .controls input[type=text] {
+    flex: 1; min-width: 280px; background: var(--bg-2); border: 1px solid var(--line-2); border-radius: 10px;
+    padding: 10px 14px; font-family: var(--mono); font-size: 17px; outline: none;
+  }
+  .controls input[type=text]:focus { border-color: var(--orange); }
+  .main { display: flex; gap: 18px; flex: 1; min-height: 0; }
+  .text-card { flex: 1; }
+  .text-card .label { justify-content: space-between; }
+  .tiles { display: flex; flex-wrap: wrap; align-content: flex-start; gap: 3px; flex: 1; overflow: hidden; font-family: var(--mono); font-size: 19px; }
+  .tile {
+    width: 24px; height: 32px; border-radius: 5px; display: flex; align-items: center; justify-content: center;
+    background: #141D2C; color: var(--text); position: relative; transition: background .12s;
+  }
+  .tile.sp { color: #3A475E; }
+  .tile.out { opacity: .22; }
+  .tile.q { box-shadow: 0 0 0 2px var(--cyan); }
+  .tile.tg { box-shadow: 0 0 0 2px var(--orange); background: transparent !important; color: var(--orange); }
+  .tile.next { box-shadow: inset 0 0 0 2px var(--orange); color: var(--orange); background: transparent; font-weight: 700; }
+  .tile.new { animation: pop .3s ease; }
+  @keyframes pop { from { transform: translateY(-5px); color: var(--orange); } }
+  .legend { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--muted); margin-top: 10px; font-family: var(--mono); }
+  .legend .g { width: 120px; height: 10px; border-radius: 5px; background: linear-gradient(90deg, #141D2C, #FB923C); }
+  .probs-card { width: 300px; flex: none; }
+  .probs-card .bar { cursor: pointer; border-radius: 6px; }
+  .probs-card .bar:hover { background: rgba(251,146,60,.08); }
+  .probs-card .bar.top .f { background: linear-gradient(90deg, #9A4A12, var(--orange)); box-shadow: 0 0 12px rgba(251,146,60,.5); }
+  .probs-card .bar.chosen .k { color: var(--orange); }
+  .probs-card .bar.chosen .t { border-color: var(--orange); }
+  .ptitle { font-family: var(--mono); font-size: 13px; color: var(--muted); margin-bottom: 10px; min-height: 18px; }
+  .ptitle b { color: var(--orange); }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <a class="back" href="../">← Simulazioni</a>
+  <div class="titles">
+    <h1>Un mini ChatGPT che scrive una lettera alla volta</h1>
+    <span class="sub">Ha letto 80 romanzi italiani e ha imparato una sola cosa: indovinare la lettera successiva</span>
+  </div>
+  <span class="spacer"></span>
+  <button class="info-btn"><b>i</b>Info</button>
+</header>
+
+<main class="stage" id="sim">
+  <div class="controls">
+    <input type="text" class="prompt" spellcheck="false" autocomplete="off" aria-label="Inizio del testo" placeholder="scrivi l'inizio di una frase…">
+    <button class="btn primary step">Scrivi 1 lettera</button>
+    <button class="btn auto">▶ Scrivi da solo</button>
+    <button class="btn reset" title="Ricomincia">↺</button>
+    <label class="range" title="Bassa: sceglie sempre la lettera più probabile. Alta: osa di più.">creatività <input type="range" class="temp" min="0" max="1.5" step="0.1" value="0.7"><output class="tout"></output></label>
+  </div>
+  <div class="main">
+    <section class="card text-card">
+      <div class="label"><span style="display:flex;gap:8px;align-items:center"><i style="background:var(--orange);box-shadow:0 0 8px var(--orange)"></i>Testo · in arancione le lettere che il modello sta guardando</span>
+        <span style="display:flex;gap:6px"><select class="sel layer" aria-label="Strato"></select><select class="sel head" aria-label="Testa"></select></span></div>
+      <div class="tiles"></div>
+      <div class="legend"><span>poca attenzione</span><span class="g"></span><span>molta</span><span style="margin-left:auto">passa col mouse su una lettera: vedi come l'ha scelta</span></div>
+    </section>
+    <section class="card probs-card">
+      <div class="label"><i style="background:var(--orange);box-shadow:0 0 8px var(--orange)"></i>Prossima lettera: le più probabili</div>
+      <div class="ptitle"></div>
+      <div class="bars"></div>
+    </section>
+  </div>
+</main>
+
+<div class="info-ov" id="info">
+  <div class="info-box">
+    <button class="info-close" aria-label="Chiudi">×</button>
+    <h2>Un mini ChatGPT</h2>
+    <p>Questo è un <b>modello di linguaggio</b> minuscolo. Ha letto 80 romanzi e raccolte di novelle italiane scritti tra il 1880 e il 1930 (circa 23 milioni di lettere) e ha imparato una sola cosa: dato un testo, <b>indovinare la lettera successiva</b>. ChatGPT funziona allo stesso modo, ma è milioni di volte più grande e lavora su pezzi di parola invece che su lettere.</p>
+    <h3>Prova</h3>
+    <ul>
+      <li>Scrivi l'inizio di una frase, poi premi <b>Scrivi 1 lettera</b>.</li>
+      <li>A destra vedi le lettere più probabili. <b>Clicca</b> una lettera per sceglierla tu.</li>
+      <li><b>Scrivi da solo</b>: il modello continua senza fermarsi. Scrive parole italiane e frasi "da romanzo", ma spesso senza senso: imita lo stile, non capisce cosa scrive.</li>
+    </ul>
+    <h3>Creatività (temperatura)</h3>
+    <p>A 0 sceglie sempre la lettera più probabile e tende a ripetersi. Più è alta, più sceglie anche lettere meno probabili. Per questo la stessa domanda a ChatGPT può dare risposte diverse.</p>
+    <h3>I colori: l'attenzione</h3>
+    <p>Per decidere la lettera successiva, il modello non guarda tutto il testo allo stesso modo: si concentra su alcune lettere precedenti, colorate in arancione. È il meccanismo di <b>attenzione</b>, il cuore dei Transformer (la T di GPT).</p>
+    <p style="margin-top:8px">Passa col mouse su una lettera: vedi dove guardava il modello quando l'ha scritta, e quanto la considerava probabile.</p>
+    <h3>Per i curiosi</h3>
+    <p>3 strati, 4 "teste" di attenzione (si possono vedere una per una dal menu), memoria di 92 lettere: quelle più vecchie diventano grigie perché il modello non le vede più. Circa 340.000 parametri.</p>
+  </div>
+</div>
+
+<script src="../info.js?v=1"></script>
+<script src="../modelli/chargpt.js"></script>
+<script src="lettere.js?v=3"></script>
+</body>
+</html>

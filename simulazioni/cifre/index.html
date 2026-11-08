@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Riconoscere le cifre · Simulazioni</title>
+<link rel="stylesheet" href="../sim.css?v=3">
+<link rel="stylesheet" href="cifre.css?v=2">
+</head>
+<body>
+<header class="topbar">
+  <a class="back" href="../">← Simulazioni</a>
+  <div class="titles">
+    <h1>Riconoscere le cifre scritte a mano</h1>
+    <span class="sub">Un modello che ha imparato a riconoscere i numeri da 0 a 9 guardando 60.000 esempi</span>
+  </div>
+  <span class="spacer"></span>
+  <div class="seg" role="tablist">
+    <button class="seg-b on" data-mode="simple">Risultato</button>
+    <button class="seg-b" data-mode="net">Dentro la rete</button>
+  </div>
+  <button class="info-btn"><b>i</b>Info</button>
+</header>
+
+<main class="stage" id="sim">
+  <section class="card left">
+    <div class="label"><i></i>Disegna qui un numero da 0 a 9</div>
+    <canvas class="pad"></canvas>
+    <div class="row-under">
+      <button class="btn clear">Cancella</button>
+      <div class="see-wrap"><span class="muted" style="text-align:right;line-height:1.3">ciò che vede<br>il modello</span><canvas class="see"></canvas></div>
+    </div>
+  </section>
+
+  <!-- vista semplice -->
+  <section class="card out simple-only">
+    <div class="label"><i></i>Risposta del modello · quanto è sicuro per ogni cifra</div>
+    <div class="verdict"><span class="big-digit">?</span></div>
+    <div class="bars out-bars"></div>
+  </section>
+
+  <!-- vista interna -->
+  <section class="card net net-only">
+    <div class="net-row">
+      <div class="col col-in"><div class="label">1 · il disegno</div><canvas class="map-in" data-k="in"></canvas><div class="muted sm">28×28 quadratini</div></div>
+      <div class="chev">›</div>
+      <div class="col"><div class="label">2 · cerca tratti semplici</div><div class="grid c1"></div><div class="muted sm">8 filtri → dove li trova</div></div>
+      <div class="chev">›</div>
+      <div class="col"><div class="label">3 · combina i tratti</div><div class="grid c2"></div><div class="muted sm">16 forme più complesse</div></div>
+      <div class="chev">›</div>
+      <div class="col col-fc">
+        <div class="label">4 · 64 neuroni votano → 10 cifre</div>
+        <div class="fc-wrap"><div class="neurons"></div><canvas class="links"></canvas><div class="outs"></div></div>
+      </div>
+    </div>
+    <div class="inspector"><span class="muted hint">passa col mouse su un elemento della rete per vederlo da vicino</span></div>
+  </section>
+</main>
+
+<div class="info-ov" id="info">
+  <div class="info-box">
+    <button class="info-close" aria-label="Chiudi">×</button>
+    <h2>Riconoscere le cifre scritte a mano</h2>
+    <p>Nessuno ha scritto le regole per riconoscere un 7. Il modello le ha <b>imparate da solo</b>, guardando 60.000 cifre scritte a mano insieme alla risposta giusta.</p>
+    <h3>Prova</h3>
+    <ul>
+      <li>Disegna un numero nel riquadro nero. La risposta si aggiorna mentre disegni.</li>
+      <li>Le barre dicono <b>quanto è sicuro</b> il modello per ogni cifra.</li>
+      <li>Prova a ingannarlo: un numero storto, una lettera, uno scarabocchio. Risponde comunque: <b>non sa dire "non lo so"</b>.</li>
+    </ul>
+    <h3>Dentro la rete</h3>
+    <ul>
+      <li><b>1 · Il disegno</b> viene ridotto a 28×28 quadratini: per il modello sono solo 784 numeri.</li>
+      <li><b>2 · Primo strato</b>: 8 piccoli filtri cercano tratti semplici (linee, bordi, curve). Accanto a ogni filtro vedi <b>dove</b> lo ha trovato nel disegno.</li>
+      <li><b>3 · Secondo strato</b>: 16 filtri combinano i tratti in forme più complesse.</li>
+      <li><b>4 · 64 neuroni</b> raccolgono tutto e <b>votano</b> per le 10 cifre. Le linee azzurre spingono verso una cifra, quelle rosse contro.</li>
+    </ul>
+    <p style="margin-top:12px">Nei filtri, <span style="color:var(--orange)">arancione</span> = peso positivo, <span style="color:#3B82F6">blu</span> = peso negativo. Tutti questi pesi (54.000) sono i <b>parametri</b> imparati durante l'addestramento.</p>
+  </div>
+</div>
+
+<script src="../info.js?v=1"></script>
+<script src="../modelli/mnist.js"></script>
+<script src="cifre.js?v=2"></script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prezzo della casa · Simulazioni</title>
+<link rel="stylesheet" href="../sim.css?v=3">
+<style>
+  .plot-card { flex: 1.7; }
+  .plot-card svg { flex: 1; width: 100%; min-height: 0; }
+  .legend-row { display: flex; gap: 18px; font-size: 13px; color: var(--muted); margin-top: 4px; flex-wrap: wrap; }
+  .legend-row span { display: inline-flex; align-items: center; gap: 6px; }
+  .legend-row i { display: inline-block; }
+  .side { width: 390px; flex: none; display: flex; flex-direction: column; gap: 14px; }
+  .knobs { display: flex; justify-content: space-around; }
+  .knob { display: flex; flex-direction: column; align-items: center; gap: 4px; cursor: grab; touch-action: none; user-select: none; }
+  .knob:active { cursor: grabbing; }
+  .knob svg { width: 116px; height: 116px; overflow: visible; }
+  .knob .n { font-weight: 650; font-size: 15px; }
+  .knob .val { font-family: var(--mono); font-size: 16px; color: var(--text); }
+  .k-ring { fill: none; stroke: var(--line-2); stroke-width: 8; stroke-linecap: round; }
+  .k-arc { fill: none; stroke-width: 8; stroke-linecap: round; filter: drop-shadow(0 0 6px currentColor); }
+  .k-body { fill: url(#kg); stroke: var(--line-2); stroke-width: 1.5; }
+  .k-ind { stroke-width: 4; stroke-linecap: round; }
+  .k1 { color: var(--violet); } .k2 { color: var(--cyan); }
+  .k1 .k-arc, .k1 .k-ind { stroke: var(--violet); } .k2 .k-arc, .k2 .k-ind { stroke: var(--cyan); }
+  .knob.auto .k-body { stroke: var(--cyan); stroke-width: 3; }
+  .err-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 14px; }
+  .err-bar { height: 10px; border-radius: 5px; background: var(--bg-2); border: 1px solid var(--line); overflow: hidden; margin: 10px 0 12px; }
+  .err-bar span { display: block; height: 100%; transition: width .12s, background .3s; }
+  .land-wrap { flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 4px; }
+  .land { width: 100%; flex: 1; min-height: 60px; border-radius: 10px; border: 1px solid var(--line); }
+  .land-axes { display: flex; justify-content: space-between; }
+  .err-card { flex: 1; }
+  .ctrl { flex-direction: row; align-items: center; justify-content: space-between; gap: 10px; }
+  .ctrl .btns { flex-wrap: nowrap; }
+  .ctrl .btn { padding: 8px 12px; font-size: 14px; }
+  .steps { font-family: var(--mono); font-size: 13px; color: var(--muted); }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <a class="back" href="../">← Simulazioni</a>
+  <div class="titles">
+    <h1>Prezzo della casa</h1>
+    <span class="sub">Un modello che prevede il prezzo di una casa a partire dalla superficie</span>
+  </div>
+  <span class="spacer"></span>
+  <button class="info-btn"><b>i</b>Info</button>
+</header>
+
+<main class="stage" id="sim">
+  <section class="card plot-card">
+    <div class="label"><i></i>Case vendute</div>
+    <svg class="plot"></svg>
+    <div class="legend-row">
+      <span><i style="width:10px;height:10px;border-radius:50%;background:#E7EDF7"></i>una casa venduta</span>
+      <span><i style="width:18px;height:3px;background:var(--cyan)"></i>previsione del modello</span>
+      <span><i style="width:3px;height:12px;background:var(--red)"></i>errore su quella casa</span>
+    </div>
+  </section>
+  <aside class="side">
+    <section class="card">
+      <div class="label"><i style="background:var(--violet);box-shadow:0 0 8px var(--violet)"></i>I 2 parametri del modello</div>
+      <div class="knobs">
+        <div class="knob k1"><svg></svg><span class="n">Costo di base</span><span class="val"></span></div>
+        <div class="knob k2"><svg></svg><span class="n">Costo al m²</span><span class="val"></span></div>
+      </div>
+    </section>
+    <section class="card err-card">
+      <div class="err-row">
+        <div><div class="label"><i style="background:var(--orange);box-shadow:0 0 8px var(--orange)"></i>Errore medio delle previsioni</div><span class="big-num err">–</span></div>
+        <span class="steps"></span>
+      </div>
+      <div class="err-bar"><span></span></div>
+      <div class="land-wrap">
+        <div class="axis-note">mappa dell'errore · più azzurro = errore più basso</div>
+        <canvas class="land"></canvas>
+        <div class="land-axes axis-note"><span>↑ costo di base</span><span>costo al m² →</span></div>
+      </div>
+    </section>
+    <section class="card ctrl">
+      <label class="switch"><input type="checkbox" class="train"><span class="tr"></span>Addestra</label>
+      <div class="btns"><button class="btn shuffle" title="Manopole a caso">⟲ Ricomincia</button><button class="btn data" title="Altre case">Altre case</button></div>
+    </section>
+  </aside>
+</main>
+
+<div class="info-ov" id="info">
+  <div class="info-box">
+    <button class="info-close" aria-label="Chiudi">×</button>
+    <h2>Prezzo della casa</h2>
+    <p>Un <b>modello</b> è una formula che fa previsioni. Qui prevede il prezzo di una casa sapendo solo quanti m² ha.</p>
+    <h3>Cosa vedi</h3>
+    <ul>
+      <li>Ogni <b>punto bianco</b> è una casa venduta: superficie e prezzo vero.</li>
+      <li>La <b>linea azzurra</b> è la previsione del modello per ogni superficie.</li>
+      <li>Le <b>linee colorate</b> mostrano di quanto sbaglia su ogni casa.</li>
+    </ul>
+    <h3>Le manopole sono i parametri</h3>
+    <p>Prezzo previsto = <b>costo di base</b> + <b>costo al m²</b> × superficie. Girando le manopole cambi la linea, e quindi le previsioni.</p>
+    <h3>Prova</h3>
+    <ul>
+      <li>Gira le manopole finché l'<b>errore medio</b> è il più basso possibile.</li>
+      <li>Poi attiva <b>Addestra</b>: il computer gira le manopole da solo, un passo alla volta, sempre nella direzione che riduce l'errore. Questo è l'<b>addestramento</b>.</li>
+      <li>Passa col mouse sul grafico: il modello prevede il prezzo di case che non ha mai visto.</li>
+    </ul>
+    <h3>Mappa dell'errore</h3>
+    <p>Ogni punto della mappa è una combinazione delle due manopole. Più il colore è azzurro, più il modello sbaglia poco. Il pallino arancione è dove sei adesso.</p>
+    <h3>Il collegamento con l'IA</h3>
+    <p>Questo modello ha <b>2 parametri</b>. ChatGPT funziona con lo stesso principio, ma ha <b>centinaia di miliardi</b> di parametri.</p>
+  </div>
+</div>
+
+<script src="../info.js?v=1"></script>
+<script src="manopole.js?v=3"></script>
+</body>
+</html>

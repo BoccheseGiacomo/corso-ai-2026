@@ -1,0 +1,840 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fondamenti di IA 2</title>
+<link rel="stylesheet" href="../assets/style.css?v=7">
+<script src="../assets/deck.js?v=7" defer></script>
+<style>
+  .sim-slide { justify-content: flex-start; }
+  .sim-idea { font-size: 34px; line-height: 1.3; color: var(--navy); max-width: 900px; margin-top: 30px; }
+  .sim-idea b { color: var(--teal-d); }
+  .sim-row { display: flex; align-items: center; gap: 40px; margin-top: auto; margin-bottom: 30px; }
+  .sim-thumb { width: 300px; height: 170px; border-radius: 16px; background: #0A0E15; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow); }
+  .sim-link {
+    display: inline-flex; align-items: center; gap: 14px; text-decoration: none;
+    background: var(--navy); color: #fff; font-size: 26px; font-weight: 650; padding: 20px 34px; border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(15,42,67,.25); transition: transform .15s, background .15s;
+  }
+  .sim-link:hover { background: var(--navy-2); transform: translateY(-2px); }
+  .sim-link span { color: #5EEAD4; font-size: 30px; }
+
+
+
+  /* ---- slide di contesto ---- */
+  .daily { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .dcard { background: var(--surface); border-radius: 16px; padding: 18px 20px; box-shadow: var(--shadow); display: grid; grid-template-columns: 54px 1fr; grid-template-rows: auto auto; column-gap: 12px; align-items: center; }
+  .dcard .de { grid-row: span 2; font-size: 38px; text-align: center; }
+  .dcard b { font-size: 22px; color: var(--navy); }
+  .dcard span:last-child { font-size: 18px; color: var(--muted); }
+  .htab { border-collapse: separate; border-spacing: 0 6px; font-size: 22px; justify-self: center; }
+  .htab th { font-size: 14px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); text-align: left; padding: 0 22px; }
+  .htab td { background: var(--surface); padding: 10px 22px; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .htab td:first-child { border-radius: 10px 0 0 10px; font-weight: 650; color: var(--navy); }
+  .htab td:last-child { border-radius: 0 10px 10px 0; text-align: right; min-width: 180px; }
+  .htab tr.ask td { background: var(--orange-l); color: var(--orange-d); font-weight: 750; }
+  .three-fit { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .fit { background: var(--surface); border-radius: 16px; padding: 14px 16px 16px; box-shadow: var(--shadow); display: flex; flex-direction: column; align-items: center; gap: 4px; border: 2px solid transparent; }
+  .fit.best { border-color: var(--green); }
+  .fit svg { width: 100%; height: auto; }
+  .fit b { font-size: 22px; color: var(--navy); }
+  .ferr { font-family: var(--mono); font-size: 17px; font-weight: 700; }
+  .ferr.bad { color: var(--red); } .ferr.mid { color: #B07D00; } .ferr.good { color: var(--green); }
+  .vs-list { margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 12px; }
+  .vs-list li { font-size: 22px; line-height: 1.35; color: var(--ink); }
+  .vs-list b { color: var(--navy); }
+  .ex-wrap { display: flex; flex-direction: column; gap: 14px; }
+  .ex-src { font-size: 22px; color: var(--muted); }
+  .ex-src b { color: var(--navy); }
+  .ex-rows { display: flex; flex-direction: column; gap: 10px; font-family: var(--mono); }
+  .ex-row { display: flex; align-items: center; gap: 6px; font-size: 24px; }
+  .ex-row .tk { padding: 6px 12px; border-radius: 8px; background: #EEF2F6; color: var(--ink); }
+  .ex-row .tk.q { background: transparent; border: 2.5px dashed var(--orange); color: var(--orange); font-weight: 700; padding: 4px 14px; }
+  .ex-ans { font-family: var(--font); color: var(--teal-d); font-weight: 700; margin-left: 10px; }
+  /* ---- esperimenti ---- */
+  .obs { font-size: 16px; color: var(--orange-d); font-weight: 600; margin-top: 2px; }
+  .obs::before { content: "→ "; }
+  .s-lab .lab-grid { flex: 1; }
+  .s-lab .lstep { justify-content: flex-start; }
+  .obs-t { width: 100%; border-collapse: separate; border-spacing: 0 8px; font-size: 20px; margin-top: -8px; }
+  .obs-t th { font-size: 14px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); text-align: left; padding: 0 16px; }
+  .obs-t td { background: var(--surface); padding: 12px 16px; color: var(--ink); }
+  .obs-t td:first-child { border-radius: 12px 0 0 12px; font-weight: 650; color: var(--navy); width: 44%; }
+  .obs-t td:last-child { border-radius: 0 12px 12px 0; width: 120px; }
+  .when { display: inline-block; font-size: 15px; font-weight: 700; padding: 4px 10px; border-radius: 999px; background: #EEF2F6; color: var(--muted); white-space: nowrap; }
+  .when.now { background: var(--teal-l); color: var(--teal-d); }
+  /* ---- componenti delle slide di teoria ---- */
+  .agenda-l { display: flex; flex-direction: column; gap: 16px; padding: 0; margin: 6px 0 0; }
+  .agenda-l li { list-style: none; display: flex; align-items: center; gap: 22px; font-size: 30px; color: var(--navy); font-weight: 600; }
+  .agenda-l li span { width: 52px; height: 52px; border-radius: 14px; background: var(--teal-l); color: var(--teal-d); display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 750; flex: none; }
+  .agenda-l li small { font-size: 21px; color: var(--muted); font-weight: 500; }
+
+  .tool-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  .tcard { background: var(--surface); border: 1.5px solid var(--line); border-radius: 16px; padding: 22px 20px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 8px; }
+  .tcard.first { border-color: var(--teal); box-shadow: 0 0 0 4px var(--teal-l), var(--shadow); }
+  .tcard .tn { font-size: 26px; font-weight: 750; color: var(--navy); }
+  .tcard .tu { font-family: var(--mono); font-size: 16px; color: var(--teal-d); }
+  .tcard .tt { font-size: 18px; color: var(--muted); line-height: 1.35; }
+  .tcard .badge { align-self: flex-start; font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 4px 10px; border-radius: 999px; background: var(--teal); color: #fff; }
+  .tcard .badge.g { background: #EEF2F6; color: var(--muted); }
+  .tool-grid.tall { grid-auto-rows: 1fr; gap: 20px; margin-top: 18px; }
+  .tool-grid.tall .tcard .tn { font-size: 28px; }
+
+  .vs { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 6px; }
+  .vs-box { background: var(--surface); border: 1.5px solid var(--line); border-radius: 18px; padding: 26px 28px; box-shadow: var(--shadow); }
+  .vs-box.ml { border-color: var(--teal); }
+  .vs-box h3 { font-size: 24px; margin-bottom: 20px; }
+  .vs-box.ml h3 { color: var(--teal-d); }
+  .eq { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; font-size: 21px; }
+  .chip { padding: 10px 16px; border-radius: 12px; background: #EEF2F6; color: var(--navy); font-weight: 650; }
+  .chip.t { background: var(--teal-l); color: var(--teal-d); }
+  .chip.o { background: var(--orange-l); color: var(--orange-d); }
+  .eq .op { color: var(--muted); font-weight: 700; font-size: 20px; padding-left: 14px; }
+  .vs-ex { margin-top: 20px; font-size: 19px; color: var(--muted); line-height: 1.45; }
+  .vs-ex b { color: var(--navy); }
+
+  .fn-rows { display: flex; flex-direction: column; gap: 16px; }
+  .fn-row, .fn-head { display: grid; grid-template-columns: 1fr 70px 200px 70px 1fr; align-items: center; }
+  .fn-in, .fn-out { background: var(--surface); border: 1.5px solid var(--line); border-radius: 14px; padding: 14px 18px; font-size: 21px; color: var(--navy); box-shadow: var(--shadow); }
+  .fn-out { border-color: var(--orange); background: var(--orange-l); font-weight: 650; }
+  .fn-box { background: var(--navy); color: #fff; border-radius: 14px; padding: 16px; text-align: center; font-size: 20px; font-weight: 650; }
+  .fn-arr { text-align: center; color: var(--muted); font-size: 30px; }
+  .fn-head { font-size: 15px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+  .fn-head span:nth-child(3) { text-align: center; }
+
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; flex: 1; }
+  .pts { display: flex; flex-direction: column; gap: 22px; }
+  .pt { display: flex; gap: 16px; align-items: flex-start; font-size: 25px; line-height: 1.35; color: var(--ink); }
+  .pt i { flex: none; width: 34px; height: 34px; border-radius: 10px; background: var(--teal-l); color: var(--teal-d); font-style: normal; font-weight: 750; display: flex; align-items: center; justify-content: center; font-size: 18px; margin-top: 2px; }
+  .art { width: 100%; height: auto; max-height: 380px; }
+
+  .cycle { display: flex; align-items: flex-start; justify-content: center; margin-top: 16px; }
+  .cstep { width: 240px; text-align: center; }
+  .cstep .cn { width: 92px; height: 92px; margin: 0 auto 14px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 40px; background: var(--surface); border: 3px solid var(--teal); box-shadow: var(--shadow); }
+  .cstep h3 { font-size: 24px; margin-bottom: 6px; }
+  .cstep p { font-size: 19px; color: var(--muted); line-height: 1.35; }
+  .carr { font-size: 38px; color: var(--teal); margin-top: 22px; padding: 0 6px; }
+  .loop-back { text-align: center; margin-top: 26px; font-size: 23px; color: var(--teal-d); font-weight: 650; }
+
+  .scale { display: flex; flex-direction: column; gap: 14px; margin-top: 4px; }
+  .srow { display: grid; grid-template-columns: 270px 1fr 290px; align-items: center; gap: 18px; }
+  .srow .sn { font-size: 21px; color: var(--navy); font-weight: 650; }
+  .srow .sn small { display: block; font-size: 15px; color: var(--muted); font-weight: 500; }
+  .srow .sb { height: 26px; border-radius: 8px; background: linear-gradient(90deg, var(--teal), #13C2AD); display: block; }
+  .srow .sv { font-family: var(--mono); font-size: 20px; color: var(--navy); font-weight: 700; text-align: right; }
+  .srow.big .sb { background: linear-gradient(90deg, var(--navy-2), var(--navy)); }
+
+  .guess { display: flex; flex-direction: column; align-items: center; gap: 28px; margin-top: 6px; }
+  .guess .sent { font-size: 44px; font-weight: 650; color: var(--navy); }
+  .guess .blank { display: inline-block; min-width: 150px; border-bottom: 5px dashed var(--orange); color: var(--orange); text-align: center; }
+  .gbars { width: 640px; display: flex; flex-direction: column; gap: 10px; }
+  .gbar { display: grid; grid-template-columns: 140px 1fr 70px; align-items: center; gap: 14px; font-size: 24px; }
+  .gbar .gw { font-weight: 650; color: var(--navy); text-align: right; }
+  .gbar .gt { height: 26px; background: #EEF2F6; border-radius: 8px; overflow: hidden; display: block; }
+  .gbar .gf { height: 100%; background: #B9C7D4; border-radius: 8px; display: block; }
+  .gbar.top .gf { background: linear-gradient(90deg, var(--orange), #F29A4A); }
+  .gbar .gp { font-family: var(--mono); font-size: 19px; color: var(--muted); }
+
+  .gen { display: flex; flex-direction: column; gap: 14px; margin-top: 8px; font-family: var(--mono); }
+  .gline { display: flex; align-items: center; gap: 6px; font-size: 26px; }
+  .gline .tk { padding: 8px 12px; border-radius: 8px; background: #EEF2F6; color: var(--ink); }
+  .gline .tk.nw { background: var(--orange); color: #fff; font-weight: 700; }
+  .gline .gn { font-family: var(--font); font-size: 16px; color: var(--muted); width: 74px; }
+
+  .cmp-t { width: 100%; border-collapse: separate; border-spacing: 0 10px; font-size: 22px; }
+  .cmp-t th { font-size: 15px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); text-align: left; padding: 0 18px; }
+  .cmp-t td { background: var(--surface); padding: 15px 18px; color: var(--ink); }
+  .cmp-t td:first-child { border-radius: 12px 0 0 12px; font-weight: 650; color: var(--navy); width: 230px; }
+  .cmp-t td:last-child { border-radius: 0 12px 12px 0; font-weight: 650; color: var(--teal-d); }
+
+  .take { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 10px; }
+  .tk-card { background: var(--surface); border-radius: 18px; padding: 28px 26px; box-shadow: var(--shadow); border-top: 6px solid var(--teal); }
+  .tk-card .n { font-size: 46px; font-weight: 800; color: var(--teal); line-height: 1; }
+  .tk-card p { font-size: 25px; line-height: 1.35; color: var(--navy); margin-top: 14px; font-weight: 600; }
+
+  /* ==== Fondamenti di IA 1 ==== */
+  .def-box { background: var(--surface); border-left: 8px solid var(--teal); border-radius: 18px; padding: 30px 36px; box-shadow: var(--shadow); font-size: 31px; line-height: 1.4; color: var(--navy); margin-top: 10px; }
+  .def-box strong { color: var(--teal-d); }
+  .def-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 30px; }
+  .dfc { background: var(--surface); border-radius: 16px; padding: 22px 24px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 8px; }
+  .dfc b { font-size: 23px; color: var(--navy); }
+  .dfc span { font-size: 19px; color: var(--muted); line-height: 1.35; }
+  .daily { gap: 14px; }
+  .dcard { padding: 14px 18px; }
+  .dcard.llm { box-shadow: 0 0 0 3px var(--teal), var(--shadow); }
+  .sets { display: grid; grid-template-columns: 450px 1fr; gap: 40px; align-items: center; flex: 1; }
+  .sets svg { width: 100%; height: auto; }
+  .sets svg text { font-family: inherit; }
+  .set-list { display: flex; flex-direction: column; gap: 18px; }
+  .set-row { display: grid; grid-template-columns: 26px 1fr; gap: 14px; align-items: start; }
+  .set-row i { width: 22px; height: 22px; border-radius: 6px; margin-top: 4px; }
+  .set-row b { font-size: 23px; color: var(--navy); }
+  .set-row .sd { display: block; font-size: 20px; line-height: 1.35; color: var(--ink); margin-top: 2px; }
+  .set-row .se { display: block; font-size: 17px; color: var(--muted); margin-top: 3px; }
+
+  /* dati e modello */
+  .dm { display: grid; grid-template-columns: 1fr 150px 1fr 150px 1fr; align-items: stretch; margin-top: 16px; }
+  .dm-box { background: var(--surface); border-radius: 18px; padding: 22px 22px; box-shadow: var(--shadow); border-top: 6px solid #2F6DB5; display: flex; flex-direction: column; gap: 8px; }
+  .dm-box.mod { border-top-color: var(--teal); }
+  .dm-box.out { border-top-color: var(--orange); }
+  .dm-tag { font-size: 14px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  .dm-box b { font-size: 23px; color: var(--navy); line-height: 1.25; }
+  .dm-box span:last-child { font-size: 18px; color: var(--muted); line-height: 1.4; }
+  .dm-arr { display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 15px; padding: 0 8px; font-weight: 700; color: var(--teal-d); }
+  .dm-arr span { font-size: 40px; line-height: 1; color: var(--teal); }
+  .dm-props { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 30px; }
+  .dm-prop { display: grid; grid-template-columns: 44px 1fr; gap: 14px; align-items: center; background: var(--teal-l); border-radius: 16px; padding: 18px 22px; }
+  .dm-prop i { font-style: normal; width: 40px; height: 40px; border-radius: 50%; background: var(--teal); color: #fff; font-weight: 800; font-size: 20px; display: flex; align-items: center; justify-content: center; }
+  .dm-prop span { font-size: 21px; line-height: 1.35; color: var(--navy); }
+
+  /* slide dei parametri: quattro punti */
+  .two.params { grid-template-columns: 1.15fr 1fr; gap: 30px; }
+  .two.params .pts { gap: 14px; }
+  .two.params .pt { font-size: 20px; line-height: 1.35; }
+  .two.params .pt i { width: 28px; height: 28px; font-size: 15px; margin-top: 0; border-radius: 8px; }
+  .two.params .art { max-height: 420px; }
+
+  /* reti neurali */
+  .nn-two { display: grid; grid-template-columns: 1fr 1.15fr; gap: 30px; align-items: center; flex: 1; }
+  .nn-two .pts { gap: 18px; }
+  .nn-two .pt { font-size: 21px; }
+  .nn-two .pt i { width: 30px; height: 30px; font-size: 15px; margin-top: 0; border-radius: 8px; }
+  .neuron-art, .net-art { width: 100%; height: auto; max-height: 420px; }
+  .neuron-art text, .net-art text { font-family: inherit; }
+  .net-art { max-height: 370px; }
+
+  /* neurone, strati, tipi di rete */
+  .nn-art { width: 100%; height: auto; max-height: 400px; }
+  .nn-art text, .nn-types svg text { font-family: inherit; }
+  .nn-types { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 8px; }
+  .nt { background: var(--surface); border-radius: 18px; padding: 18px 20px 22px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 6px; }
+  .nt svg { width: 100%; height: auto; margin-bottom: 8px; }
+  .nt b { font-size: 23px; color: var(--navy); }
+  .nt span { font-size: 18px; color: var(--muted); }
+  .nt.tr { box-shadow: 0 0 0 3px var(--orange), var(--shadow); }
+  .nn-art { max-height: 370px; }
+
+  /* storia e cifre */
+  .hist { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 10px; }
+  .hc { background: var(--surface); border-radius: 18px; padding: 24px 24px 26px; box-shadow: var(--shadow); border-top: 6px solid var(--teal); display: flex; flex-direction: column; gap: 10px; }
+  .hc .hy { font-size: 30px; font-weight: 800; color: var(--teal); line-height: 1; }
+  .hc b { font-size: 23px; color: var(--navy); }
+  .hc span:last-child { font-size: 19px; color: var(--ink); line-height: 1.45; }
+  .px-two { display: grid; grid-template-columns: 1fr 1.25fr; gap: 30px; align-items: center; flex: 1; }
+  .px-two .pts { gap: 18px; }
+  .px-two .pt { font-size: 21px; }
+  .px-two .pt i { width: 30px; height: 30px; font-size: 15px; margin-top: 0; border-radius: 8px; }
+  .px-art { width: 100%; height: auto; }
+  .px-art text { font-family: inherit; }
+
+  /* modello linguistico */
+  .fn-head.lm, .fn-rows.lm { margin-top: 0; }
+  .fn-head.lm { margin-top: 34px; }
+  .fn-rows.lm .fn-row { font-size: 24px; }
+
+  /* parola successiva e attenzione */
+  .lm-two { display: grid; grid-template-columns: 1fr 1.05fr; gap: 40px; align-items: center; flex: 1; }
+  .lm-two .pts { gap: 24px; }
+  .lm-two .pt { font-size: 22px; }
+  .lm-two .pt i { width: 30px; height: 30px; font-size: 15px; margin-top: 0; border-radius: 8px; }
+  .guess.lm { gap: 22px; align-items: stretch; }
+  .guess.lm .sent { font-size: 34px; }
+  .guess.lm .blank { min-width: 110px; }
+  .guess.lm .gbars { width: 100%; }
+  .at-sent { display: flex; flex-wrap: wrap; gap: 10px; font-size: 34px; font-weight: 650; margin-top: 18px; }
+  .at-w { padding: 8px 14px; border-radius: 10px; color: var(--navy); background: rgba(224,115,31, calc(var(--a) * .85)); }
+  .at-blank { padding: 6px 14px; border-radius: 10px; border: 3px dashed var(--teal); color: var(--teal-d); }
+  .at-cap { font-size: 17px; color: var(--muted); margin-top: 12px; }
+  .at-pts { margin-top: 26px; gap: 14px; }
+  .at-pts .pt { font-size: 22px; }
+  .at-pts .pt i { width: 30px; height: 30px; font-size: 15px; margin-top: 0; border-radius: 8px; }
+  .at-sent { font-size: 42px; gap: 12px; margin-top: 34px; }
+  .at-cap { font-size: 19px; margin-top: 16px; }
+  .at-pts { margin-top: 40px; gap: 20px; }
+  .at-pts .pt { font-size: 25px; }
+
+  /* storia dell'IA */
+  .eras { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; margin: auto 0; position: relative; }
+  .eras::before { content: ""; position: absolute; left: 4%; right: 4%; top: 60px; height: 4px; background: var(--teal); border-radius: 2px; }
+  .era { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px; position: relative; }
+  .era .ey { font-size: 24px; font-weight: 800; color: var(--teal-d); height: 32px; }
+  .era .ed { width: 22px; height: 22px; border-radius: 50%; background: var(--surface); border: 5px solid var(--teal); margin: 4px 0 6px; }
+  .era b { font-size: 25px; color: var(--navy); }
+  .era .et { font-size: 19px; color: var(--ink); line-height: 1.45; }
+  .era.win .ey { color: var(--muted); }
+  .era.win .ed { border-color: var(--muted); }
+  .hist.hs { margin: auto 0; gap: 26px; }
+  .hist.hs .hc { padding: 28px 28px 32px; gap: 14px; }
+  .hist.hs .hc b { font-size: 25px; }
+  .hist.hs .hc span:last-child { font-size: 21px; line-height: 1.5; }
+
+  /* linea del tempo */
+  .tline { position: relative; flex: 1; margin: 0 10px; min-height: 370px; }
+  .tline .tbar { position: absolute; left: 0; right: 0; top: 50%; height: 4px; margin-top: -2px; background: var(--teal); border-radius: 2px; }
+  .tp { position: absolute; top: 50%; width: 0; height: 0; }
+  .tp .tdot { position: absolute; left: -11px; top: -11px; width: 22px; height: 22px; box-sizing: border-box; border-radius: 50%; background: var(--surface); border: 5px solid var(--teal); z-index: 2; }
+  .tp .ttick { position: absolute; left: -1px; width: 2px; height: 34px; background: var(--line, #C9D3DC); }
+  .tp.up .ttick { bottom: 11px; }
+  .tp.down .ttick { top: 11px; }
+  .tp .tlab { position: absolute; left: -110px; width: 220px; text-align: center; display: flex; flex-direction: column; gap: 4px; }
+  .tp.up .tlab { bottom: 50px; height: 122px; }
+  .tp.down .tlab { top: 50px; }
+  .tp .ty { font-size: 24px; font-weight: 800; color: var(--teal-d); }
+  .tp .tt { font-size: 19px; color: var(--ink); line-height: 1.35; }
+  .tp.grey .tdot { border-color: var(--muted); }
+  .tp.grey .ty { color: var(--muted); }
+  .tp.first .tlab { left: -60px; text-align: left; }
+  .tp.last .tlab { left: auto; right: -60px; text-align: right; }
+
+  /* ===== Fondamenti 2 ===== */
+  .rp-pts { margin-top: 30px; gap: 14px; }
+  .rp-pts .pt { font-size: 22px; }
+  /* contesto-modello-risposta */
+  .cmr { display: grid; grid-template-columns: 1.1fr 60px .8fr 60px 1.1fr; align-items: center; margin-top: 6px; }
+  .cmr-h { font-size: 15px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  .cmr-ctx { background: var(--surface); border: 3px solid var(--navy-2); border-radius: 18px; padding: 16px 18px; display: flex; flex-direction: column; gap: 8px; box-shadow: var(--shadow); }
+  .cmr-ctx .cmr-h { color: var(--navy-2); }
+  .ci { background: var(--bg); border-radius: 10px; padding: 9px 14px; font-size: 19px; color: var(--navy); font-weight: 600; }
+  .ci.p { background: var(--orange-l); border: 2px solid var(--orange); }
+  .ci small { display: block; font-size: 15px; font-weight: 500; color: var(--muted); }
+  .cmr-arr { text-align: center; font-size: 40px; color: var(--teal); font-weight: 700; }
+  .cmr-mod { background: var(--navy); color: #fff; border-radius: 18px; padding: 34px 10px; text-align: center; font-size: 23px; font-weight: 700; line-height: 1.25; }
+  .cmr-out { background: var(--surface); border: 2px solid var(--teal); border-radius: 18px; padding: 16px 18px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 10px; }
+  .cmr-words { display: flex; flex-wrap: wrap; gap: 6px; }
+  .cmr-words span { background: var(--teal-l); color: var(--teal-d); border-radius: 8px; padding: 6px 10px; font-size: 19px; font-weight: 650; }
+  .cmr-words .nw { background: none; color: var(--muted); }
+  .cmr-loop { font-size: 18px; color: var(--teal-d); font-weight: 600; text-align: center; margin-top: 14px; }
+  .cmr-pts { margin-top: 18px; gap: 10px; }
+  .cmr-pts .pt { font-size: 21px; }
+  /* modelli */
+  .two-col { display: grid; grid-template-columns: 1.15fr 1fr; gap: 40px; align-items: center; flex: 1; }
+  .two-col .pts { gap: 22px; }
+  .two-col .pt { font-size: 22px; }
+  .mods { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .mod { background: var(--surface); border-radius: 14px; padding: 14px 18px; box-shadow: var(--shadow); border-left: 5px solid var(--teal); display: flex; flex-direction: column; gap: 2px; }
+  .mod b { font-size: 22px; color: var(--navy); }
+  .mod span { font-size: 16px; color: var(--muted); }
+  /* scala */
+  .sc { display: flex; flex-direction: column; gap: 30px; margin: auto 0; padding-bottom: 10px; }
+  .sc-row { display: grid; grid-template-columns: 330px 1fr 200px; align-items: center; gap: 22px; }
+  .sc-name { font-size: 22px; color: var(--navy); font-weight: 600; }
+  .sc-track { position: relative; height: 40px; border-radius: 8px; background: var(--bg); border: 1px solid var(--line); }
+  .sc-g { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--line); }
+  .sc-bar { position: relative; display: block; height: 100%; background: var(--teal); border-radius: 8px; }
+  .sc-row.big .sc-bar { background: var(--navy); }
+  .sc-val { font-size: 21px; font-weight: 750; color: var(--teal-d); }
+  .sc-row.big .sc-val { color: var(--navy); }
+  .sc-bar { width: var(--log); transition: width .7s ease; }
+  .sc.lin .sc-bar { width: var(--lin); }
+  .sc .g-lin, .sc.lin .g-log { display: none; }
+  .sc.lin .g-lin { display: block; }
+  .sc .ax-lin-row { display: none; }
+  .sc.lin .ax-lin-row { display: grid; }
+  .sc.lin .sc-axis:not(.ax-lin-row) { display: none; }
+  .sc-tog { display: inline-flex; align-self: flex-end; margin-top: -6px; border: 2px solid var(--teal); border-radius: 10px; overflow: hidden; }
+  .sc-tog button { font: inherit; font-size: 17px; font-weight: 650; padding: 8px 16px; border: 0; background: var(--surface); color: var(--teal-d); cursor: pointer; }
+  .sc-tog button.on { background: var(--teal); color: #fff; }
+  .sc-axis { margin-top: -18px; }
+  .sc-ax { position: relative; height: 30px; border-top: 2px solid var(--muted); }
+  .sc-tick { position: absolute; top: 6px; transform: translateX(-50%); white-space: nowrap; font-size: 19px; color: var(--muted); font-weight: 600; }
+  .sc-tick::before { content: ""; position: absolute; left: 50%; top: -12px; width: 2px; height: 8px; background: var(--muted); }
+  .sc-tick sup { font-size: 13px; }
+  .sc-axl { font-size: 17px; color: var(--muted); padding: 4px 0 0 20px; align-self: start; }
+  /* token (dal deck terminologia) */
+  .toks { display: flex; flex-wrap: wrap; gap: 4px; font-family: var(--mono); font-size: 27px; }
+  .toks span { padding: 6px 4px; border-radius: 6px; white-space: pre; }
+  .toks span:nth-child(5n+1) { background: #D6EEF9; }
+  .toks span:nth-child(5n+2) { background: #FDE4CF; }
+  .toks span:nth-child(5n+3) { background: #DDF3E4; }
+  .toks span:nth-child(5n+4) { background: #EADFF7; }
+  .toks span:nth-child(5n+5) { background: #FBE0E3; }
+  .tok-row { background: var(--surface); border-radius: 16px; padding: 16px 20px; box-shadow: var(--shadow); display: grid; grid-template-columns: 1fr 120px; align-items: center; gap: 16px; }
+  .tok-row .tn { font-size: 18px; color: var(--muted); text-align: right; }
+  .tok-row .tn b { display: block; font-size: 30px; color: var(--navy); }
+  .tok-list { display: flex; flex-direction: column; gap: 12px; }
+  .tok-pts { margin-top: 24px; gap: 12px; }
+  .tok-pts .pt { font-size: 21px; }
+  .cmp-t { width: 100%; border-collapse: separate; border-spacing: 0 8px; }
+  .cmp-t th { font-size: 14px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); text-align: left; padding: 0 16px; font-weight: 700; }
+  .cmp-t td { background: var(--surface); padding: 12px 16px; color: var(--ink); line-height: 1.35; vertical-align: top; }
+  .tk-t td { font-size: 22px; padding: 16px 20px; }
+  .tk-t td:first-child { font-weight: 750; color: var(--navy); border-radius: 12px 0 0 12px; }
+  .tk-t td:last-child { border-radius: 0 12px 12px 0; }
+  /* costo dei token */
+  .tc-two { display: grid; grid-template-columns: .78fr 1.22fr; gap: 36px; align-items: center; flex: 1; }
+  .tc-two .pts { gap: 22px; }
+  .tc-two .pt { font-size: 21px; }
+  .pr-t { border-spacing: 0 6px; }
+  .pr-t th { font-size: 13px; padding: 0 12px; }
+  .pr-t td { font-size: 19px; padding: 11px 14px; }
+  .pr-t td:first-child { border-radius: 10px 0 0 10px; white-space: nowrap; }
+  .pr-t td:last-child { border-radius: 0 10px 10px 0; }
+  .pr-t td b { color: var(--navy); }
+  .pr-t td small { font-size: 14px; color: var(--muted); margin-left: 4px; }
+  .pr-t td:nth-child(2), .pr-t td:nth-child(3) { font-weight: 700; color: var(--teal-d); vertical-align: middle; }
+  .tc-src { font-size: 14px; color: var(--muted); margin-top: 6px; }
+  /* temperatura */
+  .tp-sub { font-size: 21px; margin: -6px 0 18px; }
+  .temp { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  .tbox { background: var(--surface); border-radius: 18px; padding: 20px 24px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 8px; }
+  .tbox h3 { font-size: 22px; margin-bottom: 0; }
+  .tbox .tsub { font-size: 16px; color: var(--muted); margin-bottom: 8px; }
+  /* contesto */
+  .cx-two { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; align-items: center; flex: 1; }
+  .cx-two .pts { gap: 20px; }
+  .cx-two .pt { font-size: 21px; }
+  .cx { display: flex; flex-direction: column; gap: 8px; }
+  .cx-bar { border-radius: 10px; padding: 8px 14px; font-size: 18px; font-weight: 650; color: #fff; }
+  .cx-bar small { display: block; font-size: 14px; font-weight: 500; opacity: .9; }
+  .sb1 { background: #0F2A43; } .sb2 { background: #1D4366; } .sb4 { background: #2F6DB5; } .sb5 { background: #0E9F8E; } .sbp { background: var(--orange); } .sb3 { background: #7A8A99; }
+  /* rilegge la chat (dal deck terminologia) */
+  .grow { display: flex; flex-direction: column; gap: 16px; margin-top: 6px; }
+  .grow-row { display: grid; grid-template-columns: 170px 1fr; align-items: center; gap: 16px; }
+  .grow-row .gl2 { font-size: 18px; font-weight: 700; color: var(--navy); }
+  .grow-row .gl2 small { display: block; font-weight: 500; color: var(--muted); font-size: 15px; }
+  .msgs { display: flex; gap: 6px; flex-wrap: nowrap; }
+  .m { font-family: var(--mono); font-size: 17px; font-weight: 700; padding: 13px 14px; border-radius: 9px; color: #fff; min-width: 54px; text-align: center; }
+  .m.s { background: #0F2A43; } .m.u { background: #2F6DB5; } .m.a { background: #0E9F8E; } .m.n { background: var(--orange); }
+  .grow-leg { display: flex; gap: 22px; font-size: 16px; color: var(--muted); margin-top: 8px; }
+  .grow-leg span { display: inline-flex; align-items: center; gap: 8px; }
+  .grow-leg i { width: 16px; height: 16px; border-radius: 4px; display: inline-block; }
+  /* prompt */
+  .pr-two { display: grid; grid-template-columns: .9fr 1.1fr; gap: 34px; align-items: center; flex: 1; }
+  .pr-two .pts { gap: 20px; }
+  .pr-two .pt { font-size: 21px; }
+  .chat { display: flex; flex-direction: column; gap: 10px; }
+  .cm { display: grid; grid-template-columns: 120px 1fr; gap: 12px; align-items: center; }
+  .cm .rl { font-size: 15px; font-weight: 700; text-align: center; padding: 8px; border-radius: 9px; color: #fff; }
+  .cm .tx { background: var(--surface); border-radius: 12px; padding: 11px 16px; font-size: 18px; line-height: 1.35; box-shadow: var(--shadow); }
+  .cm .tx small { display: block; font-size: 14.5px; color: var(--muted); margin-top: 3px; }
+  .lab-shot { display: block; width: 100%; max-width: 440px; margin-top: 10px; border: 1px solid var(--line, #C9D3DC); border-radius: 8px; }
+  .err { display: flex; flex-direction: column; gap: 22px; margin-top: 30px; max-width: 980px; }
+  .err-def { margin: 30px 0 0; max-width: 980px; font-size: 23px; line-height: 1.45; color: var(--ink); background: #E6F4F2; border-radius: 14px; padding: 18px 26px; }
+  .err-def strong { color: var(--teal-d); }
+  .err-card { display: flex; align-items: center; gap: 24px; background: var(--surface); border-radius: 16px; padding: 26px 32px; box-shadow: var(--shadow); border-left: 8px solid var(--orange); }
+  .err-card.ok { border-left-color: var(--teal); }
+  .err-card p { margin: 0; font-size: 28px; line-height: 1.4; color: var(--ink); }
+  .err-n { flex: none; width: 46px; height: 46px; border-radius: 50%; background: var(--orange); color: #fff; font-size: 24px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+  .err-card.ok .err-n { background: var(--teal); }
+  .rl.s { background: #0F2A43; } .rl.u { background: var(--orange); } .rl.a { background: #0E9F8E; }
+</style>
+</head>
+<body data-course="Corso AI · Fondamenti di IA 2">
+
+<svg class="sprite" aria-hidden="true">
+  <symbol id="i-copy" viewBox="0 0 24 24"><path d="M8 8h11v12H8z M5 16V4h11"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><path d="M9 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z M2.5 20c.6-3.5 3.3-5.5 6.5-5.5s5.9 2 6.5 5.5 M16 4.3a3.5 3.5 0 0 1 0 6.4 M18 14.8c1.9.7 3.2 2.5 3.5 5.2"/></symbol>
+</svg>
+
+<main class="stage" id="stage" aria-live="polite">
+
+<section class="slide s-title" data-title="Titolo">
+  <div class="title-grid">
+    <div class="title-text">
+      <p class="kicker">Modulo · Fondamenti di IA 2</p>
+      <h1>Come funziona un modello linguistico</h1>
+      <p class="lead">Language model, LLM e SLM, token, contesto e prompt</p>
+      <p class="author"><span class="author-bar"></span>Giacomo Bocchese</p>
+    </div>
+    <div class="title-art" aria-hidden="true">
+      <svg viewBox="0 0 520 460"><circle cx="270" cy="235" r="210" fill="#0E9F8E" fill-opacity=".08"/><rect x="60" y="120" width="170" height="220" rx="18" fill="#fff" stroke="#DCE3EA" stroke-width="2"/><text x="145" y="150" text-anchor="middle" font-size="17" font-weight="700" fill="#5B6B7A">contesto</text><rect x="78" y="170" width="46" height="18" rx="5" fill="#D6EEF9"/><rect x="130" y="170" width="30" height="18" rx="5" fill="#FDE4CF"/><rect x="166" y="170" width="52" height="18" rx="5" fill="#DDF3E4"/><rect x="78" y="200" width="38" height="18" rx="5" fill="#EADFF7"/><rect x="122" y="200" width="60" height="18" rx="5" fill="#FBE0E3"/><rect x="188" y="200" width="26" height="18" rx="5" fill="#D6EEF9"/><rect x="78" y="230" width="54" height="18" rx="5" fill="#FDE4CF"/><rect x="138" y="230" width="34" height="18" rx="5" fill="#DDF3E4"/><rect x="178" y="230" width="40" height="18" rx="5" fill="#EADFF7"/><rect x="78" y="260" width="30" height="18" rx="5" fill="#FBE0E3"/><rect x="114" y="260" width="48" height="18" rx="5" fill="#D6EEF9"/><rect x="168" y="260" width="44" height="18" rx="5" fill="#FDE4CF"/><rect x="78" y="290" width="62" height="18" rx="5" fill="#DDF3E4"/><rect x="146" y="290" width="40" height="18" rx="5" fill="#E0731F"/><path d="M240 230 H292" stroke="#0E9F8E" stroke-width="5" stroke-linecap="round"/><path d="M286 218 L304 230 L286 242z" fill="#0E9F8E"/><rect x="312" y="180" width="140" height="100" rx="18" fill="#0F2A43"/><text x="382" y="226" text-anchor="middle" font-size="18" font-weight="700" fill="#fff">modello</text><text x="382" y="250" text-anchor="middle" font-size="18" font-weight="700" fill="#fff">linguistico</text><path d="M382 290 V340" stroke="#0E9F8E" stroke-width="5" stroke-linecap="round"/><path d="M370 334 L382 352 L394 334z" fill="#0E9F8E"/><rect x="330" y="362" width="104" height="34" rx="9" fill="#0E9F8E"/><text x="382" y="385" text-anchor="middle" font-size="17" font-weight="700" fill="#fff">token</text><path d="M330 380 C 200 420, 140 400, 145 350" fill="none" stroke="#9FB3C5" stroke-width="3" stroke-dasharray="7 6"/></svg>
+    </div>
+  </div>
+  <aside class="notes">
+    Secondo modulo di teoria. Riprende i modelli linguistici visti alla fine di Fondamenti di IA 1 e spiega come sono fatti gli strumenti che usiamo: grandi e piccoli modelli, token, contesto e prompt.
+  </aside>
+</section>
+
+<section class="slide" data-title="Ripasso: il modello linguistico">
+  <p class="kicker">Fondamenti di IA 2 · Ripasso</p>
+  <h2>Ripasso: cos'è un modello linguistico</h2>
+  <div class="def-box">
+    Un <strong>modello linguistico</strong> (in inglese <em>language model</em>) è un modello che riceve un testo e <strong>prevede come continua</strong>.
+  </div>
+  <div class="fn-head lm"><span>Ingresso</span><span></span><span>Modello</span><span></span><span>Uscita</span></div>
+  <div class="fn-rows lm">
+    <div class="fn-row"><span class="fn-in">"Il gatto è salito sul…"</span><span class="fn-arr">→</span><span class="fn-box">modello linguistico</span><span class="fn-arr">→</span><span class="fn-out">"tetto"</span></div>
+  </div>
+  <div class="pts rp-pts"><div class="pt"><i>1</i><span>È una <strong>rete neurale</strong> di tipo transformer, con moltissimi parametri.</span></div><div class="pt"><i>2</i><span>È stato addestrato su <strong>enormi quantità di testo</strong>: ha imparato a prevedere la parola che viene dopo.</span></div></div>
+  <aside class="notes">
+    Riprendiamo quello che abbiamo visto alla fine di Fondamenti di IA 1. È lo schema ingresso → modello → uscita: entra un testo, esce la parola che lo continua.
+    Domanda alla classe: come ha imparato il modello che dopo "Il gatto è salito sul" viene "tetto"? Risposta: leggendo moltissimi testi e regolando i suoi parametri finché le previsioni coincidevano con le parole vere.
+  </aside>
+</section>
+
+<section class="slide" data-title="Ripasso: una parola alla volta">
+  <p class="kicker">Fondamenti di IA 2 · Ripasso</p>
+  <h2>Ripasso: il modello scrive una parola alla volta</h2>
+  <div class="lm-two">
+    <div class="pts"><div class="pt"><i>1</i><span>Per ogni parola possibile il modello calcola una <strong>probabilità</strong>.</span></div><div class="pt"><i>2</i><span>Ne <strong>sceglie</strong> una, la aggiunge al testo e ripete.</span></div><div class="pt"><i>3</i><span>Ripetendo questo passo, parola dopo parola, scrive una <strong>risposta intera</strong>.</span></div></div>
+    <div class="guess lm">
+      <div class="sent">Il gatto è salito sul <span class="blank">?</span></div>
+      <div class="gbars">
+        <div class="gbar top"><span class="gw">tetto</span><span class="gt"><span class="gf" style="width:58%"></span></span><span class="gp">58%</span></div>
+        <div class="gbar"><span class="gw">divano</span><span class="gt"><span class="gf" style="width:17%"></span></span><span class="gp">17%</span></div>
+        <div class="gbar"><span class="gw">tavolo</span><span class="gt"><span class="gf" style="width:11%"></span></span><span class="gp">11%</span></div>
+        <div class="gbar"><span class="gw">albero</span><span class="gt"><span class="gf" style="width:9%"></span></span><span class="gp">9%</span></div>
+      </div>
+    </div>
+  </div>
+  <p class="bottom-line">Per prevedere ogni parola il modello <strong>rilegge tutto il testo</strong>, dall'inizio, compresa la parola appena aggiunta.</p>
+  <aside class="notes">
+    Punto da sottolineare: il modello non "tiene a mente" quello che ha già letto. Per ogni nuova parola rilegge da capo tutto il testo: la domanda, le istruzioni e la parte di risposta già scritta.
+    Le percentuali sono un esempio. Il modello non sceglie sempre la parola più probabile: per questo la stessa domanda può dare risposte diverse. Lo vediamo meglio con la temperatura.
+    È anche il motivo per cui nelle app la risposta compare un pezzo alla volta.
+  </aside>
+</section>
+
+<section class="slide" data-title="Contesto, modello e risposta">
+  <p class="kicker">Fondamenti di IA 2 · Il modello linguistico</p>
+  <h2>Contesto, modello e risposta</h2>
+  <div class="cmr">
+    <div class="cmr-ctx">
+      <span class="cmr-h">Contesto</span>
+      <div class="ci">Istruzioni dell'app</div>
+      <div class="ci">Messaggi precedenti</div>
+      <div class="ci">File allegati</div>
+      <div class="ci p">Prompt<small>la nostra richiesta</small></div>
+    </div>
+    <div class="cmr-arr">→</div>
+    <div class="cmr-mod">Modello<br>linguistico</div>
+    <div class="cmr-arr">→</div>
+    <div class="cmr-out">
+      <span class="cmr-h">Risposta</span>
+      <div class="cmr-words"><span>Gentile</span><span>cliente,</span><span>la</span><span>ringraziamo</span><span class="nw">…</span></div>
+    </div>
+  </div>
+  <p class="cmr-loop">↺ Ogni parola generata viene aggiunta al contesto. Per prevedere la successiva il modello rilegge tutto il contesto.</p>
+  <div class="pts cmr-pts"><div class="pt"><i>1</i><span>Il <strong>contesto</strong> è tutto il testo che il modello legge prima di rispondere.</span></div><div class="pt"><i>2</i><span>Il <strong>prompt</strong>, cioè ciò che scriviamo noi, è solo una parte del contesto.</span></div></div>
+  <aside class="notes">
+    È lo schema che useremo per tutto il modulo. Nelle prossime slide vediamo una parte alla volta: quanto è grande il modello, in che unità legge il testo (i token), cosa c'è nel contesto e cos'è esattamente un prompt.
+    Quando scriviamo una domanda a ChatGPT il modello non legge solo la domanda: legge anche le istruzioni dell'app, i messaggi precedenti e gli eventuali file.
+  </aside>
+</section>
+
+<section class="slide" data-title="Large language model">
+  <p class="kicker">Fondamenti di IA 2 · Grandi e piccoli</p>
+  <h2>Large language model (LLM)</h2>
+  <div class="two-col">
+    <div class="pts"><div class="pt"><i>1</i><span>Un <strong>LLM</strong> è un modello linguistico molto grande: ha <strong>più di 50 miliardi</strong> di parametri, spesso centinaia o migliaia di miliardi.</span></div><div class="pt"><i>2</i><span>Funziona in grandi <strong>centri di calcolo</strong> (data center): lo usiamo attraverso internet ed è impossibile eseguirlo su un normale computer.</span></div><div class="pt"><i>3</i><span>È <strong>più intelligente</strong>: scrive bene in molte lingue e svolge compiti complessi.</span></div></div>
+    <div class="mods"><div class="mod"><b>GPT-6</b><span>OpenAI · ChatGPT</span></div><div class="mod"><b>Claude Opus 5.5</b><span>Anthropic</span></div><div class="mod"><b>Gemini 4</b><span>Google</span></div><div class="mod"><b>DeepSeek V4</b><span>DeepSeek</span></div><div class="mod"><b>Qwen 3.8 Max</b><span>Alibaba</span></div><div class="mod"><b>Kimi K3</b><span>Moonshot AI</span></div></div>
+  </div>
+  <p class="bottom-line">OpenAI, Anthropic e Google non dichiarano quanti parametri hanno i loro modelli. I più grandi modelli pubblici superano i <strong>mille miliardi</strong>.</p>
+  <aside class="notes">
+    Large Language Model significa "modello linguistico di grandi dimensioni". Grande per numero di parametri e per quantità di testo usato nell'addestramento.
+    I modelli "pubblici" (open weights) sono quelli di cui l'azienda rende disponibili i parametri: chiunque può scaricarli. DeepSeek, Qwen e Kimi pubblicano molti dei loro modelli; nel 2026 i più grandi arrivano a oltre mille miliardi di parametri (per esempio DeepSeek V4).
+    Per far funzionare un modello così servono molti computer specializzati: per questo lo usiamo via internet e non sul nostro computer.
+  </aside>
+</section>
+
+<section class="slide" data-title="Small language model">
+  <p class="kicker">Fondamenti di IA 2 · Grandi e piccoli</p>
+  <h2>Small language model (SLM)</h2>
+  <div class="two-col">
+    <div class="pts"><div class="pt"><i>1</i><span>Uno <strong>SLM</strong> è un modello linguistico abbastanza piccolo da funzionare su un normale <strong>computer</strong> o su un <strong>telefono</strong>.</span></div><div class="pt"><i>2</i><span>Ha <strong>meno di 20 miliardi</strong> di parametri, spesso solo pochi miliardi.</span></div><div class="pt"><i>3</i><span>Funziona anche senza internet e i dati restano sul dispositivo, ma è <strong>meno intelligente</strong> e sbaglia più spesso.</span></div></div>
+    <div class="mods"><div class="mod"><b>LFM3 1.7B</b><span>Liquid AI · 1,7 miliardi · ott 2026 · quello della prova</span></div><div class="mod"><b>Qwen 3.5 Small</b><span>Alibaba · da 0,8 a 9 miliardi · mar 2026</span></div><div class="mod"><b>Gemma 4 E2B / E4B</b><span>Google · circa 2 e 4 miliardi · apr 2026</span></div><div class="mod"><b>Ministral 3</b><span>Mistral · 3, 8 e 14 miliardi · dic 2025</span></div><div class="mod"><b>Gemini Nano</b><span>Google · nei telefoni Android</span></div></div>
+  </div>
+  <aside class="notes">
+    Le soglie di 50 e 20 miliardi sono indicative: non esiste una definizione ufficiale di "grande" e "piccolo". L'idea è che uno SLM stia nella memoria di un dispositivo normale. I modelli tra 20 e 50 miliardi stanno in mezzo: girano su computer potenti, non su quelli normali.
+    Vantaggi: privacy (il testo non esce dal dispositivo), funziona offline, costa poco. Svantaggi: conosce meno fatti, ragiona peggio, scrive peggio nelle lingue diverse dall'inglese.
+    Spesso si usano per compiti semplici e ripetitivi, per esempio riassumere una notifica sul telefono o classificare delle email.
+    "1.7B" nel nome significa 1,7 miliardi di parametri (B = billion). LFM3 di Liquid AI è uscito a fine ottobre 2026 e occupa circa 1 GB.
+  </aside>
+</section>
+
+<section class="slide" data-title="Quanti parametri">
+  <p class="kicker">Fondamenti di IA 2 · Grandi e piccoli</p>
+  <h2>Quanti parametri: dal modello della casa agli LLM</h2>
+  <div class="sc-tog" role="group" aria-label="Tipo di scala"><button type="button" class="on" onclick="var c=this.closest('section').querySelector('.sc');c.classList.add('lin');this.classList.add('on');this.nextElementSibling.classList.remove('on')">Scala lineare</button><button type="button" onclick="var c=this.closest('section').querySelector('.sc');c.classList.remove('lin');this.classList.add('on');this.previousElementSibling.classList.remove('on')">Scala logaritmica</button></div>
+  <div class="sc lin"><div class="sc-row"><span class="sc-name">Il modello della casa</span><span class="sc-track"><i class="sc-g g-log" style="left:8.333%"></i><i class="sc-g g-log" style="left:16.667%"></i><i class="sc-g g-log" style="left:25.000%"></i><i class="sc-g g-log" style="left:33.333%"></i><i class="sc-g g-log" style="left:41.667%"></i><i class="sc-g g-log" style="left:50.000%"></i><i class="sc-g g-log" style="left:58.333%"></i><i class="sc-g g-log" style="left:66.667%"></i><i class="sc-g g-log" style="left:75.000%"></i><i class="sc-g g-log" style="left:83.333%"></i><i class="sc-g g-log" style="left:91.667%"></i><i class="sc-g g-lin" style="left:20%"></i><i class="sc-g g-lin" style="left:40%"></i><i class="sc-g g-lin" style="left:60%"></i><i class="sc-g g-lin" style="left:80%"></i><span class="sc-bar" style="--log:2.51%;--lin:0.000000%"></span></span><span class="sc-val">2</span></div><div class="sc-row"><span class="sc-name">Il modello delle cifre</span><span class="sc-track"><i class="sc-g g-log" style="left:8.333%"></i><i class="sc-g g-log" style="left:16.667%"></i><i class="sc-g g-log" style="left:25.000%"></i><i class="sc-g g-log" style="left:33.333%"></i><i class="sc-g g-log" style="left:41.667%"></i><i class="sc-g g-log" style="left:50.000%"></i><i class="sc-g g-log" style="left:58.333%"></i><i class="sc-g g-log" style="left:66.667%"></i><i class="sc-g g-log" style="left:75.000%"></i><i class="sc-g g-log" style="left:83.333%"></i><i class="sc-g g-log" style="left:91.667%"></i><i class="sc-g g-lin" style="left:20%"></i><i class="sc-g g-lin" style="left:40%"></i><i class="sc-g g-lin" style="left:60%"></i><i class="sc-g g-lin" style="left:80%"></i><span class="sc-bar" style="--log:39.44%;--lin:0.000005%"></span></span><span class="sc-val">54.000</span></div><div class="sc-row"><span class="sc-name">Il mini modello delle lettere</span><span class="sc-track"><i class="sc-g g-log" style="left:8.333%"></i><i class="sc-g g-log" style="left:16.667%"></i><i class="sc-g g-log" style="left:25.000%"></i><i class="sc-g g-log" style="left:33.333%"></i><i class="sc-g g-log" style="left:41.667%"></i><i class="sc-g g-log" style="left:50.000%"></i><i class="sc-g g-log" style="left:58.333%"></i><i class="sc-g g-log" style="left:66.667%"></i><i class="sc-g g-log" style="left:75.000%"></i><i class="sc-g g-log" style="left:83.333%"></i><i class="sc-g g-log" style="left:91.667%"></i><i class="sc-g g-lin" style="left:20%"></i><i class="sc-g g-lin" style="left:40%"></i><i class="sc-g g-lin" style="left:60%"></i><i class="sc-g g-lin" style="left:80%"></i><span class="sc-bar" style="--log:46.10%;--lin:0.000034%"></span></span><span class="sc-val">340.000</span></div><div class="sc-row big"><span class="sc-name">Uno SLM</span><span class="sc-track"><i class="sc-g g-log" style="left:8.333%"></i><i class="sc-g g-log" style="left:16.667%"></i><i class="sc-g g-log" style="left:25.000%"></i><i class="sc-g g-log" style="left:33.333%"></i><i class="sc-g g-log" style="left:41.667%"></i><i class="sc-g g-log" style="left:50.000%"></i><i class="sc-g g-log" style="left:58.333%"></i><i class="sc-g g-log" style="left:66.667%"></i><i class="sc-g g-log" style="left:75.000%"></i><i class="sc-g g-log" style="left:83.333%"></i><i class="sc-g g-log" style="left:91.667%"></i><i class="sc-g g-lin" style="left:20%"></i><i class="sc-g g-lin" style="left:40%"></i><i class="sc-g g-lin" style="left:60%"></i><i class="sc-g g-lin" style="left:80%"></i><span class="sc-bar" style="--log:85.84%;--lin:2.000000%"></span></span><span class="sc-val">20 miliardi</span></div><div class="sc-row big"><span class="sc-name">Un grande LLM</span><span class="sc-track"><i class="sc-g g-log" style="left:8.333%"></i><i class="sc-g g-log" style="left:16.667%"></i><i class="sc-g g-log" style="left:25.000%"></i><i class="sc-g g-log" style="left:33.333%"></i><i class="sc-g g-log" style="left:41.667%"></i><i class="sc-g g-log" style="left:50.000%"></i><i class="sc-g g-log" style="left:58.333%"></i><i class="sc-g g-log" style="left:66.667%"></i><i class="sc-g g-log" style="left:75.000%"></i><i class="sc-g g-log" style="left:83.333%"></i><i class="sc-g g-log" style="left:91.667%"></i><i class="sc-g g-lin" style="left:20%"></i><i class="sc-g g-lin" style="left:40%"></i><i class="sc-g g-lin" style="left:60%"></i><i class="sc-g g-lin" style="left:80%"></i><span class="sc-bar" style="--log:100.00%;--lin:100.000000%"></span></span><span class="sc-val">1.000 miliardi</span></div><div class="sc-row sc-axis"><span></span><span class="sc-ax ax-log"><span class="sc-tick" style="left:8.333%">10<sup>1</sup></span><span class="sc-tick" style="left:16.667%">10<sup>2</sup></span><span class="sc-tick" style="left:25.000%">10<sup>3</sup></span><span class="sc-tick" style="left:33.333%">10<sup>4</sup></span><span class="sc-tick" style="left:41.667%">10<sup>5</sup></span><span class="sc-tick" style="left:50.000%">10<sup>6</sup></span><span class="sc-tick" style="left:58.333%">10<sup>7</sup></span><span class="sc-tick" style="left:66.667%">10<sup>8</sup></span><span class="sc-tick" style="left:75.000%">10<sup>9</sup></span><span class="sc-tick" style="left:83.333%">10<sup>10</sup></span><span class="sc-tick" style="left:91.667%">10<sup>11</sup></span><span class="sc-tick" style="left:100.000%">10<sup>12</sup></span></span><span class="sc-axl">parametri</span></div><div class="sc-row sc-axis ax-lin-row"><span></span><span class="sc-ax ax-lin"><span class="sc-tick" style="left:0%">0</span><span class="sc-tick" style="left:20%">200 mld</span><span class="sc-tick" style="left:40%">400 mld</span><span class="sc-tick" style="left:60%">600 mld</span><span class="sc-tick" style="left:80%">800 mld</span><span class="sc-tick" style="left:100%">1.000 mld</span></span><span class="sc-axl">parametri</span></div></div>
+  <aside class="notes">
+    I primi tre sono i modelli delle simulazioni di Fondamenti di IA 1. Lo SLM da 20 miliardi è un riferimento, al limite della definizione che abbiamo dato.
+    La slide parte con la scala lineare: le barre sono proporzionali al numero vero di parametri. I primi tre modelli sono invisibili e anche lo SLM è una linea sottilissima: questa è la vera proporzione.
+    Poi cliccare su "Scala logaritmica": ogni tacca vale dieci volte la precedente (10<sup>3</sup> = mille, 10<sup>6</sup> = un milione, 10<sup>9</sup> = un miliardo, 10<sup>12</sup> = mille miliardi). Così si vedono tutti i modelli insieme.
+    Un grande LLM ha circa 50 volte i parametri di uno SLM da 20 miliardi, e lo SLM circa 60.000 volte quelli del mini modello delle lettere.
+  </aside>
+</section>
+
+<section class="slide s-lab" data-title="Grande contro piccolo">
+  <p class="kicker lab-kicker"><svg class="ic"><use href="#i-users"/></svg>Pratica · in coppia · Arena e Liquid Playground</p>
+  <h2>Grande contro piccolo</h2>
+  <div class="lab-grid">
+    <div class="lstep">
+      <h3><span>1</span>Il modello grande</h3>
+      <p class="lstep-text">Apri <strong>arena.ai</strong>, scegli la modalità <strong>Direct</strong> e un modello grande, per esempio <strong>claude-sonnet-5.5</strong>.</p>
+    </div>
+    <div class="lstep">
+      <h3><span>2</span>Il modello piccolo</h3>
+      <p class="lstep-text">Apri <strong>playground.liquid.ai</strong> e scegli <strong>LFM3-1.7B</strong>: un modello da 1,7 miliardi di parametri, uscito a ottobre 2026.</p>
+    </div>
+    <div class="lstep">
+      <h3><span>3</span>Fai le stesse domande</h3>
+      <div class="prompt small" data-copy="Riassumi la seconda guerra mondiale in tre righe."><span class="prompt-text">Riassumi la seconda guerra mondiale in tre righe.</span></div>
+      <div class="prompt small" data-copy="Quante lettere r ci sono in «il ramarro marrone corre»?"><span class="prompt-text">Quante lettere r ci sono in «il ramarro marrone corre»?</span></div>
+      <div class="prompt small" data-copy="Quante lettere &quot;r&quot; ci sono in «il ramarro marrone corre»?"><span class="prompt-text">Quante lettere "r" ci sono in «il ramarro marrone corre»?</span></div>
+    </div>
+    <div class="lstep">
+      <h3><span>4</span>Un problema di ragionamento</h3>
+      <div class="prompt small" data-copy="Ho 3 mele, ne mangio una, ne compro altre 5 e taglio a metà tutte le mele che ho. Due metà marciscono. Quante mezze mele posso ancora mangiare?"><span class="prompt-text">Ho 3 mele, ne mangio una, ne compro altre 5 e taglio a metà tutte le mele che ho. Due metà marciscono. Quante mezze mele posso ancora mangiare?</span></div>
+      <p class="obs">Confronta correttezza, chiarezza e velocità.</p>
+    </div>
+  </div>
+  <aside class="notes">
+    Arena: serve un account gratuito, da creare prima della prova. Su Arena non ci sono modelli piccoli (a novembre 2026 il più piccolo ha 27 miliardi di parametri): per questo il modello piccolo lo proviamo sul sito di Liquid AI, l'azienda che l'ha creato.
+    Liquid Playground: si apre senza account cliccando sul modello. Il modello gira sui server di Liquid AI, non sul nostro computer, ma è abbastanza piccolo da poter funzionare anche su un telefono. Verificare prima della lezione che la chat funzioni ancora senza registrazione.
+    Risposte corrette: le r sono 7 (ramarro 3, marrone 2, corre 2). Le mele: 3 − 1 + 5 = 7 mele, tagliate diventano 14 metà, tolte le 2 marce restano 12 mezze mele.
+    Contare le lettere è difficile per tutti i modelli, perché leggono token e non lettere singole: è un buon aggancio per la parte sui token.
+    Le due domande sulle r differiscono solo per gli apici intorno alla r. Nelle nostre prove LFM3 risponde giusto solo nella versione con gli apici: un piccolo cambiamento nel modo di scrivere la domanda cambia la risposta. Una spiegazione probabile è che con gli apici la r diventa un token a sé e il modello capisce meglio che si parla della lettera. Far provare entrambe le versioni e chiedere ai partecipanti perché secondo loro cambia qualcosa.
+    Cosa aspettarsi: il riassunto riesce di solito a entrambi, ma il modello piccolo è meno preciso; nei conti e nel problema delle mele sbaglia più spesso, soprattutto nei passaggi intermedi. Le risposte cambiano a ogni prova: verificare prima della lezione.
+  </aside>
+</section>
+
+<section class="slide s-lab" data-title="Grande contro piccolo: il codice">
+  <p class="kicker lab-kicker"><svg class="ic"><use href="#i-users"/></svg>Pratica · in coppia · Arena, Liquid Playground e OneCompiler</p>
+  <h2>Grande contro piccolo: scrivere una pagina web</h2>
+  <div class="lab-grid">
+    <div class="lstep">
+      <h3><span>1</span>Scegli una sfida</h3>
+      <div class="prompt small" data-copy="Crea un unico file HTML con un gioco: un quadrato compare in punti casuali e bisogna cliccarlo. Mostra i punti e un timer di 30 secondi."><span class="prompt-text">Crea un unico file HTML con un gioco: un quadrato compare in punti casuali e bisogna cliccarlo. Mostra i punti e un timer di 30 secondi.</span></div>
+      <div class="prompt small" data-copy="Crea un unico file HTML con un orologio analogico che segna l'ora attuale."><span class="prompt-text">Crea un unico file HTML con un orologio analogico che segna l'ora attuale.</span></div>
+    </div>
+    <div class="lstep">
+      <h3><span>2</span>Oppure un disegno</h3>
+      <div class="prompt small" data-copy="Crea un unico file HTML con un disegno in SVG: un paesaggio con montagne, un lago, il sole e una casetta."><span class="prompt-text">Crea un unico file HTML con un disegno in SVG: un paesaggio con montagne, un lago, il sole e una casetta.</span></div>
+    </div>
+    <div class="lstep">
+      <h3><span>3</span>Chiedi a entrambi i modelli</h3>
+      <p class="lstep-text">Invia la stessa sfida al modello grande su <strong>arena.ai</strong> e al modello piccolo su <strong>playground.liquid.ai</strong>. Copia il codice che scrivono.</p>
+      <p class="obs">La pagina funziona? Quale è fatta meglio?</p>
+    </div>
+    <div class="lstep">
+      <h3><span>4</span>Guarda il risultato</h3>
+      <p class="lstep-text">Apri <strong>onecompiler.com/html</strong> e chiudi con la × i file <strong>styles.css</strong> e <strong>script.js</strong>. In <strong>index.html</strong> cancella tutto, incolla il codice e premi <strong>Run</strong>.</p>
+      <img class="lab-shot" src="img/onecompiler-tab.png" alt="OneCompiler: le × per chiudere styles.css e script.js e il pulsante Run">
+    </div>
+  </div>
+  <aside class="notes">
+    Scrivere programmi in questo modo, descrivendo a parole quello che si vuole e lasciando il codice al modello, si chiama vibe coding.
+    OneCompiler: si usa senza account. I file styles.css e script.js vanno chiusi perché il modello scrive tutto in un unico file HTML: lasciarli aperti non serve e può confondere. La pagina compare a destra, nella scheda Preview.
+    Il codice va copiato tutto, dalla riga &lt;!DOCTYPE html&gt; fino a &lt;/html&gt;. Se il modello aggiunge spiegazioni prima o dopo, non vanno incollate.
+    Cosa aspettarsi: il modello grande di solito produce una pagina che funziona al primo colpo e curata nella grafica; il modello piccolo spesso scrive codice incompleto o con errori, oppure una pagina che si apre ma non funziona come richiesto. Provare le sfide prima della lezione.
+  </aside>
+</section>
+
+<section class="slide" data-title="Quando il modello sbaglia">
+  <p class="kicker">Fondamenti di IA 2 · Grandi e piccoli</p>
+  <h2>Hai notato cosa fa il modello quando sbaglia?</h2>
+  <div class="err">
+    <div class="err-card f">
+      <span class="err-n">1</span>
+      <p>Non dice «non lo so»: <strong>risponde comunque</strong>, con lo stesso tono sicuro di quando ha ragione.</p>
+    </div>
+    <div class="err-card ok f">
+      <span class="err-n">2</span>
+      <p>Per questo tocca a chi lo usa <strong>verificare</strong> le risposte e <strong>provare</strong> il codice prima di fidarsi.</p>
+    </div>
+  </div>
+  <p class="err-def f">Una risposta che contiene informazioni <strong>false o inventate</strong>, presentate come se fossero vere, si chiama <strong>allucinazione</strong> (in inglese <em>hallucination</em>).</p>
+  <aside class="notes">
+    Prima lasciare che i partecipanti raccontino cosa hanno visto nelle prove: conti sbagliati, lettere contate male, pagine web che non funzionano. Poi mostrare i due punti uno alla volta.
+    Il modello sceglie sempre la parola più probabile: anche quando non ha l'informazione giusta, produce un testo che sembra plausibile.
+    Allucinazione: il modello non inventa di proposito e non «vede» cose come una persona che ha le allucinazioni; il termine indica soltanto un contenuto falso presentato come un fatto. Alcuni ricercatori preferiscono parlare di confabulazione (confabulation), proprio per non attribuire al modello qualità umane. Esempi tipici: date e citazioni inventate, libri o articoli che non esistono, conti sbagliati.
+    I modelli più grandi sbagliano meno spesso, ma sbagliano anche loro: la verifica serve sempre.
+  </aside>
+</section>
+
+<section class="slide" data-title="I token">
+  <p class="kicker">Fondamenti di IA 2 · I token</p>
+  <h2>Il modello legge e scrive token, non parole</h2>
+  <div class="tok-list">
+    <div class="tok-row"><div class="toks"><span>Il</span><span> gat</span><span>to</span><span> è</span><span> sal</span><span>ito</span><span> sul</span><span> tet</span><span>to</span><span>.</span></div><div class="tn"><b>10</b>token</div></div>
+    <div class="tok-row"><div class="toks"><span>The</span><span> cat</span><span> climbed</span><span> onto</span><span> the</span><span> roof</span><span>.</span></div><div class="tn"><b>7</b>token</div></div>
+  </div>
+  <div class="pts tok-pts"><div class="pt"><i>1</i><span>Un <strong>token</strong> è un pezzo di testo: una parola intera, una parte di parola o un segno di punteggiatura.</span></div><div class="pt"><i>2</i><span>Finora abbiamo detto «parola» per semplicità: in realtà il modello prevede il <strong>token successivo</strong>.</span></div><div class="pt"><i>3</i><span>La stessa frase in italiano richiede di solito <strong>più token</strong> che in inglese.</span></div></div>
+  <aside class="notes">
+    Divisione reale calcolata con il tokenizer di OpenAI per i modelli GPT recenti. Altri modelli dividono il testo in modo diverso.
+    Le parole frequenti sono spesso un solo token; quelle meno frequenti vengono spezzate. I tokenizer sono costruiti soprattutto su testi in inglese, per questo l'italiano viene spezzato di più.
+    Il programma che divide il testo in token si chiama tokenizer. Un modello recente conosce circa 200.000 token diversi.
+    Il mini modello delle lettere di Fondamenti di IA 1 usava come token le singole lettere.
+  </aside>
+</section>
+
+<section class="slide" data-title="Quanti token">
+  <p class="kicker">Fondamenti di IA 2 · I token</p>
+  <h2>Quanto è lungo un testo in token</h2>
+  <table class="cmp-t tk-t">
+    <tr><th style="width:300px">Token</th><th>In italiano, circa</th></tr>
+    <tr><td>1 token</td><td>⅔ di parola</td></tr>
+    <tr><td>1.000 token</td><td>650 parole: una pagina e mezza</td></tr>
+    <tr><td>100.000 token</td><td>65.000 parole: un romanzo di 250 pagine</td></tr>
+    <tr><td>1.000.000 token</td><td>650.000 parole: circa tre volte <em>I promessi sposi</em></td></tr>
+  </table>
+  <aside class="notes">
+    Valori indicativi: dipendono dal tokenizer e dal tipo di testo. Numeri, codice e tabelle usano più token.
+    I promessi sposi contano circa 220.000-230.000 parole.
+    Chi usa i modelli tramite API (cioè da un programma) paga a milioni di token, e i token scritti dal modello costano più di quelli letti. Negli abbonamenti i token diventano limiti di utilizzo: dopo un certo uso l'app chiede di aspettare.
+  </aside>
+</section>
+
+<section class="slide" data-title="Cosa dipende dai token">
+  <p class="kicker">Fondamenti di IA 2 · I token</p>
+  <h2>Cosa dipende dal numero di token</h2>
+  <div class="tc-two">
+    <div class="pts"><div class="pt"><i>1</i><span>Il <strong>costo</strong> di utilizzo del modello: chi lo usa paga in base ai token usati.</span></div><div class="pt"><i>2</i><span>La <strong>quantità massima di testo</strong> che il modello può elaborare insieme: la finestra di contesto.</span></div><div class="pt"><i>3</i><span>I <strong>limiti di utilizzo</strong> delle app: dopo un certo numero di token l'app chiede di aspettare.</span></div></div>
+    <div class="tc-tab">
+      <table class="cmp-t pr-t">
+        <tr><th>Modello</th><th>Prezzo per milione di token</th><th>Testo massimo (token)</th></tr>
+        <tr><td><b>Claude Opus 5.5</b> <small>Anthropic</small></td><td>12 $</td><td>1 milione</td></tr><tr><td><b>GPT-6 Sol</b> <small>OpenAI</small></td><td>6 $</td><td>1,1 milioni</td></tr><tr><td><b>DeepSeek V4 Pro</b> <small>DeepSeek</small></td><td>2,6 $</td><td>1 milione</td></tr><tr><td><b>Claude Haiku 5.5</b> <small>Anthropic</small></td><td>0,30 $</td><td>1 milione</td></tr><tr><td><b>Gemma 4 31B</b> <small>Google</small></td><td>0,30 $</td><td>128.000</td></tr><tr><td><b>LFM3 1.7B</b> <small>Liquid AI</small></td><td>0,14 $</td><td>256.000</td></tr>
+      </table>
+    </div>
+  </div>
+  <aside class="notes">
+    Prezzi indicativi a novembre 2026 (fonti: classifica di arena.ai e openrouter.ai), media tra token letti e scritti.
+    I prezzi valgono per l'uso tramite API, cioè da un programma. Negli abbonamenti (ChatGPT, Claude, Gemini) si paga una cifra fissa al mese e i token diventano limiti di utilizzo.
+    Nella realtà i token scritti dal modello costano di più di quelli letti: per esempio Claude Opus 5.5 costa 4 $ per milione di token letti e 20 $ per milione di token scritti. Qui per semplicità mostriamo la media.
+    Ordine di grandezza: un milione di token sono circa 650.000 parole in italiano. Con Claude Opus 5.5 leggere e scrivere tutto questo testo costerebbe circa 12 dollari; con LFM3 1.7B circa 14 centesimi.
+    La finestra di contesto la vediamo meglio tra poco, nella parte sul contesto.
+  </aside>
+</section>
+
+<section class="slide s-lab" data-title="Proviamo il tokenizer">
+  <p class="kicker lab-kicker"><svg class="ic"><use href="#i-users"/></svg>Pratica · in coppia · platform.openai.com/tokenizer</p>
+  <h2>Proviamo a dividere un testo in token</h2>
+  <div class="lab-grid">
+    <div class="lstep">
+      <h3><span>1</span>Apri il tokenizer</h3>
+      <p class="lstep-text">Vai su <strong>platform.openai.com/tokenizer</strong>: non serve un account. Incolla un testo e guarda i pezzi colorati.</p>
+    </div>
+    <div class="lstep">
+      <h3><span>2</span>Italiano e inglese</h3>
+      <div class="prompt small" data-copy="Buongiorno, le scrivo per chiedere informazioni sulla fattura."><span class="prompt-text">Buongiorno, le scrivo per chiedere informazioni sulla fattura.</span></div>
+      <div class="prompt small" data-copy="Good morning, I am writing to ask for information about the invoice."><span class="prompt-text">Good morning, I am writing to ask for information about the invoice.</span></div>
+    </div>
+    <div class="lstep">
+      <h3><span>3</span>Una parola lunga</h3>
+      <div class="prompt small" data-copy="precipitevolissimevolmente"><span class="prompt-text">precipitevolissimevolmente</span></div>
+      <p class="obs">In quanti pezzi viene divisa?</p>
+    </div>
+    <div class="lstep">
+      <h3><span>4</span>Un tuo testo</h3>
+      <p class="lstep-text">Incolla un'email o un paragrafo che usi al lavoro.</p>
+      <p class="obs">Quanti token sono? E quante parole?</p>
+    </div>
+  </div>
+  <aside class="notes">
+    Il tokenizer di OpenAI mostra la divisione usata dai modelli GPT. «precipitevolissimevolmente» viene divisa in 7 token.
+    Far notare che lo spazio prima di una parola fa parte del token, e che i numeri lunghi vengono spezzati in gruppi di cifre.
+    Se la pagina chiede di accettare i cookie, basta rifiutare quelli non necessari.
+  </aside>
+</section>
+
+<section class="slide" data-title="Temperatura">
+  <p class="kicker">Fondamenti di IA 2 · I token</p>
+  <h2>La temperatura regola quanto è varia la scelta</h2>
+  <p class="tp-sub">Token successivo dopo «Il gatto è salito sul…»</p>
+  <div class="temp">
+    <div class="tbox">
+      <h3>Temperatura bassa</h3>
+      <p class="tsub">Quasi sempre il token più probabile: risposte prevedibili e ripetibili</p>
+      <div class="gbar top"><span class="gw">tetto</span><span class="gt"><span class="gf" style="width:92%"></span></span><span class="gp">92%</span></div>
+      <div class="gbar"><span class="gw">tavolo</span><span class="gt"><span class="gf" style="width:5%"></span></span><span class="gp">5%</span></div>
+      <div class="gbar"><span class="gw">divano</span><span class="gt"><span class="gf" style="width:2%"></span></span><span class="gp">2%</span></div>
+      <div class="gbar"><span class="gw">albero</span><span class="gt"><span class="gf" style="width:1%"></span></span><span class="gp">1%</span></div>
+    </div>
+    <div class="tbox">
+      <h3>Temperatura alta</h3>
+      <p class="tsub">Più spazio ai token meno probabili: risposte varie, ma più rischiose</p>
+      <div class="gbar top"><span class="gw">tetto</span><span class="gt"><span class="gf" style="width:45%"></span></span><span class="gp">45%</span></div>
+      <div class="gbar"><span class="gw">tavolo</span><span class="gt"><span class="gf" style="width:22%"></span></span><span class="gp">22%</span></div>
+      <div class="gbar"><span class="gw">divano</span><span class="gt"><span class="gf" style="width:18%"></span></span><span class="gp">18%</span></div>
+      <div class="gbar"><span class="gw">albero</span><span class="gt"><span class="gf" style="width:15%"></span></span><span class="gp">15%</span></div>
+    </div>
+  </div>
+  <p class="bottom-line">Nelle app di solito non si regola. Nella simulazione delle lettere è il cursore <strong>«Creatività (temperatura)»</strong>.</p>
+  <aside class="notes">
+    Percentuali di esempio, per mostrare l'effetto.
+    Con temperatura molto bassa il modello tende a ripetersi; con temperatura molto alta scrive frasi sempre più strane. Si può far vedere nella simulazione delle lettere, portando il cursore a 0 e poi al massimo.
+    La temperatura si regola quando si usano i modelli da programma (API) o in strumenti per sviluppatori come Google AI Studio.
+  </aside>
+</section>
+
+<section class="slide" data-title="Il prompt">
+  <p class="kicker">Fondamenti di IA 2 · Il prompt</p>
+  <h2>Il prompt è la richiesta che scriviamo al modello</h2>
+  <div class="def-box">
+    Il <strong>prompt</strong> è il testo che scriviamo per ottenere una risposta: una domanda, un'istruzione o un testo da elaborare.
+  </div>
+  <div class="pr-two">
+    <div class="pts"><div class="pt"><i>1</i><span>Il prompt è la parte del contesto che <strong>scriviamo noi</strong>, a ogni messaggio.</span></div><div class="pt"><i>2</i><span>Il <strong>prompt di sistema</strong> (<em>system prompt</em>) è scritto da chi ha costruito l'app: il modello lo legge prima della chat e di solito noi non lo vediamo.</span></div></div>
+    <div class="chat">
+      <div class="cm"><span class="rl s">sistema</span><div class="tx">Sei l'assistente dell'ufficio clienti. Rispondi in italiano, con tono cortese.<small>Prompt di sistema: scritto da chi ha fatto l'app</small></div></div>
+      <div class="cm"><span class="rl u">utente</span><div class="tx">Scrivi una risposta a questa email di un cliente: …<small>Il nostro prompt</small></div></div>
+      <div class="cm"><span class="rl a">assistente</span><div class="tx">Gentile cliente, la ringraziamo per averci scritto…<small>La risposta del modello</small></div></div>
+    </div>
+  </div>
+  <aside class="notes">
+    In italiano si dice anche richiesta o istruzione, ma "prompt" è il termine che si trova ovunque.
+    Il prompt di sistema contiene le regole dell'app, a volte la data di oggi e l'elenco degli strumenti che il modello può usare. Le istruzioni personalizzate che impostiamo noi vengono aggiunte vicino al prompt di sistema: per questo valgono in tutta la chat.
+    Come scrivere un buon prompt lo vediamo nel modulo Utilizzo dell'IA.
+  </aside>
+</section>
+
+<section class="slide" data-title="Rilegge tutta la chat">
+  <p class="kicker">Fondamenti di IA 2 · Il contesto</p>
+  <h2>A ogni messaggio il modello rilegge tutta la chat</h2>
+  <div class="grow">
+    <div class="grow-row"><span class="gl2">1° messaggio<small>il modello legge</small></span><div class="msgs"><span class="m s">istruzioni</span><span class="m n">D1</span></div></div>
+    <div class="grow-row"><span class="gl2">2° messaggio<small>il modello legge</small></span><div class="msgs"><span class="m s">istruzioni</span><span class="m u">D1</span><span class="m a">R1</span><span class="m n">D2</span></div></div>
+    <div class="grow-row"><span class="gl2">3° messaggio<small>il modello legge</small></span><div class="msgs"><span class="m s">istruzioni</span><span class="m u">D1</span><span class="m a">R1</span><span class="m u">D2</span><span class="m a">R2</span><span class="m n">D3</span></div></div>
+    <div class="grow-row"><span class="gl2">10° messaggio<small>il modello legge</small></span><div class="msgs"><span class="m s">istruzioni</span><span class="m u">D1</span><span class="m a">R1</span><span class="m u">D2</span><span class="m a">R2</span><span class="m u">…</span><span class="m a">…</span><span class="m u">D9</span><span class="m a">R9</span><span class="m n">D10</span></div></div>
+    <div class="grow-row"><span class="gl2">Nuova chat<small>il modello legge</small></span><div class="msgs"><span class="m s">istruzioni</span><span class="m n">D1</span></div></div>
+  </div>
+  <div class="grow-leg"><span><i style="background:#0F2A43"></i>istruzioni dell'app</span><span><i style="background:#2F6DB5"></i>domande precedenti</span><span><i style="background:#0E9F8E"></i>risposte precedenti</span><span><i style="background:#E0731F"></i>domanda nuova</span></div>
+  <p class="bottom-line">Il modello non "ricorda" la chat: <strong>la rilegge ogni volta</strong>. Una nuova chat parte da un contesto vuoto.</p>
+  <aside class="notes">
+    È il punto più importante della parte sul contesto. Il modello non cambia mentre chattiamo (i parametri restano fissi): l'unico modo in cui "sa" cosa abbiamo detto prima è che l'app gli rimanda tutta la conversazione.
+    Conseguenze: ogni messaggio richiede di leggere più token del precedente; una chat molto lunga si riempie; aprire una nuova chat è un modo per ripartire puliti.
+    La "memoria" delle app funziona in modo simile: è testo salvato che l'app rimette nel contesto. Lo vediamo più avanti.
+  </aside>
+</section>
+
+<section class="slide" data-title="Il contesto">
+  <p class="kicker">Fondamenti di IA 2 · Il contesto</p>
+  <h2>Il contesto è tutto il testo che il modello legge</h2>
+  <div class="cx-two">
+    <div class="pts"><div class="pt"><i>1</i><span>Il <strong>contesto</strong> (<em>context</em>) è tutto il testo che il modello riceve ogni volta che risponde.</span></div><div class="pt"><i>2</i><span>Oltre a ciò che ha imparato nell'addestramento, il modello conosce <strong>solo ciò che è nel contesto</strong>.</span></div><div class="pt"><i>3</i><span>La <strong>finestra di contesto</strong> (<em>context window</em>) è la quantità massima di token che può leggere insieme: nei modelli più grandi arriva a circa <strong>1 milione</strong>.</span></div></div>
+    <div class="cx"><div class="cx-row"><div class="cx-bar sb1" style="width:74%">Istruzioni dell'app<small>prompt di sistema, data, strumenti disponibili</small></div></div><div class="cx-row"><div class="cx-bar sb2" style="width:70%">Istruzioni personalizzate e memoria<small>se le abbiamo impostate</small></div></div><div class="cx-row"><div class="cx-bar sb4" style="width:100%">File allegati<small>spesso la parte più grande</small></div></div><div class="cx-row"><div class="cx-bar sb5" style="width:86%">Messaggi precedenti<small>domande e risposte della chat</small></div></div><div class="cx-row"><div class="cx-bar sbp" style="width:58%">Il nostro prompt<small>il messaggio appena scritto</small></div></div><div class="cx-row"><div class="cx-bar sb3" style="width:50%">La risposta in corso<small>token dopo token</small></div></div></div>
+  </div>
+  <aside class="notes">
+    Anche se scriviamo una sola riga, il modello legge molto di più: le istruzioni dell'app (che di solito non vediamo), la chat fin qui, i file.
+    1 milione di token corrisponde a circa 650.000 parole in italiano. Nelle app il limite effettivo è spesso più basso, e cambia con il piano e con il modello: verificare prima della lezione.
+    La finestra comprende sia ciò che il modello legge sia ciò che scrive.
+  </aside>
+</section>
+
+</main>
+
+<div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
+<nav class="controls" aria-label="Navigazione slide">
+  <button type="button" id="btn-prev" aria-label="Slide precedente">&#8249;</button>
+  <span id="counter">1 / 18</span>
+  <button type="button" id="btn-next" aria-label="Slide successiva">&#8250;</button>
+  <button type="button" id="btn-help" aria-label="Comandi da tastiera">?</button>
+</nav>
+<div class="notes-panel" id="notes-panel" hidden></div>
+<div class="help-panel" id="help-panel" hidden>
+  <h3>Comandi</h3>
+  <dl>
+    <dt>→ ↓ Spazio PagGiù</dt><dd>Avanti</dd>
+    <dt>← ↑ PagSu</dt><dd>Indietro</dd>
+    <dt>Home / Fine</dt><dd>Prima / ultima slide</dd>
+    <dt>F</dt><dd>Schermo intero</dd>
+    <dt>O</dt><dd>Panoramica</dd>
+    <dt>N</dt><dd>Note per il docente</dd>
+  </dl>
+</div>
+
+</body>
+</html>
