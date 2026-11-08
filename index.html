@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Corso di intelligenza artificiale</title>
+<meta name="description" content="Materiali del corso: slide di Fondamenti di IA 1 e 2, Utilizzo dell'IA e simulazioni interattive.">
+<style>
+  :root {
+    --bg: #F6F8FA; --surface: #FFFFFF; --ink: #1B2733; --muted: #5B6B7A; --line: #DCE3EA;
+    --navy: #0F2A43; --teal: #0E9F8E; --teal-d: #0B7F72; --teal-l: #E3F4F2;
+    --orange-l: #FDEEDF; --orange-d: #B85A12;
+    --font: "Segoe UI", "Inter", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+    --mono: "Cascadia Code", Consolas, "SF Mono", Menlo, monospace;
+    --shadow: 0 1px 2px rgba(15,42,67,.06), 0 6px 20px rgba(15,42,67,.07);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    font-family: var(--font); color: var(--ink); -webkit-font-smoothing: antialiased;
+    background: radial-gradient(circle at 90% 0%, rgba(14,159,142,.12), transparent 40%), var(--bg);
+    min-height: 100vh;
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 48px 24px 40px; }
+  .kicker { font-size: 14px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--teal-d); margin: 0 0 10px; }
+  h1 { font-size: clamp(34px, 5vw, 56px); line-height: 1.05; color: var(--navy); margin: 0; letter-spacing: -.02em; }
+  .lead { font-size: clamp(17px, 2vw, 21px); color: var(--muted); margin: 14px 0 0; }
+  .url {
+    margin: 30px 0 34px; padding: 18px 22px; border-radius: 16px; background: var(--navy); color: #fff;
+    display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px;
+  }
+  .url span { font-size: 14px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #7FD8CC; }
+  .url a { font: 600 clamp(17px, 2.6vw, 28px) var(--mono); color: #fff; text-decoration: none; word-break: break-all; }
+  .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+  .card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 22px 24px;
+    box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 12px;
+  }
+  .card.wide { grid-column: 1 / -1; }
+  .card h2 { margin: 0; font-size: 24px; color: var(--navy); display: flex; align-items: center; gap: 12px; }
+  .card p { margin: 0; font-size: 16px; line-height: 1.45; color: var(--muted); }
+  .ic { width: 40px; height: 40px; padding: 8px; border-radius: 10px; flex: none;
+        fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .c-f1 .ic, .c-f2 .ic { background: var(--teal-l); color: var(--teal-d); }
+  .c-sim .ic { background: var(--orange-l); color: var(--orange-d); }
+  .c-use .ic { background: #EAF0F8; color: #2F6DB5; }
+  .btns { display: flex; flex-wrap: wrap; gap: 10px; margin-top: auto; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 10px;
+    font: 600 16px var(--font); text-decoration: none; border: 1px solid transparent; cursor: pointer;
+  }
+  .btn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+  .btn-main { background: var(--navy); color: #fff; }
+  .btn-main:hover { background: #1D4366; }
+  .btn-soft { background: var(--bg); color: var(--navy); border-color: var(--line); }
+  .btn-soft:hover { background: var(--teal-l); }
+  footer { margin-top: 34px; font-size: 14px; color: var(--muted); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; }
+  @media (max-width: 720px) {
+    .wrap { padding: 28px 16px; }
+    .grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Corso di intelligenza artificiale</p>
+  <h1>Intelligenza artificiale: come funziona e come si usa</h1>
+  <p class="lead">Materiali del corso: le slide di Fondamenti di IA 1 e 2 e di Utilizzo dell'IA, e le simulazioni interattive.</p>
+
+  <div class="url">
+    <span>Apri questa pagina</span>
+    <a href="https://bocchesegiacomo.github.io/corso-ai-2026/">bocchesegiacomo.github.io/corso-ai-2026</a>
+  </div>
+
+  <div class="grid">
+    <section class="card c-f1">
+      <h2><svg class="ic" viewBox="0 0 24 24"><path d="M3 4h18v12H3z M8 20h8M12 16v4"/></svg>Fondamenti di IA 1</h2>
+      <p>Cos'è l'intelligenza artificiale, come impara un modello, le reti neurali, il riconoscimento delle immagini, i modelli linguistici e la storia dell'IA.</p>
+      <div class="btns">
+        <a class="btn btn-main" href="fondamenti-1/"><svg viewBox="0 0 24 24"><path d="M5 12h14 M13 6l6 6-6 6"/></svg>Apri le slide</a>
+      </div>
+    </section>
+
+    <section class="card c-f2">
+      <h2><svg class="ic" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Fondamenti di IA 2</h2>
+      <p>Come funziona un modello linguistico: LLM e modelli piccoli, parametri, token, temperatura, contesto e prompt.</p>
+      <div class="btns">
+        <a class="btn btn-main" href="fondamenti-2/"><svg viewBox="0 0 24 24"><path d="M5 12h14 M13 6l6 6-6 6"/></svg>Apri le slide</a>
+      </div>
+    </section>
+
+    <section class="card c-use wide">
+      <h2><svg class="ic" viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-2.4z"/></svg>Utilizzo dell'IA</h2>
+      <p>Come si usano gli strumenti di IA: assistenti e account, prime prove, privacy e chat temporanea, cosa vede il modello, e tutto quello che può fare, dai testi agli agenti. Con esercizi da fare in coppia.</p>
+      <div class="btns">
+        <a class="btn btn-main" href="utilizzo/"><svg viewBox="0 0 24 24"><path d="M5 12h14 M13 6l6 6-6 6"/></svg>Apri le slide</a>
+      </div>
+    </section>
+
+    <section class="card c-sim wide">
+      <h2><svg class="ic" viewBox="0 0 24 24"><path d="M4 21v-7 M4 10V3 M12 21v-9 M12 8V3 M20 21v-5 M20 12V3 M1 14h6 M9 8h6 M17 16h6"/></svg>Simulazioni</h2>
+      <p>Modelli veri da provare nel browser: regolare i parametri di un modello, riconoscere cifre scritte a mano, generare testo lettera per lettera.</p>
+      <div class="btns">
+        <a class="btn btn-main" href="simulazioni/"><svg viewBox="0 0 24 24"><path d="M5 12h14 M13 6l6 6-6 6"/></svg>Tutte le simulazioni</a>
+        <a class="btn btn-soft" href="simulazioni/manopole/">Manopole</a>
+        <a class="btn btn-soft" href="simulazioni/cifre/">Cifre</a>
+        <a class="btn btn-soft" href="simulazioni/lettere/">Lettere</a>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <span>Giacomo Bocchese</span>
+    <span>Le slide si usano con le frecce; F schermo intero, O panoramica.</span>
+  </footer>
+</div>
+</body>
+</html>
