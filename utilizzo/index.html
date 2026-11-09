@@ -287,6 +287,10 @@
   .tp.first .tlab { left: -60px; text-align: left; }
   .tp.last .tlab { left: auto; right: -60px; text-align: right; }
 
+.ip-ex { display:flex; flex-wrap:wrap; align-items:center; gap:10px 14px; margin-top:22px; padding:14px 20px; border-radius:14px; background:var(--teal-l, #E3F4F2); font-size:21px; }
+.ip-lab { width:100%; color:#0B7F72; font-weight:700; font-size:19px; }
+.ip-row { background:#fff; border:1px solid #DCE3EA; border-radius:10px; padding:6px 14px; }
+
   /* utilizzo */
   .agenda2 { display: grid; grid-template-columns: 1fr 1fr; grid-auto-flow: column; grid-template-rows: repeat(4, auto); gap: 30px 40px; padding: 0; margin: 8px 0 0; }
   .agenda2 li { list-style: none; display: flex; align-items: center; gap: 18px; font-size: 25px; color: var(--navy); font-weight: 650; line-height: 1.2; }
@@ -455,6 +459,39 @@
   .rs-a { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; background: var(--surface); border: 1px solid #DCE3EA; border-radius: 12px; padding: 12px; box-shadow: var(--shadow); }
   .rs-a i { height: 46px; border-radius: 6px; background: linear-gradient(#D6EEF9 0 33%, #DDF3E4 33% 66%, #FDE4CF 66%); }
   .agenda2 li small { display: block; font-size: 18px; color: var(--muted); font-weight: 500; margin-top: 2px; }
+
+  /* ===== laboratorio e sfide ===== */
+  .lab-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .s-lab .dl { margin: -4px 0 12px; }
+  .s-lab .dl .ic { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+  .ch-ic { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .ch-two { display: grid; grid-template-columns: 1.45fr 1fr; gap: 28px; align-items: start; margin-top: 4px; }
+  .ch-left { display: flex; flex-direction: column; gap: 12px; }
+  .ch-task { background: var(--surface); border-left: 7px solid var(--orange); border-radius: 14px; padding: 16px 22px; font-size: 21px; line-height: 1.45; box-shadow: var(--shadow); }
+  .ch-task b { color: var(--orange-d); }
+  .ch-neon { background: #0B1020; color: #E6F7FF; border-left-color: #22D3EE; box-shadow: 0 0 0 1px rgba(34,211,238,.35), 0 0 26px rgba(168,85,247,.35); }
+  .ch-neon b { color: #22D3EE; text-shadow: 0 0 10px rgba(34,211,238,.8); }
+  .ch-must { margin: 2px 0 0; font-size: 18px; font-weight: 650; color: var(--navy); }
+  .ch-quote { align-self: flex-start; font-size: 22px; font-weight: 750; color: var(--navy); background: var(--orange-l); border: 2px dashed var(--orange); border-radius: 12px; padding: 10px 18px; }
+  .ch-list { margin: 0; padding-left: 22px; font-size: 18.5px; line-height: 1.42; color: var(--ink); }
+  .ch-list li { margin: 3px 0; }
+  .ch-info { display: flex; flex-direction: column; gap: 7px; margin-top: 2px; }
+  .ch-i { display: flex; align-items: center; gap: 12px; font-size: 17.5px; color: var(--ink); }
+  .ch-ii { flex: none; width: 34px; height: 34px; border-radius: 10px; background: var(--orange-l); color: var(--orange-d); display: flex; align-items: center; justify-content: center; }
+  .ch-ii .ci { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .ch-vote { background: var(--navy); border-radius: 18px; padding: 18px 20px 20px; color: #fff; display: flex; flex-direction: column; gap: 12px; }
+  .ch-vh { margin: 0 0 2px; font-size: 14px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #7FD8CC; }
+  .ch-c { display: grid; grid-template-columns: 34px 1fr; gap: 4px 12px; align-items: center; background: rgba(255,255,255,.07); border-radius: 12px; padding: 12px 14px; }
+  .ch-c i { font-style: normal; width: 34px; height: 34px; border-radius: 10px; background: var(--orange); color: #fff; font-weight: 800; font-size: 17px; display: flex; align-items: center; justify-content: center; grid-row: span 2; }
+  .ch-c span { font-size: 19px; font-weight: 650; line-height: 1.3; }
+  .ch-c b { font-size: 15px; font-weight: 600; letter-spacing: .5em; color: #9FC4E6; }
+  .ch-sum { margin: 2px 0 0; font-size: 15.5px; line-height: 1.4; color: #CFE0EE; }
+  .vc-pts { margin-top: 30px; gap: 26px; }
+  .vc-pts .ip { font-size: 25px; line-height: 1.4; }
+  .nt-3 .nt { min-height: 230px; }
+  .nt-3 { grid-template-columns: repeat(3, 1fr); }
+  .nt-3 .nt-q { font-size: 22px; }
+  .nt-3 .nt-a { font-size: 19px; }
 </style>
 </head>
 <body data-course="Corso AI · Utilizzo dell'IA">
@@ -1001,12 +1038,161 @@
   </aside>
 </section>
 
+<section class="slide s-lab" data-title="Scrivere con vincoli precisi">
+  <p class="kicker lab-kicker"><svg class="ic"><use href="#i-users"/></svg>Pratica · in coppia · Gemini o ChatGPT</p>
+  <h2>Scrivere con vincoli precisi</h2>
+  <div class="lab-grid">
+    <div class="lstep">
+      <h3><span>1</span>Un testo con vincoli</h3>
+      <div class="prompt small" data-copy="Scrivi un messaggio ai clienti di Occhialeria Dolomiti per annunciare che il negozio resterà chiuso venerdì 23 ottobre per inventario. Massimo 50 parole, dai del Lei, niente punti esclamativi, chiudi con una domanda."><span class="prompt-text">Scrivi un messaggio ai clienti di Occhialeria Dolomiti per annunciare che il negozio resterà chiuso venerdì 23 ottobre per inventario. Massimo 50 parole, dai del Lei, niente punti esclamativi, chiudi con una domanda.</span></div>
+      <p class="obs">Ha rispettato tutti i vincoli? Conta le parole.</p>
+    </div>
+    <div class="lstep">
+      <h3><span>2</span>Cambia stile nella stessa chat</h3>
+      <div class="prompt small" data-copy="Riscrivilo come un post per Instagram, tono allegro, con 3 emoji."><span class="prompt-text">Riscrivilo come un post per Instagram, tono allegro, con 3 emoji.</span></div>
+      <p class="lstep-text">Poi chiedi:</p>
+      <div class="prompt small" data-copy="Ora riscrivilo come avviso formale da appendere in negozio."><span class="prompt-text">Ora riscrivilo come avviso formale da appendere in negozio.</span></div>
+      <p class="obs">Le versioni sono davvero diverse? Il contenuto è rimasto uguale?</p>
+    </div>
+  </div>
+  <aside class="notes">
+    Si usano Gemini o ChatGPT perché non servono file: così i messaggi gratuiti di Claude restano per il documento.
+    1) Spesso il modello sbaglia il numero esatto di parole: prevede il testo, non lo conta. Far contare le parole alle coppie e confrontare. Regola che emerge: i vincoli misurabili vanno controllati.
+    2) Nel cambio di stile controllare che date e informazioni restino quelle giuste (venerdì 23 ottobre, inventario).
+  </aside>
+</section>
+
+<section class="slide s-lab" data-title="Lavorare con un documento">
+  <p class="kicker lab-kicker"><svg class="ic"><use href="#i-users"/></svg>Pratica · in coppia · Claude</p>
+  <h2>Lavorare con un documento</h2>
+  <a class="dl" href="materiali/regolamento_segreteria_occhialeria_dolomiti.pdf" download target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24"><path d="M12 4v11 M7.5 10.5L12 15l4.5-4.5 M5 19h14"/></svg><span><strong>Scarica il PDF</strong> · Regolamento della segreteria di Occhialeria Dolomiti</span></a>
+  <div class="lab-grid">
+    <div class="lstep">
+      <h3><span>1</span>Riassumi</h3>
+      <p class="lstep-text">Allega il PDF e scrivi:</p>
+      <div class="prompt small" data-copy="Leggi il regolamento allegato e fammi un riassunto dettagliato ma conciso."><span class="prompt-text">Leggi il regolamento allegato e fammi un riassunto dettagliato ma conciso.</span></div>
+    </div>
+    <div class="lstep">
+      <h3><span>2</span>Metti in tabella</h3>
+      <div class="prompt small" data-copy="Crea una tabella con le cose da fare, chi le deve fare ed entro quando."><span class="prompt-text">Crea una tabella con le cose da fare, chi le deve fare ed entro quando.</span></div>
+    </div>
+    <div class="lstep">
+      <h3><span>3</span>Trova il punto esatto</h3>
+      <div class="prompt small" data-copy="Entro quanti giorni bisogna rispondere a un reclamo? Dimmi in quale punto del documento lo dice e riporta la frase esatta."><span class="prompt-text">Entro quanti giorni bisogna rispondere a un reclamo? Dimmi in quale punto del documento lo dice e riporta la frase esatta.</span></div>
+      <p class="obs">Controlla nel PDF: la frase c'è davvero?</p>
+    </div>
+    <div class="lstep">
+      <h3><span>4</span>Domande difficili</h3>
+      <div class="prompt small" data-copy="Si può lavorare in smart working? E le trasferte in treno vengono rimborsate?"><span class="prompt-text">Si può lavorare in smart working? E le trasferte in treno vengono rimborsate?</span></div>
+      <p class="obs">Ti dice che il documento non ne parla, o inventa una risposta?</p>
+    </div>
+  </div>
+  <aside class="notes">
+    Il regolamento (9 pagine) è un documento di fantasia preparato per il corso.
+    Risposte giuste. 3) Reclami: prima risposta scritta entro 3 giorni lavorativi (art. 7.3, pagina 7). 4) Lo smart working non è citato. Trasferte: è rimborsata solo l'auto propria, 0,35 € al km (art. 8.2); treno e mezzi pubblici non sono citati.
+    Regola che emerge: una risposta su un documento si verifica nel documento.
+    Aggancio utile: l'art. 9.4 vieta di caricare documenti aziendali su servizi di IA non autorizzati. Qui si può perché il documento è inventato.
+  </aside>
+</section>
+
+<section class="slide s-lab" data-title="Leggere e creare immagini">
+  <p class="kicker lab-kicker"><svg class="ic"><use href="#i-users"/></svg>Pratica · in coppia · Gemini o ChatGPT</p>
+  <h2>Leggere e creare immagini</h2>
+  <div class="lab-grid lab-3">
+    <div class="lstep">
+      <h3><span>1</span>Leggi una foto</h3>
+      <p class="lstep-text">Fotografa uno scontrino o una pagina con una tabella, allega la foto e scrivi:</p>
+      <div class="prompt small" data-copy="Elenca tutto quello che c'è scritto e calcola il totale."><span class="prompt-text">Elenca tutto quello che c'è scritto e calcola il totale.</span></div>
+      <p class="obs">Ha letto bene tutti i numeri? Il totale coincide?</p>
+    </div>
+    <div class="lstep">
+      <h3><span>2</span>Crea un'immagine</h3>
+      <div class="prompt small" data-copy="Crea un'immagine di un rifugio di montagna al tramonto, in stile cartolina anni '60."><span class="prompt-text">Crea un'immagine di un rifugio di montagna al tramonto, in stile cartolina anni '60.</span></div>
+      <p class="obs">Assomiglia a quello che immaginavi?</p>
+    </div>
+    <div class="lstep">
+      <h3><span>3</span>Modificala</h3>
+      <p class="lstep-text">Nella stessa chat:</p>
+      <div class="prompt small" data-copy="Aggiungi in alto la scritta &quot;Saluti dalle Dolomiti&quot;."><span class="prompt-text">Aggiungi in alto la scritta "Saluti dalle Dolomiti".</span></div>
+      <p class="obs">La scritta è giusta? Il resto dell'immagine è rimasto uguale?</p>
+    </div>
+  </div>
+  <aside class="notes">
+    Le scritte nelle immagini a volte escono con lettere sbagliate o mancanti. Una modifica può cambiare anche parti che non si volevano toccare: confrontare le immagini delle coppie.
+    La generazione di immagini richiede un account. Il numero di immagini al giorno nelle versioni gratuite cambia spesso: verificarlo prima della lezione.
+  </aside>
+</section>
+
+<section class="slide s-lab s-ch" data-title="Sfida: la locandina del Birrone">
+  <p class="kicker lab-kicker"><svg class="ch-ic" viewBox="0 0 24 24"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg>Sfida 1 · in coppia</p>
+  <h2>La locandina del pub «Il Birrone»</h2>
+  <div class="ch-two">
+    <div class="ch-left">
+      <div class="ch-task">Il pub <b>«Il Birrone»</b> inaugura venerdì 20 marzo e vi chiede la locandina. Deve essere <b>buffa e caratteristica</b>: personaggi, birre giganti, tutto quello che vi viene in mente.</div>
+      <p class="ch-must">Deve contenere, scritta giusta, la frase:</p>
+      <div class="ch-quote">Il Birrone · Grande inaugurazione venerdì 20 marzo</div>
+      <div class="ch-info"><div class="ch-i"><span class="ch-ii"><svg class="ci" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span><b>15 minuti</b>, poi ogni coppia mostra la sua locandina</span></div><div class="ch-i"><span class="ch-ii"><svg class="ci" viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-2.4z"/></svg></span><span><b>Gemini o ChatGPT</b></span></div><div class="ch-i"><span class="ch-ii"><svg class="ci" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span><span>Si migliora solo a parole, con tutte le richieste che volete</span></div></div>
+    </div>
+    <div class="ch-vote"><p class="ch-vh">Votano le altre coppie</p><div class="ch-c"><i>1</i><span>È buffa e caratteristica?</span><b>1 2 3 4 5</b></div><div class="ch-c"><i>2</i><span>Qualità dell'immagine</span><b>1 2 3 4 5</b></div><div class="ch-c"><i>3</i><span>La scritta è giusta?</span><b>1 2 3</b></div><p class="ch-sum">Il docente raccoglie i voti e li somma: vince il punteggio più alto.</p></div>
+  </div>
+  <aside class="notes">
+    La scritta obbligatoria è la parte difficile: costringe a controllare il risultato, insistere e correggere. È proprio questo l'esercizio.
+    Ogni coppia mostra la locandina a turno; le altre coppie votano: da 1 a 5 per i primi due criteri, da 1 a 3 per la scritta. Il docente raccoglie i voti e li somma; vince il punteggio più alto.
+  </aside>
+</section>
+
+<section class="slide" data-title="Come si fa vibe coding">
+  <p class="kicker">Utilizzo dell'IA · Cosa può fare</p>
+  <h2>Come si fa vibe coding</h2>
+  <div class="icpts vc-pts"><div class="ip"><span class="ip-ic"><svg class="ci" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></span><span><b>Descrivi</b> cosa vuoi, con tutti i dettagli: contenuti, stile, colori, animazioni.</span></div><div class="ip"><span class="ip-ic"><svg class="ci" viewBox="0 0 24 24"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span><span><b>Prova</b> il risultato nell'anteprima: clicca, scorri, controlla i testi.</span></div><div class="ip"><span class="ip-ic"><svg class="ci" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg></span><span><b>Chiedi una modifica alla volta</b>: «Rendi il titolo più grande», «Aggiungi un&#39;animazione quando scorro la pagina».</span></div><div class="ip"><span class="ip-ic"><svg class="ci" viewBox="0 0 24 24"><path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg></span><span><b>Se qualcosa non funziona</b>, descrivi cosa vedi o incolla il messaggio di errore.</span></div></div>
+  <p class="bottom-line">Non serve saper programmare: serve <strong>descrivere bene</strong> e <strong>controllare il risultato</strong>.</p>
+  <aside class="notes">
+    Una modifica alla volta: se si chiedono dieci cose insieme e qualcosa si rompe, non si capisce cosa l'ha rotto.
+    Se il modello va in confusione dopo molte modifiche, conviene aprire una nuova chat, incollare il codice e ripartire da lì.
+  </aside>
+</section>
+
+<section class="slide s-lab s-ch" data-title="Sfida: il sito della startup">
+  <p class="kicker lab-kicker"><svg class="ch-ic" viewBox="0 0 24 24"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg>Sfida 2 · in coppia</p>
+  <h2>Il sito di una startup di intelligenza artificiale</h2>
+  <div class="ch-two">
+    <div class="ch-left">
+      <div class="ch-task ch-neon">Create il sito di una startup di IA inventata. Deve essere <b>devastante e super futuristico</b>: neon, effetti luminosi, animazioni.</div>
+      <p class="ch-must">Il sito deve avere:</p>
+      <ul class="ch-list">
+        <li>nome e slogan della startup;</li>
+        <li>una sezione «Come funziona» che spiega <b>in modo corretto</b> almeno tre termini tra token, rete neurale, parametri, contesto, addestramento;</li>
+        <li>almeno un elemento interattivo: un pulsante, un effetto al passaggio del mouse, un contatore.</li>
+      </ul>
+      <div class="ch-info"><div class="ch-i"><span class="ch-ii"><svg class="ci" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span><b>20 minuti</b>, poi ogni coppia mostra il suo sito</span></div><div class="ch-i"><span class="ch-ii"><svg class="ci" viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-2.4z"/></svg></span><span>Solo <b>Mercury</b>: chat.inceptionlabs.ai, senza account</span></div><div class="ch-i"><span class="ch-ii"><svg class="ci" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span><span>Il codice non si tocca: solo richieste a parole</span></div></div>
+    </div>
+    <div class="ch-vote"><p class="ch-vh">Votano le altre coppie</p><div class="ch-c"><i>1</i><span>Effetto wow</span><b>1 2 3 4 5</b></div><div class="ch-c"><i>2</i><span>Funziona</span><b>1 2 3 4 5</b></div><div class="ch-c"><i>3</i><span>I termini di IA sono spiegati bene</span><b>1 2 3 4 5</b></div><p class="ch-sum">Il docente raccoglie i voti e li somma: vince il punteggio più alto.</p></div>
+  </div>
+  <aside class="notes">
+    Il terzo criterio obbliga a leggere e controllare le spiegazioni scritte dal modello: chi vota deve capire se token, rete neurale o parametri sono spiegati bene. È un ripasso della teoria.
+    Mercury è molto veloce e non richiede account. Verificare prima della lezione che mostri l'anteprima del sito accanto alla chat.
+    Ogni coppia mostra il sito a turno (circa un minuto); le altre coppie votano da 1 a 5 per ogni criterio. Il docente raccoglie i voti e li somma.
+    Tutti usano Mercury, così i risultati sono confrontabili.
+  </aside>
+</section>
+
+<section class="slide" data-title="Cosa abbiamo notato nei laboratori">
+  <p class="kicker">Utilizzo dell'IA · Cosa può fare</p>
+  <h2>Cosa abbiamo notato nei laboratori</h2>
+  <div class="nt-grid nt-3"><div class="nt"><p class="nt-q">Non sempre rispetta i vincoli precisi.</p><p class="nt-a f">Numero di parole, scritte nelle immagini: i vincoli vanno controllati.</p></div><div class="nt"><p class="nt-q">Sul documento cita il punto giusto, ma a volte inventa.</p><p class="nt-a f">Se un'informazione non c'è, può rispondere lo stesso. La risposta si verifica nel documento.</p></div><div class="nt"><p class="nt-q">Il primo risultato raramente è quello finale.</p><p class="nt-a f">Si migliora con richieste chiare e precise, nella stessa chat: il modello non vi legge nella mente.</p></div></div>
+  <p class="bottom-line f">L'IA produce in fretta, ma <strong>l'umano deve decidere e verificare la correttezza</strong>.</p>
+  <aside class="notes">
+    Si vedono solo le osservazioni. Per ognuna chiedere prima alla classe: è successo anche a voi? Perché secondo voi? Poi mostrare la spiegazione.
+    La regola in fondo compare per ultima: farla formulare ai partecipanti prima di mostrarla.
+  </aside>
+</section>
+
 </main>
 
 <div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
 <nav class="controls" aria-label="Navigazione slide">
   <button type="button" id="btn-prev" aria-label="Slide precedente">&#8249;</button>
-  <span id="counter">1 / 24</span>
+  <span id="counter">1 / 31</span>
   <button type="button" id="btn-next" aria-label="Slide successiva">&#8250;</button>
   <button type="button" id="btn-help" aria-label="Comandi da tastiera">?</button>
 </nav>
