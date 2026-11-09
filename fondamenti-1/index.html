@@ -286,6 +286,10 @@
   .tp.grey .ty { color: var(--muted); }
   .tp.first .tlab { left: -60px; text-align: left; }
   .tp.last .tlab { left: auto; right: -60px; text-align: right; }
+
+.ip-ex { display:flex; flex-wrap:wrap; align-items:center; gap:10px 14px; margin-top:22px; padding:14px 20px; border-radius:14px; background:var(--teal-l, #E3F4F2); font-size:21px; }
+.ip-lab { width:100%; color:#0B7F72; font-weight:700; font-size:19px; }
+.ip-row { background:#fff; border:1px solid #DCE3EA; border-radius:10px; padding:6px 14px; }
 </style>
 </head>
 <body data-course="Corso AI · Fondamenti di IA 1">
@@ -535,6 +539,39 @@
     Leggere l'esempio: una casa di 100 m² → 50.000 + 2.000 × 100 = 250.000 €.
     La formula la scegliamo noi; i due numeri dentro (i parametri) no: li deve trovare il modello guardando le case già vendute.
     Domanda da lasciare aperta: come si trovano i valori giusti dei parametri? È l'addestramento.
+  </aside>
+</section>
+
+<section class="slide" data-title="Input e parametri">
+  <p class="kicker">Fondamenti di IA 1</p>
+  <h2>Input e parametri sono due cose diverse</h2>
+  <div class="vs">
+    <div class="vs-box">
+      <h3>Input (ingresso)</h3>
+      <ul class="vs-list">
+        <li>È il <b>dato che l'utente fornisce al modello</b> per fare una singola previsione</li>
+        <li><b>Cambia a ogni previsione</b>: 60 m², 100 m², 150 m²…</li>
+      </ul>
+    </div>
+    <div class="vs-box ml">
+      <h3>Parametri</h3>
+      <ul class="vs-list">
+        <li>Sono i <b>coefficienti della formula</b>: definiscono il comportamento del modello</li>
+        <li><b>Sono gli stessi per tutte le case</b></li>
+        <li>Li trova <b>l'addestramento</b>, guardando gli esempi</li>
+      </ul>
+    </div>
+  </div>
+  <div class="ip-ex f">
+    <span class="ip-lab">Stessi parametri (50.000 € e 2.000 € al m²), input diversi:</span>
+    <span class="ip-row"><b>60 m²</b> → 170.000 €</span>
+    <span class="ip-row"><b>100 m²</b> → 250.000 €</span>
+    <span class="ip-row"><b>150 m²</b> → 350.000 €</span>
+  </div>
+  <p class="bottom-line f">Cambiare l'input significa fare <strong>un'altra domanda</strong> allo stesso modello. Cambiare i parametri significa avere <strong>un altro modello</strong>.</p>
+  <aside class="notes">
+    Domanda alla classe prima di mostrare l'esempio: se chiedo il prezzo di una casa di 60 m² invece che di 100, cosa cambia nella formula? Solo la superficie, cioè l'input. Le manopole restano dove sono.
+    In un modello linguistico come ChatGPT l'input è il testo che scriviamo; i parametri sono miliardi di numeri fissati durante l'addestramento, uguali per tutti gli utenti.
   </aside>
 </section>
 
