@@ -1,0 +1,995 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Glossario · Corso di intelligenza artificiale</title>
+<meta name="description" content="Glossario interattivo del corso di intelligenza artificiale: i termini principali con definizione e animazione.">
+<style>
+  :root {
+    --bg: #F6F8FA; --surface: #FFFFFF; --ink: #1B2733; --muted: #5B6B7A; --line: #DCE3EA;
+    --navy: #0F2A43; --teal: #0E9F8E; --teal-d: #0B7F72; --teal-l: #E3F4F2;
+    --font: "Segoe UI", "Inter", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+    --mono: "Cascadia Code", Consolas, "SF Mono", Menlo, monospace;
+    --shadow: 0 1px 2px rgba(15,42,67,.06), 0 6px 20px rgba(15,42,67,.08);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; overflow: hidden; }
+  body {
+    font-family: var(--font); color: var(--ink); -webkit-font-smoothing: antialiased;
+    background: radial-gradient(circle at 85% 10%, rgba(14,159,142,.10), transparent 45%),
+                radial-gradient(circle at 10% 90%, rgba(47,109,181,.08), transparent 45%), var(--bg);
+  }
+  #world { position: fixed; inset: 0; }
+
+  /* barra in alto */
+  #top { position: fixed; left: 0; right: 0; top: 0; z-index: 10; padding: 14px 20px 22px;
+         display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px;
+         background: linear-gradient(var(--bg) 60%, rgba(246,248,250,0)); pointer-events: none; }
+  #top > * { pointer-events: auto; }
+  .back { font-size: 14px; color: var(--muted); text-decoration: none; font-weight: 600; }
+  .back:hover { color: var(--navy); }
+  h1 { margin: 0; font-size: 24px; color: var(--navy); letter-spacing: -.01em; }
+  .search { position: relative; }
+  .search svg { position: absolute; left: 12px; top: 50%; width: 18px; height: 18px; transform: translateY(-50%);
+                fill: none; stroke: var(--muted); stroke-width: 2.2; stroke-linecap: round; }
+  #q { width: min(380px, 70vw); font: 500 17px var(--font); color: var(--ink); padding: 10px 14px 10px 38px;
+       border-radius: 12px; border: 1.5px solid var(--line); background: #fff; outline: none; box-shadow: var(--shadow); }
+  #q:focus { border-color: var(--teal); }
+  .cats { display: flex; flex-wrap: wrap; gap: 8px; }
+  .cat { font: 600 13px var(--font); padding: 5px 11px; border-radius: 999px; border: 1.5px solid var(--c);
+         color: var(--c); background: #fff; cursor: pointer; transition: opacity .2s, background .2s; }
+  .cat.off { opacity: .35; }
+  #count { font-size: 14px; color: var(--muted); }
+  #empty { position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); font-size: 20px; color: var(--muted); display: none; }
+
+  /* termini */
+  .node { position: absolute; left: 0; top: 0; padding: .48em .9em; border-radius: 12px; background: #fff;
+          border: 2px solid var(--c); color: var(--ink); font-weight: 650; white-space: nowrap; cursor: grab;
+          user-select: none; -webkit-user-select: none; touch-action: none; box-shadow: var(--shadow);
+          transition: opacity .35s, background .2s; will-change: transform; }
+  .node::before { content: ""; display: inline-block; width: .5em; height: .5em; border-radius: 50%; background: var(--c);
+                  margin-right: .5em; vertical-align: .08em; }
+  .node:hover, .node.hot { background: var(--cl); }
+  .node.dim { opacity: .3; }
+  .node.gone { opacity: 0; pointer-events: none; }
+  .node.drag { cursor: grabbing; }
+
+  /* scheda */
+  #veil { position: fixed; inset: 0; z-index: 20; background: rgba(15,42,67,.32); display: none; align-items: center; justify-content: center; padding: 18px; }
+  #veil.on { display: flex; }
+  #card { width: min(680px, 100%); max-height: calc(100vh - 36px); overflow: auto; background: #fff; border-radius: 20px;
+          box-shadow: 0 20px 60px rgba(15,42,67,.3); border-top: 8px solid var(--c); padding: 22px 28px 24px; position: relative;
+          animation: pop .25s ease; }
+  @keyframes pop { from { transform: scale(.94); opacity: 0; } to { transform: none; opacity: 1; } }
+  #x { position: absolute; right: 14px; top: 12px; border: 0; background: none; font-size: 28px; line-height: 1; color: var(--muted); cursor: pointer; }
+  .c-cat { font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--c); }
+  .c-name { margin: 4px 0 0; font-size: 32px; color: var(--navy); line-height: 1.15; }
+  .c-alt { font-size: .62em; font-weight: 500; color: var(--muted); font-style: italic; white-space: nowrap; }
+  .c-def { font-size: 20px; line-height: 1.5; margin: 14px 0 0; }
+  .c-es { font-size: 17px; line-height: 1.45; margin: 10px 0 0; color: var(--muted); }
+  .c-es b { color: var(--ink); }
+  #viz { display: block; width: 100%; aspect-ratio: 600 / 230; margin-top: 16px; background: var(--bg); border-radius: 14px; }
+  .c-rel { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .c-rel span { font-size: 14px; color: var(--muted); margin-right: 2px; }
+  .c-rel button { font: 600 14px var(--font); padding: 6px 12px; border-radius: 10px; border: 1.5px solid var(--c); color: var(--ink);
+                  background: #fff; cursor: pointer; }
+  .c-rel button:hover { background: var(--cl); }
+  @media (max-width: 640px) { h1 { font-size: 20px; } #card { padding: 18px 18px 20px; } .c-name { font-size: 26px; } .c-def { font-size: 18px; } }
+</style>
+</head>
+<body>
+<div id="world"></div>
+<div id="top">
+  <a class="back" href="../">← Corso</a>
+  <h1>Glossario</h1>
+  <label class="search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5L21 21"/></svg>
+    <input id="q" type="search" placeholder="Cerca un termine…" autocomplete="off" spellcheck="false"></label>
+  <div class="cats" id="cats"></div>
+  <span id="count"></span>
+</div>
+<div id="empty">Nessun termine trovato.</div>
+<div id="veil"><div id="card" role="dialog" aria-modal="true">
+  <button id="x" aria-label="Chiudi">×</button>
+  <div class="c-cat" id="c-cat"></div>
+  <h2 class="c-name" id="c-name"></h2>
+  <p class="c-def" id="c-def"></p>
+  <p class="c-es" id="c-es"></p>
+  <canvas id="viz" width="600" height="230"></canvas>
+  <div class="c-rel" id="c-rel"></div>
+</div></div>
+
+<script>
+"use strict";
+// ---------------------------------------------------------------- dati
+const CATS = {
+  base:   { n: "Concetti di base",    c: "#0E9F8E", l: "#E3F4F2" },
+  reti:   { n: "Reti neurali",        c: "#6B5BD2", l: "#EEEBFB" },
+  llm:    { n: "Modelli linguistici", c: "#2F6DB5", l: "#E6EEF8" },
+  uso:    { n: "Uso",                 c: "#E0731F", l: "#FDEEDF" },
+  agenti: { n: "Strumenti e agenti",  c: "#C8553D", l: "#F9E6E1" },
+};
+const TERMS = [
+  { id: "ia", n: "Intelligenza artificiale", en: "artificial intelligence, AI", cat: "base",
+    d: "L'insieme dei sistemi informatici che svolgono compiti che normalmente richiederebbero le capacità di una persona: capire e scrivere testi, riconoscere immagini e suoni, prevedere, decidere.",
+    rel: ["ml"] },
+  { id: "ml", n: "Machine learning", it: "apprendimento automatico", cat: "base",
+    d: "La parte dell'IA in cui il sistema non segue regole scritte da una persona: le ricava da molti esempi, con l'addestramento.",
+    es: "Il filtro antispam impara da milioni di email già etichettate come spam o non spam.",
+    rel: ["ia", "dl", "dati", "addestramento", "modello"], v: "ml" },
+  { id: "dl", n: "Deep learning", it: "apprendimento profondo", cat: "base",
+    d: "Il machine learning fatto con reti neurali a molti strati. È la tecnica alla base del riconoscimento delle immagini, della traduzione automatica e degli LLM.",
+    rel: ["ml", "rete", "strato", "llm"] },
+  { id: "modello", n: "Modello", en: "model", cat: "base",
+    d: "Un sistema che trasforma un input in un output. Nel machine learning il suo comportamento è deciso dai parametri, che si trovano con l'addestramento.",
+    rel: ["input", "output", "parametro", "addestramento", "inferenza", "ml"], v: "io" },
+  { id: "input", n: "Input", it: "ingresso", cat: "base",
+    d: "Il dato che si dà al modello per ottenere una singola previsione. Cambia a ogni richiesta; i parametri invece restano gli stessi.",
+    es: "La superficie di una casa; il testo scritto in chat.",
+    rel: ["modello", "output", "parametro", "prompt"], v: "ioIn" },
+  { id: "output", n: "Output", it: "uscita", cat: "base",
+    d: "Il risultato che il modello restituisce per un input: un numero, una categoria, un testo.",
+    es: "Il prezzo previsto; «spam»; il token successivo.",
+    rel: ["modello", "input"], v: "ioOut" },
+  { id: "dati", n: "Dati di addestramento", en: "training data", cat: "base",
+    d: "Gli esempi, ognuno con la risposta giusta, da cui il modello impara.",
+    es: "Case già vendute con il loro prezzo; per un LLM, enormi quantità di testo.",
+    rel: ["addestramento", "ml"], v: "dati" },
+  { id: "parametro", n: "Parametro", en: "parameter", cat: "base",
+    d: "Un numero dentro il modello che ne decide il comportamento. Lo fissa l'addestramento ed è lo stesso per tutti gli input. Il modello del prezzo di una casa ne ha 2; un LLM decine o centinaia di miliardi.",
+    rel: ["modello", "addestramento", "peso", "input", "llm", "ottimizzatore"], v: "parametro" },
+  { id: "addestramento", n: "Addestramento", en: "training", cat: "base",
+    d: "Il processo che regola i parametri finché il modello sbaglia il meno possibile sugli esempi. Si ripete un ciclo: prevedere, misurare l'errore, correggere i parametri.",
+    rel: ["parametro", "errore", "ottimizzatore", "dati", "inferenza", "backprop"], v: "addestramento" },
+  { id: "errore", n: "Errore", en: "loss", cat: "base",
+    d: "Il numero che misura quanto le previsioni del modello si allontanano dalle risposte giuste degli esempi. L'addestramento cerca di renderlo il più piccolo possibile.",
+    rel: ["addestramento", "ottimizzatore", "backprop"], v: "errore" },
+  { id: "ottimizzatore", n: "Ottimizzatore", en: "optimizer", cat: "base",
+    d: "L'algoritmo che, durante l'addestramento, decide di quanto cambiare ogni parametro per ridurre l'errore. Procede a piccoli passi.",
+    rel: ["addestramento", "errore", "parametro", "backprop"], v: "ottimizzatore" },
+  { id: "inferenza", n: "Inferenza", en: "inference", cat: "base",
+    d: "L'uso di un modello già addestrato: riceve un input e produce un output, con i parametri fissi. Quando chattiamo con un LLM facciamo inferenza.",
+    rel: ["modello", "addestramento", "parametro"], v: "inferenza" },
+
+  { id: "rete", n: "Rete neurale", en: "neural network", cat: "reti",
+    d: "Un modello fatto di neuroni artificiali collegati tra loro e organizzati in strati. È ispirato al cervello, ma ne è una versione molto semplificata.",
+    rel: ["neurone", "strato", "peso", "dl", "transformer", "backprop"], v: "rete" },
+  { id: "neurone", n: "Neurone", en: "neuron", cat: "reti",
+    d: "L'unità di base di una rete neurale. Riceve dei numeri, moltiplica ciascuno per il peso della sua connessione, li somma, applica una funzione semplice e passa il risultato ai neuroni dello strato successivo.",
+    rel: ["rete", "peso", "strato"], v: "neurone" },
+  { id: "strato", n: "Strato", en: "layer", cat: "reti",
+    d: "Un gruppo di neuroni allo stesso livello della rete. Ogni strato elabora i numeri che riceve e li passa allo strato successivo. Il «deep» di deep learning indica i molti strati.",
+    rel: ["rete", "neurone", "dl"], v: "strato" },
+  { id: "peso", n: "Peso", en: "weight", cat: "reti",
+    d: "Il numero associato a una connessione tra due neuroni: dice quanto conta quel collegamento. I pesi sono i parametri di una rete neurale.",
+    rel: ["neurone", "parametro", "rete"], v: "peso" },
+  { id: "backprop", n: "Retropropagazione", en: "backpropagation", cat: "reti",
+    d: "Il metodo che calcola come cambiare ogni peso per ridurre l'errore, partendo dall'uscita e andando all'indietro strato per strato. È ciò che rende possibile addestrare reti con molti strati.",
+    rel: ["addestramento", "ottimizzatore", "rete", "errore"], v: "backprop" },
+  { id: "pixel", n: "Pixel", en: "picture element", cat: "reti",
+    d: "Il quadratino più piccolo di un'immagine. Per un modello ogni pixel è un numero (tre, per i colori): un'immagine è una griglia di numeri.",
+    es: "Una cifra scritta a mano di 28 × 28 pixel diventa 784 numeri.",
+    rel: ["input", "rete", "multimodale"], v: "pixel" },
+
+  { id: "ling", n: "Modello linguistico", en: "language model", cat: "llm",
+    d: "Un modello che riceve un testo e prevede come continua: assegna una probabilità a ogni token possibile e ne sceglie uno.",
+    rel: ["llm", "slm", "token", "autoregressivo", "temperatura", "allucinazione"], v: "ling" },
+  { id: "llm", n: "LLM", en: "Large Language Model", cat: "llm",
+    d: "Un modello linguistico molto grande: più di 50 miliardi di parametri, spesso centinaia. Gira nei data center e si usa via internet.",
+    es: "I modelli dietro ChatGPT, Claude e Gemini.",
+    rel: ["ling", "slm", "parametro", "transformer", "api", "ragionamento"], v: "llm" },
+  { id: "slm", n: "SLM", en: "Small Language Model", cat: "llm",
+    d: "Un modello linguistico abbastanza piccolo da funzionare su un computer normale o su un telefono, anche senza internet. Ha meno di 20 miliardi di parametri ed è meno capace di un LLM.",
+    rel: ["llm", "ling"], v: "slm" },
+  { id: "token", n: "Token", en: "", cat: "llm",
+    d: "Il pezzo di testo che il modello legge e scrive: una parola intera, una parte di parola o un segno di punteggiatura. Il modello prevede un token alla volta.",
+    es: "«Il gatto è salito sul tetto.» sono 10 token.",
+    rel: ["tokenizer", "ling", "finestra", "embedding", "contesto", "temperatura", "api"], v: "token" },
+  { id: "tokenizer", n: "Tokenizer", en: "", cat: "llm",
+    d: "Il programma che divide il testo in token e assegna a ciascuno un numero, prima di passarlo al modello. All'uscita fa il contrario: dai numeri ricostruisce il testo.",
+    rel: ["token", "embedding"], v: "tokenizer" },
+  { id: "embedding", n: "Embedding", en: "", cat: "llm",
+    d: "La lista di numeri con cui il modello rappresenta un token. Token con significato simile hanno liste di numeri simili.",
+    rel: ["token", "tokenizer", "transformer", "rag"], v: "embedding" },
+  { id: "transformer", n: "Transformer", en: "", cat: "llm",
+    d: "L'architettura di rete neurale su cui si basano gli LLM, presentata da ricercatori di Google nel 2017. Il suo meccanismo centrale è l'attenzione.",
+    rel: ["attenzione", "rete", "llm", "embedding"], v: "transformer" },
+  { id: "attenzione", n: "Attenzione", en: "attention", cat: "llm",
+    d: "Il meccanismo del transformer che, per ogni token, decide quanto considerare ciascuno dei token precedenti. Così il modello collega parole anche lontane tra loro.",
+    es: "In «Giulia è uscita presto perché era molto stanca» il modello guarda «Giulia» per scrivere «stanca» e non «stanco».",
+    rel: ["transformer", "contesto"], v: "attenzione" },
+  { id: "autoregressivo", n: "Modello autoregressivo", en: "autoregressive model", cat: "llm",
+    d: "Un modello che genera un token alla volta: ogni token scelto viene aggiunto al testo e serve a prevedere il successivo. Gli LLM più usati funzionano così.",
+    rel: ["ling", "diffusione", "token"], v: "autoregressivo" },
+  { id: "diffusione", n: "Modello a diffusione", en: "diffusion model", cat: "llm",
+    d: "Un modello che parte da una risposta fatta di segnaposto e in pochi passaggi riempie e corregge tutte le posizioni insieme. È molto più veloce di un modello autoregressivo, ma per ora meno capace.",
+    es: "Mercury di Inception.",
+    rel: ["autoregressivo", "ling"], v: "diffusione" },
+  { id: "temperatura", n: "Temperatura", en: "temperature", cat: "llm",
+    d: "L'impostazione che regola quanto è varia la scelta del token successivo. Bassa: quasi sempre il token più probabile. Alta: più spazio ai token meno probabili, quindi risposte più varie ma più rischiose.",
+    rel: ["token", "ling"], v: "temperatura" },
+  { id: "ragionamento", n: "Modello di ragionamento", en: "reasoning model", cat: "llm",
+    d: "Un modello che, prima di rispondere, scrive un ragionamento passo per passo. Va meglio su matematica, logica e programmazione, ma è più lento e usa più token.",
+    rel: ["llm", "token"], v: "ragionamento" },
+  { id: "multimodale", n: "Multimodale", en: "multimodal", cat: "llm",
+    d: "Detto di un modello che, oltre al testo, legge o produce immagini, audio o video.",
+    rel: ["llm", "pixel", "computer"], v: "multimodale" },
+
+  { id: "prompt", n: "Prompt", en: "", cat: "uso",
+    d: "Il testo che scriviamo al modello per ottenere una risposta: una domanda, un'istruzione o un testo da elaborare. È una parte del contesto.",
+    rel: ["contesto", "sysprompt", "input"], v: "prompt" },
+  { id: "sysprompt", n: "Prompt di sistema", en: "system prompt", cat: "uso",
+    d: "Le istruzioni scritte da chi ha costruito l'app. Il modello le legge prima della chat; di solito l'utente non le vede. Spesso contengono anche l'elenco degli strumenti disponibili.",
+    rel: ["prompt", "contesto", "strumento"], v: "sysprompt" },
+  { id: "contesto", n: "Contesto", en: "context", cat: "uso",
+    d: "Tutto il testo che il modello legge ogni volta che risponde: prompt di sistema, messaggi precedenti, file allegati, il nostro prompt. Oltre a ciò che ha imparato nell'addestramento, il modello sa solo ciò che è nel contesto.",
+    rel: ["prompt", "sysprompt", "finestra", "memoria", "token", "attenzione", "strumento", "rag"], v: "contesto" },
+  { id: "finestra", n: "Finestra di contesto", en: "context window", cat: "uso",
+    d: "Il numero massimo di token che il modello può leggere in una volta, compresa la risposta che sta scrivendo. Nei modelli più grandi arriva a circa 1 milione di token.",
+    rel: ["contesto", "token"], v: "finestra" },
+  { id: "memoria", n: "Memoria", en: "memory", cat: "uso",
+    d: "Informazioni che l'app salva dalle chat e rimette nel contesto delle chat successive. Il modello non cambia: è testo aggiunto al contesto.",
+    rel: ["contesto"], v: "memoria" },
+  { id: "allucinazione", n: "Allucinazione", en: "hallucination", cat: "uso",
+    d: "Una risposta che contiene informazioni false o inventate, presentate come se fossero vere.",
+    rel: ["ling", "ricerca"], v: "allucinazione" },
+  { id: "vibe", n: "Vibe coding", en: "", cat: "uso",
+    d: "Creare programmi o siti descrivendo a parole cosa si vuole e lasciando scrivere il codice al modello, senza scriverlo né leggerlo riga per riga.",
+    rel: ["codice", "agente"], v: "vibe" },
+  { id: "api", n: "API", en: "Application Programming Interface", cat: "uso",
+    d: "Il canale con cui un programma usa un modello direttamente, senza l'app di chat. Si paga in base ai token letti e scritti.",
+    rel: ["token", "llm"] },
+
+  { id: "strumento", n: "Strumento", en: "tool", cat: "agenti",
+    d: "Un programma esterno che l'app mette a disposizione del modello. Il modello scrive la richiesta come testo, l'app la esegue e aggiunge il risultato al contesto.",
+    rel: ["ricerca", "codice", "computer", "agente", "contesto", "sysprompt", "mcp"], v: "strumento" },
+  { id: "ricerca", n: "Ricerca web", en: "web search", cat: "agenti",
+    d: "Lo strumento con cui il modello cerca su internet. Il modello scrive come testo la ricerca da fare e poi legge i risultati, ancora una volta come testo.",
+    rel: ["strumento", "allucinazione", "rag"], v: "ricerca" },
+  { id: "codice", n: "Esecuzione di codice", en: "code execution", cat: "agenti",
+    d: "Lo strumento con cui il modello scrive un programma e un altro programma lo esegue. Il risultato è calcolato, non previsto token per token: per conti e conteggi è affidabile.",
+    rel: ["strumento", "vibe"], v: "codice" },
+  { id: "computer", n: "Uso del computer", en: "computer use", cat: "agenti",
+    d: "Lo strumento con cui il modello usa un computer: riceve uno screenshot, scrive un'azione (un clic, un testo da digitare), un programma la esegue, e si ripete.",
+    rel: ["strumento", "agente", "multimodale"], v: "computer" },
+  { id: "agente", n: "Agente", en: "agent", cat: "agenti",
+    d: "Un modello linguistico che usa gli strumenti molte volte di seguito, legge ogni volta il risultato e sceglie da solo il passo successivo, finché il compito non è finito.",
+    rel: ["strumento", "computer", "vibe", "contesto", "mcp"], v: "agente" },
+  { id: "rag", n: "RAG", en: "Retrieval-Augmented Generation", cat: "agenti",
+    d: "Una tecnica che, prima di rispondere, cerca in una raccolta di documenti i pezzi utili alla domanda e li inserisce nel contesto.",
+    rel: ["contesto", "ricerca", "embedding"], v: "rag" },
+  { id: "mcp", n: "MCP", en: "Model Context Protocol", cat: "agenti",
+    d: "Uno standard per collegare un'app di IA a strumenti e dati esterni (email, calendario, archivi aziendali) sempre nello stesso modo.",
+    rel: ["strumento", "agente"] },
+];
+const BY = Object.fromEntries(TERMS.map(t => [t.id, t]));
+const norm = s => (s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+// collegamenti non orientati, senza doppioni
+const LINKS = [];
+{ const seen = new Set();
+  for (const t of TERMS) for (const r of t.rel) {
+    if (!BY[r]) { console.warn("collegamento mancante", t.id, r); continue; }
+    const k = [t.id, r].sort().join("|");
+    if (!seen.has(k)) { seen.add(k); LINKS.push([t.id, r]); }
+  }
+  // relazioni simmetriche anche nella scheda
+  for (const [a, b] of LINKS) { if (!BY[a].rel.includes(b)) BY[a].rel.push(b); if (!BY[b].rel.includes(a)) BY[b].rel.push(a); }
+}
+
+// ---------------------------------------------------------------- nodi
+const world = document.getElementById("world");
+let W = 0, H = 0, TOP = 90, DPR = 1;
+const catOn = Object.fromEntries(Object.keys(CATS).map(k => [k, true]));
+const nodes = TERMS.map((t, i) => {
+  const el = document.createElement("div");
+  el.className = "node"; el.textContent = t.n;
+  el.style.setProperty("--c", CATS[t.cat].c); el.style.setProperty("--cl", CATS[t.cat].l);
+  world.appendChild(el);
+  return { t, el, x: 0, y: 0, vx: 0, vy: 0, a: 0, w: 0, h: 0, on: true, s: 1, ph: Math.random() * 6.28, sp: .35 + Math.random() * .4, amp: 6 + Math.random() * 8, fixed: false, i };
+});
+const NI = Object.fromEntries(nodes.map(n => [n.t.id, n]));
+const L = LINKS.map(([a, b]) => [NI[a], NI[b]]);
+
+function measure() {
+  const fs = Math.max(13, Math.min(17, Math.min(W, H * 1.6) / 78));
+  for (const n of nodes) { n.el.style.fontSize = fs + "px"; n.w = n.el.offsetWidth; n.h = n.el.offsetHeight; }
+}
+function resize() {
+  W = innerWidth; H = innerHeight; DPR = Math.min(2, devicePixelRatio || 1);
+  TOP = document.getElementById("top").offsetHeight - 6;
+  measure();
+}
+resize();
+// posizione iniziale: un settore per categoria
+{ const keys = Object.keys(CATS);
+  const cx = W / 2, cy = (H + TOP) / 2, R = Math.min(W, H - TOP) * .3;
+  for (const n of nodes) {
+    const k = keys.indexOf(n.t.cat), ang = k / keys.length * 6.283 - 1.57 + (Math.random() - .5) * 1.1;
+    const r = R * (.5 + Math.random() * .7);
+    n.x = cx + Math.cos(ang) * r * 1.3; n.y = cy + Math.sin(ang) * r;
+  }
+}
+addEventListener("resize", resize);
+
+// ---------------------------------------------------------------- fisica
+let mouse = null, drag = null, hover = null, time = 0;
+function step() {
+  time += 1 / 60;
+  const act = nodes.filter(n => n.on);
+  const cx = W / 2, cy = (H + TOP) / 2;
+  const crowd = Math.min(1.4, Math.max(.6, Math.sqrt(W * (H - TOP) / (act.length * 22000))));
+  for (let i = 0; i < act.length; i++) {
+    const a = act[i];
+    for (let j = i + 1; j < act.length; j++) {
+      const b = act[j];
+      let dx = b.x - a.x, dy = b.y - a.y;
+      if (dx === 0 && dy === 0) dx = Math.random() - .5;
+      const d2 = dx * dx + dy * dy, d = Math.sqrt(d2);
+      // repulsione generale
+      let f = 3000 * crowd * crowd / (d2 + 400);
+      // sovrapposizione dei rettangoli: spinta forte
+      const ox = (a.w + b.w) / 2 + 12 - Math.abs(dx), oy = (a.h + b.h) / 2 + 10 - Math.abs(dy);
+      if (ox > 0 && oy > 0) f += Math.min(ox, oy * 2.2) * .22;
+      const fx = dx / d * f, fy = dy / d * f;
+      a.vx -= fx; a.vy -= fy; b.vx += fx; b.vy += fy;
+    }
+  }
+  // molle tra termini collegati
+  for (const [a, b] of L) {
+    if (!a.on || !b.on) continue;
+    const dx = b.x - a.x, dy = b.y - a.y, d = Math.hypot(dx, dy) || 1;
+    const rest = (a.w + b.w) / 2 * .75 + 70 * crowd;
+    const f = (d - rest) * .0019;
+    a.vx += dx / d * f; a.vy += dy / d * f; b.vx -= dx / d * f; b.vy -= dy / d * f;
+  }
+  for (const n of act) {
+    // verso il centro, più forte se pochi termini
+    const g = act.length < 12 ? .004 : .0006;
+    const asp = Math.min(1, (H - TOP) / W * 1.4); n.vx += (cx - n.x) * g * asp; n.vy += (cy - n.y) * g * 1.4;
+    // il cursore spinge via i termini vicini
+    if (mouse && !drag) {
+      const dx = n.x - mouse.x, dy = n.y - mouse.y, d = Math.hypot(dx, dy);
+      if (Math.abs(dx) < n.w / 2 + 30 && Math.abs(dy) < n.h / 2 + 24) { n.vx *= .3; n.vy *= .3; }
+      else if (d < 130 && d > 1) { const f = (130 - d) * .006; n.vx += dx / d * f; n.vy += dy / d * f; }
+    }
+    // bordi
+    const mx = n.w / 2 + 16, my = n.h / 2 + 14;
+    if (n.x < mx) n.vx += (mx - n.x) * .2; if (n.x > W - mx) n.vx -= (n.x - W + mx) * .2;
+    if (n.y < TOP + my) n.vy += (TOP + my - n.y) * .2; if (n.y > H - my) n.vy -= (n.y - H + my) * .2;
+  }
+  for (const n of nodes) {
+    n.s += ((n.on ? 1 : 0) - n.s) * .14;
+    if (n === drag) continue;
+    n.vx *= .66; n.vy *= .66;
+    const vmax = 14; n.vx = Math.max(-vmax, Math.min(vmax, n.vx)); n.vy = Math.max(-vmax, Math.min(vmax, n.vy));
+    n.x += n.vx; n.y += n.vy;
+    // rotazione: oscillazione lenta + inclinazione quando si muove
+    const target = Math.sin(time * n.sp + n.ph) * n.amp + Math.max(-28, Math.min(28, n.vx * 5));
+    n.a += (target - n.a) * .06;
+  }
+  if (drag) { const target = Math.max(-35, Math.min(35, drag.vx * 3)); drag.a += (target - drag.a) * .2; }
+}
+function render() {
+  for (const n of nodes) {
+    n.el.style.transform = `translate(${n.x - n.w / 2}px, ${n.y - n.h / 2}px) rotate(${n.a}deg) scale(${.2 + .8 * n.s})`;
+  }
+}
+function loop() { step(); render(); requestAnimationFrame(loop); }
+
+// ---------------------------------------------------------------- interazione
+function setHover(n) {
+  hover = n;
+  const near = n ? new Set([n, ...n.t.rel.map(r => NI[r])]) : null;
+  for (const m of nodes) { m.el.classList.toggle("dim", !!near && !near.has(m)); m.el.classList.toggle("hot", !!near && m !== n && near.has(m)); }
+}
+for (const n of nodes) {
+  const el = n.el;
+  el.addEventListener("pointerenter", () => { if (!drag) setHover(n); });
+  el.addEventListener("pointerleave", () => { if (!drag && hover === n) setHover(null); });
+  el.addEventListener("pointerdown", e => {
+    e.preventDefault(); el.setPointerCapture(e.pointerId);
+    drag = n; n.vx = n.vy = 0; el.classList.add("drag");
+    const st = { x: e.clientX, y: e.clientY, t: performance.now(), dx: n.x - e.clientX, dy: n.y - e.clientY, moved: 0, lx: e.clientX, ly: e.clientY };
+    const mv = ev => {
+      st.moved = Math.max(st.moved, Math.hypot(ev.clientX - st.x, ev.clientY - st.y));
+      n.vx = (ev.clientX - st.lx) * .6; n.vy = (ev.clientY - st.ly) * .6; st.lx = ev.clientX; st.ly = ev.clientY;
+      n.x = ev.clientX + st.dx; n.y = ev.clientY + st.dy;
+    };
+    const up = ev => {
+      el.removeEventListener("pointermove", mv); el.removeEventListener("pointerup", up); el.removeEventListener("pointercancel", up);
+      el.classList.remove("drag"); drag = null;
+      if (st.moved < 6) openCard(n.t.id);
+      if (ev.pointerType !== "mouse") setHover(null);
+    };
+    el.addEventListener("pointermove", mv); el.addEventListener("pointerup", up); el.addEventListener("pointercancel", up);
+  });
+}
+addEventListener("pointermove", e => { mouse = { x: e.clientX, y: e.clientY }; });
+document.addEventListener("pointerleave", () => { mouse = null; });
+
+// ricerca e categorie
+const q = document.getElementById("q"), count = document.getElementById("count"), empty = document.getElementById("empty");
+const cats = document.getElementById("cats");
+for (const [k, c] of Object.entries(CATS)) {
+  const b = document.createElement("button");
+  b.className = "cat"; b.textContent = c.n; b.style.setProperty("--c", c.c);
+  b.onclick = () => { catOn[k] = !catOn[k]; b.classList.toggle("off", !catOn[k]); filter(); };
+  cats.appendChild(b);
+}
+const HAY = Object.fromEntries(TERMS.map(t => [t.id, { name: norm([t.n, t.en, t.it].join(" ")), all: norm([t.n, t.en, t.it, t.d, t.es].join(" ")) }]));
+function matches(t, s) {
+  if (!s) return true;
+  const h = HAY[t.id];
+  return s.split(/\s+/).every(w => h.name.includes(w)) || (s.length >= 3 && h.all.includes(s));
+}
+function filter() {
+  const s = norm(q.value.trim());
+  let k = 0;
+  for (const n of nodes) {
+    const on = catOn[n.t.cat] && matches(n.t, s);
+    if (on && !n.on) { n.vx += (Math.random() - .5) * 8; n.vy += (Math.random() - .5) * 8; }
+    n.on = on; n.el.classList.toggle("gone", !on); if (on) k++;
+  }
+  count.textContent = k === TERMS.length ? `${k} termini` : `${k} su ${TERMS.length}`;
+  empty.style.display = k ? "none" : "block";
+  setHover(null);
+}
+q.addEventListener("input", filter);
+q.addEventListener("keydown", e => {
+  if (e.key === "Enter") {
+    const s = norm(q.value.trim());
+    const hit = nodes.filter(n => n.on);
+    const exact = hit.find(n => norm(n.t.n) === s) || hit.find(n => HAY[n.t.id].name.includes(s)) || hit[0];
+    if (exact) openCard(exact.t.id);
+  }
+});
+addEventListener("keydown", e => {
+  if (e.key === "Escape") { if (veil.classList.contains("on")) closeCard(); else { q.value = ""; filter(); } }
+  if (e.key === "/" && document.activeElement !== q) { e.preventDefault(); q.focus(); }
+});
+
+// ---------------------------------------------------------------- scheda
+const veil = document.getElementById("veil"), card = document.getElementById("card");
+const vc = document.getElementById("viz"), vx = vc.getContext("2d");
+let vizFn = null, vizT0 = 0;
+function openCard(id) {
+  const t = BY[id], c = CATS[t.cat];
+  card.style.setProperty("--c", c.c); card.style.setProperty("--cl", c.l);
+  document.getElementById("c-cat").textContent = c.n;
+  const alt = t.en || t.it;
+  document.getElementById("c-name").innerHTML = t.n.replace(/</g, "&lt;") + (alt ? ' <span class="c-alt">(' + alt + ")</span>" : "");
+  document.getElementById("c-def").textContent = t.d;
+  const es = document.getElementById("c-es");
+  es.innerHTML = t.es ? "<b>Esempio:</b> " + t.es.replace(/</g, "&lt;") : ""; es.style.display = t.es ? "" : "none";
+  const rel = document.getElementById("c-rel"); rel.innerHTML = "<span>Collegati:</span>";
+  for (const r of t.rel) {
+    const b = document.createElement("button"), rc = CATS[BY[r].cat];
+    b.textContent = BY[r].n; b.style.setProperty("--c", rc.c); b.style.setProperty("--cl", rc.l);
+    b.onclick = () => openCard(r);
+    rel.appendChild(b);
+  }
+  vizFn = t.v ? VIZ[t.v] : null;
+  vc.style.display = vizFn ? "block" : "none";
+  if (vizFn) {
+    const r = Math.min(2, devicePixelRatio || 1); vc.width = 600 * r; vc.height = 230 * r; vx.setTransform(r, 0, 0, r, 0, 0);
+    vizT0 = performance.now();
+  }
+  veil.classList.add("on");
+  card.style.animation = "none"; void card.offsetWidth; card.style.animation = "";
+}
+function closeCard() { veil.classList.remove("on"); vizFn = null; }
+document.getElementById("x").onclick = closeCard;
+veil.addEventListener("pointerdown", e => { if (e.target === veil) closeCard(); });
+function vizLoop() {
+  if (vizFn && veil.classList.contains("on")) {
+    vx.clearRect(0, 0, 600, 230);
+    try { vizFn(vx, (performance.now() - vizT0) / 1000); } catch (err) { console.error(err); vizFn = null; }
+  }
+  requestAnimationFrame(vizLoop);
+}
+
+// ---------------------------------------------------------------- animazioni
+const K = { ink: "#1B2733", navy: "#0F2A43", teal: "#0E9F8E", tealL: "#E3F4F2", orange: "#E0731F", orangeL: "#FDEEDF",
+  purple: "#6B5BD2", purpleL: "#EEEBFB", blue: "#2F6DB5", blueL: "#E6EEF8", red: "#D64545", redL: "#FBEAEA", muted: "#5B6B7A", line: "#DCE3EA", soft: "#C9D5E0", white: "#fff" };
+const FONT = '"Segoe UI", system-ui, sans-serif', MONO = '"Cascadia Code", Consolas, monospace';
+const lerp = (a, b, p) => a + (b - a) * p;
+const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
+const ease = x => { x = clamp(x); return x * x * (3 - 2 * x); };
+const ph = (t, per) => (t % per) / per;
+function box(c, x, y, w, h, r, fill, stroke, lw = 2, dash) {
+  c.beginPath(); c.roundRect(x, y, w, h, r);
+  if (fill) { c.fillStyle = fill; c.fill(); }
+  if (stroke) { c.setLineDash(dash || []); c.strokeStyle = stroke; c.lineWidth = lw; c.stroke(); c.setLineDash([]); }
+}
+function tx(c, s, x, y, o = {}) {
+  c.font = `${o.w || 500} ${o.s || 15}px ${o.m ? MONO : FONT}`; c.fillStyle = o.c || K.ink;
+  c.textAlign = o.a || "center"; c.textBaseline = "middle"; c.globalAlpha = o.al == null ? 1 : o.al; c.fillText(s, x, y); c.globalAlpha = 1;
+}
+function tw(c, s, o = {}) { c.font = `${o.w || 500} ${o.s || 15}px ${o.m ? MONO : FONT}`; return c.measureText(s).width; }
+function arrow(c, x1, y1, x2, y2, col = K.muted, lw = 2.2) {
+  const a = Math.atan2(y2 - y1, x2 - x1);
+  c.strokeStyle = col; c.fillStyle = col; c.lineWidth = lw;
+  c.beginPath(); c.moveTo(x1, y1); c.lineTo(x2 - Math.cos(a) * 6, y2 - Math.sin(a) * 6); c.stroke();
+  c.beginPath(); c.moveTo(x2, y2); c.lineTo(x2 - 10 * Math.cos(a - .45), y2 - 10 * Math.sin(a - .45)); c.lineTo(x2 - 10 * Math.cos(a + .45), y2 - 10 * Math.sin(a + .45)); c.closePath(); c.fill();
+}
+function dot(c, x, y, r, col) { c.beginPath(); c.arc(x, y, r, 0, 6.283); c.fillStyle = col; c.fill(); }
+function line(c, x1, y1, x2, y2, col, lw = 2) { c.strokeStyle = col; c.lineWidth = lw; c.beginPath(); c.moveTo(x1, y1); c.lineTo(x2, y2); c.stroke(); }
+const euro = v => Math.round(v / 1000).toLocaleString("it-IT") + ".000 €";
+function knob(c, x, y, v, label, val, col) {
+  const a0 = .75 * Math.PI, a1 = 2.25 * Math.PI, a = lerp(a0, a1, v);
+  c.lineCap = "round";
+  c.strokeStyle = K.soft; c.lineWidth = 7; c.beginPath(); c.arc(x, y, 30, a0, a1); c.stroke();
+  c.strokeStyle = col; c.beginPath(); c.arc(x, y, 30, a0, a); c.stroke();
+  dot(c, x, y, 21, K.white); c.strokeStyle = K.line; c.lineWidth = 1.5; c.beginPath(); c.arc(x, y, 21, 0, 6.283); c.stroke();
+  line(c, x, y, x + Math.cos(a) * 15, y + Math.sin(a) * 15, K.navy, 4);
+  tx(c, label, x, y + 48, { s: 13, c: K.muted }); tx(c, val, x, y + 66, { s: 15, w: 700, c: K.navy });
+}
+// grafico case: superficie 30..170 m², prezzo 0..420.000
+const HOUSES = [[45, 130000], [60, 160000], [80, 215000], [120, 290000], [150, 350000]];
+function chart(c, X, Y, Wd, Hd, base, perm, o = {}) {
+  const sx = s => X + (s - 30) / 140 * Wd, sy = p => Y + Hd - p / 420000 * Hd;
+  line(c, X, Y + Hd, X + Wd, Y + Hd, K.soft, 2); line(c, X, Y, X, Y + Hd, K.soft, 2);
+  tx(c, "superficie", X + Wd / 2, Y + Hd + 14, { s: 12, c: K.muted }); tx(c, "prezzo", X - 12, Y + 8, { s: 12, c: K.muted, a: "right" });
+  if (o.res) for (const [s, p] of HOUSES) { const pr = base + perm * s; line(c, sx(s), sy(p), sx(s), sy(pr), K.red, 2.5); }
+  c.save(); c.beginPath(); c.rect(X, Y - 4, Wd, Hd + 4); c.clip();
+  line(c, sx(30), sy(base + perm * 30), sx(170), sy(base + perm * 170), K.teal, 3.5); c.restore();
+  for (const [s, p] of HOUSES) dot(c, sx(s), sy(p), 6, K.navy);
+  return HOUSES.reduce((e, [s, p]) => e + Math.abs(base + perm * s - p), 0) / HOUSES.length;
+}
+function net(c, layers, X, Y, Wd, Hd, f) {
+  const pos = layers.map((n, l) => Array.from({ length: n }, (_, i) => [X + l / (layers.length - 1) * Wd, Y + Hd / 2 + (i - (n - 1) / 2) * Math.min(38, Hd / (n - .5))]));
+  for (let l = 0; l < pos.length - 1; l++) for (const a of pos[l]) for (const b of pos[l + 1]) { const s = f.edge ? f.edge(l, a, b) : null; line(c, a[0], a[1], b[0], b[1], s && s.c || "rgba(15,42,67,.14)", s && s.w || 1.4); }
+  if (f.pulse) for (let l = 0; l < pos.length - 1; l++) for (const a of pos[l]) for (const b of pos[l + 1]) f.pulse(l, a, b);
+  pos.forEach((col, l) => col.forEach((p, i) => { const s = f.node ? f.node(l, i) : {}; dot(c, p[0], p[1], 11, s.fill || K.white); c.strokeStyle = s.stroke || K.navy; c.lineWidth = 2.2; c.beginPath(); c.arc(p[0], p[1], 11, 0, 6.283); c.stroke(); }));
+  return pos;
+}
+function chatRow(c, y, role, text, col, o = {}) {
+  box(c, 16, y - 15, 86, 30, 8, col); tx(c, role, 59, y, { s: 13, w: 700, c: K.white });
+  const w = o.w || 470;
+  box(c, 112, y - 18, w, 36, 10, o.fill || K.white, o.stroke, 1.5, o.dash);
+  tx(c, text, 126, y, { s: o.s || 14.5, a: "left", m: o.m, c: o.c || K.ink, w: o.bold ? 650 : 500 });
+}
+
+const VIZ = {};
+const IO_EX = [["120 m²", "256.000 €"], ["Un'email", "«spam»"], ["«Il gatto è salito sul…»", "«tetto»"], ["Foto di una cifra", "«È un 7»"]];
+function io(mode) {
+  return (c, t) => {
+    const k = Math.floor(t / 2.8) % IO_EX.length, p = ph(t, 2.8);
+    tx(c, "input", 105, 62, { s: 13, w: 700, c: mode === "in" ? K.teal : K.muted });
+    tx(c, "output", 495, 62, { s: 13, w: 700, c: mode === "out" ? K.teal : K.muted });
+    box(c, 16, 85, 178, 60, 12, mode === "in" ? K.tealL : K.white, mode === "in" ? K.teal : K.line, 2);
+    box(c, 406, 85, 178, 60, 12, mode === "out" ? K.tealL : K.white, mode === "out" ? K.teal : K.line, 2);
+    box(c, 240, 75, 120, 80, 16, K.navy); tx(c, "modello", 300, 115, { c: K.white, w: 700, s: 17 });
+    arrow(c, 198, 115, 234, 115); arrow(c, 364, 115, 400, 115);
+    tx(c, IO_EX[k][0], 105, 115, { s: 15, w: 600 });
+    if (p > .55) tx(c, IO_EX[k][1], 495, 115, { s: 16, w: 700, c: K.navy, al: ease((p - .55) / .1) });
+    if (p < .55) { const x = p < .3 ? lerp(150, 300, ease(p / .3)) : lerp(300, 450, ease((p - .3) / .25)); dot(c, x, 115, 7, K.orange); }
+    tx(c, mode === "in" ? "cambia a ogni richiesta" : mode === "out" ? "il risultato per quell'input" : "input → modello → output", 300, 195, { s: 14, c: K.muted });
+  };
+}
+VIZ.io = io(null); VIZ.ioIn = io("in"); VIZ.ioOut = io("out");
+
+VIZ.parametro = (c, t) => {
+  const a = .5 + .5 * Math.sin(t * .9), b = .5 + .5 * Math.sin(t * .63 + 1.3);
+  const base = lerp(0, 150000, a), perm = lerp(500, 3500, b);
+  knob(c, 70, 85, a, "costo di base", euro(base), "#8B7CF0");
+  knob(c, 190, 85, b, "costo al m²", Math.round(perm).toLocaleString("it-IT") + " €", K.teal);
+  chart(c, 300, 22, 270, 165, base, perm);
+  tx(c, "girando le manopole (i parametri) cambia la retta, cioè il comportamento del modello", 300, 218, { s: 13, c: K.muted });
+};
+VIZ.addestramento = (c, t) => {
+  const p = ph(t, 6), q = ease(p / .8);
+  const base = lerp(180000, 47000, q), perm = lerp(300, 2030, q);
+  const e = chart(c, 40, 22, 320, 165, base, perm, { res: true });
+  tx(c, "passo " + Math.floor(q * 500), 400, 40, { s: 14, a: "left", c: K.muted });
+  tx(c, "errore medio", 400, 78, { s: 14, a: "left", c: K.muted });
+  tx(c, euro(e), 400, 104, { s: 22, w: 700, a: "left", c: e < 15000 ? K.teal : K.red });
+  box(c, 400, 128, 170, 14, 7, K.line); box(c, 400, 128, Math.max(6, 170 * Math.min(1, e / 90000)), 14, 7, e < 15000 ? K.teal : K.red);
+  tx(c, "prevede → misura l'errore → corregge", 300, 218, { s: 13, c: K.muted });
+};
+VIZ.errore = (c, t) => {
+  const wob = Math.sin(t * 1.2) * .5 + .5;
+  const e = chart(c, 40, 22, 320, 165, lerp(20000, 80000, wob), lerp(2300, 1800, wob), { res: true });
+  tx(c, "le linee rosse sono", 400, 60, { s: 14, a: "left", c: K.muted });
+  tx(c, "gli errori sugli esempi", 400, 80, { s: 14, a: "left", c: K.muted });
+  tx(c, "errore medio", 400, 118, { s: 14, a: "left", c: K.muted });
+  tx(c, euro(e), 400, 144, { s: 22, w: 700, a: "left", c: K.red });
+};
+VIZ.ottimizzatore = (c, t) => {
+  const X = 50, Y = 20, Wd = 500, Hd = 160, f = x => (x - .62) * (x - .62) * 2.6 + .05;
+  const sx = x => X + x * Wd, sy = v => Y + Hd - v / 1.1 * Hd;
+  line(c, X, Y + Hd, X + Wd, Y + Hd, K.soft); line(c, X, Y, X, Y + Hd, K.soft);
+  tx(c, "valore del parametro", X + Wd / 2, Y + Hd + 16, { s: 12, c: K.muted }); tx(c, "errore", X + 6, Y + 4, { s: 12, c: K.muted, a: "left" });
+  c.strokeStyle = K.blue; c.lineWidth = 3; c.beginPath();
+  for (let i = 0; i <= 100; i++) { const x = i / 100; i ? c.lineTo(sx(x), sy(f(x))) : c.moveTo(sx(x), sy(f(x))); } c.stroke();
+  const p = ph(t, 7), steps = 12, kf = Math.min(steps, p * 1.25 * steps), k = Math.floor(kf), fr = ease(kf - k);
+  const xs = [.04]; for (let i = 0; i < steps + 1; i++) xs.push(.62 + (xs[i] - .62) * .62);
+  for (let i = 0; i < k; i++) dot(c, sx(xs[i]), sy(f(xs[i])), 4, "rgba(224,115,31,.35)");
+  const x = lerp(xs[k], xs[k + 1], fr), y = f(x) - Math.sin(fr * Math.PI) * .05;
+  dot(c, sx(x), sy(y) - 9, 9, K.orange);
+  tx(c, "a ogni passo sposta il parametro nella direzione in cui l'errore scende", 300, 218, { s: 13, c: K.muted });
+};
+VIZ.inferenza = (c, t) => {
+  const ex = [[60, 170000], [100, 250000], [150, 350000]], k = Math.floor(t / 2.2) % 3, p = ph(t, 2.2);
+  tx(c, "input", 85, 50, { s: 13, w: 700, c: K.muted }); tx(c, "output", 515, 50, { s: 13, w: 700, c: K.muted });
+  box(c, 20, 80, 130, 56, 12, K.white, K.line); tx(c, ex[k][0] + " m²", 85, 108, { s: 18, w: 700 });
+  box(c, 450, 80, 130, 56, 12, K.white, K.line); if (p > .5) tx(c, euro(ex[k][1]), 515, 108, { s: 18, w: 700, c: K.navy });
+  box(c, 190, 50, 220, 120, 18, K.navy);
+  knob(c, 255, 100, .33, "", "", "#8B7CF0"); knob(c, 345, 100, .5, "", "", K.teal);
+  tx(c, "parametri fissi", 300, 152, { s: 13, c: "#CFE9E5", w: 600 });
+  arrow(c, 152, 108, 186, 108); arrow(c, 414, 108, 446, 108);
+  tx(c, "nessun addestramento: il modello già addestrato risponde e basta", 300, 205, { s: 13, c: K.muted });
+};
+VIZ.dati = (c, t) => {
+  const n = Math.min(HOUSES.length, Math.floor(ph(t, 6) * 9));
+  box(c, 30, 20, 280, 32, 8, K.navy); tx(c, "superficie", 90, 36, { s: 14, w: 700, c: K.white }); tx(c, "prezzo (risposta giusta)", 220, 36, { s: 13, w: 700, c: K.white });
+  for (let i = 0; i < n; i++) { const y = 70 + i * 28; tx(c, HOUSES[i][0] + " m²", 90, y, { s: 15 }); tx(c, euro(HOUSES[i][1]), 220, y, { s: 15, w: 650, c: K.teal }); line(c, 30, y + 14, 310, y + 14, K.line, 1); }
+  arrow(c, 320, 110, 380, 110);
+  box(c, 390, 80, 170, 60, 14, K.navy); tx(c, "addestramento", 475, 110, { s: 16, w: 700, c: K.white });
+  tx(c, "ogni esempio ha già la risposta giusta", 300, 218, { s: 13, c: K.muted });
+};
+VIZ.ml = (c, t) => {
+  const p = ph(t, 6);
+  box(c, 20, 30, 250, 150, 14, K.white, K.line); tx(c, "Programmazione classica", 145, 52, { s: 14, w: 700, c: K.navy });
+  tx(c, "regole scritte da una persona", 145, 90, { s: 14 }); arrow(c, 145, 104, 145, 128); tx(c, "risposte", 145, 146, { s: 14, w: 650 });
+  box(c, 330, 30, 250, 150, 14, K.tealL, K.teal); tx(c, "Machine learning", 455, 52, { s: 14, w: 700, c: K.teal });
+  const n = Math.floor(p * 14);
+  for (let i = 0; i < Math.min(n, 12); i++) { const ok = (i * 7) % 3 !== 0; box(c, 352 + (i % 6) * 36, 72 + Math.floor(i / 6) * 22, 30, 16, 4, ok ? K.white : K.redL, ok ? K.teal : K.red, 1.2); }
+  arrow(c, 455, 122, 455, 140, K.teal); tx(c, "un modello che risponde da solo", 455, 160, { s: 14, w: 650, al: p > .7 ? 1 : .25 });
+  tx(c, "esempi con la risposta giusta, non regole", 300, 210, { s: 13, c: K.muted });
+};
+
+VIZ.rete = (c, t) => {
+  const w = ph(t, 2.6) * 3.4;
+  net(c, [3, 5, 5, 2], 90, 15, 420, 190, {
+    pulse: (l, a, b) => { const f = w - l; if (f > 0 && f < 1) dot(c, lerp(a[0], b[0], f), lerp(a[1], b[1], f), 3, K.orange); },
+    node: (l) => (Math.abs(w - l) < .25 ? { fill: K.orangeL, stroke: K.orange } : {}),
+  });
+  tx(c, "ingresso", 90, 218, { s: 12, c: K.muted }); tx(c, "uscita", 510, 218, { s: 12, c: K.muted });
+};
+VIZ.strato = (c, t) => {
+  const k = Math.floor(t / 1.4) % 4;
+  const pos = net(c, [3, 5, 5, 2], 90, 25, 420, 170, { node: l => (l === k ? { fill: K.purpleL, stroke: K.purple } : {}) });
+  const x = pos[k][0][0]; box(c, x - 26, 18, 52, 186, 14, null, K.purple, 2.5, [6, 5]);
+  tx(c, "strato " + (k + 1), x, 214, { s: 13, w: 700, c: K.purple });
+};
+VIZ.neurone = (c, t) => {
+  const sets = [[.8, .2, .5], [.1, .9, .4], [.6, .6, .9]], W8 = [.9, -.4, .6];
+  const xs = sets[Math.floor(t / 3) % 3];
+  const s = xs.reduce((a, x, i) => a + x * W8[i], 0), out = Math.max(0, s);
+  xs.forEach((x, i) => {
+    const y = 45 + i * 65;
+    box(c, 20, y - 18, 64, 36, 9, K.white, K.line); tx(c, x.toFixed(1).replace(".", ","), 52, y, { s: 17, w: 700 });
+    line(c, 86, y, 270, 115, W8[i] > 0 ? K.teal : K.red, 1 + Math.abs(W8[i]) * 5);
+    tx(c, "× " + W8[i].toFixed(1).replace(".", ","), 170, y + (115 - y) * .45 - 12, { s: 13, w: 700, c: W8[i] > 0 ? K.teal : K.red });
+  });
+  dot(c, 300, 115, 34, K.purple); tx(c, "Σ", 300, 115, { s: 26, w: 700, c: K.white });
+  arrow(c, 336, 115, 420, 115, K.purple);
+  box(c, 426, 95, 150, 40, 10, K.purpleL, K.purple); tx(c, "uscita " + out.toFixed(2).replace(".", ","), 501, 115, { s: 16, w: 700, c: K.navy });
+  tx(c, "somma = " + s.toFixed(2).replace(".", ",") + (s < 0 ? " → negativa, diventa 0" : ""), 300, 175, { s: 14, c: K.muted });
+  tx(c, "ingressi × pesi, sommati, poi una funzione semplice", 300, 210, { s: 13, c: K.muted });
+};
+VIZ.peso = (c, t) => {
+  const w = .5 + .5 * Math.sin(t * 1.3);
+  dot(c, 130, 105, 30, K.white); c.strokeStyle = K.navy; c.lineWidth = 2.5; c.beginPath(); c.arc(130, 105, 30, 0, 6.283); c.stroke();
+  dot(c, 470, 105, 30, K.white); c.beginPath(); c.arc(470, 105, 30, 0, 6.283); c.stroke();
+  line(c, 160, 105, 440, 105, K.purple, 1 + w * 14);
+  const p = ph(t, 1.2); dot(c, lerp(165, 435, p), 105, 3 + w * 6, K.orange);
+  tx(c, "peso = " + w.toFixed(2).replace(".", ","), 300, 60, { s: 18, w: 700, c: K.purple });
+  tx(c, "più è alto, più il segnale passa forte", 300, 165, { s: 14, c: K.muted });
+};
+VIZ.backprop = (c, t) => {
+  const p = ph(t, 4), fwd = p < .5, w = fwd ? p / .5 * 3 : 3 - (p - .5) / .5 * 3;
+  net(c, [3, 4, 4, 2], 100, 15, 400, 170, {
+    edge: (l) => (!fwd && l >= Math.floor(w) ? { c: "rgba(214,69,69,.45)", w: 2 } : null),
+    pulse: (l, a, b) => { const f = w - l; if (f > 0 && f < 1) dot(c, lerp(a[0], b[0], f), lerp(a[1], b[1], f), 3, fwd ? K.blue : K.red); },
+  });
+  tx(c, fwd ? "avanti: il modello fa la previsione →" : "← indietro: dall'errore si calcola come cambiare ogni peso", 300, 212, { s: 14, w: 650, c: fwd ? K.blue : K.red });
+};
+const SEVEN = ["0000000000", "0111111110", "0111111110", "0000001110", "0000011100", "0000111000", "0001110000", "0001110000", "0011100000", "0000000000"];
+VIZ.pixel = (c, t) => {
+  const s = 18, X1 = 50, X2 = 330, Y = 20, k = Math.floor(t * 6) % 100, ki = Math.floor(k / 10), kj = k % 10;
+  for (let i = 0; i < 10; i++) for (let j = 0; j < 10; j++) {
+    const v = SEVEN[i][j] === "1";
+    c.fillStyle = v ? K.navy : "#EEF2F6"; c.fillRect(X1 + j * s, Y + i * s, s - 1, s - 1);
+    tx(c, v ? "1" : "0", X2 + j * s + s / 2, Y + i * s + s / 2, { s: 12, w: v ? 700 : 400, c: v ? K.navy : "#9AA9B7", m: true });
+  }
+  c.strokeStyle = K.orange; c.lineWidth = 2.5; c.strokeRect(X1 + kj * s - 1, Y + ki * s - 1, s + 1, s + 1); c.strokeRect(X2 + kj * s - 1, Y + ki * s - 1, s + 1, s + 1);
+  arrow(c, 250, 110, 315, 110);
+  tx(c, "ogni quadratino è un numero: 10 × 10 = 100 numeri", 300, 216, { s: 13, c: K.muted });
+};
+
+VIZ.ling = (c, t) => {
+  const p = ph(t, 4.5), words = [["tetto", 58], ["divano", 17], ["tavolo", 11], ["albero", 9]];
+  tx(c, "Il gatto è salito sul", 40, 40, { s: 20, w: 600, a: "left" });
+  const wd = tw(c, "Il gatto è salito sul ", { s: 20, w: 600 });
+  if (p > .75) tx(c, "tetto", 40 + wd, 40, { s: 20, w: 700, a: "left", c: K.orange });
+  else box(c, 40 + wd, 26, 60, 28, 6, K.orangeL, K.orange, 1.5, [4, 3]);
+  words.forEach(([w, v], i) => {
+    const y = 90 + i * 32, g = ease(p / .5) * v / 60;
+    tx(c, w, 140, y, { s: 15, a: "right", w: i === 0 ? 700 : 500 });
+    box(c, 152, y - 10, 340, 20, 6, "#EEF2F6"); box(c, 152, y - 10, Math.max(4, 340 * g), 20, 6, i === 0 ? K.orange : K.blue);
+    tx(c, v + "%", 505, y, { s: 14, a: "left", w: 650 });
+  });
+  tx(c, "probabilità di ogni token possibile, poi ne sceglie uno", 300, 218, { s: 13, c: K.muted });
+};
+function circleSizes(c, t, hl) {
+  const items = [["1,7 mld", 1.7, "telefono", 0], ["20 mld", 20, "computer", 0], ["400 mld", 400, "data center", 1], ["1.500 mld", 1500, "data center", 1]];
+  const g = ease(ph(t, 5) / .5);
+  let x = 50;
+  items.forEach(([lab, v, where, big]) => {
+    const r = Math.max(2.5, Math.sqrt(v) * 1.85 * g), on = big === hl;
+    x += Math.max(r, 22);
+    dot(c, x, 108, r, on ? K.blue : "#C9D5E0");
+    tx(c, lab, x, 108 + Math.max(r, 8) + 15, { s: 14, w: 700, c: on ? K.navy : K.muted });
+    tx(c, where, x, 108 + Math.max(r, 8) + 31, { s: 12, c: K.muted });
+    x += Math.max(r, 22) + 34;
+  });
+  tx(c, hl ? "LLM: oltre 50 miliardi di parametri" : "SLM: meno di 20 miliardi di parametri", 300, 16, { s: 14, w: 650, c: K.blue });
+}
+VIZ.llm = (c, t) => circleSizes(c, t, 1);
+VIZ.slm = (c, t) => circleSizes(c, t, 0);
+function chips(c, toks, x, y, gap, colors, s = 18) {
+  let cx = x;
+  toks.forEach((tk, i) => {
+    const w = tw(c, tk.trim() || "·", { s, w: 600 }) + 14;
+    box(c, cx, y - 16, w, 32, 7, colors[i % colors.length]); tx(c, tk.trim(), cx + w / 2, y, { s, w: 600 });
+    cx += w + gap;
+  });
+  return cx;
+}
+const TCOL = ["#D6EEF9", "#FDE4CF", "#DDF3E4", "#EADFF7", "#FBE0E3"];
+VIZ.token = (c, t) => {
+  const p = ph(t, 6), g = ease((p - .15) / .3) * 8;
+  const it = ["Il", " gat", "to", " è", " sal", "ito", " sul", " tet", "to", "."], en = ["The", " cat", " climbed", " onto", " the", " roof", "."];
+  chips(c, it, 30, 60, g, TCOL); if (g > 4) tx(c, "10 token", 570, 60, { s: 15, w: 700, a: "right", c: K.blue });
+  chips(c, en, 30, 140, g, TCOL); if (g > 4) tx(c, "7 token", 570, 140, { s: 15, w: 700, a: "right", c: K.blue });
+  tx(c, "parole intere, parti di parola, punteggiatura", 300, 210, { s: 13, c: K.muted });
+};
+VIZ.tokenizer = (c, t) => {
+  const p = ph(t, 6), toks = ["Ciao", ",", " come", " st", "ai", "?"], ids = ["34102", "11", "3816", "357", "1611", "30"];
+  tx(c, "testo", 20, 35, { s: 13, w: 700, a: "left", c: K.muted }); tx(c, "«Ciao, come stai?»", 110, 35, { s: 18, w: 600, a: "left" });
+  if (p > .2) { tx(c, "token", 20, 100, { s: 13, w: 700, a: "left", c: K.muted }); chips(c, toks, 110, 100, 8, TCOL); }
+  if (p > .45) {
+    tx(c, "numeri", 20, 165, { s: 13, w: 700, a: "left", c: K.muted });
+    let x = 110; toks.forEach((tk, i) => { const w = tw(c, tk.trim(), { s: 18, w: 600 }) + 14; tx(c, ids[i], x + w / 2, 165, { s: 14, w: 700, m: true, c: K.blue }); x += w + 8; });
+  }
+  tx(c, "numeri di esempio", 580, 214, { s: 12, a: "right", c: K.muted });
+};
+const EMB = [["gatto", 120, 70, 0], ["cane", 160, 95, 0], ["cavallo", 95, 115, 0], ["mela", 420, 60, 1], ["pera", 465, 85, 1], ["banana", 430, 110, 1], ["Roma", 250, 165, 2], ["Milano", 300, 185, 2], ["Trento", 345, 158, 2]];
+VIZ.embedding = (c, t) => {
+  const k = Math.floor(t / 2.2) % 3, cols = [K.purple, K.teal, K.orange];
+  EMB.forEach(([w, x, y, g], i) => {
+    const xx = x + Math.sin(t * .8 + i) * 4, yy = y + Math.cos(t * .7 + i * 2) * 4;
+    dot(c, xx, yy, 7, g === k ? cols[g] : "#B7C4D1"); tx(c, w, xx + 12, yy, { s: 14, a: "left", w: g === k ? 700 : 500, c: g === k ? K.navy : K.muted });
+  });
+  tx(c, "significato simile → numeri simili → punti vicini", 300, 218, { s: 13, c: K.muted });
+};
+const ATT_W = ["Giulia", "è", "uscita", "presto", "perché", "era", "molto"], ATT_V = [.95, .15, .35, .1, .2, .45, .25];
+VIZ.attenzione = (c, t) => {
+  let x = 22; const pos = [];
+  ATT_W.forEach(w => { const ww = tw(c, w, { s: 18, w: 600 }); pos.push(x + ww / 2); tx(c, w, x, 150, { s: 18, w: 600, a: "left" }); x += ww + 14; });
+  const tx0 = x + 30; tx(c, "stanca", x, 150, { s: 18, w: 700, a: "left", c: K.orange });
+  const pulse = .75 + .25 * Math.sin(t * 3);
+  pos.forEach((px, i) => {
+    const v = ATT_V[i]; c.strokeStyle = `rgba(47,109,181,${.15 + v * .8 * pulse})`; c.lineWidth = 1 + v * 7;
+    c.beginPath(); c.moveTo(tx0, 134); c.quadraticCurveTo((tx0 + px) / 2, 134 - 40 - (tx0 - px) * .18, px, 134); c.stroke();
+    box(c, px - 18, 168, 36, 8, 4, "#EEF2F6"); box(c, px - 18, 168, 36 * v, 8, 4, K.blue);
+  });
+  tx(c, "per scegliere «stanca» il modello guarda soprattutto «Giulia»", 300, 212, { s: 13, c: K.muted });
+};
+VIZ.transformer = (c, t) => {
+  const p = ph(t, 4), lv = p * 4.2;
+  const toks = ["Giulia", "era", "molto"];
+  toks.forEach((w, i) => { box(c, 150 + i * 105, 182, 90, 30, 8, TCOL[i]); tx(c, w, 195 + i * 105, 197, { s: 15, w: 600 }); });
+  for (let b = 0; b < 3; b++) {
+    const y = 132 - b * 46, on = lv > b + .3 && lv < b + 1.3;
+    box(c, 140, y, 320, 36, 10, on ? K.blueL : K.white, on ? K.blue : K.line, 2);
+    tx(c, "attenzione", 230, y + 18, { s: 14, w: 650, c: on ? K.blue : K.muted }); tx(c, "+", 300, y + 18, { s: 15, c: K.muted }); tx(c, "rete neurale", 375, y + 18, { s: 14, w: 650, c: on ? K.blue : K.muted });
+  }
+  tx(c, "× decine di blocchi", 470, 86, { s: 13, a: "left", c: K.muted });
+  if (lv > 3.3) { box(c, 220, 4, 160, 30, 8, K.orangeL, K.orange, 1.5); tx(c, "prossimo: «stanca»", 300, 19, { s: 14, w: 700, c: K.orange }); }
+};
+const AR = ["Il", "gatto", "è", "salito", "sul", "tetto", "e", "non", "scende"];
+VIZ.autoregressivo = (c, t) => {
+  const n = Math.min(AR.length, Math.floor(t / .7) % (AR.length + 3) + 1);
+  let x = 24; const y = 90;
+  for (let i = 0; i < n; i++) { const w = tw(c, AR[i], { s: 19, w: 600 }) + 16; box(c, x, y - 18, w, 36, 8, i === n - 1 ? K.orangeL : "#EEF2F6", i === n - 1 ? K.orange : null, 1.5); tx(c, AR[i], x + w / 2, y, { s: 19, w: 600 }); x += w + 6; }
+  if (n < AR.length) { c.strokeStyle = K.blue; c.lineWidth = 2; c.setLineDash([5, 4]); c.beginPath(); c.moveTo(30, 122); c.lineTo(x - 10, 122); c.stroke(); c.setLineDash([]); tx(c, "rilegge tutto il testo e prevede il token successivo", 30, 145, { s: 14, a: "left", c: K.blue }); }
+  tx(c, "un token alla volta, ognuno aggiunto al testo", 300, 210, { s: 13, c: K.muted });
+};
+const DF = ["La", "riunione", "di", "domani", "è", "spostata", "alle", "15."], DFP = [2, 1, 3, 1, 3, 2, 3, 2];
+VIZ.diffusione = (c, t) => {
+  const p = Math.floor(ph(t, 5) * 5);
+  let x = 24;
+  tx(c, "passaggio " + Math.min(3, p), 24, 40, { s: 15, w: 700, a: "left", c: K.purple });
+  DF.forEach((w, i) => {
+    const ww = tw(c, w, { s: 18, w: 600 }) + 18, on = DFP[i] <= p;
+    box(c, x, 82, ww, 40, 9, on ? K.purpleL : "#EEF2F6");
+    tx(c, on ? w : "?", x + ww / 2, 102, { s: 18, w: on ? 600 : 700, c: on ? K.navy : "#9AA9B7" }); x += ww + 7;
+  });
+  tx(c, "tutte le posizioni insieme, in pochi passaggi", 300, 205, { s: 13, c: K.muted });
+};
+VIZ.temperatura = (c, t) => {
+  const s = .5 + .5 * Math.sin(t * .8), T = lerp(.35, 2.2, s);
+  const base = [["tetto", 58], ["divano", 17], ["tavolo", 11], ["albero", 9], ["lampione", 5]];
+  const ex = base.map(([, v]) => Math.pow(v, 1 / T)), sum = ex.reduce((a, b) => a + b, 0);
+  base.forEach(([w], i) => {
+    const pr = ex[i] / sum, y = 30 + i * 30;
+    tx(c, w, 130, y, { s: 15, a: "right", w: i ? 500 : 700 });
+    box(c, 142, y - 10, 300, 20, 6, "#EEF2F6"); box(c, 142, y - 10, Math.max(4, 300 * pr), 20, 6, i ? K.blue : K.orange);
+    tx(c, Math.round(pr * 100) + "%", 452, y, { s: 14, w: 650, a: "left" });
+  });
+  box(c, 142, 185, 300, 6, 3, K.line); dot(c, 142 + 300 * s, 188, 10, K.navy);
+  tx(c, "bassa", 142, 210, { s: 13, c: K.muted }); tx(c, "alta", 442, 210, { s: 13, c: K.muted });
+  tx(c, "temperatura " + T.toFixed(1).replace(".", ","), 515, 188, { s: 14, w: 700, c: K.navy, a: "left" });
+};
+VIZ.ragionamento = (c, t) => {
+  const lines = ["Ho 3 mele, ne mangio una: 3 − 1 = 2.", "Ne compro altre 5: 2 + 5 = 7.", "Taglio tutto a metà: 7 × 2 = 14 metà.", "Due marciscono: 14 − 2 = 12."];
+  const n = Math.min(5, Math.floor(ph(t, 8) * 7));
+  box(c, 20, 14, 560, 136, 12, "#F1F3F6", K.line, 1.5, [5, 4]);
+  tx(c, "ragionamento", 36, 32, { s: 12, w: 700, a: "left", c: K.muted });
+  for (let i = 0; i < Math.min(n, 4); i++) tx(c, lines[i], 36, 58 + i * 24, { s: 15, a: "left", c: K.muted });
+  if (n > 4) { box(c, 20, 160, 560, 44, 12, K.blueL, K.blue, 1.5); tx(c, "Risposta: 12 mezze mele.", 36, 182, { s: 17, w: 700, a: "left", c: K.navy }); }
+};
+VIZ.multimodale = (c, t) => {
+  const k = Math.floor(t / 1.6) % 3, labs = ["testo", "immagine", "audio"];
+  for (let i = 0; i < 3; i++) {
+    const y = 45 + i * 65, on = i === k;
+    box(c, 30, y - 24, 150, 48, 12, on ? K.blueL : K.white, on ? K.blue : K.line);
+    if (i === 0) tx(c, "Aa", 70, y, { s: 20, w: 700, c: K.navy });
+    if (i === 1) { c.fillStyle = K.navy; c.beginPath(); c.moveTo(52, y + 12); c.lineTo(66, y - 8); c.lineTo(78, y + 4); c.lineTo(86, y - 4); c.lineTo(96, y + 12); c.closePath(); c.fill(); dot(c, 88, y - 12, 4, K.orange); }
+    if (i === 2) { c.strokeStyle = K.navy; c.lineWidth = 2.5; c.beginPath(); for (let j = 0; j <= 40; j++) { const xx = 50 + j, yy = y + Math.sin(j * .6 + t * 6) * 10 * Math.sin(j / 40 * Math.PI); j ? c.lineTo(xx, yy) : c.moveTo(xx, yy); } c.stroke(); }
+    tx(c, labs[i], 135, y, { s: 15, w: 600 });
+    arrow(c, 184, y, 246, 110, on ? K.blue : K.soft);
+  }
+  box(c, 250, 75, 130, 70, 16, K.navy); tx(c, "modello", 315, 110, { s: 16, w: 700, c: K.white });
+  arrow(c, 384, 110, 430, 110); box(c, 436, 88, 140, 44, 12, K.white, K.line); tx(c, "risposta", 506, 110, { s: 15, w: 600 });
+};
+
+function typed(s, p) { return s.slice(0, Math.floor(s.length * clamp(p))); }
+VIZ.prompt = (c, t) => {
+  const p = ph(t, 7), s = "Scrivi un'email di scuse a un cliente per il ritardo della consegna.";
+  chatRow(c, 70, "utente", typed(s, p / .55), K.orange, { s: 14 });
+  if (p > .6) chatRow(c, 130, "modello", "Gentile cliente, ci scusiamo per il ritardo…", K.teal);
+  tx(c, "il prompt è il messaggio che scriviamo noi", 300, 205, { s: 13, c: K.muted });
+};
+VIZ.sysprompt = (c, t) => {
+  const p = ph(t, 6);
+  chatRow(c, 40, "sistema", "Sei l'assistente dell'ufficio clienti. Rispondi con tono cortese.", K.navy, { dash: [5, 4], stroke: K.navy, fill: "#F1F3F6", s: 13.5 });
+  tx(c, "scritto da chi ha fatto l'app · di solito non si vede", 580, 70, { s: 12, a: "right", c: K.muted });
+  if (p > .25) chatRow(c, 110, "utente", "Dov'è il mio ordine?", K.orange);
+  if (p > .5) chatRow(c, 170, "modello", "Gentile cliente, verifico subito lo stato dell'ordine…", K.teal);
+};
+VIZ.contesto = (c, t) => {
+  const items = [["Prompt di sistema", 70, "#0F2A43"], ["Memoria e istruzioni personali", 62, "#6B5BD2"], ["File allegati", 100, "#2F6DB5"], ["Messaggi precedenti", 86, "#0E9F8E"], ["Il nostro prompt", 52, "#E0731F"], ["Risposta in corso", 0, "#C8553D"]];
+  const p = ph(t, 7), n = Math.min(6, Math.floor(p * 9));
+  items.forEach(([lab, w, col], i) => {
+    if (i >= n) return;
+    const y = 12 + i * 34; let ww = w;
+    if (i === 5) ww = 10 + 40 * clamp((p - .66) / .25);
+    box(c, 20, y, 5.4 * ww, 28, 7, col); tx(c, lab, 32, y + 14, { s: 13.5, w: 650, a: "left", c: K.white });
+  });
+  tx(c, "tutto questo è il contesto: il modello lo rilegge a ogni risposta", 300, 218, { s: 13, c: K.muted });
+};
+VIZ.finestra = (c, t) => {
+  const p = ph(t, 7), full = clamp(p / .75), cols = 30, rows = 6, n = Math.floor(full * cols * rows);
+  const X = 30, Y = 20, s = 18;
+  for (let i = 0; i < cols * rows; i++) { const x = X + (i % cols) * s, y = Y + Math.floor(i / cols) * s; c.fillStyle = i < n ? (i < n - 18 ? "#9CC3E8" : K.orange) : "#EEF2F6"; c.fillRect(x, y, s - 3, s - 3); }
+  box(c, X - 6, Y - 6, cols * s + 9, rows * s + 9, 8, null, full >= 1 ? K.red : K.blue, 2.5);
+  tx(c, full >= 1 ? "finestra piena: il resto non entra" : "token nel contesto: " + Math.round(full * 1000).toLocaleString("it-IT") + ".000", 300, 150, { s: 15, w: 700, c: full >= 1 ? K.red : K.blue });
+  tx(c, "limite: circa 1 milione di token nei modelli più grandi", 300, 210, { s: 13, c: K.muted });
+};
+VIZ.memoria = (c, t) => {
+  const p = ph(t, 8);
+  box(c, 16, 14, 260, 110, 12, K.white, K.line); tx(c, "Chat di lunedì", 30, 34, { s: 13, w: 700, a: "left", c: K.muted });
+  tx(c, "«Mi chiamo Luca e lavoro", 30, 64, { s: 14, a: "left" }); tx(c, "in un negozio di ottica.»", 30, 86, { s: 14, a: "left" });
+  if (p > .2) { arrow(c, 146, 128, 146, 150, K.orange); box(c, 16, 154, 260, 54, 12, K.orangeL, K.orange, 1.5); tx(c, "memoria salvata dall'app:", 30, 172, { s: 12, w: 700, a: "left", c: K.orange }); tx(c, "nome Luca, lavora in un'ottica", 30, 192, { s: 14, a: "left" }); }
+  if (p > .45) {
+    box(c, 320, 14, 264, 194, 12, K.white, K.line); tx(c, "Chat di giovedì: il contesto", 334, 34, { s: 13, w: 700, a: "left", c: K.muted });
+    box(c, 334, 50, 236, 44, 8, K.orangeL); tx(c, "nome Luca, lavora in un'ottica", 346, 72, { s: 13.5, a: "left" });
+    if (p > .6) { box(c, 334, 102, 236, 40, 8, "#FDE4CF"); tx(c, "«Scrivi la mia presentazione.»", 346, 122, { s: 13.5, a: "left" }); }
+    if (p > .75) { box(c, 334, 150, 236, 44, 8, K.tealL); tx(c, "«Sono Luca, lavoro in un'ottica…»", 346, 172, { s: 13.5, a: "left", w: 600 }); }
+  }
+};
+VIZ.allucinazione = (c, t) => {
+  const p = ph(t, 7);
+  chatRow(c, 40, "utente", "Chi ha scritto il romanzo «Le colline di vetro» (1987)?", K.orange, { s: 13.5 });
+  if (p > .2) chatRow(c, 100, "modello", typed("L'ha scritto Carla Mantovani, che con questo libro ha vinto il Premio Strega.", (p - .2) / .35), K.teal, { s: 13 });
+  if (p > .62) {
+    c.save(); c.translate(430, 165); c.rotate(-.08);
+    box(c, -130, -22, 260, 44, 10, K.redL, K.red, 2.5); tx(c, "inventato: il libro non esiste", 0, 0, { s: 15, w: 700, c: K.red }); c.restore();
+    tx(c, "detto con sicurezza, ma falso", 120, 165, { s: 14, c: K.muted });
+  }
+};
+VIZ.vibe = (c, t) => {
+  const p = ph(t, 9);
+  box(c, 16, 30, 250, 150, 12, K.white, K.line); tx(c, "richiesta", 30, 50, { s: 12, w: 700, a: "left", c: K.muted });
+  const s = "Crea un gioco: un quadrato appare in punti casuali e bisogna cliccarlo. Mostra i punti.";
+  const words = typed(s, p / .3).split(" "); let lineS = "", y = 78;
+  for (const w of words) { if (tw(c, lineS + w, { s: 14 }) > 220) { tx(c, lineS, 30, y, { s: 14, a: "left" }); y += 22; lineS = ""; } lineS += w + " "; } tx(c, lineS, 30, y, { s: 14, a: "left" });
+  if (p > .32 && p < .5) { tx(c, "il modello scrive il codice…", 430, 105, { s: 14, c: K.muted }); for (let i = 0; i < 5; i++) box(c, 330, 125 + i * 10, 80 + ((i * 37) % 120) * clamp((p - .32) / .18), 5, 2, "#C9D5E0"); }
+  if (p >= .5) {
+    box(c, 300, 20, 280, 180, 12, "#0F2A43"); const pts = Math.floor((p - .5) / .5 * 12);
+    tx(c, "Punti: " + pts, 316, 40, { s: 14, w: 700, a: "left", c: K.white });
+    const k = Math.floor(t * 1.4), qx = 330 + (k * 97 % 200), qy = 60 + (k * 53 % 110);
+    box(c, qx, qy, 28, 28, 5, K.orange);
+  }
+};
+
+VIZ.strumento = (c, t) => {
+  const st = [["Il modello scrive", "una richiesta"], ["L'app esegue", "lo strumento"], ["Il risultato", "entra nel contesto"], ["Il modello rilegge", "e continua"]];
+  const k = Math.floor(t / 1.3) % 4;
+  st.forEach(([a, b], i) => {
+    const x = 8 + i * 148, on = i === k;
+    box(c, x, 60, 136, 86, 14, on ? K.redL : K.white, on ? "#C8553D" : K.line, 2);
+    tx(c, a, x + 68, 92, { s: 13.5, w: 700, c: K.navy }); tx(c, b, x + 68, 114, { s: 13, c: K.muted });
+    if (i < 3) arrow(c, x + 137, 103, x + 147, 103);
+  });
+  c.strokeStyle = K.soft; c.lineWidth = 2; c.setLineDash([5, 4]); c.beginPath(); c.moveTo(526, 150); c.quadraticCurveTo(526, 195, 300, 195); c.quadraticCurveTo(78, 195, 78, 150); c.stroke(); c.setLineDash([]);
+  tx(c, "si ripete finché il modello non scrive la risposta", 300, 212, { s: 13, c: K.muted });
+};
+function toolChat(c, t, rows) {
+  const n = Math.min(rows.length, Math.floor(ph(t, rows.length * 1.6 + 2) * (rows.length + 1.3)));
+  rows.slice(0, n).forEach((r, i) => chatRow(c, 30 + i * 52, r[0], r[1], r[2], r[3] || {}));
+}
+VIZ.ricerca = (c, t) => toolChat(c, t, [
+  ["utente", "Che tempo farà domani a Trento?", K.orange],
+  ["modello", 'cerca_web("previsioni meteo Trento domani")', K.teal, { m: true, fill: "#F3F1FD", stroke: "#B9AEF0", dash: [5, 4], s: 13.5, c: "#4B3BB0" }],
+  ["ricerca", "ilmeteo.it · Trento domani: sole, 4–15 °C…", K.purple],
+  ["modello", "Domani a Trento sole, tra 4 e 15 °C (fonte: ilmeteo.it).", K.teal],
+]);
+VIZ.codice = (c, t) => toolChat(c, t, [
+  ["utente", "Quante lettere \"r\" ci sono in «il ramarro marrone corre»?", K.orange, { s: 13.5 }],
+  ["modello", 'esegui_python( print("il ramarro marrone corre".count("r")) )', K.teal, { m: true, fill: "#F3F1FD", stroke: "#B9AEF0", dash: [5, 4], s: 12, c: "#4B3BB0" }],
+  ["programma", "7", K.purple, { m: true }],
+  ["modello", "Nella frase ci sono 7 lettere «r».", K.teal],
+]);
+VIZ.computer = (c, t) => {
+  const p = ph(t, 7);
+  box(c, 16, 14, 330, 200, 12, K.white, K.soft); c.fillStyle = "#EEF2F6"; c.fillRect(17, 15, 328, 26);
+  tx(c, "Modulo di iscrizione", 40, 28, { s: 12, a: "left", c: K.muted });
+  tx(c, "Nome e cognome", 34, 62, { s: 12, a: "left", c: K.muted }); box(c, 34, 72, 290, 32, 7, K.white, K.soft, 1.5);
+  tx(c, typed("Mario Rossi", (p - .3) / .25), 44, 88, { s: 15, a: "left" });
+  tx(c, "Email", 34, 122, { s: 12, a: "left", c: K.muted }); box(c, 34, 132, 290, 32, 7, K.white, K.soft, 1.5);
+  box(c, 34, 176, 80, 28, 7, p > .85 ? K.teal : K.navy); tx(c, p > .85 ? "Inviato" : "Invia", 74, 190, { s: 13, w: 700, c: K.white });
+  let cx, cy;
+  if (p < .2) { cx = lerp(300, 120, ease(p / .2)); cy = lerp(200, 88, ease(p / .2)); } else if (p < .6) { cx = 120; cy = 88; } else if (p < .8) { cx = lerp(120, 74, ease((p - .6) / .2)); cy = lerp(88, 190, ease((p - .6) / .2)); } else { cx = 74; cy = 190; }
+  c.fillStyle = K.navy; c.strokeStyle = K.white; c.lineWidth = 1.5; c.beginPath(); c.moveTo(cx, cy); c.lineTo(cx + 14, cy + 11); c.lineTo(cx + 6, cy + 12); c.lineTo(cx + 2, cy + 19); c.closePath(); c.fill(); c.stroke();
+  const log = [["screenshot()", 0], ["click(120, 88)", .2], ['scrivi("Mario Rossi")', .3], ["screenshot()", .58], ["click(74, 190)", .8]];
+  tx(c, "azioni scritte dal modello", 364, 24, { s: 12, w: 700, a: "left", c: K.muted });
+  log.forEach(([s, at], i) => { if (p > at) { box(c, 362, 40 + i * 34, 222, 26, 6, "#F3F1FD", "#B9AEF0", 1.2, [4, 3]); tx(c, s, 372, 53 + i * 34, { s: 13, m: true, a: "left", c: "#4B3BB0" }); } });
+};
+VIZ.agente = (c, t) => {
+  const cx = 160, cy = 112, R = 78, a = t * 1.1;
+  c.strokeStyle = K.soft; c.lineWidth = 3; c.setLineDash([2, 9]); c.lineCap = "round"; c.beginPath(); c.arc(cx, cy, R, 0, 6.283); c.stroke(); c.setLineDash([]);
+  const nodesA = [["Decide il passo", -Math.PI / 2, K.navy], ["Agisce", Math.PI / 6, "#6B5BD2"], ["Legge il risultato", 5 * Math.PI / 6, K.teal]];
+  nodesA.forEach(([lab, an, col]) => { const x = cx + Math.cos(an) * R, y = cy + Math.sin(an) * R, w = tw(c, lab, { s: 13, w: 700 }) + 20; box(c, x - w / 2, y - 16, w, 32, 10, col); tx(c, lab, x, y, { s: 13, w: 700, c: K.white }); });
+  dot(c, cx + Math.cos(a) * R, cy + Math.sin(a) * R, 7, K.orange);
+  const steps = ['cerca_web("carta A4 prezzo")', 'leggi_pagina("fornitore-a.it")', 'leggi_pagina("fornitore-b.it")', "esegui_python( … )", "NameError: name 'pd' …", "esegui_python( … corretto )", "«Ecco il file.»"];
+  const n = Math.min(steps.length, Math.floor(t / 1.1) % (steps.length + 2) + 1);
+  tx(c, "passi scelti dal modello", 320, 18, { s: 12, w: 700, a: "left", c: K.muted });
+  for (let i = 0; i < n; i++) { const err = i === 4, fin = i === 6; tx(c, (i + 1) + ". " + steps[i], 320, 42 + i * 25, { s: 13, a: "left", m: !fin, c: err ? K.red : fin ? K.teal : "#4B3BB0", w: fin ? 700 : 500 }); }
+};
+VIZ.rag = (c, t) => {
+  const p = ph(t, 7), k = 2;
+  tx(c, "domanda: «Quanti giorni di ferie ho?»", 20, 22, { s: 14, w: 650, a: "left" });
+  for (let i = 0; i < 6; i++) { const x = 20 + (i % 3) * 66, y = 46 + Math.floor(i / 3) * 76, hit = (i === k || i === 4) && p > .25; box(c, x, y, 56, 66, 6, hit ? K.orangeL : K.white, hit ? K.orange : K.line, 2); for (let j = 0; j < 4; j++) box(c, x + 8, y + 12 + j * 12, 40 - (j % 2) * 12, 4, 2, "#C9D5E0"); }
+  tx(c, "documenti dell'azienda", 116, 212, { s: 12, c: K.muted });
+  if (p > .4) arrow(c, 222, 115, 280, 115, K.orange);
+  if (p > .45) {
+    box(c, 288, 30, 292, 170, 12, K.white, K.line); tx(c, "contesto", 302, 48, { s: 12, w: 700, a: "left", c: K.muted });
+    box(c, 302, 60, 264, 32, 7, K.orangeL); tx(c, "«…25 giorni di ferie all'anno…»", 312, 76, { s: 13, a: "left" });
+    box(c, 302, 98, 264, 32, 7, K.orangeL); tx(c, "«…le ferie si chiedono entro…»", 312, 114, { s: 13, a: "left" });
+    if (p > .6) { box(c, 302, 136, 264, 32, 7, "#FDE4CF"); tx(c, "«Quanti giorni di ferie ho?»", 312, 152, { s: 13, a: "left" }); }
+    if (p > .75) tx(c, "→ risposta basata sui documenti", 312, 186, { s: 13, w: 700, a: "left", c: K.teal });
+  }
+};
+
+// ---------------------------------------------------------------- avvio
+filter();
+for (let i = 0; i < 420; i++) step();
+loop(); vizLoop();
+</script>
+</body>
+</html>

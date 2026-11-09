@@ -287,6 +287,10 @@
   .tp.first .tlab { left: -60px; text-align: left; }
   .tp.last .tlab { left: auto; right: -60px; text-align: right; }
 
+.ip-ex { display:flex; flex-wrap:wrap; align-items:center; gap:10px 14px; margin-top:22px; padding:14px 20px; border-radius:14px; background:var(--teal-l, #E3F4F2); font-size:21px; }
+.ip-lab { width:100%; color:#0B7F72; font-weight:700; font-size:19px; }
+.ip-row { background:#fff; border:1px solid #DCE3EA; border-radius:10px; padding:6px 14px; }
+
   /* ===== Fondamenti 2 ===== */
   .rp-pts { margin-top: 30px; gap: 14px; }
   .rp-pts .pt { font-size: 22px; }
@@ -418,6 +422,98 @@
   .err-n { flex: none; width: 46px; height: 46px; border-radius: 50%; background: var(--orange); color: #fff; font-size: 24px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
   .err-card.ok .err-n { background: var(--teal); }
   .rl.s { background: #0F2A43; } .rl.u { background: var(--orange); } .rl.a { background: #0E9F8E; }
+
+  /* ===== strumenti, agenti, diffusione ===== */
+  .tl-def { font-size: 24px; padding: 20px 30px; }
+  .tl-cyc { display: grid; grid-template-columns: 1fr 34px 1fr 34px 1fr 34px 1fr; align-items: stretch; margin-top: 30px; }
+  .tl-st { background: var(--surface); border: 2px solid var(--line); border-radius: 16px; padding: 16px 16px 18px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 8px; }
+  .tl-st i { font-style: normal; width: 32px; height: 32px; border-radius: 9px; background: var(--navy); color: #fff; font-weight: 800; font-size: 17px; display: flex; align-items: center; justify-content: center; }
+  .tl-st b { font-size: 20px; line-height: 1.25; color: var(--navy); }
+  .tl-st small { font-size: 16px; line-height: 1.35; color: var(--muted); }
+  .bottom-line code, .tl-st code, .tl-code code, .cu-st code { font-family: var(--mono); font-size: .92em; color: #4B3BB0; }
+  .tl-ar { display: flex; align-items: center; justify-content: center; font-size: 26px; color: var(--muted); }
+  .tl-back { margin: 14px 0 0; text-align: center; font-size: 19px; color: var(--teal-d); font-weight: 600; }
+  .slide.active .tl-st, .slide.active .cu-st { animation: tlhi 8s infinite; }
+  .slide.active .s2, .slide.active .c2 { animation-delay: 2s; }
+  .slide.active .s3, .slide.active .c3 { animation-delay: 4s; }
+  .slide.active .s4, .slide.active .c4 { animation-delay: 6s; }
+  @keyframes tlhi { 0%, 22% { border-color: var(--teal); background: var(--teal-l); } 28%, 100% { border-color: var(--line); background: var(--surface); } }
+
+  .tl-q { margin: 4px 0 0; font-size: 22px; font-weight: 600; color: var(--orange-d); }
+  .tl-two { display: grid; grid-template-columns: 1.45fr 1fr; gap: 34px; align-items: center; margin-top: 20px; }
+  .tl-chat .cm { grid-template-columns: 110px 1fr; }
+  .tl-chat .tx { font-size: 18.5px; }
+  .tl-code { background: #F3F1FD !important; border: 1.5px dashed #B9AEF0; }
+  .rl.t { background: var(--c-ctx); }
+  .tl-pre { display: block; white-space: pre; line-height: 1.35; }
+  .tl-pts { gap: 22px; }
+  .tl-pts .pt { font-size: 21px; }
+
+  .cu-two { grid-template-columns: 1fr 470px; margin-top: 16px; }
+  .cu-steps { display: flex; flex-direction: column; gap: 12px; }
+  .cu-st { display: flex; gap: 14px; align-items: flex-start; background: var(--surface); border: 2px solid var(--line); border-radius: 14px; padding: 13px 16px; font-size: 19px; line-height: 1.35; box-shadow: var(--shadow); }
+  .cu-st i { flex: none; font-style: normal; width: 30px; height: 30px; border-radius: 8px; background: var(--navy); color: #fff; font-weight: 800; font-size: 16px; display: flex; align-items: center; justify-content: center; }
+  .cu-screen { position: relative; width: 470px; height: 270px; background: #fff; border: 2px solid #C9D5E0; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); }
+  .cu-bar { height: 32px; background: #EEF2F6; display: flex; align-items: center; gap: 6px; padding: 0 12px; font-size: 14px; color: var(--muted); }
+  .cu-bar i { width: 10px; height: 10px; border-radius: 50%; background: #C9D5E0; }
+  .cu-bar span { margin-left: 10px; }
+  .cu-form { padding: 14px 22px; display: flex; flex-direction: column; gap: 6px; }
+  .cu-form label { font-size: 14px; color: var(--muted); }
+  .cu-in { height: 38px; border: 1.5px solid #C9D5E0; border-radius: 8px; padding: 0 12px; display: flex; align-items: center; font-size: 17px; margin-bottom: 6px; }
+  .cu-type { display: inline-block; overflow: hidden; white-space: nowrap; width: 0; }
+  .cu-btn { align-self: flex-start; margin-top: 4px; background: var(--navy); color: #fff; font-weight: 700; font-size: 15px; padding: 8px 22px; border-radius: 8px; }
+  .cu-cur { position: absolute; left: 0; top: 0; width: 26px; height: 26px; transform: translate(400px, 230px); }
+  .slide.active .cu-cur { animation: cucur 8s infinite; }
+  .slide.active .cu-type { animation: cutype 8s infinite steps(11, end); }
+  @keyframes cucur { 0% { transform: translate(400px, 230px); } 16% { transform: translate(150px, 84px); } 19% { transform: translate(150px, 84px) scale(.8); } 22%, 88% { transform: translate(150px, 84px); } 100% { transform: translate(400px, 230px); } }
+  @keyframes cutype { 0%, 28% { width: 0; } 50%, 92% { width: 100px; } 100% { width: 0; } }
+  .cu-log { margin-top: 12px; display: flex; gap: 8px; }
+  .cu-log code { font-family: var(--mono); font-size: 13.5px; background: #F3F1FD; border: 1.5px dashed #B9AEF0; color: #4B3BB0; border-radius: 8px; padding: 4px 8px; opacity: .25; }
+  .slide.active .cu-log .l1 { animation: culog1 8s infinite; }
+  .slide.active .cu-log .l2 { animation: culog2 8s infinite; }
+  .slide.active .cu-log .l3 { animation: culog3 8s infinite; }
+  @keyframes culog1 { 0%, 14% { opacity: .25; } 18%, 92% { opacity: 1; } 100% { opacity: .25; } }
+  @keyframes culog2 { 0%, 25% { opacity: .25; } 29%, 92% { opacity: 1; } 100% { opacity: .25; } }
+  @keyframes culog3 { 0%, 52% { opacity: .25; } 56%, 92% { opacity: 1; } 100% { opacity: .25; } }
+
+  .ag-two { display: grid; grid-template-columns: 1fr 400px; gap: 30px; align-items: center; margin-top: 4px; }
+  .ag-left { display: flex; flex-direction: column; gap: 18px; }
+  .ag-cmp { display: flex; flex-direction: column; gap: 10px; }
+  .ag-row { display: grid; grid-template-columns: 96px 1fr; gap: 14px; align-items: center; background: var(--surface); border-radius: 14px; padding: 13px 18px; box-shadow: var(--shadow); font-size: 19px; line-height: 1.35; border-left: 6px solid #2F6DB5; }
+  .ag-row b { font-size: 20px; color: var(--navy); }
+  .ag-row.ag { border-left-color: var(--teal); }
+  .ag-def { font-size: 21px; padding: 18px 24px; margin-top: 0; }
+  .ag-loop { width: 400px; height: auto; }
+
+  .ag-goal { display: flex; gap: 16px; align-items: baseline; background: var(--navy); color: #fff; border-radius: 14px; padding: 12px 20px; font-size: 20px; margin-top: 4px; }
+  .ag-goal b { color: #7FD8CC; font-size: 14px; letter-spacing: .1em; text-transform: uppercase; }
+  .ag-head, .ag-tr { display: grid; grid-template-columns: 34px 1.25fr 1fr; gap: 14px; align-items: center; }
+  .ag-head { margin-top: 12px; font-size: 14px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+  .ag-trace { display: flex; flex-direction: column; gap: 6px; margin-top: 6px; }
+  .ag-tr { background: var(--surface); border-radius: 10px; padding: 7px 12px; box-shadow: var(--shadow); font-size: 17px; }
+  .ag-tr i { font-style: normal; width: 28px; height: 28px; border-radius: 8px; background: var(--navy); color: #fff; font-weight: 800; font-size: 14px; display: flex; align-items: center; justify-content: center; }
+  .ag-tr code { font-family: var(--mono); font-size: 15px; color: #4B3BB0; }
+  .ag-err { color: var(--red); font-weight: 700; font-family: var(--mono); font-size: 14.5px; }
+  .ag-pre { white-space: pre; }
+  .ag-tr.fin { grid-template-columns: 34px 1fr; background: var(--teal-l); }
+  .ag-final { font-weight: 600; color: var(--navy); }
+  .ag-pts { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 14px; }
+  .ag-pts .pt { font-size: 17.5px; line-height: 1.38; }
+
+  .dif { display: flex; flex-direction: column; gap: 14px; margin-top: 14px; }
+  .dif-row { display: grid; grid-template-columns: 250px 1fr; gap: 18px; align-items: center; background: var(--surface); border-radius: 16px; padding: 14px 20px; box-shadow: var(--shadow); }
+  .dif-lab b { display: block; font-size: 21px; color: var(--navy); }
+  .dif-lab small { font-size: 15.5px; color: var(--muted); }
+  .dif-words { display: flex; flex-wrap: wrap; gap: 8px; }
+  .dw { position: relative; display: inline-flex; align-items: center; justify-content: center; min-width: 64px; height: 46px; padding: 0 12px; border-radius: 10px; background: #EEF2F6; font-size: 20px; }
+  .dw em { position: absolute; font-style: normal; color: #9AA9B7; font-weight: 700; }
+  .dw b { font-weight: 600; color: var(--navy); opacity: 0; }
+  .dw.df { background: #F3F1FD; }
+  .slide.active .dw b, .slide.active .dw em { animation-duration: 7s; animation-iteration-count: infinite; animation-timing-function: linear; }
+  .dif-pts { margin-top: 22px; gap: 14px; }
+  .dif-pts .pt { font-size: 19.5px; line-height: 1.4; }
+  .dif-pts .pt i, .ag-pts .pt i { width: 27px; height: 27px; font-size: 14px; margin-top: 0; border-radius: 8px; }
+  .tl-pts .pt i { width: 29px; height: 29px; font-size: 15px; margin-top: 0; border-radius: 8px; }
 </style>
 </head>
 <body data-course="Corso AI · Fondamenti di IA 2">
@@ -814,12 +910,184 @@
   </aside>
 </section>
 
+<section class="slide" data-title="Gli strumenti">
+  <p class="kicker">Fondamenti di IA 2 · Strumenti e agenti</p>
+  <h2>Il modello scrive solo testo: gli strumenti eseguono</h2>
+  <div class="def-box tl-def">
+    Uno <strong>strumento</strong> (<em>tool</em>) è un programma esterno che l'app mette a disposizione del modello. Il modello scrive una richiesta in un formato preciso, l'app la esegue e aggiunge il risultato al contesto.
+  </div>
+  <div class="tl-cyc">
+    <div class="tl-st s1"><i>1</i><b>Il modello scrive una richiesta</b><small>per esempio: <code>cerca_web("meteo Trento")</code></small></div>
+    <div class="tl-ar">→</div>
+    <div class="tl-st s2"><i>2</i><b>L'app esegue lo strumento</b><small>motore di ricerca, programma, mouse e tastiera</small></div>
+    <div class="tl-ar">→</div>
+    <div class="tl-st s3"><i>3</i><b>Il risultato entra nel contesto</b><small>come altro testo da leggere</small></div>
+    <div class="tl-ar">→</div>
+    <div class="tl-st s4"><i>4</i><b>Il modello rilegge e continua</b><small>risponde, oppure chiede un altro strumento</small></div>
+  </div>
+  <p class="tl-back">↺ si ripete finché il modello non scrive la risposta</p>
+  <p class="bottom-line">L'elenco degli strumenti disponibili è scritto nel <strong>prompt di sistema</strong>: così il modello sa che esistono e come chiederli.</p>
+  <aside class="notes">
+    Il modello resta quello di sempre: prevede il testo successivo. La differenza è che l'app "ascolta" quello che scrive: quando riconosce una richiesta di strumento, la esegue al posto del modello.
+    Il risultato è altro testo che entra nel contesto, come i messaggi della chat. Per questo il modello può usarlo nella risposta.
+    Nelle prossime tre slide vediamo tre strumenti: ricerca web, esecuzione di codice, uso del computer.
+  </aside>
+</section>
+
+<section class="slide" data-title="La ricerca web">
+  <p class="kicker">Fondamenti di IA 2 · Strumenti e agenti</p>
+  <h2>Ricerca web: il modello detta cosa cercare</h2>
+  <div class="tl-two">
+    <div class="chat tl-chat">
+      <div class="cm f"><span class="rl u">utente</span><div class="tx">Che tempo farà domani a Trento?</div></div>
+      <div class="cm f"><span class="rl a">modello</span><div class="tx tl-code"><code>cerca_web("previsioni meteo Trento domani")</code><small>Testo scritto dal modello: di solito l'utente non lo vede</small></div></div>
+      <div class="cm f"><span class="rl t">ricerca</span><div class="tx">1. ilmeteo.it · Trento domani: sole, minima 4 °C, massima 15 °C…<br>2. 3bmeteo.com · Meteo Trento: cielo sereno…<small>I risultati, aggiunti al contesto come testo</small></div></div>
+      <div class="cm f"><span class="rl a">modello</span><div class="tx">Domani a Trento è previsto sole, con temperature tra 4 e 15 °C (fonte: ilmeteo.it).<small>La risposta, scritta leggendo i risultati</small></div></div>
+    </div>
+    <div class="pts tl-pts f"><div class="pt"><i>1</i><span>Il modello <strong>scrive come testo la ricerca</strong> da fare e poi <strong>legge i risultati</strong>, ancora una volta come testo.</span></div><div class="pt"><i>2</i><span>La risposta dipende da <strong>cosa ha cercato</strong> e da <strong>quali pagine ha trovato</strong>: le fonti vanno controllate.</span></div></div>
+  </div>
+  <aside class="notes">
+    Mostrare i passaggi uno alla volta.
+    A cercare è un programma dell'app (un motore di ricerca). Il modello riceve solo titoli ed estratti delle pagine, a volte il testo di qualche pagina intera.
+    Se la ricerca è formulata male, o le pagine trovate sono vecchie o sbagliate, la risposta lo sarà anche lei. Per questo è utile chiedere le fonti e aprirle.
+  </aside>
+</section>
+
+<section class="slide" data-title="L'esecuzione di codice">
+  <p class="kicker">Fondamenti di IA 2 · Strumenti e agenti</p>
+  <h2>Codice: il modello lo scrive, un programma lo esegue</h2>
+  <div class="tl-two">
+    <div class="chat tl-chat">
+      <div class="cm f"><span class="rl u">utente</span><div class="tx">Quante lettere "r" ci sono in «il ramarro marrone corre»?</div></div>
+      <div class="cm f"><span class="rl a">modello</span><div class="tx tl-code"><code class="tl-pre">esegui_python(
+  print("il ramarro marrone corre".count("r"))
+)</code><small>Codice scritto dal modello: è testo come un altro</small></div></div>
+      <div class="cm f"><span class="rl t">programma</span><div class="tx tl-code"><code>7</code><small>Il programma esegue il codice e restituisce il risultato</small></div></div>
+      <div class="cm f"><span class="rl a">modello</span><div class="tx">Nella frase ci sono 7 lettere «r».<small>La risposta, scritta leggendo il risultato</small></div></div>
+    </div>
+    <div class="pts tl-pts f"><div class="pt"><i>1</i><span>Il codice lo <strong>scrive</strong> il modello, ma a <strong>eseguirlo</strong> è un programma esterno.</span></div><div class="pt"><i>2</i><span>Il numero è <strong>calcolato dal programma</strong>, non previsto token per token: per conteggi e calcoli è affidabile.</span></div></div>
+  </div>
+  <aside class="notes">
+    È la stessa domanda della prova "grande contro piccolo": senza strumenti il modello spesso sbaglia, perché legge token e non lettere singole.
+    Con il codice il conteggio lo fa un programma, che vede ogni lettera. Il modello deve solo scrivere il codice giusto e leggere il risultato.
+    Le app lo fanno da sole quando servono calcoli, tabelle o file (per esempio un Excel): a volte si vede il codice in un riquadro che si può aprire.
+  </aside>
+</section>
+
+<section class="slide" data-title="L'uso del computer">
+  <p class="kicker">Fondamenti di IA 2 · Strumenti e agenti</p>
+  <h2 style="font-size:35px">Uso del computer: il modello vede screenshot e scrive azioni</h2>
+  <div class="tl-two cu-two">
+    <div class="cu-steps">
+      <div class="cu-st c1"><i>1</i><span><b>Screenshot</b>: il modello riceve un'immagine dello schermo</span></div>
+      <div class="cu-st c2"><i>2</i><span><b>Azione scritta</b>: per esempio <code>click(380, 182)</code> o <code>scrivi("Mario Rossi")</code></span></div>
+      <div class="cu-st c3"><i>3</i><span><b>Esecuzione</b>: un programma muove il mouse, clicca e digita</span></div>
+      <div class="cu-st c4"><i>4</i><span><b>Nuovo screenshot</b>: il modello guarda il risultato e decide l'azione successiva</span></div>
+    </div>
+    <div class="cu-right">
+      <div class="cu-screen">
+        <div class="cu-bar"><i></i><i></i><i></i><span>Modulo di iscrizione</span></div>
+        <div class="cu-form">
+          <label>Nome e cognome</label><div class="cu-in"><span class="cu-type">Mario Rossi</span></div>
+          <label>Email</label><div class="cu-in"></div>
+          <div class="cu-btn">Invia</div>
+        </div>
+        <svg class="cu-cur" viewBox="0 0 24 24"><path d="M4 2l15 11-7 1-4 7z" fill="#0F2A43" stroke="#fff" stroke-width="1.5"/></svg>
+      </div>
+      <div class="cu-log"><code class="l1">click(380, 182)</code><code class="l2">scrivi("Mario Rossi")</code><code class="l3">screenshot()</code></div>
+    </div>
+  </div>
+  <p class="bottom-line">Il modello vede lo schermo facendo <strong>uno screenshot alla volta</strong>, e ogni azione è <strong>un frammento di testo</strong> (es. <code>cerca_web("meteo a Belluno")</code>).</p>
+  <aside class="notes">
+    Le coordinate (380, 182) sono il punto dello schermo, in pixel, dove cliccare: il modello le ricava guardando lo screenshot.
+    Tra un'azione e l'altra il modello non vede niente: se una finestra si apre in ritardo o compare un avviso, se ne accorge solo allo screenshot successivo.
+    Esempi: ChatGPT (modalità agente), Claude (uso del computer), Gemini. Di solito richiedono un piano a pagamento.
+  </aside>
+</section>
+
+<section class="slide" data-title="Cos'è un agente">
+  <p class="kicker">Fondamenti di IA 2 · Strumenti e agenti</p>
+  <h2 style="font-size:37px">Un agente lavora in ciclo finché il compito non è finito</h2>
+  <div class="ag-two">
+    <div class="ag-left">
+      <div class="ag-cmp">
+        <div class="ag-row"><b>Chat</b><span>Una domanda → una risposta. Il passo successivo lo decide <strong>l'utente</strong>.</span></div>
+        <div class="ag-row ag"><b>Agente</b><span>Un obiettivo → molti passi. Il passo successivo lo decide <strong>il modello</strong>.</span></div>
+      </div>
+      <div class="def-box ag-def">Un <strong>agente</strong> è un modello linguistico che usa gli strumenti molte volte di seguito, leggendo ogni volta il risultato e scegliendo da solo il passo successivo, finché il compito non è finito.</div>
+    </div>
+    <svg class="ag-loop" viewBox="0 0 520 470" aria-hidden="true" font-family="Segoe UI, sans-serif">
+      <defs><marker id="agm" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9z" fill="#5B6B7A"/></marker></defs>
+      <path id="agp" d="M260 120 A150 150 0 1 1 259.9 120" fill="none" stroke="#C9D5E0" stroke-width="4" stroke-dasharray="2 10" stroke-linecap="round"/>
+      <path d="M128 330 Q 100 360 60 400" stroke="#0E9F8E" stroke-width="3.5" fill="none" marker-end="url(#agm)"/>
+      <circle r="10" fill="#E0731F" class="ag-dot"><animateMotion dur="6s" repeatCount="indefinite"><mpath href="#agp"/></animateMotion></circle>
+      <g>
+        <rect x="160" y="70" width="200" height="88" rx="16" fill="#0F2A43"/>
+        <text x="260" y="104" text-anchor="middle" fill="#fff" font-size="20" font-weight="700">Decide il passo</text>
+        <text x="260" y="132" text-anchor="middle" fill="#9FC4E6" font-size="16">il modello</text>
+      </g>
+      <g>
+        <rect x="320" y="290" width="190" height="88" rx="16" fill="#6B5BD2"/>
+        <text x="415" y="324" text-anchor="middle" fill="#fff" font-size="20" font-weight="700">Agisce</text>
+        <text x="415" y="352" text-anchor="middle" fill="#E4DEFA" font-size="16">uno strumento</text>
+      </g>
+      <g>
+        <rect x="10" y="290" width="200" height="88" rx="16" fill="#0E9F8E"/>
+        <text x="110" y="324" text-anchor="middle" fill="#fff" font-size="20" font-weight="700">Legge il risultato</text>
+        <text x="110" y="352" text-anchor="middle" fill="#D5F2EE" font-size="16">entra nel contesto</text>
+      </g>
+      <text x="260" y="262" text-anchor="middle" fill="#0F2A43" font-size="20" font-weight="700">Obiettivo</text>
+      <text x="260" y="288" text-anchor="middle" fill="#5B6B7A" font-size="16">nel contesto, dall'inizio</text>
+      <text x="40" y="440" fill="#0B7F72" font-size="18" font-weight="700">Compito finito → consegna il risultato</text>
+    </svg>
+  </div>
+  <p class="bottom-line">Non è un modello diverso: è lo <strong>stesso modello linguistico</strong>, messo in un ciclo e con degli strumenti a disposizione.</p>
+  <aside class="notes">
+    Collegare alle slide precedenti: uno strumento = il modello scrive una richiesta, l'app la esegue, il risultato entra nel contesto. Un agente è questo ciclo ripetuto molte volte senza che l'utente intervenga.
+    Le tre parti: il modello decide (scrive il prossimo passo), gli strumenti agiscono (cercare, leggere pagine, eseguire codice, leggere e scrivere file, usare il computer), il contesto fa da memoria di lavoro (contiene l'obiettivo e tutto quello che è successo).
+    Il ciclo si ferma quando il modello scrive la risposta finale invece di un'altra richiesta di strumento.
+  </aside>
+</section>
+
+<section class="slide" data-title="Un agente al lavoro">
+  <p class="kicker">Fondamenti di IA 2 · Strumenti e agenti</p>
+  <h2>Un agente al lavoro, passo dopo passo</h2>
+  <div class="ag-goal"><b>Obiettivo</b>Confronta il prezzo della carta A4 di tre fornitori e prepara un file Excel.</div>
+  <div class="ag-head"><span></span><span>Il modello scrive</span><span>Risultato, aggiunto al contesto</span></div>
+  <div class="ag-trace"><div class="ag-tr f"><i>1</i><code>cerca_web("carta A4 risma 500 fogli prezzo")</code><span>Elenco di siti di fornitori</span></div><div class="ag-tr f"><i>2</i><code>leggi_pagina("fornitore-a.it/carta-a4")</code><span>Risma da 500 fogli: 4,90 €</span></div><div class="ag-tr f"><i>3</i><code>leggi_pagina(…) per gli altri due fornitori</code><span>Fornitore B: 4,20 € · Fornitore C: 5,10 €</span></div><div class="ag-tr f"><i>4</i><code>esegui_python( pd.DataFrame(prezzi).to_excel("prezzi.xlsx") )</code><span><span class="ag-err">NameError: name &#39;pd&#39; is not defined</span></span></div><div class="ag-tr f"><i>5</i><code><span class="ag-pre">esegui_python( import pandas as pd
+  pd.DataFrame(prezzi).to_excel("prezzi.xlsx") )</span></code><span>File prezzi.xlsx creato</span></div>
+    <div class="ag-tr fin f"><i>6</i><span class="ag-final">«Ecco il file. Il fornitore più economico è B, con 4,20 € a risma.»</span></div>
+  </div>
+  <div class="pts ag-pts f"><div class="pt"><i>1</i><span>Nessuno gli ha detto quali passi fare: li ha scelti il modello, leggendo ogni volta il risultato precedente. Al passo 4 ha visto l'errore e l'ha <strong>corretto da solo</strong>.</span></div><div class="pt"><i>2</i><span>Un errore in un passo può portarsi dietro anche i successivi. Se il compito comporta dei rischi, serve il <strong>controllo di una persona</strong>.</span></div></div>
+  <aside class="notes">
+    Mostrare un passo alla volta e chiedere ogni volta: "che cosa farà adesso?". Di solito la classe indovina: è lo stesso ragionamento che faremmo noi.
+    Ogni riga di sinistra è testo scritto dal modello; ogni riga di destra è un risultato che l'app ha aggiunto al contesto. Al passo successivo il modello rilegge tutto, compreso l'errore.
+    Prezzi di esempio. Esempi reali di agenti: la modalità agente di ChatGPT, Claude Code, Manus. Più passi fa un agente, più token legge: per questo questi strumenti sono spesso a pagamento.
+  </aside>
+</section>
+
+<section class="slide" data-title="I modelli a diffusione">
+  <p class="kicker">Fondamenti di IA 2 · Modelli a diffusione</p>
+  <h2>Modelli a diffusione: tutto il testo insieme</h2>
+  <style>@keyframes bdwa0 { 0%, 8.57% { opacity: 0; } 10.29%, 91.43% { opacity: 1; } 93.14%, 100% { opacity: 0; } } @keyframes edwa0 { 0%, 8.57% { opacity: 1; } 10.29%, 91.43% { opacity: 0; } 93.14%, 100% { opacity: 1; } } @keyframes bdwa1 { 0%, 16.43% { opacity: 0; } 18.14%, 91.43% { opacity: 1; } 93.14%, 100% { opacity: 0; } } @keyframes edwa1 { 0%, 16.43% { opacity: 1; } 18.14%, 91.43% { opacity: 0; } 93.14%, 100% { opacity: 1; } } @keyframes bdwa2 { 0%, 24.29% { opacity: 0; } 26.00%, 91.43% { opacity: 1; } 93.14%, 100% { opacity: 0; } } @keyframes edwa2 { 0%, 24.29% { opacity: 1; } 26.00%, 91.43% { opacity: 0; } 93.14%, 100% { opacity: 1; } } @keyframes bdwa3 { 0%, 32.14% { opacity: 0; } 33.86%, 91.43% { opacity: 1; } 93.14%, 100% { opacity: 0; } } @keyframes edwa3 { 0%, 32.14% { opacity: 1; } 33.86%, 91.43% { opacity: 0; } 93.14%, 100% { opacity: 1; } } @keyframes bdwa4 { 0%, 40.00% { opacity: 0; } 41.71%, 91.43% { opacity: 1; } 93.14%, 100% { opacity: 0; } } @keyframes edwa4 { 0%, 40.00% { opacity: 1; } 41.71%, 91.43% { opacity: 0; } 93.14%, 100% { opacity: 1; } } @keyframes bdwa5 { 0%, 47.86% { opacity: 0; } 49.57%, 91.43% { opacity: 1; } 93.14%, 100% { opacity: 0; } } @keyframes edwa5 { 0%, 47.86% { opacity: 1; } 49.57%, 91.43% { opacity: 0; } 93.14%, 100% { opacity: 1; } } @keyframes bdwa6 { 0%, 55.71% { opacity: 0; } 57.43%, 91.43% { opacity: 1; } 93.14%, 100% { opacity: 0; } } @keyframes edwa6 { 0%, 55.71% { opacity: 1; } 57.43%, 91.43% { opacity: 0; } 93.14%, 100% { opacity: 1; } } @keyframes bdwa7 { 0%, 63.57% { opacity: 0; } 65.29%, 91.43% { opacity: 1; } 93.14%, 100% { opacity: 0; } } @keyframes edwa7 { 0%, 63.57% { opacity: 1; } 65.29%, 91.43% { opacity: 0; } 93.14%, 100% { opacity: 1; } } @keyframes bdwd0 { 0%, 16.43% { opacity: 0; } 18.14%, 91.43% { opacity: 1; } 93.14%, 100% { opacity: 0; } } @keyframes edwd0 { 0%, 16.43% { opacity: 1; } 18.14%, 91.43% { opacity: 0; } 93.14%, 100% { opacity: 1; } } @keyframes bdwd1 { 0%, 8.57% { opacity: 0; } 10.29%, 91.43% { opacity: 1; } 93.14%, 100% { opacity: 0; } } @keyframes edwd1 { 0%, 8.57% { opacity: 1; } 10.29%, 91.43% { opacity: 0; } 93.14%, 100% { opacity: 1; } } @keyframes bdwd2 { 0%, 24.29% { opacity: 0; } 26.00%, 91.43% { opacity: 1; } 93.14%, 100% { opacity: 0; } } @keyframes edwd2 { 0%, 24.29% { opacity: 1; } 26.00%, 91.43% { opacity: 0; } 93.14%, 100% { opacity: 1; } } @keyframes bdwd3 { 0%, 8.57% { opacity: 0; } 10.29%, 91.43% { opacity: 1; } 93.14%, 100% { opacity: 0; } } @keyframes edwd3 { 0%, 8.57% { opacity: 1; } 10.29%, 91.43% { opacity: 0; } 93.14%, 100% { opacity: 1; } } @keyframes bdwd4 { 0%, 24.29% { opacity: 0; } 26.00%, 91.43% { opacity: 1; } 93.14%, 100% { opacity: 0; } } @keyframes edwd4 { 0%, 24.29% { opacity: 1; } 26.00%, 91.43% { opacity: 0; } 93.14%, 100% { opacity: 1; } } @keyframes bdwd5 { 0%, 16.43% { opacity: 0; } 18.14%, 91.43% { opacity: 1; } 93.14%, 100% { opacity: 0; } } @keyframes edwd5 { 0%, 16.43% { opacity: 1; } 18.14%, 91.43% { opacity: 0; } 93.14%, 100% { opacity: 1; } } @keyframes bdwd6 { 0%, 24.29% { opacity: 0; } 26.00%, 91.43% { opacity: 1; } 93.14%, 100% { opacity: 0; } } @keyframes edwd6 { 0%, 24.29% { opacity: 1; } 26.00%, 91.43% { opacity: 0; } 93.14%, 100% { opacity: 1; } } @keyframes bdwd7 { 0%, 16.43% { opacity: 0; } 18.14%, 91.43% { opacity: 1; } 93.14%, 100% { opacity: 0; } } @keyframes edwd7 { 0%, 16.43% { opacity: 1; } 18.14%, 91.43% { opacity: 0; } 93.14%, 100% { opacity: 1; } }</style>
+  <div class="dif">
+    <div class="dif-row"><div class="dif-lab"><b>Autoregressivi</b><small>una parola alla volta, da sinistra a destra</small></div><div class="dif-words"><span class="dw ar"><em style="animation-name:edwa0">?</em><b style="animation-name:bdwa0">La</b></span><span class="dw ar"><em style="animation-name:edwa1">?</em><b style="animation-name:bdwa1">riunione</b></span><span class="dw ar"><em style="animation-name:edwa2">?</em><b style="animation-name:bdwa2">di</b></span><span class="dw ar"><em style="animation-name:edwa3">?</em><b style="animation-name:bdwa3">domani</b></span><span class="dw ar"><em style="animation-name:edwa4">?</em><b style="animation-name:bdwa4">è</b></span><span class="dw ar"><em style="animation-name:edwa5">?</em><b style="animation-name:bdwa5">spostata</b></span><span class="dw ar"><em style="animation-name:edwa6">?</em><b style="animation-name:bdwa6">alle</b></span><span class="dw ar"><em style="animation-name:edwa7">?</em><b style="animation-name:bdwa7">15.</b></span></div></div>
+    <div class="dif-row"><div class="dif-lab"><b>A diffusione</b><small>tutte le parole insieme, in pochi passaggi</small></div><div class="dif-words"><span class="dw df"><em style="animation-name:edwd0">?</em><b style="animation-name:bdwd0">La</b></span><span class="dw df"><em style="animation-name:edwd1">?</em><b style="animation-name:bdwd1">riunione</b></span><span class="dw df"><em style="animation-name:edwd2">?</em><b style="animation-name:bdwd2">di</b></span><span class="dw df"><em style="animation-name:edwd3">?</em><b style="animation-name:bdwd3">domani</b></span><span class="dw df"><em style="animation-name:edwd4">?</em><b style="animation-name:bdwd4">è</b></span><span class="dw df"><em style="animation-name:edwd5">?</em><b style="animation-name:bdwd5">spostata</b></span><span class="dw df"><em style="animation-name:edwd6">?</em><b style="animation-name:bdwd6">alle</b></span><span class="dw df"><em style="animation-name:edwd7">?</em><b style="animation-name:bdwd7">15.</b></span></div></div>
+  </div>
+  <div class="pts dif-pts"><div class="pt"><i>1</i><span>I modelli visti finora sono <strong>autoregressivi</strong>: scrivono un token alla volta e lo aggiungono al contesto.</span></div><div class="pt"><i>2</i><span>Un modello <strong>a diffusione</strong> parte da una risposta fatta di segnaposto (<em>placeholder</em>) e in pochi passaggi riempie e corregge <strong>tutte le posizioni insieme</strong>.</span></div><div class="pt"><i>3</i><span>Per questo è <strong>molto più veloce</strong>. Esempio: <strong>Mercury</strong> di Inception (chat.inceptionlabs.ai, senza account).</span></div><div class="pt"><i>4</i><span>Lo svantaggio: per ora sono <strong>meno capaci</strong> dei migliori modelli autoregressivi.</span></div></div>
+  <aside class="notes">
+    Nell'animazione il modello autoregressivo ha bisogno di 8 passi per 8 parole; quello a diffusione finisce in 3 passaggi, perché a ogni passaggio lavora su tutte le posizioni.
+    Secondo Inception, Mercury supera i 1.000 token al secondo, mentre i modelli veloci tradizionali ne scrivono circa 70–90. È un dato dell'azienda: un test indipendente su Mercury 2 ha misurato circa 320 token al secondo. Resta comunque molto veloce.
+    Anche Google ha sperimentato un modello di questo tipo (Gemini Diffusion). Svantaggi (punto 4): Mercury 2 viene messo a confronto con modelli piccoli e veloci (per esempio Claude Haiku 4.5, GPT-5 mini), non con i modelli migliori. Nella ricerca i modelli a diffusione restano un po' indietro in qualità rispetto agli autoregressivi; in più, riempiendo più posizioni nello stesso passaggio, il modello sceglie quelle parole senza vedere le altre: con pochi passaggi la risposta è più veloce ma meno accurata.
+  </aside>
+</section>
+
 </main>
 
 <div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
 <nav class="controls" aria-label="Navigazione slide">
   <button type="button" id="btn-prev" aria-label="Slide precedente">&#8249;</button>
-  <span id="counter">1 / 18</span>
+  <span id="counter">1 / 25</span>
   <button type="button" id="btn-next" aria-label="Slide successiva">&#8250;</button>
   <button type="button" id="btn-help" aria-label="Comandi da tastiera">?</button>
 </nav>
