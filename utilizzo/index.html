@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Utilizzo dell'IA</title>
+<title>Utilizzo dell'IA 1</title>
 <link rel="stylesheet" href="../assets/style.css?v=7">
 <script src="../assets/deck.js?v=7" defer></script>
 <style>
@@ -458,6 +458,9 @@
   .rs-h { font-weight: 700; color: var(--teal-d); font-size: 15px; }
   .rs-a { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; background: var(--surface); border: 1px solid #DCE3EA; border-radius: 12px; padding: 12px; box-shadow: var(--shadow); }
   .rs-a i { height: 46px; border-radius: 6px; background: linear-gradient(#D6EEF9 0 33%, #DDF3E4 33% 66%, #FDE4CF 66%); }
+  .agenda2.agenda3 { grid-template-columns: 1fr; grid-auto-flow: row; grid-template-rows: none; gap: 34px; margin-top: 26px; }
+  .agenda2.agenda3 li { font-size: 30px; }
+  .agenda2.agenda3 li small { font-size: 20px; }
   .agenda2 li small { display: block; font-size: 18px; color: var(--muted); font-weight: 500; margin-top: 2px; }
 
   /* ===== laboratorio e sfide ===== */
@@ -494,7 +497,7 @@
   .nt-3 .nt-a { font-size: 19px; }
 </style>
 </head>
-<body data-course="Corso AI · Utilizzo dell'IA">
+<body data-course="Corso AI · Utilizzo dell'IA 1">
 
 <svg class="sprite" aria-hidden="true">
   <symbol id="i-copy" viewBox="0 0 24 24"><path d="M8 8h11v12H8z M5 16V4h11"/></symbol>
@@ -520,8 +523,8 @@
 <section class="slide s-title" data-title="Titolo">
   <div class="title-grid">
     <div class="title-text">
-      <p class="kicker">Modulo · Utilizzo dell'IA</p>
-      <h1>Utilizzo dell'IA</h1>
+      <p class="kicker">Modulo · Utilizzo dell'IA 1</p>
+      <h1>Utilizzo dell'IA 1</h1>
       <p class="lead">Gli strumenti di IA e le loro funzioni, con molti esercizi pratici</p>
       <p class="author"><span class="author-bar"></span>Giacomo Bocchese</p>
     </div>
@@ -553,11 +556,12 @@
 </section>
 
 <section class="slide" data-title="Programma">
-  <p class="kicker">Utilizzo dell'IA</p>
+  <p class="kicker">Utilizzo dell'IA 1</p>
   <h2>Programma del modulo</h2>
-  <ol class="agenda2"><li><span>1</span><div>Gli strumenti<small>assistenti, account, prime prove</small></div></li><li><span>2</span><div>Cosa può fare<small>riassumere, scrivere, tradurre, programmare</small></div></li><li><span>3</span><div>Principi di prompting<small>come si chiede bene</small></div></li><li><span>4</span><div>Scrittura assistita<small>email, toni, forme diverse</small></div></li><li><span>5</span><div>Lavorare con i documenti<small>riassumere, estrarre, verificare</small></div></li><li><span>6</span><div>Multimodalità<small>immagini e voce</small></div></li><li><span>7</span><div>Utilizzo avanzato<small>strumenti, memoria, impostazioni, Excel, agenti</small></div></li><li><span>8</span><div>Automatizzare i compiti ripetuti<small>istruzioni da riusare</small></div></li></ol>
+  <ol class="agenda2 agenda3"><li><span>1</span><div>Gli strumenti<small>assistenti e account, prime prove, privacy e chat temporanea, cosa vede il modello</small></div></li><li><span>2</span><div>Cosa può fare<small>testi, immagini e file, uso del computer, ricerca web, dati, codice, agenti</small></div></li><li><span>3</span><div>Laboratorio e sfide<small>scrivere con vincoli, lavorare con un documento, immagini, due sfide a punti</small></div></li></ol>
   <aside class="notes">
     Le parti vanno dalla più semplice alla più complessa: ognuna usa quello che abbiamo imparato nelle precedenti.
+    Principi di prompting, scrittura assistita, documenti, multimodalità, utilizzo avanzato e automazione saranno nel modulo Utilizzo dell'IA 2.
     Per ogni parte: un po' di teoria, poi una prova in coppia, poi una discussione su cosa è successo e perché, infine una regola da ricordare. Le regole si accumulano fino a formare la nostra cassetta degli attrezzi.
   </aside>
 </section>
@@ -572,7 +576,7 @@
 </section>
 
 <section class="slide" data-title="Account e strumenti">
-  <p class="kicker">Utilizzo dell'IA · Gli strumenti</p>
+  <p class="kicker">Utilizzo dell'IA 1 · Gli strumenti</p>
   <h2>Gli assistenti che useremo</h2>
   <div class="tool-grid tall">
     <div class="tcard first"><span class="badge">Subito, senza account</span><span class="tn">Duck.ai</span><span class="tu">duck.ai</span><span class="tt">Di DuckDuckGo. Non salva le conversazioni.</span></div><div class="tcard"><span class="badge g">Con account</span><span class="tn">ChatGPT</span><span class="tu">chatgpt.com</span><span class="tt">Di OpenAI.</span></div><div class="tcard"><span class="badge g">Con account</span><span class="tn">Gemini</span><span class="tu">gemini.google.com</span><span class="tt">Di Google.</span></div><div class="tcard"><span class="badge g">Con account</span><span class="tn">Claude</span><span class="tu">claude.ai</span><span class="tt">Di Anthropic.</span></div><div class="tcard first"><span class="badge">Subito, senza account</span><span class="tn">Mercury</span><span class="tu">chat.inceptionlabs.ai</span><span class="tt">Di Inception. Scrive piccole app e le mostra di fianco.</span></div><div class="tcard"><span class="badge g">Con account</span><span class="tn">Qwen</span><span class="tu">chat.qwen.ai</span><span class="tt">Di Alibaba, azienda cinese.</span></div><div class="tcard"><span class="badge g">Con account</span><span class="tn">Arena</span><span class="tu">arena.ai</span><span class="tt">Mette a confronto le risposte di due modelli.</span></div><div class="tcard"><span class="badge g">Con account</span><span class="tn">DeepSeek</span><span class="tu">chat.deepseek.com</span><span class="tt">Di DeepSeek, azienda cinese.</span></div>
@@ -586,7 +590,7 @@
 </section>
 
 <section class="slide" data-title="Come si usa una chat">
-  <p class="kicker">Utilizzo dell'IA · Gli strumenti</p>
+  <p class="kicker">Utilizzo dell'IA 1 · Gli strumenti</p>
   <h2>Come si usa una chat</h2>
   <div class="cs-strip"><div class="cs-step s1"><span class="cs-ic"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span><div><b>1</b> Apri una nuova chat</div></div><span class="cs-sep">›</span><div class="cs-step s2"><span class="cs-ic"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span><div><b>2</b> Allega un file con <span class="kbd">+</span><small>se serve</small></div></div><span class="cs-sep">›</span><div class="cs-step s3"><span class="cs-ic"><svg viewBox="0 0 24 24"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg></span><div><b>3</b> Scrivi la richiesta<small>il prompt</small></div></div><span class="cs-sep">›</span><div class="cs-step s4"><span class="cs-ic"><svg viewBox="0 0 24 24"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/></svg></span><div><b>4</b> Premi Invio<small>o la freccia</small></div></div></div>
   <div class="cs-win" aria-hidden="true">
@@ -669,7 +673,7 @@
 </section>
 
 <section class="slide" data-title="Cosa abbiamo notato">
-  <p class="kicker">Utilizzo dell'IA · Gli strumenti</p>
+  <p class="kicker">Utilizzo dell'IA 1 · Gli strumenti</p>
   <h2>Cosa abbiamo notato nelle prove</h2>
   <div class="nt-grid"><div class="nt"><p class="nt-q">La risposta compare un pezzo alla volta.</p><p class="nt-a f">Il modello scrive un pezzo di testo dopo l'altro.</p></div><div class="nt"><p class="nt-q">La stessa domanda dà risposte diverse.</p><p class="nt-a f">A ogni passo il modello sceglie tra più parole possibili: la scelta può cambiare ogni volta.</p></div><div class="nt"><p class="nt-q">A volte aggiunge cose che non c'erano.</p><p class="nt-a f">Può inventare informazioni errate e scriverle con sicurezza («allucinazione»): il testo va sempre riletto.</p></div><div class="nt"><p class="nt-q">Si può correggere il risultato.</p><p class="nt-a f">Basta chiederlo nella stessa chat: «Rendilo più breve» o «Rendilo più formale».</p></div></div>
   <p class="bottom-line f">L'assistente scrive bene e in fretta, ma <strong>il testo va riletto</strong> prima di usarlo: la responsabilità di quello che invii resta tua.</p>
@@ -680,7 +684,7 @@
 </section>
 
 <section class="slide" data-title="Addestramento sulle tue chat">
-  <p class="kicker">Utilizzo dell'IA · Gli strumenti</p>
+  <p class="kicker">Utilizzo dell'IA 1 · Gli strumenti</p>
   <h2>Le tue chat possono servire ad addestrare i modelli</h2>
   <div class="two u-split">
     <div class="pts"><div class="pt"><i>1</i><span>Quello che scrivi viene salvato sui server dell'azienda e può essere usato per <strong>addestrare i modelli futuri</strong>.</span></div><div class="pt"><i>2</i><span>Nelle impostazioni, di solito nella sezione <strong>Privacy</strong> o <strong>Controllo dei dati</strong>, c'è un'opzione per disattivarlo.</span></div><div class="pt"><i>3</i><span>Disattivarlo non cancella le chat: restano salvate e possono essere controllate per motivi di sicurezza.</span></div></div>
@@ -699,7 +703,7 @@
 </section>
 
 <section class="slide" data-title="Chat temporanea">
-  <p class="kicker">Utilizzo dell'IA · Gli strumenti</p>
+  <p class="kicker">Utilizzo dell'IA 1 · Gli strumenti</p>
   <h2>La chat temporanea</h2>
   <div class="two u-split">
     <div class="pts"><div class="pt"><i>1</i><span>È una chat che <strong>non compare nella cronologia</strong> e non viene usata per addestrare i modelli.</span></div><div class="pt"><i>2</i><span>Lo strumento non la ricorda: le chat successive non sanno cosa hai scritto.</span></div><div class="pt"><i>3</i><span>Viene cancellata dopo un breve periodo; fino ad allora resta sui server per motivi di sicurezza.</span></div><div class="pt"><i>4</i><span>Di solito si attiva da un pulsante vicino a «Nuova chat».</span></div></div>
@@ -719,7 +723,7 @@
 </section>
 
 <section class="slide" data-title="Versioni e modelli">
-  <p class="kicker">Utilizzo dell'IA · Gli strumenti</p>
+  <p class="kicker">Utilizzo dell'IA 1 · Gli strumenti</p>
   <h2>Versioni e modelli</h2>
   <div class="versions">
     <table class="vtbl">
@@ -757,7 +761,7 @@
 </section>
 
 <section class="slide" data-title="Cosa vede il modello">
-  <p class="kicker">Utilizzo dell'IA · Gli strumenti</p>
+  <p class="kicker">Utilizzo dell'IA 1 · Gli strumenti</p>
   <h2>Cosa vede il modello</h2>
   <div class="context">
     <div class="ctx-in">
@@ -796,7 +800,7 @@
 </section>
 
 <section class="slide" data-title="Chat e memoria">
-  <p class="kicker">Utilizzo dell'IA · Gli strumenti</p>
+  <p class="kicker">Utilizzo dell'IA 1 · Gli strumenti</p>
   <h2>Chat e memoria</h2>
   <div class="chats">
     <div class="chatcard">
@@ -841,7 +845,7 @@
 </section>
 
 <section class="slide" data-title="Limiti da conoscere">
-  <p class="kicker">Utilizzo dell'IA · Gli strumenti</p>
+  <p class="kicker">Utilizzo dell'IA 1 · Gli strumenti</p>
   <h2>Limiti da conoscere</h2>
   <div class="limits">
     <div class="lim-card">
@@ -880,7 +884,7 @@
 </section>
 
 <section class="slide" data-title="Lavorare con i testi">
-  <p class="kicker">Utilizzo dell'IA · Cosa può fare</p>
+  <p class="kicker">Utilizzo dell'IA 1 · Cosa può fare</p>
   <h2>Lavorare con i testi</h2>
   <div class="cap-grid"><div class="cap"><span class="cap-ic"><svg class="ci" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></span><b>Scrivere</b><span>Email, lettere, avvisi, verbali, curriculum</span></div><div class="cap"><span class="cap-ic"><svg class="ci" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg></span><b>Riscrivere</b><span>Cambiare tono, lunghezza, stile o destinatario</span></div><div class="cap"><span class="cap-ic"><svg class="ci" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg></span><b>Correggere</b><span>Ortografia, grammatica, frasi poco chiare</span></div><div class="cap"><span class="cap-ic"><svg class="ci" viewBox="0 0 24 24"><path d="M5 8h8M9 5v3M6.5 8c.8 3 3 5.5 6 7"/><path d="M12 8c-.8 3-3 5.5-6 7"/><path d="M13 20l4-9 4 9M14.5 17h5"/></svg></span><b>Tradurre</b><span>Tra decine di lingue, mantenendo il tono</span></div><div class="cap"><span class="cap-ic"><svg class="ci" viewBox="0 0 24 24"><path d="M4 6h16M4 10h16M4 14h10M4 18h6"/></svg></span><b>Riassumere</b><span>Documenti lunghi, catene di email, riunioni</span></div><div class="cap"><span class="cap-ic"><svg class="ci" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg></span><b>Spiegare</b><span>Lo stesso argomento a livelli diversi</span></div><div class="cap"><span class="cap-ic"><svg class="ci" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg></span><b>Rispondere su un documento</b><span>Contratti, regolamenti, manuali</span></div><div class="cap"><span class="cap-ic"><svg class="ci" viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4.5" cy="6" r="1"/><circle cx="4.5" cy="12" r="1"/><circle cx="4.5" cy="18" r="1"/></svg></span><b>Organizzare</b><span>Da note disordinate a tabelle ed elenchi</span></div></div>
   <aside class="notes">
@@ -889,7 +893,7 @@
 </section>
 
 <section class="slide" data-title="Immagini, file e voce">
-  <p class="kicker">Utilizzo dell'IA · Cosa può fare</p>
+  <p class="kicker">Utilizzo dell'IA 1 · Cosa può fare</p>
   <h2>Leggere immagini e file, parlare</h2>
   <div class="two u-split2">
     <div class="icpts"><div class="ip"><span class="ip-ic"><svg class="ci" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></span><span><strong>Foto e scansioni</strong>: legge il testo stampato e scritto a mano e lo trascrive.</span></div><div class="ip"><span class="ip-ic"><svg class="ci" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg></span><span><strong>Documenti</strong>: legge PDF, fogli di calcolo e presentazioni, comprese tabelle e grafici.</span></div><div class="ip"><span class="ip-ic"><svg class="ci" viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0M12 17v4M8 21h8"/></svg></span><span><strong>Voce</strong>: conversa a voce in tempo reale e può fare da interprete tra due lingue.</span></div><div class="ip"><span class="ip-ic"><svg class="ci" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></span><span><strong>Immagini</strong>: le crea partendo da una descrizione e modifica quelle esistenti.</span></div></div>
@@ -907,7 +911,7 @@
 </section>
 
 <section class="slide" data-title="Aiutarti a usare il computer">
-  <p class="kicker">Utilizzo dell'IA · Cosa può fare</p>
+  <p class="kicker">Utilizzo dell'IA 1 · Cosa può fare</p>
   <h2>Aiutarti a usare il computer</h2>
   <div class="two u-split2">
     <div class="icpts"><div class="ip"><span class="ip-ic"><svg class="ci" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg></span><span><strong>Spiegare come si fa</strong>: «Come si blocca la prima riga in Excel?», «Come salvo in PDF?»</span></div><div class="ip"><span class="ip-ic"><svg class="ci" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span><span><strong>Risolvere problemi</strong>: mandi uno screenshot dell&#39;errore e ti indica la causa probabile e cosa fare.</span></div><div class="ip"><span class="ip-ic"><svg class="ci" viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4.5" cy="6" r="1"/><circle cx="4.5" cy="12" r="1"/><circle cx="4.5" cy="18" r="1"/></svg></span><span><strong>Guidarti passo passo</strong>: un passo alla volta, aspettando la tua conferma.</span></div><div class="ip"><span class="ip-ic"><svg class="ci" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></span><span><strong>Configurare</strong>: stampanti, email sul telefono, impostazioni di Windows.</span></div></div>
@@ -926,7 +930,7 @@
 </section>
 
 <section class="slide" data-title="Cercare sul web">
-  <p class="kicker">Utilizzo dell'IA · Cosa può fare</p>
+  <p class="kicker">Utilizzo dell'IA 1 · Cosa può fare</p>
   <h2>Cercare sul web</h2>
   <div class="two u-split2">
     <div class="icpts"><div class="ip"><span class="ip-ic"><svg class="ci" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg></span><span>Cerca sul web informazioni <strong>aggiornate</strong>: notizie, orari, prezzi, regolamenti.</span></div><div class="ip"><span class="ip-ic"><svg class="ci" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg></span><span>Risponde <strong>citando le fonti</strong>, con il link a ogni pagina usata.</span></div><div class="ip"><span class="ip-ic"><svg class="ci" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg></span><span>Può confrontare più fonti e indicare dove non sono d&#39;accordo.</span></div></div>
@@ -943,7 +947,7 @@
 </section>
 
 <section class="slide" data-title="Calcolare e analizzare dati">
-  <p class="kicker">Utilizzo dell'IA · Cosa può fare</p>
+  <p class="kicker">Utilizzo dell'IA 1 · Cosa può fare</p>
   <h2>Calcolare e analizzare dati</h2>
   <div class="two u-split2">
     <div class="icpts"><div class="ip"><span class="ip-ic"><svg class="ci" viewBox="0 0 24 24"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"/></svg></span><span>Per i calcoli <strong>scrive un piccolo programma e lo esegue</strong>.</span></div><div class="ip"><span class="ip-ic"><svg class="ci" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg></span><span><strong>Pulisce i dati</strong>: toglie i doppioni, uniforma date e nomi, unisce più fogli.</span></div><div class="ip"><span class="ip-ic"><svg class="ci" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></svg></span><span><strong>Crea grafici</strong> e scrive un breve rapporto sui risultati.</span></div><div class="ip"><span class="ip-ic"><svg class="ci" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg></span><span><strong>Produce file</strong> da scaricare: Excel, Word, PowerPoint, PDF.</span></div></div>
@@ -961,7 +965,7 @@
 </section>
 
 <section class="slide" data-title="Scrivere codice e creare siti">
-  <p class="kicker">Utilizzo dell'IA · Cosa può fare</p>
+  <p class="kicker">Utilizzo dell'IA 1 · Cosa può fare</p>
   <h2>Scrivere codice e creare siti</h2>
   <div class="two u-split2">
     <div class="icpts"><div class="ip"><span class="ip-ic"><svg class="ci" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></span><span>Descrivi a parole una pagina web, un gioco o un piccolo programma: scrive il codice e spesso lo mostra <strong>funzionante accanto alla chat</strong> (<em>vibe coding</em>).</span></div><div class="ip"><span class="ip-ic"><svg class="ci" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg></span><span>Lo modifichi a parole: «Aggiungi un pulsante», «Cambia i colori», «Correggi questo errore».</span></div><div class="ip"><span class="ip-ic"><svg class="ci" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg></span><span>Spiega il codice riga per riga, anche a chi non sa programmare.</span></div><div class="ip"><span class="ip-ic"><svg class="ci" viewBox="0 0 24 24"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"/></svg></span><span>Gli <strong>agenti di programmazione</strong> lavorano da soli per ore: nel 2026, 16 agenti Claude hanno scritto un compilatore C di circa 100.000 righe.</span></div></div>
@@ -977,7 +981,7 @@
 </section>
 
 <section class="slide" data-title="Usare il computer al posto tuo">
-  <p class="kicker">Utilizzo dell'IA · Cosa può fare</p>
+  <p class="kicker">Utilizzo dell'IA 1 · Cosa può fare</p>
   <h2>Usare il computer al posto tuo: gli agenti</h2>
   <div class="two u-split2">
     <div class="icpts"><div class="ip"><span class="ip-ic"><svg class="ci" viewBox="0 0 24 24"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span><span>Guarda lo schermo, muove il mouse, <strong>clicca e scrive</strong> nei campi, come una persona.</span></div><div class="ip"><span class="ip-ic"><svg class="ci" viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4.5" cy="6" r="1"/><circle cx="4.5" cy="12" r="1"/><circle cx="4.5" cy="18" r="1"/></svg></span><span>Esempi: compilare un modulo online, confrontare prodotti su più siti, cercare un volo.</span></div><div class="ip"><span class="ip-ic"><svg class="ci" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg></span><span>Fa molti passaggi da solo e <strong>chiede conferma</strong> prima delle azioni importanti, come pagare o inviare.</span></div><div class="ip"><span class="ip-ic"><svg class="ci" viewBox="0 0 24 24"><path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg></span><span>È più lento di una persona e può sbagliare: <strong>va seguito</strong>.</span></div></div>
@@ -990,7 +994,7 @@
 </section>
 
 <section class="slide" data-title="Ragionare su problemi difficili">
-  <p class="kicker">Utilizzo dell'IA · Cosa può fare</p>
+  <p class="kicker">Utilizzo dell'IA 1 · Cosa può fare</p>
   <h2>Ragionare su problemi difficili</h2>
   <div class="two u-split2">
     <div class="icpts"><div class="ip"><span class="ip-ic"><svg class="ci" viewBox="0 0 24 24"><path d="M9 3a3 3 0 0 0-3 3 3 3 0 0 0-2 5 3 3 0 0 0 2 5 3 3 0 0 0 3 3V3zM15 3a3 3 0 0 1 3 3 3 3 0 0 1 2 5 3 3 0 0 1-2 5 3 3 0 0 1-3 3V3z"/></svg></span><span>Alcuni modelli, prima di rispondere, <strong>scrivono un ragionamento</strong> passo per passo e controllano i passaggi.</span></div><div class="ip"><span class="ip-ic"><svg class="ci" viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4.5" cy="6" r="1"/><circle cx="4.5" cy="12" r="1"/><circle cx="4.5" cy="18" r="1"/></svg></span><span>Servono per matematica, logica, pianificazione e problemi con molti vincoli.</span></div><div class="ip"><span class="ip-ic"><svg class="ci" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></span><span>Nel luglio 2025 Gemini Deep Think ha ottenuto 35 punti su 42 alle Olimpiadi internazionali di matematica: un punteggio da <strong>medaglia d&#39;oro</strong>.</span></div><div class="ip"><span class="ip-ic"><svg class="ci" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg></span><span>Ragionare richiede più tempo: per un&#39;email semplice non serve.</span></div></div>
@@ -1035,6 +1039,15 @@
   <aside class="notes">
     Per le prove 2 e 4 usare Claude: legge le foto e mostra la pagina funzionante accanto alla chat. Verificare prima della lezione che funzioni con la versione gratuita.
     Alla fine chiedere: quale di queste cose pensavate che non sapesse fare? In quale lavoro vi sarebbe utile?
+  </aside>
+</section>
+
+<section class="slide s-section" data-title="Laboratorio e sfide">
+  <p class="kicker">Parte 3</p>
+  <h2>Laboratorio e sfide</h2>
+  <p class="section-q">Prove più impegnative in coppia, poi due sfide a punti: una locandina e un sito web.</p>
+  <aside class="notes">
+    Prima tre esperimenti, poi le due sfide. Nelle sfide votano le altre coppie; il docente raccoglie i voti e li somma.
   </aside>
 </section>
 
@@ -1142,7 +1155,7 @@
 </section>
 
 <section class="slide" data-title="Come si fa vibe coding">
-  <p class="kicker">Utilizzo dell'IA · Cosa può fare</p>
+  <p class="kicker">Utilizzo dell'IA 1 · Laboratorio e sfide</p>
   <h2>Come si fa vibe coding</h2>
   <div class="icpts vc-pts"><div class="ip"><span class="ip-ic"><svg class="ci" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></span><span><b>Descrivi</b> cosa vuoi, con tutti i dettagli: contenuti, stile, colori, animazioni.</span></div><div class="ip"><span class="ip-ic"><svg class="ci" viewBox="0 0 24 24"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span><span><b>Prova</b> il risultato nell'anteprima: clicca, scorri, controlla i testi.</span></div><div class="ip"><span class="ip-ic"><svg class="ci" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg></span><span><b>Chiedi una modifica alla volta</b>: «Rendi il titolo più grande», «Aggiungi un&#39;animazione quando scorro la pagina».</span></div><div class="ip"><span class="ip-ic"><svg class="ci" viewBox="0 0 24 24"><path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg></span><span><b>Se qualcosa non funziona</b>, descrivi cosa vedi o incolla il messaggio di errore.</span></div></div>
   <p class="bottom-line">Non serve saper programmare: serve <strong>descrivere bene</strong> e <strong>controllare il risultato</strong>.</p>
@@ -1177,7 +1190,7 @@
 </section>
 
 <section class="slide" data-title="Cosa abbiamo notato nei laboratori">
-  <p class="kicker">Utilizzo dell'IA · Cosa può fare</p>
+  <p class="kicker">Utilizzo dell'IA 1 · Laboratorio e sfide</p>
   <h2>Cosa abbiamo notato nei laboratori</h2>
   <div class="nt-grid nt-3"><div class="nt"><p class="nt-q">Non sempre rispetta i vincoli precisi.</p><p class="nt-a f">Numero di parole, scritte nelle immagini: i vincoli vanno controllati.</p></div><div class="nt"><p class="nt-q">Sul documento cita il punto giusto, ma a volte inventa.</p><p class="nt-a f">Se un'informazione non c'è, può rispondere lo stesso. La risposta si verifica nel documento.</p></div><div class="nt"><p class="nt-q">Il primo risultato raramente è quello finale.</p><p class="nt-a f">Si migliora con richieste chiare e precise, nella stessa chat: il modello non vi legge nella mente.</p></div></div>
   <p class="bottom-line f">L'IA produce in fretta, ma <strong>l'umano deve decidere e verificare la correttezza</strong>.</p>
@@ -1192,7 +1205,7 @@
 <div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
 <nav class="controls" aria-label="Navigazione slide">
   <button type="button" id="btn-prev" aria-label="Slide precedente">&#8249;</button>
-  <span id="counter">1 / 31</span>
+  <span id="counter">1 / 32</span>
   <button type="button" id="btn-next" aria-label="Slide successiva">&#8250;</button>
   <button type="button" id="btn-help" aria-label="Comandi da tastiera">?</button>
 </nav>
