@@ -537,6 +537,8 @@
   .hl-pts { gap: 16px; }
   .hl-pts .pt { font-size: 20.5px; line-height: 1.42; }
   .hl-pts .pt i { width: 30px; height: 30px; font-size: 15px; margin-top: 0; border-radius: 8px; }
+  .hl-ast { margin: 14px 0 0;  font-size: 15.5px; line-height: 1.4; color: var(--muted); }
+  .hl-pts sup, .hl-ast sup { color: var(--orange-d); font-weight: 700; }
   .hl-viz { display: flex; flex-direction: column; gap: 10px; background: var(--surface); border-radius: 14px; padding: 14px 20px; box-shadow: var(--shadow); }
   .hl-row { display: grid; grid-template-columns: 330px 1fr 190px 180px; gap: 14px; align-items: center; font-size: 17px; }
   .hl-q { font-weight: 650; color: var(--navy); }
@@ -841,12 +843,13 @@
   <p class="kicker">Fondamenti di IA 2 · Il modello linguistico</p>
   <h2>Perché il modello inventa</h2>
   <div class="hl-two">
-    <div class="pts hl-pts"><div class="pt"><i>1</i><span><strong>Scrive testo probabile, non testo verificato.</strong> Il modello sceglie le parole più probabili dopo quelle precedenti. Non ha un passaggio in cui controlla se un fatto è vero: una frase falsa ma plausibile può avere una probabilità alta.</span></div><div class="pt"><i>2</i><span><strong>I fatti rari non si possono ricavare.</strong> La capitale della Francia compare in migliaia di testi e il modello la conosce. La data di nascita di una persona poco nota compare una volta o mai: non c'è una regola da cui ricavarla, quindi il modello scrive una data plausibile, spesso sbagliata.</span></div></div>
+    <div class="pts hl-pts"><div class="pt"><i>1</i><span><strong>Scrive testo probabile, non testo verificato.</strong> Il modello sceglie le parole più probabili dopo quelle precedenti. Non ha un passaggio in cui controlla se un fatto è vero: una frase falsa ma plausibile può avere una probabilità alta.<sup>*</sup></span></div><div class="pt"><i>2</i><span><strong>I fatti rari non si possono ricavare.</strong> La capitale della Francia compare in migliaia di testi e il modello la conosce. La data di nascita di una persona poco nota compare una volta o mai: non c'è una regola da cui ricavarla, quindi il modello scrive una data plausibile, spesso sbagliata.</span></div></div>
     <div class="hl-viz f">
       <div class="hl-row"><span class="hl-q">Capitale della Francia</span><span class="hl-bar"><i style="width:96%"></i></span><span class="hl-n">in migliaia di testi</span><span class="hl-r ok">Parigi ✓</span></div>
       <div class="hl-row"><span class="hl-q">Data di nascita di un artigiano di Feltre</span><span class="hl-bar"><i style="width:3%"></i></span><span class="hl-n">in un testo o in nessuno</span><span class="hl-r bad">12 maggio 1961 ✗</span></div>
     </div>
   </div>
+  <p class="hl-ast"><sup>*</sup> I modelli agentici più avanzati (per esempio Claude Opus 5.5 e GPT-6.1-sol) possono verificare i fatti durante il ragionamento, cercando sul web, se il prompt chiede di farlo. Non è comunque una garanzia che la risposta sia corretta.</p>
   <p class="bottom-line f">Più l'informazione è <strong>rara e precisa</strong> (nomi, date, numeri, citazioni, articoli di legge), più va <strong>verificata</strong>.</p>
   <aside class="notes">
     Il punto 2 viene da uno studio di OpenAI (settembre 2025, «Why language models hallucinate»): se una certa percentuale dei fatti di un tipo compare una sola volta nei testi di addestramento, ci si deve aspettare che il modello di base sbagli almeno su quella percentuale di fatti di quel tipo. Esempio dello studio: le date di compleanno.
