@@ -514,6 +514,56 @@
   .dif-pts .pt { font-size: 19.5px; line-height: 1.4; }
   .dif-pts .pt i, .ag-pts .pt i { width: 27px; height: 27px; font-size: 14px; margin-top: 0; border-radius: 8px; }
   .tl-pts .pt i { width: 29px; height: 29px; font-size: 15px; margin-top: 0; border-radius: 8px; }
+
+  /* ===== fasi, allucinazioni, aggiornamento, ragionamento ===== */
+  .ph-cyc { margin-top: 26px; }
+  .ph-cyc .tl-st { padding: 16px 16px 18px; }
+  .ph-cyc .tl-st b { font-size: 19.5px; }
+  .ph-cyc .tl-st small { font-size: 16px; line-height: 1.42; color: var(--ink); }
+  .ph-cyc .tl-st small strong { color: var(--teal-d); }
+  .ba-in { margin-top: 10px; display: flex; align-items: baseline; gap: 16px; background: var(--navy); color: #fff; border-radius: 14px; padding: 14px 22px; font-size: 23px; font-weight: 600; }
+  .ba-in span { font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #7FD8CC; }
+  .ba-two { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; margin-top: 18px; }
+  .ba-col { background: var(--surface); border-radius: 16px; padding: 18px 22px; box-shadow: var(--shadow); border-top: 6px solid var(--muted); }
+  .ba-col.ok { border-top-color: var(--teal); }
+  .ba-col h3 { margin: 0; font-size: 22px; color: var(--navy); }
+  .ba-sub { margin: 2px 0 12px; font-size: 15px; color: var(--muted); }
+  .ba-out { font-size: 19px; line-height: 1.45; background: var(--bg); border-radius: 10px; padding: 12px 16px; }
+  .ba-out em { font-style: normal; color: var(--orange-d); font-weight: 600; }
+  .ba-out.base { color: var(--muted); }
+  .ba-col.ok .ba-out { color: var(--teal-d); font-weight: 650; }
+  .ba-why { margin: 12px 0 0; font-size: 17px; line-height: 1.4; color: var(--ink); }
+  .hl-two { display: grid; grid-template-columns: 1fr; gap: 22px; margin-top: 10px; }
+  .hl-pts { gap: 16px; }
+  .hl-pts .pt { font-size: 20.5px; line-height: 1.42; }
+  .hl-pts .pt i { width: 30px; height: 30px; font-size: 15px; margin-top: 0; border-radius: 8px; }
+  .hl-viz { display: flex; flex-direction: column; gap: 10px; background: var(--surface); border-radius: 14px; padding: 14px 20px; box-shadow: var(--shadow); }
+  .hl-row { display: grid; grid-template-columns: 330px 1fr 190px 180px; gap: 14px; align-items: center; font-size: 17px; }
+  .hl-q { font-weight: 650; color: var(--navy); }
+  .hl-bar { height: 16px; border-radius: 8px; background: #EEF2F6; overflow: hidden; }
+  .hl-bar i { display: block; height: 100%; background: var(--blue, #2F6DB5); border-radius: 8px; min-width: 6px; }
+  .hl-n { font-size: 15px; color: var(--muted); }
+  .hl-r { font-weight: 700; text-align: right; }
+  .hl-r.ok { color: var(--teal-d); } .hl-r.bad { color: var(--red); }
+  .ku-two { display: grid; grid-template-columns: 1.05fr 1fr; gap: 30px; align-items: start; margin-top: 10px; }
+  .ku-pts { gap: 18px; }
+  .ku-pts .pt { font-size: 20px; line-height: 1.42; }
+  .ku-pts .pt i { width: 30px; height: 30px; font-size: 15px; margin-top: 0; border-radius: 8px; }
+  .ku-lab { background: var(--orange-l); border: 1.5px solid #F3CFAE; border-radius: 16px; padding: 16px 20px; display: flex; flex-direction: column; gap: 8px; }
+  .ku-h { margin: 0; font-size: 14px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--orange-d); }
+  .ku-t { margin: 0; font-size: 17.5px; color: var(--ink); }
+  .ku-obs { margin: 2px 0 0; font-size: 17px; font-weight: 650; color: var(--orange-d); }
+  .ku-obs::before { content: "→ "; }
+  .rz-two { display: grid; grid-template-columns: 1fr 1.05fr; gap: 30px; align-items: start; margin-top: 10px; }
+  .rz-pts { gap: 18px; }
+  .rz-pts .pt { font-size: 20px; line-height: 1.42; }
+  .rz-pts .pt i { width: 30px; height: 30px; font-size: 15px; margin-top: 0; border-radius: 8px; }
+  .rz-viz { display: flex; flex-direction: column; gap: 10px; }
+  .rz-q { background: var(--surface); border-radius: 12px; padding: 12px 16px; font-size: 16px; line-height: 1.4; box-shadow: var(--shadow); border-left: 5px solid var(--orange); }
+  .rz-think { background: #F1F3F6; border: 1.5px dashed #B7C4D1; border-radius: 12px; padding: 10px 16px 12px; }
+  .rz-think span { font-size: 12.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  .rz-think p { margin: 5px 0 0; font-size: 17px; color: var(--muted); font-family: var(--mono); }
+  .rz-ans { background: #E6EEF8; border: 1.5px solid #2F6DB5; border-radius: 12px; padding: 10px 16px; font-size: 19px; font-weight: 700; color: var(--navy); }
 </style>
 </head>
 <body data-course="Corso AI · Fondamenti di IA 2">
@@ -653,6 +703,52 @@
   </aside>
 </section>
 
+<section class="slide" data-title="Le fasi dell'addestramento">
+  <p class="kicker">Fondamenti di IA 2 · Come nasce un assistente</p>
+  <h2>Come nasce un assistente: le fasi dell'addestramento</h2>
+  <div class="tl-cyc ph-cyc">
+    <div class="tl-st s1"><i>1</i><b>Pre-addestramento</b><small>Il modello legge enormi quantità di testo (siti, libri, codice) e impara a prevedere il token successivo. Ne esce un <strong>modello di base</strong>.</small></div>
+    <div class="tl-ar">→</div>
+    <div class="tl-st s2"><i>2</i><b>Addestramento con esempi</b><small>Persone scrivono migliaia di domande con la risposta ideale: il modello impara a rispondere come un assistente.</small></div>
+    <div class="tl-ar">→</div>
+    <div class="tl-st s3"><i>3</i><b>Addestramento al ragionamento</b><small>Il modello risolve problemi di matematica e programmazione con una soluzione verificabile e viene premiato quando arriva al risultato giusto.</small></div>
+    <div class="tl-ar">→</div>
+    <div class="tl-st s4"><i>4</i><b>Rinforzo con il giudizio umano</b><small>(<em>RLHF</em>) Il modello scrive più risposte alla stessa domanda, delle persone indicano la migliore e il modello si regola per dare risposte simili.</small></div>
+  </div>
+  <p class="bottom-line">Le <strong>conoscenze</strong> vengono quasi tutte dalla fase 1. Il <strong>modo di rispondere e di ragionare</strong> viene dalle fasi 2, 3 e 4.</p>
+  <aside class="notes">
+    La fase 1 è di gran lunga la più lunga e costosa: mesi di calcolo su migliaia di computer. Le altre fasi usano molti meno dati, ma cambiano il comportamento del modello.
+    Fasi 2 e 4: ricetta resa pubblica da OpenAI nel 2022 con InstructGPT, il predecessore di ChatGPT. Le persone preferivano le risposte di un modello da 1,3 miliardi di parametri addestrato anche con queste fasi a quelle di GPT-3, che ha 175 miliardi di parametri ma solo la fase 1.
+    Fase 3: il primo modello di questo tipo è o1 di OpenAI (settembre 2024); DeepSeek ha descritto pubblicamente il metodo con R1 (gennaio 2025). Si usano problemi in cui la risposta giusta si può controllare in automatico, come un calcolo o un programma che deve superare dei test.
+    L'ordine e il numero delle fasi cambiano da azienda ad azienda; lo schema generale è questo.
+  </aside>
+</section>
+
+<section class="slide" data-title="Modello di base e assistente">
+  <p class="kicker">Fondamenti di IA 2 · Come nasce un assistente</p>
+  <h2>Lo stesso testo, due modelli diversi</h2>
+  <div class="ba-in"><span>Testo di ingresso</span>Qual è la capitale della Francia?</div>
+  <div class="ba-two">
+    <div class="ba-col">
+      <h3>Modello di base</h3>
+      <p class="ba-sub">solo fase 1</p>
+      <div class="ba-out base">Qual è la capitale della Francia? <em>Qual è la capitale della Germania? Qual è la capitale della Spagna? Qual è la capitale…</em></div>
+      <p class="ba-why">Ha visto molti elenchi di domande: continua il testo scrivendone altre.</p>
+    </div>
+    <div class="ba-col ok">
+      <h3>Assistente</h3>
+      <p class="ba-sub">fasi 1, 2, 3 e 4</p>
+      <div class="ba-out">La capitale della Francia è Parigi.</div>
+      <p class="ba-why">Ha imparato che a una domanda segue una risposta.</p>
+    </div>
+  </div>
+  <p class="bottom-line">Il modello di base non sbaglia: fa quello per cui è addestrato, cioè <strong>continuare il testo</strong>.</p>
+  <aside class="notes">
+    Esempio tipico del comportamento di un modello di base: la continuazione esatta cambia da modello a modello.
+    Le app di chat usano sempre modelli già addestrati come assistenti; i modelli di base si trovano soprattutto tra i modelli aperti, scaricabili.
+  </aside>
+</section>
+
 <section class="slide s-lab" data-title="Grande contro piccolo">
   <p class="kicker lab-kicker"><svg class="ic"><use href="#i-users"/></svg>Pratica · in coppia · Arena e Liquid Playground</p>
   <h2>Grande contro piccolo</h2>
@@ -738,6 +834,24 @@
     Il modello sceglie sempre la parola più probabile: anche quando non ha l'informazione giusta, produce un testo che sembra plausibile.
     Allucinazione: il modello non inventa di proposito e non «vede» cose come una persona che ha le allucinazioni; il termine indica soltanto un contenuto falso presentato come un fatto. Alcuni ricercatori preferiscono parlare di confabulazione (confabulation), proprio per non attribuire al modello qualità umane. Esempi tipici: date e citazioni inventate, libri o articoli che non esistono, conti sbagliati.
     I modelli più grandi sbagliano meno spesso, ma sbagliano anche loro: la verifica serve sempre.
+  </aside>
+</section>
+
+<section class="slide" data-title="Perché il modello inventa">
+  <p class="kicker">Fondamenti di IA 2 · Il modello linguistico</p>
+  <h2>Perché il modello inventa</h2>
+  <div class="hl-two">
+    <div class="pts hl-pts"><div class="pt"><i>1</i><span><strong>Scrive testo probabile, non testo verificato.</strong> Il modello sceglie le parole più probabili dopo quelle precedenti. Non ha un passaggio in cui controlla se un fatto è vero: una frase falsa ma plausibile può avere una probabilità alta.</span></div><div class="pt"><i>2</i><span><strong>I fatti rari non si possono ricavare.</strong> La capitale della Francia compare in migliaia di testi e il modello la conosce. La data di nascita di una persona poco nota compare una volta o mai: non c'è una regola da cui ricavarla, quindi il modello scrive una data plausibile, spesso sbagliata.</span></div></div>
+    <div class="hl-viz f">
+      <div class="hl-row"><span class="hl-q">Capitale della Francia</span><span class="hl-bar"><i style="width:96%"></i></span><span class="hl-n">in migliaia di testi</span><span class="hl-r ok">Parigi ✓</span></div>
+      <div class="hl-row"><span class="hl-q">Data di nascita di un artigiano di Feltre</span><span class="hl-bar"><i style="width:3%"></i></span><span class="hl-n">in un testo o in nessuno</span><span class="hl-r bad">12 maggio 1961 ✗</span></div>
+    </div>
+  </div>
+  <p class="bottom-line f">Più l'informazione è <strong>rara e precisa</strong> (nomi, date, numeri, citazioni, articoli di legge), più va <strong>verificata</strong>.</p>
+  <aside class="notes">
+    Il punto 2 viene da uno studio di OpenAI (settembre 2025, «Why language models hallucinate»): se una certa percentuale dei fatti di un tipo compare una sola volta nei testi di addestramento, ci si deve aspettare che il modello di base sbagli almeno su quella percentuale di fatti di quel tipo. Esempio dello studio: le date di compleanno.
+    La data dell'artigiano è inventata per l'esempio: è proprio il tipo di risposta che un modello dà con sicurezza.
+    Con la ricerca web le allucinazioni sui fatti calano, perché il modello legge l'informazione invece di ricordarla. Restano possibili se legge una fonte sbagliata.
   </aside>
 </section>
 
@@ -907,6 +1021,51 @@
     Anche se scriviamo una sola riga, il modello legge molto di più: le istruzioni dell'app (che di solito non vediamo), la chat fin qui, i file.
     1 milione di token corrisponde a circa 650.000 parole in italiano. Nelle app il limite effettivo è spesso più basso, e cambia con il piano e con il modello: verificare prima della lezione.
     La finestra comprende sia ciò che il modello legge sia ciò che scrive.
+  </aside>
+</section>
+
+<section class="slide" data-title="Aggiornamento delle conoscenze">
+  <p class="kicker">Fondamenti di IA 2 · Il contesto</p>
+  <h2>Il modello conosce i fatti solo fino a una certa data</h2>
+  <div class="ku-two">
+    <div class="pts ku-pts"><div class="pt"><i>1</i><span>Il pre-addestramento usa testi raccolti fino a una certa data: la <strong>data di aggiornamento delle conoscenze</strong> (<em>knowledge cutoff</em>). Di solito è qualche mese prima dell'uscita del modello.</span></div><div class="pt"><i>2</i><span>Di quello che è successo dopo il modello non sa niente, a meno che l'informazione non sia <strong>nel contesto</strong>.</span></div><div class="pt"><i>3</i><span>La data di oggi la conosce perché l'app la scrive nel <strong>prompt di sistema</strong>; gli eventi recenti no.</span></div></div>
+    <div class="ku-lab f">
+      <p class="ku-h">Prova</p>
+      <p class="ku-t">Disattiva la ricerca web e chiedi:</p>
+      <div class="prompt small" data-copy="Senza cercare sul web: chi ha vinto le elezioni di metà mandato negli Stati Uniti del 3 novembre 2026?"><span class="prompt-text">Senza cercare sul web: chi ha vinto le elezioni di metà mandato negli Stati Uniti del 3 novembre 2026?</span></div>
+      <p class="ku-t">Poi riattiva la ricerca web e fai la stessa domanda.</p>
+      <p class="ku-obs">Cosa cambia tra le due risposte?</p>
+    </div>
+  </div>
+  <p class="bottom-line">Per i fatti recenti serve la <strong>ricerca web</strong>, che mette le informazioni nuove nel contesto.</p>
+  <aside class="notes">
+    Senza ricerca il modello può dire che non lo sa, oppure inventare un risultato: tutte e due le risposte sono istruttive.
+    In alcune app la ricerca web non si può spegnere: per questo il prompt dice «Senza cercare sul web».
+    Le aziende indicano la data di aggiornamento nella documentazione di ogni modello.
+  </aside>
+</section>
+
+<section class="slide" data-title="Modelli di ragionamento">
+  <p class="kicker">Fondamenti di IA 2 · Il contesto</p>
+  <h2 style="font-size:37px">Modelli di ragionamento: scrivono prima di rispondere</h2>
+  <div class="rz-two">
+    <div class="pts rz-pts"><div class="pt"><i>1</i><span>Un <strong>modello di ragionamento</strong> (<em>reasoning model</em>), prima della risposta, scrive un ragionamento passo per passo: prova, controlla, corregge.</span></div><div class="pt"><i>2</i><span>Il ragionamento è fatto di token ed <strong>entra nel contesto</strong>: il modello lo rilegge mentre scrive la risposta, come una brutta copia.</span></div><div class="pt"><i>3</i><span>Va molto meglio in matematica, logica e programmazione. È <strong>più lento</strong> e usa più token, quindi costa di più.</span></div></div>
+    <div class="rz-viz">
+      <div class="rz-q">Ho 3 mele, ne mangio una, ne compro altre 5 e taglio a metà tutte le mele che ho. Due metà marciscono. Quante mezze mele posso ancora mangiare?</div>
+      <div class="rz-think"><span>Ragionamento</span>
+        <p class="f">Ho 3 mele, ne mangio una: 3 − 1 = 2.</p>
+        <p class="f">Ne compro altre 5: 2 + 5 = 7.</p>
+        <p class="f">Taglio tutto a metà: 7 × 2 = 14 metà.</p>
+        <p class="f">Due marciscono: 14 − 2 = 12.</p>
+      </div>
+      <div class="rz-ans f">Risposta: 12 mezze mele.</div>
+    </div>
+  </div>
+  <p class="bottom-line">Nelle app si attiva con pulsanti come <strong>«Ragiona»</strong> o <strong>«Thinking»</strong>. Serve per i problemi difficili, non per scrivere un'email.</p>
+  <aside class="notes">
+    È lo stesso problema della prova «grande contro piccolo».
+    Come si addestra: è la fase 3 della slide sulle fasi dell'addestramento. Il modello riceve problemi con una soluzione controllabile e viene premiato quando ci arriva; così impara a scrivere ragionamenti che portano al risultato giusto.
+    Alcune app mostrano il ragionamento completo, altre solo un riassunto.
   </aside>
 </section>
 
@@ -1087,7 +1246,7 @@
 <div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
 <nav class="controls" aria-label="Navigazione slide">
   <button type="button" id="btn-prev" aria-label="Slide precedente">&#8249;</button>
-  <span id="counter">1 / 25</span>
+  <span id="counter">1 / 30</span>
   <button type="button" id="btn-next" aria-label="Slide successiva">&#8250;</button>
   <button type="button" id="btn-help" aria-label="Comandi da tastiera">?</button>
 </nav>
