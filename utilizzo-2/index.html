@@ -544,6 +544,60 @@
   .ci-c.si .ci-h { color: var(--teal-d); }
   .ci-c ul { margin: 0; padding-left: 22px; }
   .ci-c li { font-size: 20px; line-height: 1.4; margin: 8px 0; }
+  .sk-two { display: grid; grid-template-columns: 1.1fr 1fr; gap: 28px; align-items: start; margin-top: 4px; }
+  .sk-left { display: flex; flex-direction: column; gap: 16px; }
+  .sk-def { background: var(--surface); border-left: 6px solid var(--teal); border-radius: 14px; padding: 12px 18px; box-shadow: var(--shadow); font-size: 18.5px; line-height: 1.45; }
+  .sk-def code, .sk-lab code, .av code { font-family: var(--mono); font-size: .9em; background: var(--teal-l); color: var(--teal-d); border-radius: 5px; padding: 0 5px; }
+  .sk-pts { display: flex; flex-direction: column; gap: 12px; }
+  .sk-pts .pt { font-size: 18px; line-height: 1.4; }
+  .sk-pts .pt i { width: 28px; height: 28px; font-size: 14px; margin-top: 0; border-radius: 8px; }
+  .sk-viz { display: flex; flex-direction: column; gap: 8px; }
+  .sk-lab { margin: 0; font-size: 12.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  .sk-list { display: flex; flex-direction: column; gap: 5px; background: #F1F3F6; border: 1.5px dashed #B7C4D1; border-radius: 12px; padding: 8px; }
+  .sk-it { display: grid; grid-template-columns: 190px 1fr; gap: 10px; align-items: center; background: var(--surface); border-radius: 8px; padding: 5px 10px; font-size: 14.5px; color: var(--muted); border: 2px solid transparent; transition: border-color .3s, background .3s; }
+  .sk-it code { font-family: var(--mono); font-size: 13.5px; color: var(--navy); font-weight: 650; }
+  .sk-viz:has(.sk-req.on) .sk-it.on { border-color: var(--orange); background: var(--orange-l); }
+  .sk-req { background: var(--surface); border-left: 5px solid #2F6DB5; border-radius: 10px; padding: 8px 14px; font-size: 16px; box-shadow: var(--shadow); }
+  .sk-req span { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #2F6DB5; margin-right: 10px; }
+  .sk-open { background: var(--orange-l); border: 1.5px solid #F3CFAE; border-radius: 12px; padding: 9px 14px; }
+  .sk-open .sk-lab { color: var(--orange-d); }
+  .sk-open ol { margin: 6px 0 0; padding-left: 22px; font-size: 15.5px; line-height: 1.45; }
+  .sf-two { display: grid; grid-template-columns: 1fr 1.02fr; gap: 28px; align-items: start; margin-top: 4px; }
+  .sf-left { display: flex; flex-direction: column; gap: 16px; }
+  .sf-tree { margin: 0; background: var(--navy); color: #fff; border-radius: 14px; padding: 14px 18px; font-family: var(--mono); font-size: 15.5px; line-height: 1.6; white-space: pre; }
+  .sf-tree .d { color: #7FD8CC; font-weight: 700; }
+  .sf-tree em { font-style: normal; color: #FFD08A; }
+  .av { background: var(--surface); border-radius: 16px; box-shadow: var(--shadow); padding: 14px 16px; display: flex; flex-direction: column; }
+  .av .sk-lab { margin-bottom: 8px; }
+  .av-r { display: grid; grid-template-columns: 112px 120px 1fr; gap: 12px; align-items: center; padding: 10px 4px; border-top: 1px solid var(--line); font-size: 16px; line-height: 1.35; }
+  .av-r b { color: var(--navy); }
+  .av-y { font-weight: 700; color: var(--teal-d); }
+  .av-r.no .av-y { color: var(--red); }
+  .av-h { border-top: 0; font-size: 12.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); padding-top: 0; }
+  .av-h b { color: var(--muted); }
+  .ast { color: var(--orange-d); font-weight: 700; }
+  .lab-fat .lab-3 { grid-template-columns: minmax(0, 1fr) minmax(0, .72fr) minmax(0, 1.4fr); }
+  .lab-fat .prompt.small { font-size: 14.5px; line-height: 1.4; }
+  .lab-fat .prompt-text { overflow-wrap: anywhere; }
+  .lab-fat .lstep-text, .lab-fat .obs { font-size: 15.5px; }
+  .sf-ast { margin: 0; font-size: 15px; color: var(--muted); }
+  .h-code { font-family: var(--mono); font-size: .85em; color: var(--teal-d); }
+  .md-two { display: grid; grid-template-columns: 1.55fr 1fr; gap: 24px; align-items: start; margin-top: 2px; }
+  .prompt.skf { background: var(--navy); color: #E8EEF4; border: 0; border-radius: 14px; padding: 10px 50px 12px 18px; font-size: 13.5px; box-shadow: var(--shadow); }
+  .prompt.skf .skf-name { margin: 0 0 4px; font-family: var(--mono); font-size: 12px; color: #9FB3C8; letter-spacing: .03em; }
+  .prompt.skf pre { margin: 0; font-family: var(--mono); font-size: 13.5px; line-height: 1.36; white-space: pre-wrap; }
+  .skf .k-sep { color: #9FB3C8; }
+  .skf .k-key { color: #7FD8CC; font-weight: 700; }
+  .skf .k-val { color: #FFD08A; }
+  .skf .k-h { color: #fff; font-weight: 700; }
+  .skf .k-file { color: #F4A66A; }
+  .md-notes { display: flex; flex-direction: column; gap: 9px; }
+  .md-n { background: var(--surface); border-radius: 12px; padding: 9px 14px; box-shadow: var(--shadow); border-left: 5px solid #2F6DB5; display: flex; flex-direction: column; gap: 3px; }
+  .md-n.a { border-left-color: var(--teal); }
+  .md-n.o { border-left-color: var(--orange); }
+  .md-n b { font-size: 16.5px; color: var(--navy); }
+  .md-n span { font-size: 15.5px; line-height: 1.4; color: var(--ink); }
+  .md-n code { font-family: var(--mono); font-size: .92em; background: var(--teal-l); color: var(--teal-d); border-radius: 5px; padding: 0 5px; }
 </style>
 </head>
 <body data-course="Corso AI · Utilizzo dell'IA 2">
@@ -607,7 +661,7 @@
 <section class="slide" data-title="Programma">
   <p class="kicker">Utilizzo dell'IA 2</p>
   <h2>Programma del modulo</h2>
-  <ol class="agenda2 agenda3"><li><span>1</span><div>Principi di prompting<small>come aumentare l'efficacia della tua richiesta al modello</small></div></li></ol>
+  <ol class="agenda2 agenda3"><li><span>1</span><div>Principi di prompting<small>come aumentare l'efficacia della tua richiesta al modello</small></div></li><li><span>2</span><div>Le skill<small>salvare istruzioni e file da riusare</small></div></li></ol>
   <aside class="notes">
     Il programma cresce man mano che si aggiungono le parti.
   </aside>
@@ -762,12 +816,143 @@
     Prima si vede solo la colonna «Non va bene»: chiedere alla classe cosa non ha funzionato nelle prove. Poi la colonna «Va bene» e la regola.
   </aside>
 </section>
+
+<section class="slide" data-title="Cos'è una skill">
+  <p class="kicker">Utilizzo dell'IA 2 · Le skill</p>
+  <h2>Skill: un prompt salvato, aperto quando serve</h2>
+  <div class="sk-two">
+    <div class="sk-left">
+      <div class="sk-def">Una <strong>skill</strong> è una cartella con un file <code>SKILL.md</code>: <strong>nome</strong>, <strong>descrizione</strong> (cosa fa e quando usarla) e <strong>istruzioni</strong>. Si possono aggiungere altri file: modelli, listini, esempi, script.</div>
+      <div class="sk-pts">
+        <div class="pt"><i>1</i><span>Nel contesto entrano solo <strong>nome e descrizione</strong> di ogni skill: il resto viene letto solo quando la richiesta lo richiede. Per questo se ne possono avere molte.</span></div>
+        <div class="pt"><i>2</i><span>È la <strong>descrizione</strong> a decidere quando la skill si attiva: deve dire con precisione a cosa serve.</span></div>
+        <div class="pt"><i>3</i><span><strong>La skill è il file.</strong> Se l'app la supporta, la <strong>carichi</strong> e lei la usa quando serve. Se non la supporta, la <strong>incolli</strong> e diventa un prompt normale, letto tutto subito.</span></div>
+      </div>
+    </div>
+    <div class="sk-viz">
+      <p class="sk-lab">Contesto del modello: solo nome e descrizione</p>
+      <div class="sk-list"><div class="sk-it on"><code>verbale-riunione</code><span>Da appunti di una riunione a un verbale</span></div><div class="sk-it"><code>post-negozio</code><span>Post social con il tono del negozio</span></div><div class="sk-it"><code>preventivo-occhiali</code><span>Preventivi con il listino e il totale</span></div></div>
+      <div class="sk-req f"><span>Richiesta</span>Ecco gli appunti della riunione di oggi: scrivi il verbale.</div>
+      <div class="sk-open f"><p class="sk-lab">Si apre <code>verbale-riunione/SKILL.md</code></p>
+        <ol><li>Data, luogo e partecipanti.</li><li>Decisioni prese, una per riga.</li><li>Tabella: compito, responsabile, scadenza.</li></ol>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    Collegamento con quello che abbiamo appena fatto: un buon prompt che usiamo spesso conviene salvarlo, invece di riscriverlo ogni volta. La skill è il modo ordinato di farlo.
+    Il file SKILL.md inizia con due righe obbligatorie: name (minuscolo, con i trattini, uguale al nome della cartella) e description. Sotto ci sono le istruzioni, scritte come un prompt.
+    Con una sola skill la differenza rispetto a un prompt incollato è piccola; si vede quando le skill sono tante: nel contesto entrano circa 100 token per skill, non tutte le istruzioni.
+    Il formato è uno standard aperto (agentskills.io): lo stesso file funziona in Claude, Gemini e ChatGPT.
+  </aside>
+</section>
+
+<section class="slide" data-title="Skill con file">
+  <p class="kicker">Utilizzo dell'IA 2 · Le skill</p>
+  <h2>Skill con file: ripetibilità e automazione</h2>
+  <div class="sf-two">
+    <div class="sf-left">
+      <pre class="sf-tree"><span class="d">preventivo-occhiali/</span>
+├── SKILL.md            <em>istruzioni</em>
+├── listino.csv         <em>prezzi: sempre gli stessi</em>
+├── esempio.md          <em>un preventivo fatto bene</em>
+└── calcola_totale.py   <em>il calcolo: sempre uguale</em></pre>
+      <div class="sk-pts sf-pts">
+        <div class="pt"><i>1</i><span><strong>Ripetibilità:</strong> i file della skill sono sempre gli stessi. Il modello non deve ricordare prezzi o formato: li legge.</span></div>
+        <div class="pt"><i>2</i><span>La skill resta <strong>salvata nel tuo account</strong><sup class="ast">*</sup>: la ritrovi in ogni chat nuova, senza riscrivere le istruzioni. Per questo <strong>accelera il lavoro</strong>.</span></div>
+        <p class="sf-ast"><sup class="ast">*</sup> Se l'app supporta le skill.</p>
+      </div>
+    </div>
+    <div class="av f">
+      <p class="sk-lab">Dove funziona con un account gratuito</p>
+      <div class="av-r av-h"><b>App</b><span>Skill</span><span>Come</span></div>
+      <div class="av-r"><b>Claude</b><span class="av-y">sì</span><span>la crei in chat con <code>skill-creator</code>, oppure carichi lo <code>.zip</code> da Impostazioni → Funzionalità</span></div><div class="av-r"><b>Gemini</b><span class="av-y">sì, 18+ e account personale</span><span>la crei in chat con Gemini, oppure carichi il file da Personalizza → Skill (dal sito)</span></div><div class="av-r"><b>ChatGPT</b><span class="av-y">sì, in prova (beta)</span><span>la crei in chat oppure la carichi; verifica nel menu del tuo account</span></div><div class="av-r no"><b>Duck.ai, Mercury</b><span class="av-y">no</span><span>incolli il testo di <code>SKILL.md</code></span></div>
+    </div>
+  </div>
+  <aside class="notes">
+    Lo script si usa solo se l'app può eseguire codice: è lo stesso strumento dell'esecuzione di codice. Chiedere al modello di scriverlo: non serve saper programmare.
+    Per caricare la skill: la cartella va compressa in .zip, con dentro la cartella e non i file sciolti; una skill per ogni zip. In Gemini si può caricare anche il solo SKILL.md.
+    ChatGPT: la pagina dei prezzi indica le skill anche nel piano gratuito, in prova; le pagine di aiuto citano solo i piani di lavoro. Controllare con un account gratuito prima della lezione, insieme ai nomi esatti dei menu.
+    Dati aggiornati a novembre 2026.
+  </aside>
+</section>
+
+<section class="slide" data-title="Un SKILL.md reale">
+  <p class="kicker">Utilizzo dell'IA 2 · Le skill</p>
+  <h2>Com'è fatto un file <code class="h-code">SKILL.md</code></h2>
+  <div class="md-two">
+    <div class="prompt skf" data-copy="---&#10;name: preventivo-occhiali&#10;description: Prepara il preventivo per un paio di occhiali da vista di Occhialeria Dolomiti. Usala quando il cliente chiede un preventivo o il prezzo di montatura, lenti e trattamenti.&#10;---&#10;&#10;# Preventivo occhiali&#10;&#10;## Dati da raccogliere&#10;Chiedi quelli che mancano, una domanda alla volta:&#10;- montatura scelta;&#10;- tipo di lenti: monofocali o progressive;&#10;- trattamenti: antiriflesso, filtro luce blu.&#10;&#10;## Come procedere&#10;1. Prendi i prezzi solo da listino.csv: non inventarli.&#10;2. Calcola il totale con calcola_totale.py, non a mente.&#10;3. Scrivi il preventivo come in esempio.md: tabella con voce e prezzo, poi il totale IVA inclusa.&#10;&#10;## Regole&#10;- Se una voce non è nel listino, scrivi «da verificare in negozio».&#10;- Il preventivo vale 30 giorni."><p class="skf-name">preventivo-occhiali/SKILL.md</p><pre><span class="k-sep">---</span>
+<span class="k-key">name:</span><span class="k-val"> preventivo-occhiali</span>
+<span class="k-key">description:</span><span class="k-val"> Prepara il preventivo per un paio di occhiali da vista di Occhialeria Dolomiti. Usala quando il cliente chiede un preventivo o il prezzo di montatura, lenti e trattamenti.</span>
+<span class="k-sep">---</span>
+
+<span class="k-h"># Preventivo occhiali</span>
+
+<span class="k-h">## Dati da raccogliere</span>
+Chiedi quelli che mancano, una domanda alla volta:
+- montatura scelta;
+- tipo di lenti: monofocali o progressive;
+- trattamenti: antiriflesso, filtro luce blu.
+
+<span class="k-h">## Come procedere</span>
+1. Prendi i prezzi solo da <span class="k-file">listino.csv</span>: non inventarli.
+2. Calcola il totale con <span class="k-file">calcola_totale.py</span>, non a mente.
+3. Scrivi il preventivo come in <span class="k-file">esempio.md</span>: tabella con voce e prezzo, poi il totale IVA inclusa.
+
+<span class="k-h">## Regole</span>
+- Se una voce non è nel listino, scrivi «da verificare in negozio».
+- Il preventivo vale 30 giorni.</pre></div>
+    <div class="md-notes">
+      <div class="md-n a"><b>Intestazione, tra le due righe <code>---</code></b><span>Obbligatoria, sempre in cima.</span></div>
+      <div class="md-n a"><b><code>name</code></b><span>Minuscolo, parole unite da trattini, uguale al nome della cartella.</span></div>
+      <div class="md-n a"><b><code>description</code></b><span><strong>Cosa fa e quando usarla</strong>, al massimo 1024 caratteri. È l'unica parte sempre nel contesto: il modello decide da qui se aprire la skill.</span></div>
+      <div class="md-n f"><b>Istruzioni</b><span>Scritte come un buon prompt: dati da raccogliere, passi in ordine, regole. Vengono lette solo quando la skill si attiva.</span></div>
+      <div class="md-n o f"><b>File della cartella</b><span>Citati per nome nelle istruzioni: il modello li apre solo quando servono.</span></div>
+    </div>
+  </div>
+  <aside class="notes">
+    È la skill della cartella vista nella slide precedente. Il pulsante copia il testo del file: si può usare come modello per il laboratorio.
+    Il file si scrive con un editor di testo qualsiasi (Blocco note va bene) e si salva con il nome esatto SKILL.md, in maiuscolo.
+    Errore più comune: una description vaga come «Aiuta con i preventivi». Il modello non capisce quando usarla. Deve dire il compito e la situazione in cui serve.
+    Le istruzioni seguono gli stessi principi di prompting della parte 1: chiarezza, contesto, formato del risultato.
+  </aside>
+</section>
+
+<section class="slide s-lab lab-fat" data-title="Esercizio: skill per le fatture">
+  <p class="kicker lab-kicker"><svg class="ic"><use href="#i-users"/></svg>Pratica · in coppia · Claude e un modello piccolo</p>
+  <h2>Esercizio finale: una skill che legge le fatture</h2>
+  <p class="lab-q">Lo stesso lavoro con Claude e con un modello piccolo: cosa cambia?</p>
+  <div class="lab-grid lab-3">
+    <div class="lstep">
+      <h3><span>1</span>Crea la skill: Sonnet low</h3>
+      <div class="prompt small" data-copy="Crea una skill che legga le fatture da un'immagine. Per ogni fattura estrai fornitore, numero, data, scadenza, imponibile, IVA e totale, e le righe con descrizione, quantità, prezzo unitario e importo. Il risultato è un file Excel con un foglio di dati, una riga per ogni voce, e un grafico a barre del totale per fornitore. Nella skill crea anche un file di codice che faccia i calcoli (importi, imponibile, IVA e totali), così i conti non vengono fatti a mente. Se un dato non si legge, scrivi «da verificare» invece di inventarlo."><span class="prompt-text">Crea una skill che legga le fatture da un'immagine. Per ogni fattura estrai fornitore, numero, data, scadenza, imponibile, IVA e totale, e le righe con descrizione, quantità, prezzo unitario e importo. Il risultato è un file Excel con un foglio di dati, una riga per ogni voce, e un grafico a barre del totale per fornitore. Nella skill crea anche un file di codice che faccia i calcoli (importi, imponibile, IVA e totali), così i conti non vengono fatti a mente. Se un dato non si legge, scrivi «da verificare» invece di inventarlo.</span></div>
+    </div>
+    <div class="lstep">
+      <h3><span>2</span>Usala in Claude</h3>
+      <p class="lstep-text">Cerca su internet 2–3 immagini di fatture di esempio e caricale in una chat nuova:</p>
+      <div class="prompt small" data-copy="Ecco alcune fatture: preparami il file Excel."><span class="prompt-text">Ecco alcune fatture: preparami il file Excel.</span></div>
+      <p class="obs">La skill si è attivata da sola? I numeri nell'Excel sono giusti?</p>
+    </div>
+    <div class="lstep">
+      <h3><span>3</span>Modello piccolo, a mano</h3>
+      <p class="lstep-text">Nel modello piccolo indicato dal docente carica le stesse fatture e scrivi:</p>
+      <div class="prompt small" data-copy="Leggi le fatture nelle immagini allegate e analizzale.&#10;Per ogni voce calcola l'importo (quantità × prezzo unitario); per ogni fattura calcola imponibile, IVA e totale e confrontali con quelli scritti.&#10;Restituisci un CSV in un blocco di codice, separato da punto e virgola, con una riga per ogni voce e questa intestazione:&#10;fornitore;numero;data;descrizione;quantità;prezzo_unitario;importo;imponibile;iva;totale;controllo&#10;Nella colonna controllo scrivi OK se i conti tornano, altrimenti la differenza. Se un dato non si legge, scrivi «da verificare»."><span class="prompt-text">Leggi le fatture nelle immagini allegate e analizzale.<br>Per ogni voce calcola l'importo (quantità × prezzo unitario); per ogni fattura calcola imponibile, IVA e totale e confrontali con quelli scritti.<br>Restituisci un CSV in un blocco di codice, separato da punto e virgola, con una riga per ogni voce e questa intestazione:<br>fornitore;numero;data;descrizione;quantità;prezzo_unitario;importo;imponibile;iva;totale;controllo<br>Nella colonna controllo scrivi OK se i conti tornano, altrimenti la differenza. Se un dato non si legge, scrivi «da verificare».</span></div>
+      <p class="lstep-text">Salva il prompt in un file sul computer o in un documento Google: lo incolli ogni volta che ti serve.</p>
+      <p class="obs">Ha letto bene le fatture? I conti tornano? Quali errori fa rispetto a Claude?</p>
+    </div>
+  </div>
+  <aside class="notes">
+    Passi 1 e 2 in Claude con Sonnet e ragionamento basso (low). Claude crea la skill in chat e produce il file Excel: serve l'esecuzione del codice attiva nelle impostazioni.
+    Passo 3: il modello piccolo lo sceglie il docente e deve accettare immagini. Niente skill, codice e grafico: il prompt chiede solo un CSV, quindi i conti li fa il modello a mente. Il prompt salvato in un file o in un documento Google è la versione «a mano» della skill: funziona con qualunque modello, ma va incollato ogni volta. Il CSV si può copiare in un file .csv e aprire con Excel.
+    Per le immagini: cercare «fattura esempio» o «fac simile fattura». Niente fatture vere con dati di persone o aziende reali.
+    Il controllo dei numeri è obbligatorio in tutti e due i casi: il modello può leggere male una cifra, soprattutto in una foto storta o sfocata. Ci si aspetta più errori nei conti al passo 3.
+  </aside>
+</section>
 </main>
 
 <div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
 <nav class="controls" aria-label="Navigazione slide">
   <button type="button" id="btn-prev" aria-label="Slide precedente">&#8249;</button>
-  <span id="counter">1 / 11</span>
+  <span id="counter">1 / 15</span>
   <button type="button" id="btn-next" aria-label="Slide successiva">&#8250;</button>
   <button type="button" id="btn-help" aria-label="Comandi da tastiera">?</button>
 </nav>
