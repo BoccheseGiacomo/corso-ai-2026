@@ -566,6 +566,79 @@
   .rz-think span { font-size: 12.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
   .rz-think p { margin: 5px 0 0; font-size: 17px; color: var(--muted); font-family: var(--mono); }
   .rz-ans { background: #E6EEF8; border: 1.5px solid #2F6DB5; border-radius: 12px; padding: 10px 16px; font-size: 19px; font-weight: 700; color: var(--navy); }
+  .ma-two { display: grid; grid-template-columns: 1fr 1.05fr; gap: 34px; align-items: center; flex: 1; }
+  .ma-pts { gap: 20px; }
+  .ma-pts .pt { font-size: 20.5px; line-height: 1.42; }
+  .ma-pts .pt i { width: 30px; height: 30px; font-size: 15px; margin-top: 0; border-radius: 8px; }
+  .ma-viz { display: flex; flex-direction: column; gap: 14px; }
+  .ma-app { position: relative; background: #E6EEF8; border: 2px solid #2F6DB5; border-radius: 22px; padding: 38px 20px 20px; }
+  .ma-lab { position: absolute; top: 10px; left: 20px; font-size: 14px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #2F6DB5; }
+  .ma-grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto auto; gap: 12px; }
+  .ma-chip { background: var(--surface); border-radius: 12px; padding: 10px 14px; font-size: 17px; font-weight: 650; color: var(--navy); box-shadow: var(--shadow); text-align: center; }
+  .ma-chip small { display: block; font-size: 13.5px; font-weight: 500; color: var(--muted); margin-top: 2px; }
+  .ma-core { grid-column: 1 / 3; grid-row: 2; background: var(--teal); color: #fff; border-radius: 16px; padding: 18px; text-align: center; }
+  .ma-core b { display: block; font-size: 24px; }
+  .ma-core small { font-size: 15px; opacity: .9; }
+  .ma-api { display: flex; align-items: center; gap: 12px; font-size: 16.5px; color: var(--muted); padding-left: 6px; }
+  .ma-api span { background: var(--surface); border: 1.5px solid var(--line); border-radius: 10px; padding: 6px 12px; font-weight: 650; color: var(--navy); }
+  .ma-api i { font-style: normal; font-weight: 700; color: var(--muted); }
+  .ma-api b { background: var(--teal); color: #fff; border-radius: 10px; padding: 6px 14px; }
+  .nm { display: flex; flex-direction: column; background: var(--surface); border-radius: 16px; box-shadow: var(--shadow); overflow: hidden; margin-top: 10px; }
+  .nm-row { display: grid; grid-template-columns: 1.25fr 1.35fr .9fr; gap: 20px; align-items: center; padding: 16px 24px; font-size: 20px; border-top: 1px solid var(--line); }
+  .nm-head { border-top: 0; background: var(--navy); color: #fff; font-size: 15px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 12px 24px; }
+  .nm-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .nm-tags em { font-style: normal; font-family: var(--mono); font-size: 17px; background: var(--teal-l); color: var(--teal-d); border-radius: 8px; padding: 3px 10px; font-weight: 650; }
+  .nm-use { color: var(--muted); font-size: 18.5px; }
+  .jg-two { display: grid; grid-template-columns: 1fr 520px; gap: 26px; align-items: center; flex: 1; }
+  .jg-pts { gap: 18px; }
+  .jg-pts .pt { font-size: 20px; line-height: 1.42; }
+  .jg-pts .pt i { width: 30px; height: 30px; font-size: 15px; margin-top: 0; border-radius: 8px; }
+  .jg-viz { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .jg-svg { width: 520px; height: auto; display: block; }
+  .jg-t { font-size: 16.5px; font-weight: 700; font-family: var(--font); paint-order: stroke; stroke: #F6F8FA; stroke-width: 6px; stroke-linejoin: round; }
+  .jg-leg { display: flex; gap: 22px; font-size: 15.5px; color: var(--muted); }
+  .jg-leg i { display: inline-block; width: 16px; height: 16px; border-radius: 50%; vertical-align: -2px; margin-right: 7px; }
+  .jg-leg i.c { border: 2.5px dashed #2F6DB5; background: rgba(47,109,181,.1); }
+  .jg-leg i.p { border: 2.5px solid #0E9F8E; background: rgba(14,159,142,.16); border-radius: 3px; transform: rotate(45deg); }
+  .cl-two { display: grid; grid-template-columns: 1.4fr 1fr; gap: 30px; align-items: start; margin-top: 10px; }
+  .cl-pts { gap: 12px; }
+  .cl-pts .pt { font-size: 19px; line-height: 1.38; }
+  .cl-pts .pt i { width: 30px; height: 30px; font-size: 15px; margin-top: 0; border-radius: 8px; }
+  .cl-do { background: var(--orange-l); border: 1.5px solid #F3CFAE; border-radius: 16px; padding: 16px 20px; display: flex; flex-direction: column; gap: 8px; }
+  .cl-do p { margin: 0; font-size: 18.5px; line-height: 1.4; }
+  .cl-do .cl-h { font-size: 14px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--orange-d); }
+  .cl-bar { margin-top: 44px; padding: 0 30px 0 10px; }
+  .cl-track { position: relative; height: 34px; border-radius: 10px; background: #EEF2F6; }
+  .cl-fill { position: absolute; inset: 0; border-radius: 10px; background: linear-gradient(90deg, #0E9F8E 0%, #0E9F8E 10%, #E0A100 30%, #E0A100 40%, #D64545 50%, #F4C9C9 100%); opacity: .85; }
+  .cl-book { position: absolute; top: -10px; bottom: -10px; width: 0; border-left: 3px solid var(--navy); }
+  .cl-book b, .cl-book small { position: absolute; left: 8px; white-space: nowrap; }
+  .cl-book b { top: -24px; font-size: 16px; color: var(--navy); }
+  .cl-book small { top: calc(100% + 6px); font-size: 15px; line-height: 1.25; color: var(--navy); }
+  .cl-ast { margin: 8px 0 0; font-size: 15px; color: var(--muted); }
+  .cl-ast sup, .cl-ticks sup { color: var(--orange-d); font-weight: 700; }
+  .cl-ticks { position: relative; height: 30px; margin-top: 36px; font-size: 14.5px; color: var(--muted); }
+  .cl-ticks span { position: absolute; transform: translateX(-50%); white-space: nowrap; }
+  .cl-ticks span:first-child { transform: none; }
+  .cl-ticks span:last-child { transform: translateX(-100%); }
+  .cl-legs { display: flex; gap: 26px; font-size: 15.5px; color: var(--muted); }
+  .cl-legs i { display: inline-block; width: 14px; height: 14px; border-radius: 4px; margin-right: 7px; vertical-align: -1px; }
+  .cl-legs i.la { background: #0E9F8E; } .cl-legs i.lm { background: #E0A100; } .cl-legs i.lb { background: #D64545; }
+  .rg-two { display: grid; grid-template-columns: 1.05fr 1fr; gap: 30px; align-items: center; flex: 1; }
+  .rg-pts { gap: 18px; }
+  .rg-pts .pt { font-size: 20px; line-height: 1.42; }
+  .rg-pts .pt i { width: 30px; height: 30px; font-size: 15px; margin-top: 0; border-radius: 8px; }
+  .rg-viz { display: flex; flex-direction: column; gap: 9px; }
+  .rg-step { display: flex; gap: 10px; align-items: flex-start; font-size: 16.5px; line-height: 1.35; color: var(--ink); }
+  .rg-step i { flex: none; width: 24px; height: 24px; border-radius: 7px; background: var(--navy); color: #fff; font-style: normal; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-top: 1px; }
+  .rg-step b.o { color: var(--orange-d); }
+  .rg-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+  .rg-c { background: var(--surface); border: 1.5px solid var(--line); border-radius: 8px; padding: 5px 8px; font-size: 13.5px; line-height: 1.25; color: var(--muted); min-height: 46px; }
+  .rg-c b { display: block; font-size: 12px; color: var(--navy); }
+  .rg-viz:has(.rg-step.f.on) .rg-c.hit { background: var(--orange-l); color: var(--orange-d); border-color: var(--orange); box-shadow: 0 0 0 2px var(--orange); }
+  .rg-ctx { background: #F1F3F6; border: 1.5px dashed #B7C4D1; border-radius: 12px; padding: 8px 14px; display: flex; flex-direction: column; gap: 5px; }
+  .rg-ctx p { margin: 0; font-size: 14.5px; line-height: 1.35; background: var(--orange-l); border-radius: 6px; padding: 4px 10px; }
+  .rg-ctx p b { color: var(--orange-d); margin-right: 4px; }
+  .rg-ctx p.rg-qq { background: #E6EEF8; color: var(--navy); font-weight: 650; }
 </style>
 </head>
 <body data-course="Corso AI · Fondamenti di IA 2">
@@ -748,6 +821,46 @@
   <aside class="notes">
     Esempio tipico del comportamento di un modello di base: la continuazione esatta cambia da modello a modello.
     Le app di chat usano sempre modelli già addestrati come assistenti; i modelli di base si trovano soprattutto tra i modelli aperti, scaricabili.
+  </aside>
+</section>
+
+<section class="slide" data-title="Il modello e l'app">
+  <p class="kicker">Fondamenti di IA 2 · Modelli e app</p>
+  <h2>Il modello e l'app non sono la stessa cosa</h2>
+  <div class="ma-two">
+    <div class="pts ma-pts"><div class="pt"><i>1</i><span>ChatGPT, Claude e Gemini sono <strong>app</strong>. GPT, Claude Opus e Gemini Pro sono i <strong>modelli</strong> che ci girano dentro.</span></div><div class="pt"><i>2</i><span>Lo stesso modello può comportarsi in modo diverso in app diverse, perché cambiano il <strong>prompt di sistema</strong> e gli <strong>strumenti</strong>.</span></div><div class="pt"><i>3</i><span>Un programma può usare il modello direttamente, via <strong>API</strong>, senza l'app: non ci sono prompt di sistema né strumenti, a meno che non li aggiunga chi scrive il programma.</span></div></div>
+    <div class="ma-viz">
+      <div class="ma-app">
+        <span class="ma-lab">App</span>
+        <div class="ma-grid">
+          <span class="ma-chip f">prompt di sistema</span>
+          <span class="ma-chip f">strumenti<small>ricerca web, codice, immagini</small></span>
+          <div class="ma-core"><b>Modello</b><small>i parametri: prevede il testo</small></div>
+          <span class="ma-chip f">memoria e istruzioni personalizzate</span>
+          <span class="ma-chip f">gestione dei file</span>
+        </div>
+      </div>
+      <div class="ma-api f"><span>Programma</span><i>→ API →</i><b>Modello</b></div>
+    </div>
+  </div>
+  <aside class="notes">
+    API vuol dire Application Programming Interface: è il modo in cui un programma manda testo al modello e riceve la risposta, pagando a token.
+    Le app aziendali, i chatbot dei siti e molti programmi usano gli stessi modelli via API, con un prompt di sistema scritto da loro.
+  </aside>
+</section>
+
+<section class="slide" data-title="I nomi dei modelli">
+  <p class="kicker">Fondamenti di IA 2 · Modelli e app</p>
+  <h2>Come leggere i nomi dei modelli</h2>
+  <div class="nm">
+    <div class="nm-row nm-head"><span>Nel nome</span><span>Cosa indica di solito</span><span>Quando usarlo</span></div>
+    <div class="nm-row"><span class="nm-tags"><em>mini</em><em>nano</em><em>flash</em><em>haiku</em><em>lite</em></span><span>Modello più <strong>piccolo</strong>: veloce ed economico, meno capace</span><span class="nm-use">Compiti semplici e ripetuti</span></div><div class="nm-row"><span class="nm-tags"><em>pro</em><em>opus</em><em>fable</em><em>astra</em></span><span>Modello più <strong>grande</strong>: più capace, più lento e costoso</span><span class="nm-use">Compiti difficili</span></div><div class="nm-row"><span class="nm-tags"><em>thinking</em><em>reasoning</em><em>deep think</em></span><span>Modello di <strong>ragionamento</strong></span><span class="nm-use">Matematica, logica, codice</span></div><div class="nm-row"><span class="nm-tags"><em>5</em><em>5.5</em><em>6</em></span><span><strong>Generazione</strong>: più alto vuol dire più recente</span><span class="nm-use"></span></div>
+  </div>
+  <p class="bottom-line">Nelle app il modello si sceglie da un menu. Per un'email basta un modello veloce; per un problema difficile serve un modello <strong>grande</strong> o di <strong>ragionamento</strong>.</p>
+  <aside class="notes">
+    Sono convenzioni, non regole: ogni azienda usa nomi suoi e li cambia spesso.
+    Esempi in fila dal più piccolo al più grande: Claude Haiku, Sonnet, Opus; Gemini Flash, Pro.
+    Il numero di versione indica la generazione: un modello piccolo nuovo può andare meglio di un modello grande di due generazioni prima.
   </aside>
 </section>
 
@@ -943,6 +1056,23 @@
   </aside>
 </section>
 
+<section class="slide" data-title="Jagged intelligence">
+  <p class="kicker">Fondamenti di IA 2 · Il modello linguistico</p>
+  <h2><em>Jagged intelligence</em>: capacità irregolari</h2>
+  <div class="jg-two">
+    <div class="pts jg-pts"><div class="pt"><i>1</i><span>I modelli di metà 2025 hanno raggiunto il livello da <strong>medaglia d'oro</strong> alle Olimpiadi internazionali di matematica, ma possono sbagliare compiti che un bambino fa senza fatica, come <strong>contare le «r»</strong> in una parola.</span></div><div class="pt"><i>2</i><span>Non si può dedurre «è bravo in X, quindi è bravo anche in Y», come si fa con una persona: <strong>una persona brava in X di solito è brava anche in Y</strong>, un modello no.</span></div></div>
+    <div class="jg-viz">
+      <svg viewBox="0 0 600 430" class="jg-svg"><circle cx="280" cy="215" r="118" fill="#2F6DB5" fill-opacity=".10" stroke="#2F6DB5" stroke-width="3" stroke-dasharray="9 6"/><g class="f"><polygon points="280.0,19.0 326.0,135.3 409.9,140.0 346.0,215.0 434.2,304.0 332.0,305.1 280.0,353.0 242.0,280.8 115.5,310.0 184.0,215.0 150.1,140.0 224.0,118.0" fill="#0E9F8E" fill-opacity=".16" stroke="#0E9F8E" stroke-width="3" stroke-linejoin="round"/></g><g class="f"><circle cx="280.0" cy="47.0" r="8" fill="#0B7F72"/><text x="294.0" y="44.0" text-anchor="start" class="jg-t" fill="#0B7F72"><tspan x="294.0" dy="0">Olimpiadi di</tspan><tspan x="294.0" dy="19">matematica</tspan></text></g><g class="f"><circle cx="411.6" cy="291.0" r="8" fill="#0B7F72"/><text x="425.6" y="288.0" text-anchor="start" class="jg-t" fill="#0B7F72"><tspan x="425.6" dy="0">Scrivere un</tspan><tspan x="425.6" dy="19">programma</tspan></text></g><g class="f"><circle cx="139.7" cy="296.0" r="8" fill="#0B7F72"/><text x="125.7" y="293.0" text-anchor="end" class="jg-t" fill="#0B7F72"><tspan x="125.7" dy="0">Tradurre in</tspan><tspan x="125.7" dy="19">50 lingue</tspan></text></g><g class="f"><circle cx="380.0" cy="215.0" r="8" fill="#D64545"/><text x="394.0" y="212.0" text-anchor="start" class="jg-t" fill="#D64545"><tspan x="394.0" dy="0">Contare le «r»</tspan><tspan x="394.0" dy="19">in una parola</tspan></text></g></svg>
+      <div class="jg-leg"><span><i class="c"></i>persona: capacità regolari</span><span class="f"><i class="p"></i>modello: capacità frastagliate</span></div>
+    </div>
+  </div>
+  <aside class="notes">
+    Jagged vuol dire frastagliato, seghettato. Il termine jagged intelligence è stato reso popolare da Andrej Karpathy.
+    Lo schema: il cerchio sono le capacità di una persona, abbastanza uniformi; la forma frastagliata quelle del modello. Le punte escono molto dal cerchio (compiti in cui il modello supera quasi tutti), le rientranze lasciano fuori compiti facili per una persona.
+    Il conteggio delle lettere: i modelli recenti con il ragionamento attivo spesso lo fanno giusto, senza ragionamento sbagliano più facilmente. Provare prima della lezione con una parola lunga, per esempio «Quante r ci sono nella parola arrotondare?» (sono 3).
+  </aside>
+</section>
+
 <section class="slide" data-title="Temperatura">
   <p class="kicker">Fondamenti di IA 2 · I token</p>
   <h2>La temperatura regola quanto è varia la scelta</h2>
@@ -1024,6 +1154,59 @@
     Anche se scriviamo una sola riga, il modello legge molto di più: le istruzioni dell'app (che di solito non vediamo), la chat fin qui, i file.
     1 milione di token corrisponde a circa 650.000 parole in italiano. Nelle app il limite effettivo è spesso più basso, e cambia con il piano e con il modello: verificare prima della lezione.
     La finestra comprende sia ciò che il modello legge sia ciò che scrive.
+  </aside>
+</section>
+
+<section class="slide" data-title="Il contesto lungo">
+  <p class="kicker">Fondamenti di IA 2 · Il contesto</p>
+  <h2>Più il contesto è lungo, più il modello perde pezzi</h2>
+  <div class="cl-two">
+    <div class="pts cl-pts"><div class="pt"><i>1</i><span>I modelli a pagamento più avanzati (per esempio Claude Opus 5.5 e GPT-6.1-sol) lavorano in modo affidabile su contesti da <strong>100.000 a 500.000 token</strong>, a seconda del modello. 200.000 token sono più o meno <em>I promessi sposi</em>.</span></div><div class="pt"><i>2</i><span>Le versioni <strong>gratuite</strong> leggono meno: ChatGPT e Gemini circa <strong>30.000 token</strong> (una quarantina di pagine); Claude fino a 200.000, ma è affidabile fino a circa <strong>100.000</strong>.</span></div><div class="pt"><i>3</i><span>Un'informazione singola la ritrovano quasi sempre anche in testi più lunghi. Quando devono <strong>collegare</strong> più informazioni sparse, oltre questa soglia sbagliano più spesso.</span></div></div>
+    <div class="cl-do f">
+      <p class="cl-h">Cosa fare</p>
+      <p>Per un argomento nuovo, apri una <strong>chat nuova</strong>.</p>
+      <p>Se la chat è lunga, chiedi un <strong>riassunto</strong> e incollalo in una chat nuova.</p>
+    </div>
+  </div>
+  <div class="cl-bar">
+    <div class="cl-track"><span class="cl-fill"></span>
+      <span class="cl-book" style="left:3%"><b>30.000</b><small>ChatGPT e Gemini<br>gratuiti</small></span>
+      <span class="cl-book" style="left:20%"><b>200.000</b><small><em>I promessi sposi</em></small></span>
+    </div>
+    <div class="cl-ticks"><span style="left:0">0</span><span style="left:25%">250.000</span><span style="left:50%">500.000</span><span style="left:75%">750.000</span><span style="left:100%">1 milione di token<sup>*</sup></span></div>
+    <div class="cl-legs"><span><i class="la"></i>affidabile</span><span><i class="lm"></i>da 100.000 a 500.000: affidabile con i modelli a pagamento, a seconda del modello</span><span><i class="lb"></i>meno affidabile</span></div>
+    <p class="cl-ast"><sup>*</sup> La barra si riferisce ai modelli a pagamento.</p>
+  </div>
+  <aside class="notes">
+    Le app dichiarano finestre di contesto fino a 1 milione di token: il modello le accetta, ma più ci si avvicina al limite più è facile che trascuri qualcosa.
+    Nei test, i modelli migliori ritrovano un singolo dato nascosto in un testo enorme quasi sempre; se devono ritrovarne diversi e collegarli, la precisione cala con la lunghezza.
+    Le cifre cambiano da modello a modello e migliorano a ogni generazione.
+    Versioni gratuite (novembre 2026, da verificare prima della lezione): ChatGPT circa 27.000 token con il modello veloce; Gemini 32.000; Claude 200.000 con Sonnet. Il «circa 100.000» affidabili di Claude gratuito è una stima: il modello gratuito è più piccolo di quelli a pagamento. Oltre la finestra, l'app taglia i messaggi più vecchi o usa la ricerca nei file (RAG, slide successiva).
+  </aside>
+</section>
+
+<section class="slide" data-title="File lunghi e RAG">
+  <p class="kicker">Fondamenti di IA 2 · Il contesto</p>
+  <h2>File lunghi: l'app cerca i pezzi giusti (RAG)</h2>
+  <div class="rg-two">
+    <div class="pts rg-pts"><div class="pt"><i>1</i><span>Quando i documenti sono troppo grandi per il contesto, l'app <strong>non li passa interi</strong> al modello.</span></div><div class="pt"><i>2</i><span>Prima <strong>cerca</strong> i pezzi più pertinenti alla domanda, poi mette nel contesto <strong>solo quelli</strong>. Si chiama <em>RAG</em>, <em>Retrieval-Augmented Generation</em>.</span></div><div class="pt"><i>3</i><span>Se la ricerca sbaglia pezzo, il modello risponde «non c'è» oppure <strong>inventa</strong>, anche se l'informazione nel documento c'è.</span></div></div>
+    <div class="rg-viz">
+      <div class="rg-step"><i>1</i><span>Il documento (300 pagine) è diviso in <strong>pezzi</strong></span></div>
+      <div class="rg-grid"><span class="rg-c"><b>§ 2</b>Orari di lavoro</span><span class="rg-c"><b>§ 3</b>Straordinari</span><span class="rg-c hit"><b>§ 4.2</b>Ferie annuali</span><span class="rg-c hit"><b>§ 4.5</b>Richiesta delle ferie</span><span class="rg-c"><b>§ 5</b>Malattia</span><span class="rg-c"><b>§ 6</b>Permessi</span><span class="rg-c"><b>§ 7</b>Trasferte e rimborsi</span><span class="rg-c"><b>§ 9</b>Sicurezza</span></div>
+      <div class="rg-step f"><i>2</i><span>Domanda: <strong>«Quanti giorni di ferie ho?»</strong>. L'app cerca i pezzi più simili: trova il <b class="o">§ 4.2</b> e il <b class="o">§ 4.5</b></span></div>
+      <div class="rg-step f"><i>3</i><span>Nel contesto del modello entrano <strong>solo</strong> questi</span></div>
+      <div class="rg-ctx f">
+        <p><b>§ 4.2</b> Ogni dipendente ha diritto a 26 giorni lavorativi di ferie l'anno…</p>
+        <p><b>§ 4.5</b> Le ferie vanno richieste almeno 15 giorni prima…</p>
+        <p class="rg-qq">Quanti giorni di ferie ho?</p>
+      </div>
+    </div>
+  </div>
+  <p class="bottom-line">Con documenti lunghi indica <strong>dove guardare</strong>, per esempio: «Rispondi usando il capitolo 3».</p>
+  <aside class="notes">
+    Retrieval-Augmented Generation: generazione aumentata dal recupero. Il documento viene diviso in pezzi; per ogni domanda un programma di ricerca sceglie i pezzi più simili alla domanda e solo quelli entrano nel contesto.
+    Con documenti di poche pagine di solito il testo entra tutto nel contesto e la ricerca non serve.
+    Funzionano così anche i «progetti» delle app con molti file e i chatbot aziendali che rispondono sui regolamenti interni.
   </aside>
 </section>
 
@@ -1249,7 +1432,7 @@
 <div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
 <nav class="controls" aria-label="Navigazione slide">
   <button type="button" id="btn-prev" aria-label="Slide precedente">&#8249;</button>
-  <span id="counter">1 / 30</span>
+  <span id="counter">1 / 35</span>
   <button type="button" id="btn-next" aria-label="Slide successiva">&#8250;</button>
   <button type="button" id="btn-help" aria-label="Comandi da tastiera">?</button>
 </nav>
