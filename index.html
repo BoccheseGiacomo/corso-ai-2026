@@ -56,6 +56,8 @@
   .btn-soft { background: var(--bg); color: var(--navy); border-color: var(--line); }
   .btn-soft:hover { background: var(--teal-l); }
   .c-pdf .ic { background: #FBEAEA; color: #B83A3A; }
+  .c-zip .ic { background: #EEF2F6; color: var(--navy); }
+  .c-zip p strong { color: var(--ink); }
   .pdf-list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
   .pdf {
     display: flex; flex-direction: column; gap: 4px; padding: 12px 14px 12px 44px; border-radius: 10px;
@@ -143,6 +145,16 @@
         <a class="pdf" href="pdf/utilizzo-ia-2.pdf" download><b>Utilizzo dell'IA 2</b><span>PDF · 15 slide · 1,2 MB</span></a>
       </div>
     </section>
+
+    <!-- solo-online -->
+    <section class="card wide c-zip" id="offline">
+      <h2><svg class="ic" viewBox="0 0 24 24"><path d="M3 7l2-3h14l2 3 M3 7h18v13H3z M10 11h4"/></svg>Scarica tutto il corso</h2>
+      <p>Un file .zip con tutto il sito: questa pagina, le slide, le simulazioni, il glossario e i PDF. Estrai la cartella e apri <strong>index.html</strong> con il browser: funziona anche senza internet e anche se questo sito non esiste più.</p>
+      <div class="btns">
+        <a class="btn btn-main" href="corso-ia-offline.zip" download><svg viewBox="0 0 24 24"><path d="M12 3v12 M7 10l5 5 5-5 M5 21h14"/></svg>Scarica lo zip (3,9 MB)</a>
+      </div>
+    </section>
+    <!-- /solo-online -->
   </div>
 
   <footer>
