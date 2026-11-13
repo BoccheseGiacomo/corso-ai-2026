@@ -719,4 +719,6 @@ body.overview .controls, body.overview .progress { display: none; }
   .slide .f { opacity: 1; transform: none; }
   .copy-btn, .controls, .progress, .notes-panel, .help-panel { display: none !important; }
   .spin { animation: none; }
+  .dw b { opacity: 1 !important; animation: none !important; }
+  .dw em { display: none; }
 }

@@ -55,10 +55,21 @@
   .btn-main:hover { background: #1D4366; }
   .btn-soft { background: var(--bg); color: var(--navy); border-color: var(--line); }
   .btn-soft:hover { background: var(--teal-l); }
+  .c-pdf .ic { background: #FBEAEA; color: #B83A3A; }
+  .pdf-list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+  .pdf {
+    display: flex; flex-direction: column; gap: 4px; padding: 12px 14px 12px 44px; border-radius: 10px;
+    border: 1px solid var(--line); background: var(--bg) no-repeat 14px 14px / 20px 20px; text-decoration: none; color: var(--navy);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23B83A3A' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3v12 M7 10l5 5 5-5 M5 21h14'/%3E%3C/svg%3E");
+  }
+  .pdf:hover { background-color: #FBEAEA; border-color: #F0C4C4; }
+  .pdf b { font-size: 16px; }
+  .pdf span { font-size: 13.5px; color: var(--muted); }
   footer { margin-top: 34px; font-size: 14px; color: var(--muted); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; }
   @media (max-width: 720px) {
     .wrap { padding: 28px 16px; }
     .grid { grid-template-columns: 1fr; }
+    .pdf-list { grid-template-columns: 1fr 1fr; }
   }
 </style>
 </head>
@@ -119,6 +130,17 @@
       <p>I termini del corso in una mappa interattiva: cerca una parola, aprila e leggi la definizione, con una piccola animazione che mostra come funziona.</p>
       <div class="btns">
         <a class="btn btn-main" href="glossario/"><svg viewBox="0 0 24 24"><path d="M5 12h14 M13 6l6 6-6 6"/></svg>Apri il glossario</a>
+      </div>
+    </section>
+
+    <section class="card wide c-pdf" id="pdf">
+      <h2><svg class="ic" viewBox="0 0 24 24"><path d="M12 3v12 M7 10l5 5 5-5 M5 21h14"/></svg>Scarica le slide in PDF</h2>
+      <p>Tutte le slide di ogni modulo in un unico file, da leggere o stampare. Una pagina per slide, senza animazioni.</p>
+      <div class="pdf-list">
+        <a class="pdf" href="pdf/fondamenti-ia-1.pdf" download><b>Fondamenti di IA 1</b><span>PDF · 37 slide · 2,8 MB</span></a>
+        <a class="pdf" href="pdf/fondamenti-ia-2.pdf" download><b>Fondamenti di IA 2</b><span>PDF · 35 slide · 2,9 MB</span></a>
+        <a class="pdf" href="pdf/utilizzo-ia-1.pdf" download><b>Utilizzo dell'IA 1</b><span>PDF · 32 slide · 2,3 MB</span></a>
+        <a class="pdf" href="pdf/utilizzo-ia-2.pdf" download><b>Utilizzo dell'IA 2</b><span>PDF · 15 slide · 1,2 MB</span></a>
       </div>
     </section>
   </div>
