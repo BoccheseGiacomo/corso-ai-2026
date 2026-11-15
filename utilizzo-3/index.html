@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Utilizzo dell'IA 3 · Dati e fogli di calcolo</title>
+<meta name="description" content="Esercizi pratici: estrarre dati da fatture e PDF, analizzare e pulire dati, scrivere formule con l'IA e lavorare in Google Sheets.">
+<style>
+  :root {
+    --bg: #F6F8FA; --surface: #FFFFFF; --ink: #1B2733; --muted: #5B6B7A; --line: #DCE3EA;
+    --navy: #0F2A43; --teal: #0E9F8E; --teal-d: #0B7F72; --teal-l: #E3F4F2; --amber-l: #FFF4DC; --amber: #B7791F;
+    --font: "Segoe UI", "Inter", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+    --mono: "Cascadia Code", Consolas, "SF Mono", Menlo, monospace;
+    --shadow: 0 1px 2px rgba(15,42,67,.06), 0 6px 20px rgba(15,42,67,.08);
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: var(--font); color: var(--ink); background: var(--bg); line-height: 1.55; font-size: 17px;
+         -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 28px 20px 80px; }
+  .back { font-size: 14px; color: var(--muted); text-decoration: none; font-weight: 600; }
+  .back:hover { color: var(--navy); }
+  h1 { font-size: 34px; color: var(--navy); margin: 14px 0 6px; letter-spacing: -.015em; line-height: 1.2; }
+  .lead { color: var(--muted); font-size: 18px; margin: 0 0 24px; }
+  h2 { font-size: 25px; color: var(--navy); margin: 48px 0 6px; letter-spacing: -.01em; }
+  h2 .n { display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 10px; background: var(--teal);
+          color: #fff; font-size: 18px; margin-right: 10px; vertical-align: 3px; }
+  h3 { font-size: 18px; color: var(--navy); margin: 26px 0 8px; }
+  p { margin: 8px 0; }
+  a { color: var(--teal-d); }
+  code { font-family: var(--mono); font-size: .9em; background: #EEF2F6; padding: 1px 6px; border-radius: 6px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px 22px; box-shadow: var(--shadow); margin: 16px 0; }
+  .method { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 12px 0 4px; }
+  .method div { background: var(--teal-l); border-radius: 12px; padding: 12px 14px; font-size: 15px; }
+  .method b { display: block; color: var(--teal-d); font-size: 13px; text-transform: uppercase; letter-spacing: .04em; }
+  ol, ul { padding-left: 24px; margin: 8px 0; }
+  li { margin: 4px 0; }
+  .files { display: flex; flex-wrap: wrap; gap: 10px; margin: 10px 0; }
+  .file { display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; border-radius: 10px; background: var(--navy); color: #fff;
+          text-decoration: none; font-weight: 600; font-size: 15px; }
+  .file:hover { background: #1C4166; }
+  .file small { font-weight: 400; opacity: .75; }
+  .prompt { position: relative; background: #fff; border: 1.5px solid var(--teal); border-radius: 12px; padding: 14px 16px; margin: 10px 0; }
+  .prompt .pt { white-space: pre-wrap; margin: 0; padding-right: 74px; }
+  .prompt button { position: absolute; top: 10px; right: 10px; font: 600 13px var(--font); padding: 6px 11px; border-radius: 8px;
+                   border: 0; background: var(--teal); color: #fff; cursor: pointer; }
+  .prompt button:hover { background: var(--teal-d); }
+  .q { margin: 18px 0; }
+  .q > .lab { font-weight: 700; color: var(--navy); font-size: 15px; }
+  details { background: var(--amber-l); border-radius: 10px; padding: 8px 14px; margin: 6px 0 0; }
+  summary { cursor: pointer; font-weight: 600; color: var(--amber); font-size: 15px; }
+  details[open] summary { margin-bottom: 6px; }
+  details table { border-collapse: collapse; font-size: 15px; margin: 6px 0; }
+  details td, details th { padding: 3px 12px 3px 0; text-align: left; }
+  details td.r { text-align: right; font-variant-numeric: tabular-nums; }
+  .note { border-left: 4px solid var(--teal); padding: 4px 14px; color: var(--muted); font-size: 15.5px; margin: 12px 0; }
+  .src { font-size: 14px; color: var(--muted); }
+  @media (max-width: 700px) { .method { grid-template-columns: 1fr 1fr; } h1 { font-size: 28px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<a class="back" href="../">← Corso di intelligenza artificiale</a>
+<h1>Utilizzo dell'IA 3 · Dati e fogli di calcolo</h1>
+<p class="lead">Esercizi pratici con Claude o ChatGPT e Google Sheets: leggere fatture e PDF, analizzare dati, scrivere formule, pulire un elenco.</p>
+
+<div class="card">
+  <strong>Il metodo, uguale per ogni esercizio</strong>
+  <div class="method">
+    <div><b>1 · Guarda</b>Apri i dati in Google Sheets e guarda come sono fatti.</div>
+    <div><b>2 · Chiedi</b>Carica il file nell'IA e fai la richiesta.</div>
+    <div><b>3 · Riapri</b>Scarica il risultato e aprilo di nuovo in Sheets.</div>
+    <div><b>4 · Controlla</b>Verifica a campione: un totale, una riga, un valore.</div>
+  </div>
+</div>
+
+<div class="card">
+  <strong>Come aprire un file CSV in Google Sheets</strong>
+  <ol>
+    <li>Vai su <a href="https://sheets.google.com" target="_blank" rel="noopener">sheets.google.com</a> e crea un foglio vuoto.</li>
+    <li>Menu <b>File → Importa → Carica</b> e scegli il file dal computer.</li>
+    <li>Lascia «Rileva automaticamente» come separatore e premi <b>Importa dati</b>.</li>
+  </ol>
+</div>
+
+<!-- ============================================================ -->
+<h2><span class="n">1</span>Dati dalle fatture</h2>
+<p>Trasformare le immagini di alcune fatture in una tabella, prima a mano con un prompt, poi con una skill che si può riusare.</p>
+<p><b>Materiale:</b> 3 o 4 immagini di fatture trovate sul web (cerca «esempio fattura» nelle immagini di Google) e salvate sul computer.</p>
+
+<h3>A · Con un prompt (qualsiasi chatbot che legge le immagini)</h3>
+<div class="prompt"><p class="pt">Leggi le fatture nelle immagini allegate e analizzale.
+Per ogni voce calcola l'importo (quantità × prezzo unitario); per ogni fattura calcola imponibile, IVA e totale e confrontali con quelli scritti.
+Restituisci un file CSV da scaricare, separato da punto e virgola, con una riga per ogni voce e questa intestazione:
+fornitore;numero;data;descrizione;quantità;prezzo_unitario;importo;imponibile;iva;totale;controllo
+Nella colonna controllo scrivi OK se i conti tornano, altrimenti la differenza. Se un dato non si legge, scrivi «da verificare».</p><button>Copia</button></div>
+<p><b>Riapri:</b> scarica il file e aprilo in Sheets. <b>Controlla:</b> il totale di ogni fattura deve essere uguale a quello stampato sull'immagine.</p>
+
+<h3>B · Con una skill in Claude</h3>
+<p>La skill salva il procedimento, così la volta dopo basta caricare le fatture. Fai prima il punto A in Claude; poi, nella stessa chat:</p>
+<div class="prompt"><p class="pt">Trasforma il processo appena fatto in una skill che funzioni con tutte le immagini di fatture.</p><button>Copia</button></div>
+<p>Poi, in una chat nuova, carica altre fatture:</p>
+<div class="prompt"><p class="pt">Ecco alcune fatture: analizzale con la skill che abbiamo creato.</p><button>Copia</button></div>
+<p><b>Riapri</b> il risultato in Sheets. <b>Controlla:</b> il totale di ogni fattura e la colonna controllo.</p>
+
+<!-- ============================================================ -->
+<h2><span class="n">2</span>Una tabella da un PDF</h2>
+<p><b>Materiale:</b> l'orario festivo della <a href="https://startspa.it/wp-content/uploads/2024/09/URBAP-INV_Linea1Festiva_Vers.11.09.2024.pdf" target="_blank" rel="noopener">linea 1 urbana di Ascoli Piceno</a> (Start, PDF di una pagina). Scaricalo e allegalo alla chat. Il PDF ha due tabelle, una per direzione.</p>
+<p>Funziona allo stesso modo con altri PDF che contengono già una tabella: l'orario di una linea della tua città, il calendario della raccolta rifiuti, un listino prezzi, il calendario delle partite di un campionato.</p>
+<div class="prompt"><p class="pt">Nel PDF allegato c'è l'orario di una linea di autobus, con una tabella per ogni direzione. Trasforma ogni tabella in un file CSV da scaricare, con una riga per ogni fermata e una colonna per ogni corsa, separato da punto e virgola e con la prima riga di intestazione. Riporta gli orari esattamente come sono scritti e non aggiungere dati che non ci sono.</p><button>Copia</button></div>
+<p><b>Riapri</b> i due file in Sheets. <b>Controlla:</b> il numero di fermate e di corse e qualche orario preso dal PDF.</p>
+<details><summary>Risposta corretta</summary>
+<p>Andata (Porta Romana → Brecciarolo): 11 fermate e 7 corse, dalle 10:10 alle 19:10 da Largo Porta Romana.</p>
+<p>Ritorno (Brecciarolo → Porta Romana): 14 fermate e 8 corse; la prima parte alle 08:15 da Brecciarolo Chiesa.</p>
+<p>Orari da controllare: a Piazza Giacomini la corsa di ritorno delle 12:35 passa alle 12:49 (non alle 12:50) e arriva a Largo Porta Romana alle 13:00; l'ultima corsa di ritorno arriva alle 20:00.</p>
+</details>
+
+<!-- ============================================================ -->
+<h2><span class="n">3</span>Analizzare i dati</h2>
+<p>Dati veri: popolazione, superficie e numero di comuni delle 110 province italiane.</p>
+<div class="files"><a class="file" href="dati/province-italiane.csv" download>province-italiane.csv <small>110 righe</small></a></div>
+<p class="src">Fonte: dati ISTAT riportati nella pagina «Province d'Italia» di Wikipedia, consultata il 15/11/2026. Superficie arrotondata al km².</p>
+<p><b>Guarda:</b> apri il file in Sheets. Colonne: Provincia, Sigla, Regione, Area (Nord, Centro, Sud e isole), Popolazione, Superficie_km2, Comuni.</p>
+<p><b>Chiedi:</b> carica il file in Claude o ChatGPT e fai queste richieste, una alla volta.</p>
+
+<div class="q"><div class="lab">Richiesta 1</div>
+<div class="prompt"><p class="pt">Nel file allegato ci sono le province italiane con popolazione, superficie e numero di comuni. Quanti abitanti ci sono in totale?</p><button>Copia</button></div>
+<details><summary>Risposta corretta</summary>58.949.364 abitanti, sommando le 110 province.</details></div>
+
+<div class="q"><div class="lab">Richiesta 2</div>
+<div class="prompt"><p class="pt">Fammi un grafico a barre con le 10 province più popolose, dalla più grande alla più piccola.</p><button>Copia</button></div>
+<details><summary>Risposta corretta</summary>
+<table>
+<tr><td>1. Roma</td><td class="r">4.222.648</td><td>6. Bari</td><td class="r">1.219.545</td></tr>
+<tr><td>2. Milano</td><td class="r">3.246.455</td><td>7. Palermo</td><td class="r">1.198.738</td></tr>
+<tr><td>3. Napoli</td><td class="r">2.963.633</td><td>8. Bergamo</td><td class="r">1.114.780</td></tr>
+<tr><td>4. Torino</td><td class="r">2.204.276</td><td>9. Catania</td><td class="r">1.070.169</td></tr>
+<tr><td>5. Brescia</td><td class="r">1.265.884</td><td>10. Salerno</td><td class="r">1.055.372</td></tr>
+</table></details></div>
+
+<div class="q"><div class="lab">Richiesta 3</div>
+<div class="prompt"><p class="pt">Quanti abitanti ci sono al Nord, al Centro e al Sud e isole? Dammi anche le percentuali sul totale e un grafico a torta.</p><button>Copia</button></div>
+<details><summary>Risposta corretta</summary>
+<table>
+<tr><td>Nord</td><td class="r">27.519.367</td><td class="r">46,7%</td></tr>
+<tr><td>Centro</td><td class="r">11.698.912</td><td class="r">19,8%</td></tr>
+<tr><td>Sud e isole</td><td class="r">19.731.085</td><td class="r">33,5%</td></tr>
+</table></details></div>
+
+<div class="q"><div class="lab">Richiesta 4</div>
+<div class="prompt"><p class="pt">Calcola la densità di popolazione (abitanti per km²) di ogni provincia. Quali sono le 3 province più dense e le 3 meno dense?</p><button>Copia</button></div>
+<details><summary>Risposta corretta</summary>
+Più dense: Napoli 2.518, Monza e Brianza 2.180, Milano 2.063 abitanti per km².<br>
+Meno dense: Ogliastra 29, Nuoro 36, Valle d'Aosta 38 abitanti per km².</details></div>
+
+<div class="q"><div class="lab">Richiesta 5</div>
+<div class="prompt"><p class="pt">Quale regione ha più comuni in totale? Dammi le prime tre.</p><button>Copia</button></div>
+<details><summary>Risposta corretta</summary>Lombardia 1.501, Piemonte 1.180, Veneto 560.</details></div>
+
+<div class="q"><div class="lab">Riapri in Sheets</div>
+<div class="prompt"><p class="pt">Aggiungi al file una colonna Densità con gli abitanti per km² arrotondati all'unità e dammi il file CSV da scaricare.</p><button>Copia</button></div>
+<details><summary>Controllo</summary>Apri il file in Sheets: Napoli deve avere 2518, Agrigento 134. Le righe devono essere ancora 110.</details></div>
+
+<!-- ============================================================ -->
+<h2><span class="n">4</span>Farsi scrivere le formule</h2>
+<p>Stesso file delle province, aperto in Sheets. Si chiede la formula all'IA, la si incolla in una cella vuota e si controlla il risultato.</p>
+<p>Ogni richiesta comincia con la descrizione del foglio, così l'IA sa dove sono i dati:</p>
+<div class="prompt"><p class="pt">Uso Google Sheets in lingua italiana. Nel foglio ho queste colonne: A Provincia, B Sigla, C Regione, D Area, E Popolazione, F Superficie_km2, G Comuni. I dati vanno dalla riga 2 alla riga 111. Scrivimi la formula da incollare in una cella vuota per calcolare la popolazione totale, e spiegami in una frase cosa fa.</p><button>Copia</button></div>
+<p>Per le richieste successive basta cambiare la parte finale («…per calcolare …»).</p>
+<div class="note">In Sheets in italiano le funzioni hanno il nome italiano e gli argomenti si separano con il punto e virgola. Tra parentesi c'è il nome inglese della funzione.</div>
+
+<div class="q"><div class="lab">Formula 1 · la popolazione totale</div>
+<details><summary>Risposta corretta</summary><code>=SOMMA(E2:E111)</code> (SUM) → 58949364</details></div>
+
+<div class="q"><div class="lab">Formula 2 · la popolazione della Lombardia</div>
+<details><summary>Risposta corretta</summary><code>=SOMMA.SE(C2:C111;"Lombardia";E2:E111)</code> (SUMIF) → 10039818</details></div>
+
+<div class="q"><div class="lab">Formula 3 · quante province hanno più di un milione di abitanti</div>
+<details><summary>Risposta corretta</summary><code>=CONTA.SE(E2:E111;"&gt;1000000")</code> (COUNTIF) → 11</details></div>
+
+<div class="q"><div class="lab">Formula 4 · la popolazione della provincia con sigla VR</div>
+<details><summary>Risposta corretta</summary><code>=CERCA.VERT("VR";B2:E111;4;FALSO)</code> (VLOOKUP) → 928622 (Verona)</details></div>
+
+<div class="q"><div class="lab">Formula 5 · il numero medio di comuni per provincia</div>
+<details><summary>Risposta corretta</summary><code>=MEDIA(G2:G111)</code> (AVERAGE) → 71,77</details></div>
+
+<div class="q"><div class="lab">Formula 6 · la densità di ogni provincia, in una nuova colonna H</div>
+<details><summary>Risposta corretta</summary><code>=ARROTONDA(E2/F2;0)</code> (ROUND) in H2, poi si trascina verso il basso fino a H111. Agrigento → 134, Napoli → 2518.</details></div>
+
+<!-- ============================================================ -->
+<h2><span class="n">5</span>Farsi dire dove cliccare</h2>
+<p>L'IA può spiegare passo per passo come fare un'operazione in Sheets. Stesso file delle province. Si segue la risposta e si controlla che funzioni.</p>
+
+<div class="q"><div class="lab">Richiesta 1</div>
+<div class="prompt"><p class="pt">Uso Google Sheets in italiano. Dimmi passo per passo dove cliccare per ordinare le province dalla più popolosa alla meno popolosa, senza spostare la riga dei titoli.</p><button>Copia</button></div>
+<details><summary>Percorso atteso</summary>Seleziona tutti i dati → <b>Dati → Ordina intervallo → Opzioni avanzate di ordinamento dell'intervallo</b> → spunta «I dati hanno una riga di intestazione» → ordina per Popolazione, Z → A.</details></div>
+
+<div class="q"><div class="lab">Richiesta 2</div>
+<div class="prompt"><p class="pt">Uso Google Sheets in italiano. Dimmi passo per passo come fare un grafico a barre con le 10 province più popolose.</p><button>Copia</button></div>
+<details><summary>Percorso atteso</summary>Dopo aver ordinato: seleziona le celle A1:A11, poi tieni premuto Ctrl e seleziona E1:E11 → <b>Inserisci → Grafico</b> → nell'editor del grafico scegli «Grafico a barre».</details></div>
+
+<div class="q"><div class="lab">Richiesta 3</div>
+<div class="prompt"><p class="pt">Uso Google Sheets in italiano. Come faccio a tenere sempre visibile la riga dei titoli quando scorro verso il basso?</p><button>Copia</button></div>
+<details><summary>Percorso atteso</summary><b>Visualizza → Blocca → 1 riga</b>.</details></div>
+
+<div class="q"><div class="lab">Richiesta 4</div>
+<div class="prompt"><p class="pt">Uso Google Sheets in italiano. Come faccio a colorare automaticamente di rosso le celle della popolazione maggiori di un milione?</p><button>Copia</button></div>
+<details><summary>Percorso atteso</summary>Seleziona E2:E111 → <b>Formato → Formattazione condizionale</b> → regola «Maggiore di» 1000000 → scegli il colore rosso. Devono colorarsi 11 celle.</details></div>
+
+<div class="q"><div class="lab">Richiesta 5</div>
+<div class="prompt"><p class="pt">Uso Google Sheets in italiano. Come faccio a vedere solo le province di una regione, per esempio la Toscana?</p><button>Copia</button></div>
+<details><summary>Percorso atteso</summary><b>Dati → Crea un filtro</b> → clic sulla freccia nella colonna Regione → lascia selezionata solo Toscana. Devono restare 10 province.</details></div>
+
+<!-- ============================================================ -->
+<h2><span class="n">6</span>Pulire dati sporchi</h2>
+<p>Un elenco di iscritti a un corso (persone inventate) scritto male: righe doppie e dati scritti in modi diversi. Ogni errore segue una regola fissa, quindi si corregge con un programma: l'IA scrive il codice e lo esegue, senza correggere a mano riga per riga.</p>
+<div class="files"><a class="file" href="dati/iscritti-sporco.csv" download>iscritti-sporco.csv <small>60 righe</small></a></div>
+
+<p><b>Guarda:</b> apri il file in Sheets e cerca i problemi. Quanti ne trovi?</p>
+<details><summary>I problemi presenti</summary>
+<ul>
+<li>10 righe doppie: la stessa persona compare due volte. In 4 casi la riga è identica, negli altri 6 cambiano le maiuscole del nome e il modo di scrivere data, telefono o importo.</li>
+<li>Nomi e cognomi in minuscolo, in maiuscolo o misti: «marco Rossi», «MARCO ROSSI».</li>
+<li>Città in minuscolo o in maiuscolo: «milano», «MILANO».</li>
+<li>Date in tre formati: 16/04/2025, 2025-04-16, 16.04.2025.</li>
+<li>Telefoni con e senza +39, con uno spazio o un trattino.</li>
+<li>Importi scritti come 45, 45,00, € 45, 45 euro.</li>
+<li>Alcune email, telefoni e città mancano: vanno lasciati vuoti.</li>
+</ul></details>
+
+<p class="q"><b>Prova prima in Sheets:</b> <b>Dati → Pulizia dei dati → Rimuovi duplicati</b>. Toglie solo le 4 righe identiche: nelle altre 6 qualcosa è scritto in modo diverso.</p>
+
+<p><b>Chiedi:</b> carica il file nell'IA.</p>
+<div class="prompt"><p class="pt">Nel file allegato c'è un elenco di iscritti a un corso. Puliscilo scrivendo ed eseguendo un programma in Python, senza correggere i dati a mano. Applica queste regole:
+- nomi e cognomi con l'iniziale maiuscola e il resto minuscolo;
+- città con l'iniziale maiuscola e il resto minuscolo;
+- date nel formato gg/mm/aaaa;
+- telefoni come +39, uno spazio e le 10 cifre del numero;
+- importi come numero intero, senza simbolo dell'euro e senza «euro»;
+- dopo aver sistemato i nomi, tieni una sola riga per ogni coppia nome e cognome.
+Se una cella è vuota lasciala vuota. Dammi il file CSV pulito da scaricare, il codice che hai usato e quante righe hai tolto.</p><button>Copia</button></div>
+
+<p><b>Riapri</b> il file pulito in Sheets e controlla.</p>
+<details><summary>Risultato corretto</summary>
+<ul>
+<li>50 righe, una per persona: tolte 10 righe doppie.</li>
+<li>Restano vuote 4 email, 3 telefoni e 2 città.</li>
+<li>Le città sono sei: Milano, Torino, Bologna, Verona, Brescia, Bergamo.</li>
+</ul>
+<div class="files"><a class="file" href="dati/iscritti-pulito-soluzione.csv" download>iscritti-pulito-soluzione.csv <small>la soluzione</small></a></div>
+</details>
+
+<div class="q"><div class="lab">Dopo la pulizia</div>
+<div class="prompt"><p class="pt">Nel file pulito, quanti iscritti ci sono per ogni città e quanto è stato incassato in totale e per ogni città? Fammi anche un grafico a barre degli iscritti per città.</p><button>Copia</button></div>
+<details><summary>Risposta corretta</summary>
+<table>
+<tr><th>Città</th><th>Iscritti</th><th>Incassato</th></tr>
+<tr><td>Milano</td><td class="r">12</td><td class="r">900 €</td></tr>
+<tr><td>Torino</td><td class="r">10</td><td class="r">885 €</td></tr>
+<tr><td>Bergamo</td><td class="r">10</td><td class="r">855 €</td></tr>
+<tr><td>Bologna</td><td class="r">9</td><td class="r">480 €</td></tr>
+<tr><td>Brescia</td><td class="r">6</td><td class="r">480 €</td></tr>
+<tr><td>Verona</td><td class="r">1</td><td class="r">60 €</td></tr>
+<tr><td>senza città</td><td class="r">2</td><td class="r">180 €</td></tr>
+<tr><th>Totale</th><th class="r">50</th><th class="r">3.840 €</th></tr>
+</table>
+Se l'IA conta più di 50 iscritti o più di 3.840 €, non ha tolto tutte le righe doppie.</details></div>
+
+</div>
+<script>
+document.querySelectorAll('.prompt button').forEach(function (b) {
+  b.addEventListener('click', function () {
+    var t = b.parentNode.querySelector('.pt').innerText.trim();
+    var done = function () { b.textContent = 'Copiato'; setTimeout(function () { b.textContent = 'Copia'; }, 1500); };
+    if (navigator.clipboard && window.isSecureContext) { navigator.clipboard.writeText(t).then(done); }
+    else { var a = document.createElement('textarea'); a.value = t; document.body.appendChild(a); a.select();
+           try { document.execCommand('copy'); } catch (e) {} a.remove(); done(); }
+  });
+});
+</script>
+</body>
+</html>

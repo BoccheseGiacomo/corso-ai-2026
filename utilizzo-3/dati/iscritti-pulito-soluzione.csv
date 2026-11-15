@@ -1,0 +1,51 @@
+﻿Nome,Cognome,Email,Telefono,Citta,Data_iscrizione,Importo_euro
+Elena,Barbieri,elena.barbieri@example.com,+39 3303179740,Bologna,14/02/2025,90
+Francesca,Barbieri,,+39 3434768036,Milano,25/02/2025,45
+Roberto,Barbieri,roberto.barbieri@example.com,+39 3438383899,Torino,23/03/2025,60
+Fabio,Bianchi,fabio.bianchi@example.com,+39 3354009171,Bergamo,10/01/2025,90
+Giulia,Bianchi,giulia.bianchi@example.com,,Torino,08/04/2025,90
+Sara,Bruno,sara.bruno@example.com,+39 3492152758,Brescia,08/07/2025,60
+Federica,Caruso,federica.caruso@example.com,+39 3361663049,Bologna,09/03/2025,45
+Riccardo,Caruso,,+39 3232304553,Brescia,12/01/2025,120
+Davide,Colombo,davide.colombo@example.com,+39 3374366875,Bergamo,27/02/2025,120
+Matteo,Colombo,matteo.colombo@example.com,+39 3491023740,Brescia,21/07/2025,90
+Alberto,Conti,alberto.conti@example.com,+39 3488926316,Bergamo,04/10/2025,120
+Luca,Costa,luca.costa@example.com,+39 3390966909,Milano,16/01/2025,45
+Anna,De Luca,anna.deluca@example.com,+39 3281687316,Brescia,19/10/2025,45
+Elena,De Luca,elena.deluca@example.com,+39 3213930955,Brescia,07/02/2025,120
+Alberto,Esposito,alberto.esposito@example.com,+39 3210077283,Verona,10/03/2025,60
+Federica,Ferrari,federica.ferrari@example.com,+39 3316682360,Milano,13/05/2025,60
+Paolo,Ferrari,paolo.ferrari@example.com,+39 3390495490,Bergamo,17/01/2025,60
+Stefano,Ferrari,,+39 3367685639,Bologna,19/02/2025,45
+Federica,Fontana,,+39 3259533312,Torino,27/06/2025,60
+Luca,Fontana,luca.fontana@example.com,+39 3365697778,Milano,01/03/2025,45
+Valentina,Fontana,valentina.fontana@example.com,+39 3333014673,Milano,07/02/2025,45
+Luca,Gallo,luca.gallo@example.com,+39 3310590344,Bologna,04/06/2025,60
+Andrea,Giordano,andrea.giordano@example.com,+39 3206898575,Bergamo,21/08/2025,60
+Giulia,Giordano,giulia.giordano@example.com,+39 3464703160,Torino,25/06/2025,90
+Simone,Giordano,simone.giordano@example.com,,,08/04/2025,90
+Davide,Greco,davide.greco@example.com,+39 3388868917,Bergamo,22/05/2025,45
+Alberto,Lombardi,alberto.lombardi@example.com,+39 3472321322,Bologna,21/09/2025,45
+Federica,Lombardi,federica.lombardi@example.com,+39 3488446934,Torino,26/03/2025,90
+Stefano,Lombardi,stefano.lombardi@example.com,+39 3389328792,Milano,27/08/2025,120
+Fabio,Mancini,fabio.mancini@example.com,+39 3381809608,Milano,13/04/2025,120
+Francesca,Mancini,francesca.mancini@example.com,+39 3289438606,Bergamo,26/10/2025,120
+Giorgio,Mariani,giorgio.mariani@example.com,+39 3226755639,Torino,21/01/2025,45
+Simone,Mariani,simone.mariani@example.com,+39 3319345145,Milano,23/07/2025,120
+Andrea,Moretti,andrea.moretti@example.com,,Bergamo,05/09/2025,60
+Luca,Moretti,luca.moretti@example.com,+39 3314610033,Milano,25/02/2025,120
+Valentina,Moretti,valentina.moretti@example.com,+39 3312187664,Torino,04/03/2025,120
+Alberto,Ricci,alberto.ricci@example.com,+39 3339532275,Milano,20/04/2025,45
+Chiara,Rinaldi,chiara.rinaldi@example.com,+39 3369748212,Torino,20/07/2025,120
+Federica,Rinaldi,federica.rinaldi@example.com,+39 3325856263,Bergamo,23/03/2025,60
+Francesca,Rinaldi,francesca.rinaldi@example.com,+39 3236148540,Bologna,05/03/2025,45
+Sara,Rinaldi,sara.rinaldi@example.com,+39 3267916011,Milano,11/10/2025,90
+Alessia,Romano,alessia.romano@example.com,+39 3378513690,Bologna,23/06/2025,60
+Anna,Romano,anna.romano@example.com,+39 3288779137,,29/08/2025,90
+Elena,Romano,elena.romano@example.com,+39 3409679290,Brescia,16/02/2025,45
+Paolo,Romano,paolo.romano@example.com,+39 3278502551,Bergamo,07/02/2025,120
+Alessia,Rossi,alessia.rossi@example.com,+39 3346814538,Bologna,13/02/2025,45
+Roberto,Rossi,roberto.rossi@example.com,+39 3269938954,Bologna,15/06/2025,45
+Andrea,Santoro,andrea.santoro@example.com,+39 3425773564,Torino,14/04/2025,120
+Fabio,Santoro,fabio.santoro@example.com,+39 3318583171,Milano,03/07/2025,45
+Luca,Santoro,luca.santoro@example.com,+39 3274207802,Torino,12/04/2025,90

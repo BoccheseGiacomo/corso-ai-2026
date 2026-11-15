@@ -1,0 +1,111 @@
+﻿Provincia,Sigla,Regione,Area,Popolazione,Superficie_km2,Comuni
+Agrigento,AG,Sicilia,Sud e isole,408401,3056,43
+Alessandria,AL,Piemonte,Nord,407202,3558,187
+Ancona,AN,Marche,Centro,461503,1963,47
+Arezzo,AR,Toscana,Centro,333240,3233,36
+Ascoli Piceno,AP,Marche,Centro,200497,1229,33
+Asti,AT,Piemonte,Nord,207203,1509,117
+Avellino,AV,Campania,Sud e isole,395072,2805,118
+Bari,BA,Puglia,Sud e isole,1219545,3865,41
+Barletta-Andria-Trani,BT,Puglia,Sud e isole,377093,1542,10
+Belluno,BL,Veneto,Nord,197708,3609,60
+Benevento,BN,Campania,Sud e isole,259809,2081,78
+Bergamo,BG,Lombardia,Nord,1114780,2756,243
+Biella,BI,Piemonte,Nord,168328,913,74
+Bologna,BO,Emilia-Romagna,Nord,1020193,3703,55
+Bolzano,BZ,Trentino-Alto Adige,Nord,539679,7398,116
+Brescia,BS,Lombardia,Nord,1265884,4787,205
+Brindisi,BR,Puglia,Sud e isole,375567,1860,20
+Cagliari,CA,Sardegna,Sud e isole,536245,4311,70
+Caltanissetta,CL,Sicilia,Sud e isole,245421,2134,22
+Campobasso,CB,Molise,Sud e isole,209059,2926,84
+Caserta,CE,Campania,Sud e isole,908451,2651,104
+Catania,CT,Sicilia,Sud e isole,1070169,3575,58
+Catanzaro,CZ,Calabria,Sud e isole,339741,2417,80
+Chieti,CH,Abruzzo,Sud e isole,370487,2599,104
+Como,CO,Lombardia,Nord,598191,1279,147
+Cosenza,CS,Calabria,Sud e isole,669535,6706,150
+Cremona,CR,Lombardia,Nord,353923,1769,113
+Crotone,KR,Calabria,Sud e isole,161898,1734,27
+Cuneo,CN,Piemonte,Nord,581526,6898,247
+Enna,EN,Sicilia,Sud e isole,152544,2573,20
+Fermo,FM,Marche,Centro,166957,861,40
+Ferrara,FE,Emilia-Romagna,Nord,339612,2628,21
+Firenze,FI,Toscana,Centro,988068,3514,41
+Foggia,FG,Puglia,Sud e isole,590263,7009,61
+Forlì-Cesena,FC,Emilia-Romagna,Nord,393367,2378,30
+Frosinone,FR,Lazio,Centro,462661,3248,91
+Gallura Nord-Est Sardegna,OT,Sardegna,Sud e isole,159222,3407,26
+Genova,GE,Liguria,Nord,818812,1834,67
+Gorizia,GO,Friuli-Venezia Giulia,Nord,138427,475,25
+Grosseto,GR,Toscana,Centro,215005,4502,28
+Imperia,IM,Liguria,Nord,209348,1156,66
+Isernia,IS,Molise,Sud e isole,78755,1533,52
+L'Aquila,AQ,Abruzzo,Sud e isole,286706,5047,108
+La Spezia,SP,Liguria,Nord,214919,882,32
+Latina,LT,Lazio,Centro,566698,2256,33
+Lecce,LE,Puglia,Sud e isole,764491,2798,96
+Lecco,LC,Lombardia,Nord,333747,805,84
+Livorno,LI,Toscana,Centro,325749,1213,19
+Lodi,LO,Lombardia,Nord,230250,782,60
+Lucca,LU,Toscana,Centro,381390,1774,33
+Macerata,MC,Marche,Centro,302030,2781,55
+Mantova,MN,Lombardia,Nord,407744,2342,64
+Massa-Carrara,MS,Toscana,Centro,186783,1155,17
+Matera,MT,Basilicata,Sud e isole,189095,3479,31
+Medio Campidano,VS,Sardegna,Sud e isole,90045,1518,28
+Messina,ME,Sicilia,Sud e isole,596147,3266,108
+Milano,MI,Lombardia,Nord,3246455,1574,133
+Modena,MO,Emilia-Romagna,Nord,708340,2688,47
+Monza e Brianza,MB,Lombardia,Nord,885203,406,55
+Napoli,NA,Campania,Sud e isole,2963633,1177,92
+Novara,NO,Piemonte,Nord,364140,1341,87
+Nuoro,NU,Sardegna,Sud e isole,143262,3991,53
+Ogliastra,OG,Sardegna,Sud e isole,53984,1856,23
+Oristano,OR,Sardegna,Sud e isole,148005,2991,87
+Padova,PD,Veneto,Nord,932284,2145,101
+Palermo,PA,Sicilia,Sud e isole,1198738,5005,82
+Parma,PR,Emilia-Romagna,Nord,455713,3445,44
+Pavia,PV,Lombardia,Nord,541949,2968,184
+Perugia,PG,Umbria,Centro,636188,6336,59
+Pesaro e Urbino,PU,Marche,Centro,349558,2510,50
+Pescara,PE,Abruzzo,Sud e isole,311876,1229,46
+Piacenza,PC,Emilia-Romagna,Nord,286452,2586,46
+Pisa,PI,Toscana,Centro,418439,2444,37
+Pistoia,PT,Toscana,Centro,289925,964,20
+Pordenone,PN,Friuli-Venezia Giulia,Nord,310742,2276,50
+Potenza,PZ,Basilicata,Sud e isole,340909,6592,100
+Prato,PO,Toscana,Centro,259657,366,7
+Ragusa,RG,Sicilia,Sud e isole,321300,1624,12
+Ravenna,RA,Emilia-Romagna,Nord,387205,1859,18
+Reggio Calabria,RC,Calabria,Sud e isole,512956,3208,97
+Reggio Emilia,RE,Emilia-Romagna,Nord,530740,2291,42
+Rieti,RI,Lazio,Centro,149766,2750,73
+Rimini,RN,Emilia-Romagna,Nord,340376,923,27
+Roma,Roma/RM,Lazio,Centro,4222648,5366,121
+Rovigo,RO,Veneto,Nord,227134,1824,50
+Salerno,SA,Campania,Sud e isole,1055372,4955,158
+Sassari,SS,Sardegna,Sud e isole,312735,4287,66
+Savona,SV,Liguria,Nord,267064,1545,69
+Siena,SI,Toscana,Centro,259460,3820,35
+Siracusa,SR,Sicilia,Sud e isole,383277,2122,21
+Sondrio,SO,Lombardia,Nord,179100,3195,77
+Sulcis Iglesiente,CI,Sardegna,Sud e isole,118883,1747,24
+Taranto,TA,Puglia,Sud e isole,550436,2467,29
+Teramo,TE,Abruzzo,Sud e isole,300049,1955,47
+Terni,TR,Umbria,Centro,215285,2128,33
+Torino,TO,Piemonte,Nord,2204276,6828,312
+Trapani,TP,Sicilia,Sud e isole,411393,2469,25
+Trento,TN,Trentino-Alto Adige,Nord,546573,6208,166
+Treviso,TV,Veneto,Nord,879255,2479,94
+Trieste,TS,Friuli-Venezia Giulia,Nord,227792,213,6
+Udine,UD,Friuli-Venezia Giulia,Nord,516323,4972,134
+Valle d'Aosta,AO,Valle d'Aosta,Nord,122532,3259,74
+Varese,VA,Lombardia,Nord,882592,1199,136
+Venezia,VE,Veneto,Nord,834306,2478,44
+Verbano-Cusio-Ossola,VB,Piemonte,Nord,153283,2263,74
+Vercelli,VC,Piemonte,Nord,165910,2082,82
+Verona,VR,Veneto,Nord,928622,3097,98
+Vibo Valentia,VV,Calabria,Sud e isole,150516,1147,50
+Vicenza,VI,Veneto,Nord,854163,2720,113
+Viterbo,VT,Lazio,Centro,307405,3616,60

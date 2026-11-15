@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Utilizzo dell'IA 4 · Piccole app e siti web</title>
+<meta name="description" content="Esercizi pratici: creare con l'IA una lista delle cose da fare e un sito di presentazione, come file HTML da aprire dal desktop.">
+<style>
+  :root {
+    --bg: #F6F8FA; --surface: #FFFFFF; --ink: #1B2733; --muted: #5B6B7A; --line: #DCE3EA;
+    --navy: #0F2A43; --teal: #0E9F8E; --teal-d: #0B7F72; --teal-l: #E3F4F2; --amber-l: #FFF4DC; --amber: #B7791F;
+    --font: "Segoe UI", "Inter", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+    --mono: "Cascadia Code", Consolas, "SF Mono", Menlo, monospace;
+    --shadow: 0 1px 2px rgba(15,42,67,.06), 0 6px 20px rgba(15,42,67,.08);
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: var(--font); color: var(--ink); background: var(--bg); line-height: 1.55; font-size: 17px;
+         -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 28px 20px 80px; }
+  .back { font-size: 14px; color: var(--muted); text-decoration: none; font-weight: 600; }
+  .back:hover { color: var(--navy); }
+  h1 { font-size: 34px; color: var(--navy); margin: 14px 0 6px; letter-spacing: -.015em; line-height: 1.2; }
+  .lead { color: var(--muted); font-size: 18px; margin: 0 0 24px; }
+  h2 { font-size: 25px; color: var(--navy); margin: 48px 0 6px; letter-spacing: -.01em; }
+  h2 .n { display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 10px; background: var(--teal);
+          color: #fff; font-size: 18px; margin-right: 10px; vertical-align: 3px; }
+  h3 { font-size: 18px; color: var(--navy); margin: 26px 0 8px; }
+  p { margin: 8px 0; }
+  a { color: var(--teal-d); }
+  code { font-family: var(--mono); font-size: .9em; background: #EEF2F6; padding: 1px 6px; border-radius: 6px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px 22px; box-shadow: var(--shadow); margin: 16px 0; }
+  .method { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 12px 0 4px; }
+  .method div { background: var(--teal-l); border-radius: 12px; padding: 12px 14px; font-size: 15px; }
+  .method b { display: block; color: var(--teal-d); font-size: 13px; text-transform: uppercase; letter-spacing: .04em; }
+  ol, ul { padding-left: 24px; margin: 8px 0; }
+  li { margin: 4px 0; }
+  .files { display: flex; flex-wrap: wrap; gap: 10px; margin: 10px 0; }
+  .file { display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; border-radius: 10px; background: var(--navy); color: #fff;
+          text-decoration: none; font-weight: 600; font-size: 15px; }
+  .file:hover { background: #1C4166; }
+  .file small { font-weight: 400; opacity: .75; }
+  .prompt { position: relative; background: #fff; border: 1.5px solid var(--teal); border-radius: 12px; padding: 14px 16px; margin: 10px 0; }
+  .prompt .pt { white-space: pre-wrap; margin: 0; padding-right: 74px; }
+  .prompt button { position: absolute; top: 10px; right: 10px; font: 600 13px var(--font); padding: 6px 11px; border-radius: 8px;
+                   border: 0; background: var(--teal); color: #fff; cursor: pointer; }
+  .prompt button:hover { background: var(--teal-d); }
+  .q { margin: 18px 0; }
+  .q > .lab { font-weight: 700; color: var(--navy); font-size: 15px; }
+  details { background: var(--amber-l); border-radius: 10px; padding: 8px 14px; margin: 6px 0 0; }
+  summary { cursor: pointer; font-weight: 600; color: var(--amber); font-size: 15px; }
+  details[open] summary { margin-bottom: 6px; }
+  details table { border-collapse: collapse; font-size: 15px; margin: 6px 0; }
+  details td, details th { padding: 3px 12px 3px 0; text-align: left; }
+  details td.r { text-align: right; font-variant-numeric: tabular-nums; }
+  .note { border-left: 4px solid var(--teal); padding: 4px 14px; color: var(--muted); font-size: 15.5px; margin: 12px 0; }
+  .src { font-size: 14px; color: var(--muted); }
+  @media (max-width: 700px) { .method { grid-template-columns: 1fr 1fr; } h1 { font-size: 28px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<a class="back" href="../">← Corso di intelligenza artificiale</a>
+<h1>Utilizzo dell'IA 4 · Piccole app e siti web</h1>
+<p class="lead">Si chiede all'IA di scrivere una pagina web, la si scarica come file e la si apre dal desktop. Due esercizi: una lista delle cose da fare e un sito per presentare te stesso o la tua attività.</p>
+
+<div class="card">
+  <strong>Che cos'è un file HTML</strong>
+  <p>Un file HTML è una pagina web salvata come file sul computer. Il browser (Chrome, Edge, Firefox) lo apre anche senza internet. Dentro ci sono tre parti, tutte scritte come testo:</p>
+  <ul>
+    <li><b>HTML</b>: il contenuto, cioè titoli, testi, pulsanti, caselle;</li>
+    <li><b>CSS</b>: l'aspetto, cioè colori, caratteri, spazi;</li>
+    <li><b>JavaScript</b>: il comportamento, cioè cosa succede quando premi un pulsante.</li>
+  </ul>
+  <p>L'IA scrive tutte e tre le parti in un solo file. Tu non devi leggere il codice: lo provi e, se qualcosa non va, descrivi all'IA che cosa vedi.</p>
+</div>
+
+<div class="card">
+  <strong>Il metodo, uguale per ogni esercizio</strong>
+  <div class="method">
+    <div><b>1 · Chiedi</b>Scrivi all'IA che cosa deve fare la pagina.</div>
+    <div><b>2 · Scarica</b>Salva il file HTML e mettilo sul desktop.</div>
+    <div><b>3 · Apri</b>Fai doppio clic sul file: si apre nel browser.</div>
+    <div><b>4 · Prova e correggi</b>Usa la pagina. Se qualcosa non va, dillo all'IA e scarica il file nuovo.</div>
+  </div>
+</div>
+
+<div class="card">
+  <strong>Dalla risposta dell'IA al desktop (Windows)</strong>
+  <ol>
+    <li><b>Scarica il file.</b> Claude mostra la pagina in un riquadro a lato; ChatGPT di solito dà un file o un link da scaricare. Cerca il pulsante per scaricare. Il file finisce nella cartella <b>Download</b>.</li>
+    <li><b>Controlla il nome.</b> Deve finire con <code>.html</code>, per esempio <code>cose-da-fare.html</code>. Per vedere la fine del nome, in Esplora file apri <b>Visualizza → Mostra → Estensioni nomi file</b>. Se il nome finisce con <code>.txt</code>, rinominalo e cambia la fine in <code>.html</code>.</li>
+    <li><b>Spostalo sul desktop.</b> Apri la cartella Download e trascina il file sul desktop.</li>
+    <li><b>Aprilo.</b> Fai doppio clic sul file: si apre nel browser. Se invece si apre il Blocco note, fai clic con il tasto destro sul file, scegli <b>Apri con</b> e scegli il browser.</li>
+  </ol>
+  <p><b>Quando l'IA ti dà una versione nuova</b>, scaricala, cancella il file vecchio dal desktop e metti al suo posto quello nuovo, con lo stesso nome.</p>
+</div>
+
+<!-- ============================================================ -->
+<h2><span class="n">1</span>Una lista delle cose da fare</h2>
+<p>Un'app semplice: scrivi una cosa da fare, la aggiungi all'elenco, la segni come fatta quando l'hai fatta. Niente scadenze, niente avvisi, niente finestre che si aprono da sole.</p>
+
+<h3>Chiedi</h3>
+<div class="prompt"><p class="pt">Crea una piccola app per la lista delle cose da fare, in un solo file HTML che funzioni anche senza internet e senza librerie o file esterni. L'app deve permettere di:
+- scrivere una cosa da fare e aggiungerla con un pulsante o con il tasto Invio;
+- segnare una cosa come fatta o non fatta con una casella di spunta; le cose fatte devono apparire barrate;
+- eliminare una cosa con un pulsante accanto.
+Salva l'elenco nella memoria del browser (localStorage), così le cose restano quando chiudo e riapro il file. Non aggiungere scadenze, promemoria, avvisi o finestre che si aprono. Tutte le scritte devono essere in italiano. Dammi il file HTML da scaricare.</p><button>Copia</button></div>
+
+<h3>Scarica e apri</h3>
+<p>Segui i passi di «Dalla risposta dell'IA al desktop». Chiama il file <code>cose-da-fare.html</code>.</p>
+
+<h3>Controlla</h3>
+<ol>
+  <li>Aggiungi tre cose: le prime due con il pulsante, la terza con il tasto Invio.</li>
+  <li>Segna la seconda come fatta: deve apparire barrata.</li>
+  <li>Elimina la terza.</li>
+  <li>Premi Aggiungi con il campo vuoto: non deve comparire una riga vuota.</li>
+  <li>Chiudi il browser e riapri il file dal desktop: devono esserci ancora le prime due cose, con la seconda barrata.</li>
+</ol>
+<p><b>Se qualcosa non funziona</b>, scrivi all'IA che cosa hai fatto e che cosa vedi. Per esempio:</p>
+<div class="prompt"><p class="pt">Quando chiudo e riapro il file, l'elenco è vuoto: le cose che avevo aggiunto non ci sono più. Correggi questo problema e dammi di nuovo il file HTML completo.</p><button>Copia</button></div>
+<p>Se non riesci a farla funzionare, qui c'è una versione già pronta da confrontare con la tua:</p>
+<div class="files"><a class="file" href="esempi/cose-da-fare.html" download>cose-da-fare.html <small>esempio pronto</small></a></div>
+
+<div class="note"><b>Dove sono salvati i dati.</b> Nella memoria del browser, sul tuo computer: non vanno su internet. Restano finché apri il file con lo stesso browser. Se lo apri con un altro browser o su un altro computer, l'elenco è vuoto. Se cancelli i dati di navigazione del browser, l'elenco si cancella. Tieni il file sempre nello stesso posto e con lo stesso nome: in alcuni browser, se lo sposti, l'app riparte vuota.</div>
+
+<h3>Migliora l'app</h3>
+<p>Chiedi una modifica alla volta, nella stessa chat. Dopo ogni modifica scarica il file nuovo, sostituisci quello sul desktop e ripeti i controlli. La frase finale di ogni richiesta serve a non perdere le cose già scritte.</p>
+
+<div class="q"><div class="lab">Modifica 1 · Contatore</div>
+<div class="prompt"><p class="pt">Aggiungi sotto il titolo una riga che dica quante cose restano da fare, per esempio «2 da fare su 5». Mantieni lo stesso modo di salvare i dati e dammi il file HTML completo.</p><button>Copia</button></div></div>
+
+<div class="q"><div class="lab">Modifica 2 · Cose fatte in fondo</div>
+<div class="prompt"><p class="pt">Mostra le cose fatte in fondo all'elenco, sotto quelle da fare. Mantieni lo stesso modo di salvare i dati e dammi il file HTML completo.</p><button>Copia</button></div></div>
+
+<div class="q"><div class="lab">Modifica 3 · Togliere le cose fatte</div>
+<div class="prompt"><p class="pt">Aggiungi in fondo un pulsante «Togli le cose fatte» che elimina dall'elenco tutte le cose segnate come fatte, senza chiedere conferma. Mantieni lo stesso modo di salvare i dati e dammi il file HTML completo.</p><button>Copia</button></div></div>
+
+<div class="q"><div class="lab">Modifica 4 · Correggere un testo</div>
+<div class="prompt"><p class="pt">Fai in modo che, con un doppio clic su una cosa da fare, il suo testo diventi modificabile; con Invio si salva il testo nuovo. Mantieni lo stesso modo di salvare i dati e dammi il file HTML completo.</p><button>Copia</button></div></div>
+
+<div class="q"><div class="lab">Modifica 5 · Aspetto</div>
+<div class="prompt"><p class="pt">Cambia l'aspetto: sfondo azzurro chiaro, pulsanti blu scuro, caratteri più grandi e più spazio tra le righe. Non cambiare il funzionamento. Mantieni lo stesso modo di salvare i dati e dammi il file HTML completo.</p><button>Copia</button></div></div>
+
+<!-- ============================================================ -->
+<h2><span class="n">2</span>Un sito di presentazione</h2>
+<p>Una pagina per farti conoscere da chi potrebbe offrirti un lavoro o un incarico, oppure per presentare la tua attività ai clienti. <b>Non è un curriculum.</b> Un curriculum elenca i lavori fatti; questa pagina dice chi sei, che cosa sai fare, che cosa offri e che cosa ti appassiona.</p>
+<p>Il lavoro più importante lo fai prima di aprire l'IA: scrivere le informazioni vere. L'IA le mette in ordine e dà l'aspetto alla pagina.</p>
+
+<h3>Passo 1 · Prepara le informazioni</h3>
+<p>Copia uno dei due modelli in un documento e compilalo. Scrivi cose concrete: invece di «sono preciso», scrivi che cosa fai con precisione e un esempio. Lascia vuoto quello che non vuoi mostrare.</p>
+
+<div class="q"><div class="lab">Modello A · Per presentare te stesso</div>
+<div class="prompt"><p class="pt">Nome e cognome:
+Che cosa offro (il lavoro o il servizio che propongo, in una frase):
+Che cosa so fare (tre o quattro cose concrete):
+Un esempio di lavoro fatto bene (che cosa ho fatto e che risultato ha avuto):
+Chi sono (due o tre frasi: dove vivo, come lavoro, che cosa mi piace del mio lavoro):
+Le mie passioni (anche fuori dal lavoro):
+Contatti da mostrare (email, telefono, profilo LinkedIn):</p><button>Copia</button></div></div>
+
+<div class="q"><div class="lab">Modello B · Per presentare un'attività</div>
+<div class="prompt"><p class="pt">Nome dell'attività:
+Che cosa offriamo, in una frase:
+Servizi o prodotti (con i prezzi, se volete mostrarli):
+Chi siamo (chi lavora nell'attività e da quanto tempo):
+Che cosa ci distingue (fatti concreti: tempi di intervento, materiali usati, certificazioni):
+Zona servita o indirizzo, giorni e orari:
+Contatti da mostrare (telefono, email, WhatsApp):</p><button>Copia</button></div></div>
+
+<p>Se vuoi fare pratica senza usare i tuoi dati, usa questo esempio inventato per il modello A:</p>
+<div class="prompt"><p class="pt">Nome e cognome: Laura Bianchi
+Che cosa offro: mi occupo dell'amministrazione di piccole aziende: fatture, pagamenti e rapporti con i fornitori.
+Che cosa so fare:
+- tenere in ordine fatture e scadenze dei pagamenti;
+- preparare i documenti per il commercialista;
+- fare tabelle e riepiloghi con Excel e Google Sheets;
+- usare l'intelligenza artificiale per leggere documenti e trasformarli in tabelle.
+Un esempio di lavoro fatto bene: in un'azienda di ferramenta ho organizzato i solleciti ai clienti con un calendario fisso; in un anno il tempo medio di pagamento è sceso da 60 a 25 giorni.
+Chi sono: vivo a Verona. Mi piace mettere ordine nei documenti e spiegare i numeri in modo semplice a chi non è del mestiere.
+Le mie passioni: escursioni in montagna, cucina, volontariato nella biblioteca del quartiere.
+Contatti: laura.bianchi@example.com, 333 1234567</p><button>Copia</button></div>
+
+<div class="note"><b>Attenzione ai dati personali.</b> Se un giorno metti il sito su internet, chiunque potrà leggerlo. Metti solo le informazioni che sei disposto a mostrare a tutti: per esempio, l'email sì, l'indirizzo di casa no.</div>
+
+<h3>Passo 2 · Chiedi</h3>
+<p>Usa il prompt adatto, poi incolla sotto le tue informazioni.</p>
+
+<div class="q"><div class="lab">Per presentare te stesso</div>
+<div class="prompt"><p class="pt">Crea un sito di una sola pagina per presentarmi a chi potrebbe offrirmi un lavoro o affidarmi un incarico. Non è un curriculum: non fare un elenco dei lavori che ho fatto. La pagina deve far capire chi sono, che cosa so fare, che cosa offro e che cosa mi appassiona. Usa solo le informazioni che trovi sotto e non inventare niente: se un'informazione manca, non metterla. Metti le parti in quest'ordine: in alto il mio nome e una frase su che cosa offro; poi che cosa so fare; poi l'esempio di lavoro fatto bene; poi chi sono e le mie passioni; infine i contatti, con un invito a scrivermi. Usa uno stile semplice e ordinato, che si legga bene anche sul telefono. Scrivi tutto in un solo file HTML, senza file esterni, e dammi il file HTML da scaricare.
+
+Le mie informazioni:
+</p><button>Copia</button></div></div>
+
+<div class="q"><div class="lab">Per presentare un'attività</div>
+<div class="prompt"><p class="pt">Crea un sito di una sola pagina per presentare la mia attività ai clienti. La pagina deve far capire che cosa offriamo, chi siamo e che cosa ci distingue. Usa solo le informazioni che trovi sotto e non inventare niente: se un'informazione manca, non metterla. Metti le parti in quest'ordine: in alto il nome dell'attività e una frase su che cosa offriamo; poi i servizi o prodotti; poi chi siamo e che cosa ci distingue; poi la zona, i giorni e gli orari; infine i contatti, con un invito a chiamarci o scriverci. Usa uno stile semplice e ordinato, che si legga bene anche sul telefono. Scrivi tutto in un solo file HTML, senza file esterni, e dammi il file HTML da scaricare.
+
+Le informazioni sull'attività:
+</p><button>Copia</button></div></div>
+
+<h3>Passo 3 · Scarica, apri, controlla</h3>
+<p>Segui i passi di «Dalla risposta dell'IA al desktop». Chiama il file, per esempio, <code>presentazione.html</code>. Poi controlla:</p>
+<ol>
+  <li><b>Ogni frase è vera?</b> Confronta la pagina con le informazioni che hai scritto. L'IA tende ad aggiungere frasi che non hai scritto, come «professionista appassionato» o «sempre orientato al cliente».</li>
+  <li><b>Sembra un curriculum?</b> Se la pagina è soprattutto un elenco di date e aziende, chiedi all'IA di rifarla mettendo al centro che cosa sai fare e che cosa offri.</li>
+  <li><b>Manca qualcosa?</b> Controlla che ci siano le cose che sai fare, l'esempio, le passioni e i contatti.</li>
+  <li><b>Si legge sul telefono?</b> Restringi la finestra del browser trascinando il bordo: il testo deve andare a capo e non deve uscire dalla pagina.</li>
+</ol>
+
+<h3>Passo 4 · Correggi e migliora</h3>
+<p>Una richiesta alla volta, nella stessa chat. Dopo ogni modifica scarica il file nuovo e sostituisci quello vecchio.</p>
+
+<div class="q"><div class="lab">Togliere le frasi vuote</div>
+<div class="prompt"><p class="pt">Togli dalla pagina tutte le frasi generiche che non dicono niente di concreto, come «appassionato», «dinamico» o «orientato ai risultati». Tieni solo le informazioni che ti ho dato. Dammi il file HTML completo.</p><button>Copia</button></div></div>
+
+<div class="q"><div class="lab">Pulsante per scrivere un'email</div>
+<div class="prompt"><p class="pt">Aggiungi nei contatti un pulsante «Scrivimi» che, quando lo premo, apre il programma di posta con il mio indirizzo email già inserito. Dammi il file HTML completo.</p><button>Copia</button></div></div>
+
+<div class="q"><div class="lab">Colori</div>
+<div class="prompt"><p class="pt">Cambia i colori della pagina: blu scuro per i titoli e per la parte in alto, sfondo bianco, testo grigio scuro. Non cambiare i testi. Dammi il file HTML completo.</p><button>Copia</button></div></div>
+
+<div class="q"><div class="lab">Riquadri per le cose che sai fare</div>
+<div class="prompt"><p class="pt">Mostra le cose che so fare (o i servizi) in riquadri affiancati, tre per riga; sul telefono i riquadri devono andare uno sotto l'altro. Non cambiare i testi. Dammi il file HTML completo.</p><button>Copia</button></div></div>
+
+<div class="q"><div class="lab">Una foto</div>
+<div class="prompt"><p class="pt">Aggiungi in alto una foto rotonda. La foto si chiama foto.jpg e si trova nella stessa cartella del file HTML. Dammi il file HTML completo.</p><button>Copia</button></div>
+<p>Con la foto i file diventano due. Crea sul desktop una cartella, per esempio <code>sito</code>, e metti dentro sia il file HTML sia <code>foto.jpg</code>. Se li separi, la foto non si vede.</p></div>
+
+<div class="note"><b>Metterlo su internet.</b> Per ora il sito si apre solo sul tuo computer. Per renderlo visibile a tutti serve un servizio che lo pubblichi (per esempio GitHub Pages o Netlify, che hanno piani gratuiti). In questo esercizio non lo facciamo.</div>
+
+</div>
+<script>
+document.querySelectorAll('.prompt button').forEach(function (b) {
+  b.addEventListener('click', function () {
+    var t = b.parentNode.querySelector('.pt').innerText.trim();
+    var done = function () { b.textContent = 'Copiato'; setTimeout(function () { b.textContent = 'Copia'; }, 1500); };
+    if (navigator.clipboard && window.isSecureContext) { navigator.clipboard.writeText(t).then(done); }
+    else { var a = document.createElement('textarea'); a.value = t; document.body.appendChild(a); a.select();
+           try { document.execCommand('copy'); } catch (e) {} a.remove(); done(); }
+  });
+});
+</script>
+</body>
+</html>

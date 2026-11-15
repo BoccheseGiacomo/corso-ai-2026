@@ -1,0 +1,61 @@
+﻿Nome,Cognome,Email,Telefono,Citta,Data_iscrizione,Importo_euro
+Chiara,Rinaldi,chiara.rinaldi@example.com,336 9748212,Torino,20.07.2025,€ 120
+davide,colombo,davide.colombo@example.com,337-4366875,bergamo,27/02/2025,€ 120
+elena,barbieri,elena.barbieri@example.com,3303179740,bologna,14/02/2025,€ 90
+LUCA,SANTORO,luca.santoro@example.com,3274207802,TORINO,12.04.2025,90
+Francesca,Barbieri,,343-4768036,MILANO,2025-02-25,45
+ROBERTO,BARBIERI,roberto.barbieri@example.com,3438383899,Torino,2025-03-23,€ 60
+roberto,Rossi,roberto.rossi@example.com,326 9938954,Bologna,15/06/2025,€ 45
+Francesca,Mancini,francesca.mancini@example.com,328-9438606,Bergamo,2025-10-26,"120,00"
+Giulia,Giordano,giulia.giordano@example.com,3464703160,Torino,25/06/2025,90
+RICCARDO,CARUSO,,3232304553,Brescia,12.01.2025,120 euro
+giorgio,Mariani,giorgio.mariani@example.com,3226755639,TORINO,2025-01-21,€ 45
+Valentina,Fontana,valentina.fontana@example.com,+39 3333014673,milano,07.02.2025,"45,00"
+fabio,Santoro,fabio.santoro@example.com,331 8583171,Milano,2025-07-03,"45,00"
+Federica,CARUSO,federica.caruso@example.com,3361663049,Bologna,09.03.2025,€ 45
+Sara,Bruno,sara.bruno@example.com,3492152758,Brescia,2025-07-08,€ 60
+luca,gallo,luca.gallo@example.com,331-0590344,Bologna,2025-06-04,€ 60
+federica,Rinaldi,federica.rinaldi@example.com,3325856263,Bergamo,23.03.2025,€ 60
+fabio,Mancini,fabio.mancini@example.com,338-1809608,Milano,13/04/2025,€ 120
+sara,Rinaldi,sara.rinaldi@example.com,+39 3267916011,milano,2025-10-11,"90,00"
+giulia,Bianchi,giulia.bianchi@example.com,,torino,2025-04-08,90
+Alberto,RICCI,alberto.ricci@example.com,333 9532275,Milano,20/04/2025,€ 45
+ANDREA,GIORDANO,andrea.giordano@example.com,3206898575,bergamo,21/08/2025,€ 60
+Alberto,Esposito,alberto.esposito@example.com,3210077283,Verona,10/03/2025,60
+luca,gallo,luca.gallo@example.com,331-0590344,Bologna,2025-06-04,€ 60
+Simone,Mariani,simone.mariani@example.com,331 9345145,Milano,2025-07-23,€ 120
+ELENA,DE LUCA,elena.deluca@example.com,+39 3213930955,brescia,07/02/2025,120 euro
+luca,Fontana,luca.fontana@example.com,3365697778,Milano,2025-03-01,45
+Luca,Moretti,luca.moretti@example.com,331 4610033,MILANO,25.02.2025,120
+Elena,Romano,elena.romano@example.com,+39 3409679290,brescia,16/02/2025,45
+federica,lombardi,federica.lombardi@example.com,+39 3488446934,torino,26/03/2025,90
+alessia,Romano,alessia.romano@example.com,+39 3378513690,BOLOGNA,2025-06-23,€ 60
+sara,Rinaldi,sara.rinaldi@example.com,326 7916011,MILANO,11.10.2025,90
+giulia,giordano,giulia.giordano@example.com,+39 3464703160,Torino,25/06/2025,90
+Federica,CARUSO,federica.caruso@example.com,3361663049,Bologna,09.03.2025,€ 45
+Paolo,Romano,paolo.romano@example.com,3278502551,bergamo,07/02/2025,"120,00"
+ELENA,DE LUCA,elena.deluca@example.com,+39 3213930955,Brescia,07/02/2025,120
+Andrea,SANTORO,andrea.santoro@example.com,342-5773564,Torino,14/04/2025,€ 120
+Federica,Ferrari,federica.ferrari@example.com,3316682360,Milano,13.05.2025,60
+Alberto,Lombardi,alberto.lombardi@example.com,347 2321322,BOLOGNA,21.09.2025,"45,00"
+ANDREA,MORETTI,andrea.moretti@example.com,,Bergamo,05/09/2025,60
+Federica,Fontana,,+39 3259533312,torino,27.06.2025,60
+Alberto,CONTI,alberto.conti@example.com,348 8926316,Bergamo,04/10/2025,120 euro
+Anna,DE LUCA,anna.deluca@example.com,3281687316,BRESCIA,19.10.2025,45
+Francesca,Rinaldi,francesca.rinaldi@example.com,3236148540,Bologna,05/03/2025,"45,00"
+PAOLO,FERRARI,paolo.ferrari@example.com,3390495490,Bergamo,17/01/2025,60
+ANNA,ROMANO,anna.romano@example.com,328-8779137,,29.08.2025,90 euro
+Stefano,Lombardi,stefano.lombardi@example.com,338-9328792,Milano,27/08/2025,120
+Fabio,Bianchi,fabio.bianchi@example.com,335-4009171,Bergamo,10.01.2025,90
+Stefano,FERRARI,,+39 3367685639,bologna,19/02/2025,45 euro
+alessia,Rossi,alessia.rossi@example.com,334 6814538,Bologna,13/02/2025,45
+francesca,barbieri,,+39 3434768036,Milano,25/02/2025,45
+Luca,Costa,luca.costa@example.com,3390966909,milano,16/01/2025,45
+davide,greco,davide.greco@example.com,+39 3388868917,bergamo,22/05/2025,45 euro
+alberto,Lombardi,alberto.lombardi@example.com,3472321322,Bologna,2025-09-21,45
+ANNA,ROMANO,anna.romano@example.com,328-8779137,,29.08.2025,90 euro
+Valentina,Moretti,valentina.moretti@example.com,3312187664,TORINO,2025-03-04,€ 120
+Simone,Giordano,simone.giordano@example.com,,,08/04/2025,90
+Alessia,ROSSI,alessia.rossi@example.com,334-6814538,bologna,2025-02-13,€ 45
+elena,barbieri,elena.barbieri@example.com,3303179740,bologna,14/02/2025,€ 90
+matteo,colombo,matteo.colombo@example.com,3491023740,Brescia,2025-07-21,90

@@ -1,7 +1,7 @@
 .claude/
 __pycache__/
 *.pyc
-dati/
+/dati/
 
 # slide non complete o materiale di lavoro (non pubblicati)
 lezione-01/
