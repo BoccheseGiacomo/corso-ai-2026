@@ -1,0 +1,1076 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Legislazione · GDPR e AI Act</title>
+<link rel="stylesheet" href="../assets/style.css?v=7">
+<script src="../assets/deck.js?v=7" defer></script>
+<style>
+  .slide:not(.s-section):not(.s-title) h2 { font-size: 40px; margin-bottom: 24px; }
+  .s-lab h2 { margin-bottom: 14px !important; }
+
+  /* ---- programma ---- */
+  .agenda-l { display: flex; flex-direction: column; gap: 16px; padding: 0; margin: 6px 0 0; }
+  .agenda-l li { list-style: none; display: flex; align-items: center; gap: 22px; font-size: 30px; color: var(--navy); font-weight: 600; }
+  .agenda-l li span { width: 52px; height: 52px; border-radius: 14px; background: var(--teal-l); color: var(--teal-d); display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 750; flex: none; }
+  .agenda-l li small { font-size: 21px; color: var(--muted); font-weight: 500; }
+
+  /* ---- percorso di un messaggio ---- */
+  .flow { display: grid; grid-template-columns: 1fr 34px 1fr 34px 1fr 34px 1fr 34px 1fr; align-items: stretch; margin-top: 10px; }
+  .fstep { background: var(--surface); border-radius: 16px; padding: 18px 16px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 8px; border-top: 5px solid var(--teal); }
+  .fstep.warn { border-top-color: var(--orange); }
+  .fstep .fe { font-size: 34px; }
+  .fstep b { font-size: 20px; color: var(--navy); line-height: 1.25; }
+  .fstep span { font-size: 16.5px; color: var(--muted); line-height: 1.35; }
+  .farr { display: flex; align-items: center; justify-content: center; color: var(--teal); font-size: 28px; font-weight: 700; }
+
+  /* ---- due colonne ---- */
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; flex: 1; }
+  .pts { display: flex; flex-direction: column; gap: 20px; }
+  .pt { display: flex; gap: 16px; align-items: flex-start; font-size: 23px; line-height: 1.35; color: var(--ink); }
+  .pt i { flex: none; width: 34px; height: 34px; border-radius: 10px; background: var(--teal-l); color: var(--teal-d); font-style: normal; font-weight: 750; display: flex; align-items: center; justify-content: center; font-size: 18px; margin-top: 2px; }
+  .rules-big .pt { font-size: 27px; }
+  .rules-big .pt i { width: 40px; height: 40px; font-size: 20px; }
+  .art { width: 100%; height: auto; max-height: 400px; }
+
+  /* ---- tabelle ---- */
+  .cmp-t { width: 100%; border-collapse: separate; border-spacing: 0 8px; font-size: 19px; }
+  .cmp-t th { font-size: 14px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); text-align: left; padding: 0 16px; font-weight: 700; }
+  .cmp-t td { background: var(--surface); padding: 12px 16px; color: var(--ink); line-height: 1.35; vertical-align: top; }
+  .cmp-t td:first-child { border-radius: 12px 0 0 12px; font-weight: 650; color: var(--navy); }
+  .cmp-t td:last-child { border-radius: 0 12px 12px 0; }
+  .cmp-t td.good { color: var(--teal-d); font-weight: 600; }
+  .cmp-t.tight td { padding: 9px 16px; font-size: 18px; }
+  .cmp-t .art-n { font-family: var(--mono); font-size: 14px; color: var(--muted); font-weight: 500; display: block; }
+
+  /* ---- prove ---- */
+  .obs { font-size: 16px; color: var(--orange-d); font-weight: 600; margin-top: 2px; }
+  .obs::before { content: "→ "; }
+  .s-lab .lab-grid { flex: 1; }
+  .s-lab .lstep { justify-content: flex-start; }
+  .path { font-size: 17px; line-height: 1.4; color: var(--navy); }
+  .path b { background: var(--teal-l); color: var(--teal-d); padding: 1px 7px; border-radius: 6px; font-weight: 650; white-space: nowrap; }
+
+  /* ---- dati personali ---- */
+  .dp { display: grid; grid-template-columns: 1.15fr 1fr; gap: 28px; }
+  .dp-box { background: var(--surface); border-radius: 18px; padding: 22px 24px; box-shadow: var(--shadow); }
+  .dp-box h3 { font-size: 22px; margin-bottom: 14px; }
+  .dp-box.sp { border: 2px solid var(--red); }
+  .dp-box.sp h3 { color: var(--red); }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chips span { font-size: 18px; padding: 7px 12px; border-radius: 10px; background: #EEF2F6; color: var(--navy); font-weight: 600; }
+  .chips.r span { background: var(--red-l); color: #A33030; }
+  .chips span.wide { background: var(--orange-l); color: var(--orange-d); }
+  .dp-note { font-size: 17px; color: var(--muted); margin-top: 14px; line-height: 1.4; }
+
+  /* ---- ruoli ---- */
+  .roles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  .role { background: var(--surface); border-radius: 18px; padding: 22px 20px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 10px; border-top: 6px solid var(--teal); }
+  .role .re { font-size: 38px; }
+  .role b { font-size: 23px; color: var(--navy); }
+  .role p { font-size: 18px; line-height: 1.4; color: var(--ink); }
+  .role small { font-size: 16px; color: var(--muted); line-height: 1.35; }
+  .role.c2 { border-top-color: var(--navy); } .role.c3 { border-top-color: var(--c-task); } .role.c4 { border-top-color: var(--orange); }
+
+  /* ---- griglia di schede ---- */
+  .cards { display: grid; gap: 14px; }
+  .cards.c4 { grid-template-columns: repeat(4, 1fr); }
+  .cards.c3 { grid-template-columns: repeat(3, 1fr); }
+  .cards.c2 { grid-template-columns: repeat(2, 1fr); }
+  .card { background: var(--surface); border-radius: 14px; padding: 14px 16px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 6px; }
+  .card b { font-size: 19px; color: var(--navy); line-height: 1.25; }
+  .card span { font-size: 16.5px; color: var(--muted); line-height: 1.35; }
+  .card .an { font-family: var(--mono); font-size: 13px; color: var(--teal-d); font-weight: 700; letter-spacing: .02em; }
+  .cards.big .card { padding: 20px 20px; gap: 8px; }
+  .cards.big .card b { font-size: 22px; }
+  .cards.big .card span { font-size: 18.5px; }
+  .cards.big .card .an { font-size: 14px; }
+  .card.red { border-left: 5px solid var(--red); }
+  .card.new { border: 2px dashed var(--red); background: var(--red-l); }
+
+  /* ---- regola + eccezioni ---- */
+  .rule { background: var(--navy); color: #fff; border-radius: 18px; padding: 22px 28px; font-size: 25px; line-height: 1.4; }
+  .rule b { color: #7FD8CC; }
+  .rx { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 20px; }
+  .rx-box { background: var(--surface); border-radius: 16px; padding: 18px 22px; box-shadow: var(--shadow); }
+  .rx-box h3 { font-size: 19px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+  .rx-box ul { padding-left: 22px; display: flex; flex-direction: column; gap: 8px; }
+  .rx-box li { font-size: 20px; line-height: 1.35; }
+
+  /* ---- passi numerati ---- */
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .step { background: var(--surface); border-radius: 16px; padding: 18px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 8px; }
+  .step .sn { width: 36px; height: 36px; border-radius: 50%; background: var(--navy); color: #fff; display: grid; place-items: center; font-weight: 750; font-size: 18px; }
+  .step b { font-size: 20px; color: var(--navy); line-height: 1.25; }
+  .step span { font-size: 17px; color: var(--muted); line-height: 1.35; }
+  .step.hl { background: var(--orange-l); }
+  .step.hl .sn { background: var(--orange); }
+  .ex-box { margin-top: 18px; background: var(--surface); border-left: 5px solid var(--c-task); border-radius: 12px; padding: 14px 20px; font-size: 19px; line-height: 1.4; box-shadow: var(--shadow); }
+  .ex-box b { color: var(--c-task); }
+
+  /* ---- linea del tempo ---- */
+  .tl { display: flex; flex-direction: column; gap: 8px; }
+  .tl-row { display: grid; grid-template-columns: 190px 22px 1fr; align-items: center; gap: 16px; }
+  .tl-d { font-size: 18px; font-weight: 750; color: var(--navy); text-align: right; font-variant-numeric: tabular-nums; }
+  .tl-dot { width: 18px; height: 18px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 0 4px var(--teal-l); justify-self: center; }
+  .tl-row.fut .tl-dot { background: #fff; border: 3px solid var(--orange); box-shadow: none; }
+  .tl-row.fut .tl-d { color: var(--orange-d); }
+  .tl-t { background: var(--surface); border-radius: 12px; padding: 9px 16px; font-size: 18.5px; line-height: 1.35; box-shadow: var(--shadow); }
+  .tl-t b { color: var(--navy); }
+  .tl-leg { display: flex; gap: 26px; font-size: 16px; color: var(--muted); margin-top: 12px; padding-left: 228px; }
+  .tl-leg span { display: inline-flex; align-items: center; gap: 8px; }
+  .tl-leg i { width: 14px; height: 14px; border-radius: 50%; background: var(--teal); display: inline-block; }
+  .tl-leg i.o { background: #fff; border: 3px solid var(--orange); }
+
+  /* ---- piramide del rischio ---- */
+  .pyr-wrap { display: grid; grid-template-columns: 1fr 330px; gap: 30px; align-items: center; flex: 1; }
+  .pyr { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .lvl { display: grid; grid-template-columns: 210px 1fr; align-items: center; gap: 14px; border-radius: 14px; padding: 14px 20px; color: #fff; }
+  .lvl b { font-size: 22px; }
+  .lvl span { font-size: 17px; line-height: 1.35; opacity: .95; }
+  .lvl.l1 { width: 62%; background: var(--red); }
+  .lvl.l2 { width: 76%; background: var(--orange); }
+  .lvl.l3 { width: 89%; background: var(--amber); color: #3A2A00; }
+  .lvl.l4 { width: 100%; background: var(--green); }
+  .gpai { background: var(--surface); border: 2px solid var(--c-ctx); border-radius: 18px; padding: 22px; box-shadow: var(--shadow); }
+  .gpai b { font-size: 21px; color: var(--c-ctx); display: block; margin-bottom: 8px; }
+  .gpai p { font-size: 18px; line-height: 1.4; }
+
+  /* ---- casi con risposta ---- */
+  .cases { display: grid; gap: 12px; flex: 1; }
+  .cases.c3 { grid-template-columns: repeat(3, 1fr); }
+  .cases.c4 { grid-template-columns: repeat(4, 1fr); }
+  .case { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 8px; }
+  .case p { font-size: 17.5px; line-height: 1.35; color: var(--navy); font-weight: 600; }
+  .case .ans { margin-top: auto; font-size: 15.5px; line-height: 1.35; border-radius: 10px; padding: 8px 10px; }
+  .ans b { display: block; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 2px; }
+  .ans.g { background: #E5F4EA; color: #1E6B3E; }
+  .ans.y { background: var(--amber-l); color: #7A5800; }
+  .ans.r { background: var(--red-l); color: #A33030; }
+  .ans.o { background: var(--orange-l); color: var(--orange-d); }
+
+  /* ---- confronto ---- */
+  .vs { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 4px; }
+  .vs-box { background: var(--surface); border: 1.5px solid var(--line); border-radius: 18px; padding: 22px 26px; box-shadow: var(--shadow); }
+  .vs-box.b2 { border-color: var(--c-ctx); }
+  .vs-box h3 { font-size: 26px; margin-bottom: 4px; }
+  .vs-box .sub { font-size: 16px; color: var(--muted); margin-bottom: 14px; font-family: var(--mono); }
+  .vs-box dl { margin: 0; display: grid; grid-template-columns: 130px 1fr; gap: 10px 14px; }
+  .vs-box dt { font-size: 15px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 700; padding-top: 3px; }
+  .vs-box dd { margin: 0; font-size: 19.5px; line-height: 1.35; }
+  .vs-list { margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 9px; }
+  .vs-list li { font-size: 19px; line-height: 1.35; color: var(--ink); }
+  .vs-list b { color: var(--navy); }
+
+  /* ---- prompt lungo ---- */
+  .mail { font-size: 17px !important; line-height: 1.5 !important; }
+
+  /* ---- sintesi ---- */
+  .take { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 4px; }
+  .tk-card { background: var(--surface); border-radius: 18px; padding: 20px 22px; box-shadow: var(--shadow); border-top: 6px solid var(--teal); }
+  .tk-card .n { font-size: 38px; font-weight: 800; color: var(--teal); line-height: 1; }
+  .tk-card p { font-size: 21px; line-height: 1.35; color: var(--navy); margin-top: 10px; font-weight: 600; }
+
+  /* ---- fonti ---- */
+  .src { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 30px; }
+  .src div { font-size: 18px; line-height: 1.4; background: var(--surface); border-radius: 12px; padding: 12px 16px; box-shadow: var(--shadow); }
+  .src b { color: var(--navy); display: block; }
+  .src span { font-family: var(--mono); font-size: 14.5px; color: var(--teal-d); }
+</style>
+</head>
+<body data-course="Corso AI · Legislazione">
+
+<svg class="sprite" aria-hidden="true">
+  <symbol id="i-copy" viewBox="0 0 24 24"><path d="M8 8h11v12H8z M5 16V4h11"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><path d="M9 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z M2.5 20c.6-3.5 3.3-5.5 6.5-5.5s5.9 2 6.5 5.5 M16 4.3a3.5 3.5 0 0 1 0 6.4 M18 14.8c1.9.7 3.2 2.5 3.5 5.2"/></symbol>
+</svg>
+
+<main class="stage" id="stage" aria-live="polite">
+
+<!-- ============ Titolo ============ -->
+<section class="slide s-title" data-title="Titolo">
+  <div class="title-grid">
+    <div class="title-text">
+      <p class="kicker">Legislazione</p>
+      <h1 style="font-size:62px">Privacy e regole sull'IA: GDPR e AI&nbsp;Act</h1>
+      <p class="lead">Cosa prevedono le leggi europee e italiane, e cosa cambia quando usiamo l'IA al lavoro</p>
+      <p class="author"><span class="author-bar"></span>Giacomo Bocchese</p>
+    </div>
+    <div class="title-art" aria-hidden="true">
+      <svg viewBox="0 0 520 460">
+        <defs>
+          <linearGradient id="g-blob" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#0E9F8E" stop-opacity=".18"/>
+            <stop offset="1" stop-color="#0F2A43" stop-opacity=".10"/>
+          </linearGradient>
+        </defs>
+        <circle cx="270" cy="230" r="215" fill="url(#g-blob)"/>
+        <!-- cerchio di stelle -->
+        <g fill="#E0A100">
+          <g transform="translate(270 230)">
+            <path id="star" d="M0 -9l2.6 6 6.4.6-4.8 4.3 1.4 6.3L0 4.9l-5.6 3.3 1.4-6.3L-9-.6l6.4-.6z" transform="translate(0 -175)"/>
+            <use href="#star" transform="rotate(30)"/><use href="#star" transform="rotate(60)"/><use href="#star" transform="rotate(90)"/>
+            <use href="#star" transform="rotate(120)"/><use href="#star" transform="rotate(150)"/><use href="#star" transform="rotate(180)"/>
+            <use href="#star" transform="rotate(210)"/><use href="#star" transform="rotate(240)"/><use href="#star" transform="rotate(270)"/>
+            <use href="#star" transform="rotate(300)"/><use href="#star" transform="rotate(330)"/>
+          </g>
+        </g>
+        <!-- documento -->
+        <g transform="translate(150 120)">
+          <rect width="170" height="220" rx="14" fill="#fff" stroke="#C9D5E0" stroke-width="2"/>
+          <rect x="22" y="30" width="90" height="12" rx="6" fill="#0F2A43"/>
+          <rect x="22" y="62" width="126" height="9" rx="4.5" fill="#DCE3EA"/>
+          <rect x="22" y="84" width="110" height="9" rx="4.5" fill="#DCE3EA"/>
+          <rect x="22" y="106" width="60" height="9" rx="4.5" fill="#E0731F" opacity=".75"/>
+          <rect x="88" y="106" width="60" height="9" rx="4.5" fill="#DCE3EA"/>
+          <rect x="22" y="128" width="120" height="9" rx="4.5" fill="#DCE3EA"/>
+          <rect x="22" y="150" width="80" height="9" rx="4.5" fill="#E0731F" opacity=".75"/>
+          <rect x="22" y="172" width="100" height="9" rx="4.5" fill="#DCE3EA"/>
+        </g>
+        <!-- scudo -->
+        <g transform="translate(300 210)">
+          <path d="M60 0l60 22v50c0 46-27 76-60 92C27 148 0 118 0 72V22z" fill="#0E9F8E"/>
+          <path d="M34 80l18 18 36-40" fill="none" stroke="#fff" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+  <aside class="notes">
+    Modulo sulla legislazione: privacy, GDPR, AI Act e legge italiana sull'IA.
+    Obiettivo: sapere cosa prevedono le norme nei punti che riguardano chi usa l'IA al lavoro, senza entrare nei dettagli giuridici.
+    Contenuti aggiornati al 5 novembre 2026 (AI Act già modificato dal Regolamento UE 2026/1744). Prima della lezione ricontrollare eventuali novità.
+  </aside>
+</section>
+
+<!-- ============ Programma ============ -->
+<section class="slide" data-title="Programma">
+  <p class="kicker">Legislazione</p>
+  <h2>Programma di oggi</h2>
+  <ol class="agenda-l">
+    <li><span>1</span>Dove vanno i dati che scriviamo in chat <small>impostazioni e account</small></li>
+    <li><span>2</span>Il GDPR <small>dati personali, principi, diritti</small></li>
+    <li><span>3</span>L'AI Act <small>livelli di rischio, obblighi, scadenze</small></li>
+    <li><span>4</span>La legge italiana e le regole in azienda <small>esercizi e policy</small></li>
+  </ol>
+  <aside class="notes">
+    Parte 1 è una breve parte di teoria: che cosa succede ai dati durante l'uso e l'addestramento di un modello.
+    Esercizi: impostazioni privacy, "posso incollarlo?", togliere i dati personali, classificare sistemi per livello di rischio, policy aziendale.
+  </aside>
+</section>
+
+<!-- ============ Parte 1 · Dove vanno i dati ============ -->
+<section class="slide s-section" data-title="Dove vanno i dati">
+  <p class="kicker">Parte 1</p>
+  <h2>Dove vanno i dati che scriviamo in chat</h2>
+  <p class="section-q">Prima delle leggi, vediamo cosa succede a un messaggio quando lo inviamo a un assistente.</p>
+  <aside class="notes">Domanda alla classe: secondo voi, dove si trova fisicamente ChatGPT? Chi può leggere le vostre chat?</aside>
+</section>
+
+<section class="slide" data-title="Quando premi Invio">
+  <p class="kicker">Il percorso di un messaggio</p>
+  <h2>Cosa succede quando premi Invio</h2>
+  <div class="flow">
+    <div class="fstep"><span class="fe">💻</span><b>Il messaggio parte dal tuo computer</b><span>Testo, file e immagini viaggiano su internet.</span></div>
+    <div class="farr">→</div>
+    <div class="fstep"><span class="fe">🏢</span><b>Arriva ai server del fornitore</b><span>OpenAI, Google, Anthropic: spesso negli Stati Uniti.</span></div>
+    <div class="farr">→</div>
+    <div class="fstep"><span class="fe">🧮</span><b>Il modello calcola la risposta</b><span>I parametri restano fissi: il modello non impara in quel momento.</span></div>
+    <div class="farr">→</div>
+    <div class="fstep warn"><span class="fe">🗄️</span><b>La chat viene conservata</b><span>Nella cronologia e negli archivi del fornitore, per un tempo stabilito.</span></div>
+    <div class="farr">→</div>
+    <div class="fstep warn"><span class="fe">🔁</span><b>Può essere riutilizzata</b><span>Letta da revisori o usata per addestrare i modelli futuri.</span></div>
+  </div>
+  <p class="bottom-line">Quello che scriviamo in chat <strong>lo consegniamo a un'azienda esterna</strong>, che lo tratta secondo i propri termini d'uso.</p>
+  <aside class="notes">
+    Durante l'uso i parametri del modello non cambiano. Però le chat salvate possono diventare dati di addestramento per la versione successiva del modello.
+    Revisori: Google dichiara che una parte delle chat di Gemini viene letta da revisori umani (scollegata dall'account) e che queste chat restano fino a tre anni.
+    Le ultime due caselle dipendono dalle impostazioni e dal tipo di account: lo vediamo tra poco.
+  </aside>
+</section>
+
+<section class="slide" data-title="Memorizzazione">
+  <p class="kicker">Un rischio dell'addestramento</p>
+  <h2>Un modello può memorizzare frasi dei testi di addestramento</h2>
+  <div class="two">
+    <div class="pts">
+      <div class="pt"><i>1</i><span>Durante l'addestramento i parametri <strong>assorbono i testi</strong> letti dal modello.</span></div>
+      <div class="pt"><i>2</i><span>Le frasi molto ripetute o molto particolari possono <strong>restare memorizzate</strong> parola per parola.</span></div>
+      <div class="pt"><i>3</i><span>Nel 2021 alcuni ricercatori hanno fatto ripetere a GPT-2 <strong>nomi, numeri di telefono e indirizzi email</strong> presenti nei suoi dati di addestramento.</span></div>
+    </div>
+    <svg class="art" viewBox="0 0 520 330" aria-hidden="true" font-family="Segoe UI, sans-serif">
+      <g transform="translate(10 40)">
+        <rect width="160" height="200" rx="12" fill="#fff" stroke="#C9D5E0" stroke-width="2"/>
+        <text x="80" y="-12" text-anchor="middle" font-size="16" fill="#5B6B7A" font-weight="700">testi di addestramento</text>
+        <rect x="16" y="22" width="120" height="8" rx="4" fill="#DCE3EA"/>
+        <rect x="16" y="42" width="100" height="8" rx="4" fill="#DCE3EA"/>
+        <rect x="10" y="62" width="142" height="34" rx="6" fill="#FDEEDF"/>
+        <text x="18" y="84" font-size="14" fill="#B85A12" font-family="Consolas, monospace">M. Rossi 347 1…</text>
+        <rect x="16" y="110" width="124" height="8" rx="4" fill="#DCE3EA"/>
+        <rect x="16" y="130" width="90" height="8" rx="4" fill="#DCE3EA"/>
+        <rect x="16" y="150" width="114" height="8" rx="4" fill="#DCE3EA"/>
+      </g>
+      <path d="M182 140h50" stroke="#0E9F8E" stroke-width="4" marker-end="url(#ar)"/>
+      <defs><marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10z" fill="#0E9F8E"/></marker></defs>
+      <g transform="translate(244 80)">
+        <rect width="110" height="120" rx="16" fill="#0F2A43"/>
+        <text x="55" y="66" text-anchor="middle" font-size="18" fill="#fff" font-weight="700">modello</text>
+        <circle cx="30" cy="96" r="7" fill="#5EEAD4"/><circle cx="55" cy="96" r="7" fill="#5EEAD4"/><circle cx="80" cy="96" r="7" fill="#E0731F"/>
+      </g>
+      <path d="M366 140h40" stroke="#0E9F8E" stroke-width="4" marker-end="url(#ar)"/>
+      <g transform="translate(414 92)">
+        <rect width="100" height="96" rx="12" fill="#FDEEDF" stroke="#E0731F" stroke-width="2"/>
+        <text x="50" y="-12" text-anchor="middle" font-size="16" fill="#5B6B7A" font-weight="700">risposta</text>
+        <text x="50" y="44" text-anchor="middle" font-size="14" fill="#B85A12" font-family="Consolas, monospace">M. Rossi</text>
+        <text x="50" y="66" text-anchor="middle" font-size="14" fill="#B85A12" font-family="Consolas, monospace">347 1…</text>
+      </g>
+    </svg>
+  </div>
+  <p class="bottom-line">Un dato entrato nell'addestramento <strong>non si può togliere facilmente</strong> dal modello.</p>
+  <aside class="notes">
+    Studio: Carlini e altri, "Extracting Training Data from Large Language Models", 2021. Su GPT-2 hanno estratto centinaia di frammenti memorizzati, tra cui dati di contatto di persone reali.
+    I fornitori oggi usano filtri per ridurre il problema, ma il rischio non è zero.
+    Per questo, nel GDPR, l'addestramento dei modelli con dati personali è un tema centrale (parere EDPB 28/2024, dicembre 2024).
+  </aside>
+</section>
+
+<section class="slide" data-title="Account personale e aziendale">
+  <p class="kicker">Il tipo di account conta</p>
+  <h2>Un account personale e uno aziendale non sono uguali</h2>
+  <table class="cmp-t">
+    <tr><th></th><th>Account personale (gratuito o a pagamento)</th><th>Account aziendale</th></tr>
+    <tr><td>Esempi</td><td>ChatGPT Free e Plus, Gemini con account Google personale, Claude Free e Pro</td><td>ChatGPT Business ed Enterprise, Gemini in Google Workspace, Claude Team ed Enterprise</td></tr>
+    <tr><td>Chat usate per addestrare?</td><td>ChatGPT e Gemini: sì, finché non lo disattivi. Claude: lo chiede all'utente.</td><td class="good">No, salvo diverso accordo</td></tr>
+    <tr><td>Chi fissa le regole</td><td>I termini d'uso accettati dalla singola persona</td><td class="good">Un contratto tra l'azienda e il fornitore</td></tr>
+    <tr><td>Ruolo del fornitore per il GDPR</td><td>Usa i dati anche per scopi propri</td><td class="good">Tratta i dati solo per conto dell'azienda (responsabile del trattamento)</td></tr>
+    <tr><td>Controllo</td><td>Ognuno configura il proprio account</td><td class="good">L'azienda decide impostazioni e accessi</td></tr>
+  </table>
+  <p class="bottom-line">Per lavorare va usato <strong>lo strumento che l'azienda ha scelto e autorizzato</strong>, con l'account aziendale.</p>
+  <aside class="notes">
+    Anche un abbonamento a pagamento personale (Plus, Pro) resta un account personale: le chat possono essere usate per l'addestramento se non si cambia l'impostazione.
+    ChatGPT Business si chiamava "Team" fino al 2025.
+    Claude: dall'autunno 2025 gli utenti dei piani personali scelgono se le chat servono all'addestramento; con l'opzione attiva i dati sono conservati fino a 5 anni, altrimenti 30 giorni.
+    Il ruolo di "responsabile del trattamento" lo spieghiamo nella parte 2.
+  </aside>
+</section>
+
+<section class="slide s-lab" data-title="Impostazioni privacy">
+  <p class="kicker lab-kicker"><svg class="ic"><use href="#i-users"/></svg>Pratica · da soli · 15 minuti</p>
+  <h2>Controlliamo le impostazioni sulla privacy</h2>
+  <div class="lab-grid">
+    <div class="lstep">
+      <h3><span>1</span>ChatGPT</h3>
+      <p class="path">Impostazioni → Controlli dati → <b>Migliora il modello per tutti</b></p>
+      <p class="lstep-text">Poi apri una <strong>chat temporanea</strong>: non compare nella cronologia e non serve ad addestrare.</p>
+    </div>
+    <div class="lstep">
+      <h3><span>2</span>Gemini</h3>
+      <p class="path">Menu → Attività → <b>Conserva attività</b></p>
+      <p class="lstep-text">Se è attiva, le chat servono anche a migliorare i modelli di Google e sono conservate 18 mesi.</p>
+    </div>
+    <div class="lstep">
+      <h3><span>3</span>Claude</h3>
+      <p class="path">Impostazioni → Privacy → <b>Aiuta a migliorare Claude</b></p>
+      <p class="lstep-text">Se è attiva, le chat servono all'addestramento e restano fino a 5 anni.</p>
+    </div>
+    <div class="lstep">
+      <h3><span>4</span>Duck.ai</h3>
+      <p class="lstep-text">Apri la pagina di aiuto sulla privacy e leggi cosa succede alle chat:</p>
+      <p class="path" style="font-family:var(--mono);font-size:14.5px;color:var(--teal-d)">duckduckgo.com/duckduckgo-help-pages/duckai/ai-chat-privacy</p>
+    </div>
+  </div>
+  <aside class="notes">
+    I nomi delle voci cambiano spesso: controllare i percorsi il giorno prima.
+    ChatGPT: la chat temporanea viene cancellata entro 30 giorni. Disattivare l'addestramento non cancella la cronologia.
+    Gemini: con "Conserva attività" disattivata le chat vengono tenute circa 72 ore per rispondere e per sicurezza; quelle già esaminate da revisori umani restano fino a 3 anni. Il periodo di 18 mesi si può portare a 3 o 36 mesi.
+    Claude: con l'opzione disattivata la conservazione torna a 30 giorni.
+    Duck.ai: dichiara che le chat sono anonimizzate (niente indirizzo IP), non sono usate per addestrare i modelli, e i fornitori le cancellano entro 30 giorni, con eccezioni limitate per sicurezza e obblighi di legge. La cronologia resta sul dispositivo.
+    Importante: queste impostazioni riducono il rischio, ma non rendono un account personale adatto ai dati dei clienti.
+  </aside>
+</section>
+
+<!-- ============ Parte 2 · GDPR ============ -->
+<section class="slide s-section" data-title="Il GDPR">
+  <p class="kicker">Parte 2</p>
+  <h2>Il GDPR: le regole sui dati personali</h2>
+  <p class="section-q">Regolamento europeo 2016/679, applicato dal 25 maggio 2018 in tutta l'Unione. Vale con o senza intelligenza artificiale.</p>
+  <aside class="notes">
+    GDPR = General Data Protection Regulation. In Italia c'è anche il Codice privacy (d.lgs. 196/2003), aggiornato nel 2018 per adattarlo al GDPR.
+    Il GDPR si applica anche alle aziende fuori dall'UE che offrono servizi a persone che si trovano nell'UE (art. 3): per questo vale anche per OpenAI, Google, DeepSeek.
+    Novità in discussione: la Commissione ha proposto nel novembre 2025 alcune modifiche al GDPR (pacchetto "Digital Omnibus"). Al 5 novembre 2026 il Consiglio ha la sua posizione (21 ottobre 2026), il Parlamento non ancora: non è cambiato nulla, le regole che vediamo oggi sono quelle in vigore.
+  </aside>
+</section>
+
+<section class="slide" data-title="Dato personale">
+  <p class="kicker">La definizione</p>
+  <h2 style="font-size:36px">Dato personale: ogni informazione su una persona identificabile</h2>
+  <div class="dp">
+    <div class="dp-box">
+      <h3>Esempi di dati personali</h3>
+      <div class="chips">
+        <span>nome e cognome</span><span>email</span><span>numero di telefono</span><span>indirizzo</span>
+        <span>codice fiscale</span><span>IBAN</span><span>foto</span><span>voce registrata</span>
+        <span>targa</span><span>indirizzo IP</span><span>numero cliente</span><span>stipendio</span>
+        <span class="wide">"la collega di contabilità che abita a Feltre e ha due figli"</span>
+      </div>
+      <p class="dp-note">Basta che la persona si possa riconoscere, anche senza il nome. Non sono dati personali i dati di una società (ragione sociale, fatturato) e i dati davvero anonimi.</p>
+    </div>
+    <div class="dp-box sp">
+      <h3>Dati particolari: protezione più forte</h3>
+      <div class="chips r">
+        <span>salute</span><span>origine razziale o etnica</span><span>opinioni politiche</span>
+        <span>convinzioni religiose o filosofiche</span><span>appartenenza sindacale</span>
+        <span>dati genetici</span><span>dati biometrici per identificare</span><span>vita e orientamento sessuale</span>
+      </div>
+      <p class="dp-note">Si possono trattare solo in casi previsti dalla legge (art. 9). Regole strette anche per i dati su condanne e reati (art. 10).</p>
+    </div>
+  </div>
+  <aside class="notes">
+    Definizione: art. 4 del GDPR. "Identificabile" = riconoscibile direttamente (nome) o indirettamente (combinando informazioni).
+    Domanda: l'indirizzo email mario.rossi@azienda.it è un dato personale? Sì, identifica una persona, anche se è un indirizzo di lavoro. Invece info@azienda.it in genere no.
+    Esempio della collega: nessun nome, ma in un'azienda piccola la si riconosce subito.
+    Eccezione: i dati di una ditta individuale o di un libero professionista (nome della ditta, partita IVA, fatturato) riguardano una persona, quindi sono dati personali.
+    Dati biometrici: impronte, volto, voce usati per riconoscere una persona.
+  </aside>
+</section>
+
+<section class="slide" data-title="Le figure del GDPR">
+  <p class="kicker">Chi è chi</p>
+  <h2>Le quattro figure del GDPR</h2>
+  <div class="roles">
+    <div class="role"><span class="re">🧑</span><b>L'interessato</b><p>La persona a cui si riferiscono i dati.</p><small>Un cliente, un dipendente, un candidato.</small></div>
+    <div class="role c2"><span class="re">🏢</span><b>Il titolare del trattamento</b><p>Decide perché e come si usano i dati, e ne risponde.</p><small>Di solito l'azienda, non il singolo dipendente.</small></div>
+    <div class="role c3"><span class="re">🤝</span><b>Il responsabile del trattamento</b><p>Tratta i dati per conto del titolare, secondo un contratto.</p><small>Il fornitore del gestionale, del cloud o dell'IA aziendale.</small></div>
+    <div class="role c4"><span class="re">⚖️</span><b>Il Garante privacy</b><p>L'autorità italiana che controlla, riceve reclami e sanziona.</p><small>garanteprivacy.it</small></div>
+  </div>
+  <p class="bottom-line">Chi lavora in azienda tratta i dati <strong>per conto del titolare</strong> e deve seguirne le istruzioni.</p>
+  <aside class="notes">
+    Il contratto con il responsabile è previsto dall'art. 28 GDPR (spesso si chiama DPA, Data Processing Agreement). È quello che c'è nei piani aziendali di ChatGPT, Gemini e Claude.
+    Con un account personale il fornitore non lavora "per conto" dell'azienda: usa i dati anche per scopi propri. Per questo incollare dati dei clienti in un account personale è una comunicazione di dati a un terzo che l'azienda non ha autorizzato.
+    Molte aziende hanno anche un DPO (responsabile della protezione dei dati, art. 37): è la persona da contattare in caso di dubbi.
+  </aside>
+</section>
+
+<section class="slide" data-title="I principi">
+  <p class="kicker">Articolo 5 del GDPR</p>
+  <h2>I principi del trattamento dei dati personali</h2>
+  <table class="cmp-t tight">
+    <tr><th style="width:400px">Principio</th><th>Che cosa richiede</th></tr>
+    <tr><td>Liceità e trasparenza</td><td>Serve una base giuridica e le persone devono essere informate del trattamento.</td></tr>
+    <tr><td>Limitazione della finalità</td><td>I dati si usano solo per gli scopi dichiarati al momento della raccolta.</td></tr>
+    <tr><td>Minimizzazione</td><td>Si trattano solo i dati necessari allo scopo, anche in un prompt.</td></tr>
+    <tr><td>Esattezza</td><td>I dati devono essere corretti; un dato errato prodotto dall'IA va rettificato.</td></tr>
+    <tr><td>Limitazione della conservazione</td><td>I dati si conservano solo per il tempo necessario allo scopo.</td></tr>
+    <tr><td>Integrità e riservatezza</td><td>I dati vanno protetti da accessi non autorizzati e da perdite.</td></tr>
+    <tr><td>Responsabilizzazione</td><td>Il titolare deve poter dimostrare di rispettare questi principi.</td></tr>
+  </table>
+  <aside class="notes">
+    Il primo principio nel testo completo è "liceità, correttezza e trasparenza". La base giuridica è nella slide successiva.
+    Responsabilizzazione (accountability): in pratica registro dei trattamenti, informative, valutazioni d'impatto.
+    Per chi usa l'IA il principio più concreto è la minimizzazione: è quello dell'esercizio di oggi.
+  </aside>
+</section>
+
+<section class="slide" data-title="Basi giuridiche">
+  <p class="kicker">Articolo 6</p>
+  <h2>Per usare dati personali serve una base giuridica</h2>
+  <div class="cards c3 big">
+    <div class="card"><b>1 · Consenso</b><span>La persona ha detto sì in modo libero e informato. Esempio: iscrizione alla newsletter.</span></div>
+    <div class="card"><b>2 · Contratto</b><span>Il trattamento serve a eseguire un contratto con la persona. Esempio: spedire un ordine.</span></div>
+    <div class="card"><b>3 · Obbligo di legge</b><span>Lo impone una legge. Esempio: conservare le fatture per il fisco.</span></div>
+    <div class="card"><b>4 · Interessi vitali</b><span>Serve a proteggere la vita di qualcuno. Esempio: un soccorso urgente.</span></div>
+    <div class="card"><b>5 · Interesse pubblico</b><span>Un compito di interesse pubblico. Esempio: un comune che gestisce i servizi scolastici.</span></div>
+    <div class="card"><b>6 · Legittimo interesse</b><span>Un interesse concreto dell'azienda che non prevale sui diritti della persona. Esempio: prevenire le frodi.</span></div>
+  </div>
+  <p class="bottom-line">Senza una di queste sei basi il trattamento è <strong>illecito</strong>. Per i dati particolari servono condizioni ancora più strette.</p>
+  <aside class="notes">
+    Il consenso non è l'unica base, ed è spesso la meno adatta al lavoro: per i dipendenti, ad esempio, raramente è "libero".
+    Il legittimo interesse richiede un bilanciamento tra interesse dell'azienda e diritti della persona, da documentare per iscritto.
+    Sull'IA: il Garante contestava a OpenAI proprio la mancanza di una base giuridica adeguata per usare dati personali nell'addestramento. Secondo l'EDPB (parere 28/2024) il legittimo interesse può essere una base per addestrare un modello, ma solo se il bilanciamento è fatto bene.
+  </aside>
+</section>
+
+<section class="slide" data-title="I diritti">
+  <p class="kicker">Articoli 12-22</p>
+  <h2>I diritti delle persone sui propri dati</h2>
+  <div class="cards c4 big">
+    <div class="card"><span class="an">art. 13-14</span><b>Informazione</b><span>Sapere chi usa i dati, per cosa e per quanto tempo.</span></div>
+    <div class="card"><span class="an">art. 15</span><b>Accesso</b><span>Sapere se l'azienda ha dati su di sé e averne una copia.</span></div>
+    <div class="card"><span class="an">art. 16</span><b>Rettifica</b><span>Far correggere i dati sbagliati.</span></div>
+    <div class="card"><span class="an">art. 17</span><b>Cancellazione</b><span>Far cancellare i dati quando non c'è più motivo di tenerli.</span></div>
+    <div class="card"><span class="an">art. 18</span><b>Limitazione</b><span>Bloccare l'uso dei dati mentre si verifica un problema.</span></div>
+    <div class="card"><span class="an">art. 20</span><b>Portabilità</b><span>Ricevere i propri dati in un formato leggibile e portarli altrove.</span></div>
+    <div class="card"><span class="an">art. 21</span><b>Opposizione</b><span>Opporsi a usi basati sul legittimo interesse, e sempre al marketing diretto.</span></div>
+    <div class="card"><span class="an">art. 22</span><b>Decisioni automatizzate</b><span>Non subire decisioni importanti prese solo da una macchina.</span></div>
+  </div>
+  <p class="bottom-line">L'azienda deve rispondere <strong>entro un mese</strong>, prorogabile di altri due mesi nei casi complessi.</p>
+  <aside class="notes">
+    La cancellazione non è assoluta: se c'è un obbligo di legge (es. fatture) i dati restano.
+    Esempio IA: nel 2025 Meta ha iniziato ad addestrare i suoi modelli con i post pubblici degli utenti europei, basandosi sul legittimo interesse; gli utenti potevano opporsi con un modulo (diritto di opposizione).
+    Dopo il blocco del 2023, OpenAI ha dovuto offrire agli utenti europei un modo per opporsi all'uso dei loro dati per l'addestramento e per chiedere la correzione o la cancellazione dei dati inesatti.
+  </aside>
+</section>
+
+<section class="slide" data-title="Decisioni automatizzate">
+  <p class="kicker">Articolo 22</p>
+  <h2>Il diritto a non subire decisioni prese solo da una macchina</h2>
+  <div class="rule">Una persona ha diritto a <b>non essere sottoposta a una decisione presa solo in modo automatico</b>, se la decisione ha effetti giuridici su di lei o la tocca in modo altrettanto significativo.</div>
+  <div class="rx">
+    <div class="rx-box">
+      <h3>Esempi</h3>
+      <ul>
+        <li>Un prestito rifiutato online senza che nessuno esamini la domanda</li>
+        <li>Un candidato scartato in automatico da un software</li>
+        <li>Un turno di lavoro tolto da un algoritmo</li>
+      </ul>
+    </div>
+    <div class="rx-box">
+      <h3>Quando è ammessa</h3>
+      <ul>
+        <li>Se serve per un contratto, se lo prevede la legge o con consenso esplicito</li>
+        <li>Anche allora la persona può chiedere <strong>l'intervento di un essere umano</strong>, dire la propria e contestare la decisione</li>
+      </ul>
+    </div>
+  </div>
+  <p class="bottom-line">Una persona deve <strong>esaminare davvero il caso</strong>: non basta che firmi quello che ha deciso il sistema.</p>
+  <aside class="notes">
+    È la norma del GDPR più legata all'IA. Le linee guida europee chiariscono che l'intervento umano deve essere reale: chi decide deve avere l'autorità e la competenza per cambiare la decisione.
+    Esempio tipico da evitare: chiedere a ChatGPT "quale di questi 10 candidati devo assumere?" e seguire la risposta senza un esame proprio.
+    Lo stesso principio torna nell'AI Act come "sorveglianza umana".
+  </aside>
+</section>
+
+<section class="slide" data-title="Fuori dall'UE">
+  <p class="kicker">Trasferimenti di dati</p>
+  <h2>Quando i dati vanno fuori dall'Unione europea</h2>
+  <table class="cmp-t">
+    <tr><th style="width:360px">Dove vanno i dati</th><th>Cosa prevede il GDPR</th></tr>
+    <tr><td>Paesi dell'UE e dello Spazio economico europeo</td><td class="good">Circolano liberamente: si applica lo stesso GDPR.</td></tr>
+    <tr><td>Paesi con una decisione di adeguatezza</td><td>Ammessi: la Commissione ha riconosciuto una protezione equivalente. Esempi: Svizzera, Regno Unito, Giappone, Stati Uniti per le aziende aderenti al Data Privacy Framework.</td></tr>
+    <tr><td>Tutti gli altri paesi</td><td>Servono garanzie specifiche, ad esempio le clausole contrattuali standard approvate dalla Commissione.</td></tr>
+  </table>
+  <p class="bottom-line">Molti fornitori di IA elaborano i dati negli Stati Uniti: i contratti aziendali indicano <strong>dove vanno i dati e con quali garanzie</strong>.</p>
+  <aside class="notes">
+    Il Data Privacy Framework UE-USA è in vigore dal luglio 2023. Il Tribunale dell'UE lo ha confermato a settembre 2025; è stato presentato appello alla Corte di giustizia. Due accordi precedenti (Safe Harbor e Privacy Shield) erano stati annullati: è un punto che può cambiare.
+    Alcuni fornitori offrono piani aziendali con elaborazione e conservazione dei dati in Europa.
+    DeepSeek conserva i dati in Cina, paese senza decisione di adeguatezza: è uno dei motivi del blocco deciso dal Garante.
+  </aside>
+</section>
+
+<section class="slide" data-title="Data breach">
+  <p class="kicker">Articoli 33-34</p>
+  <h2>Una violazione dei dati va segnalata al Garante entro 72 ore</h2>
+  <p style="font-size:21px;margin-bottom:18px">Violazione (<em>data breach</em>): dati personali <strong>persi, distrutti, modificati, divulgati o letti</strong> da chi non doveva, per errore o per un attacco.</p>
+  <div class="steps">
+    <div class="step hl"><span class="sn">1</span><b>Chi se ne accorge avvisa subito</b><span>Il referente privacy o il DPO dell'azienda. Non si aspetta.</span></div>
+    <div class="step"><span class="sn">2</span><b>L'azienda valuta il rischio</b><span>Quali dati, quante persone, quali conseguenze possibili.</span></div>
+    <div class="step"><span class="sn">3</span><b>Notifica al Garante entro 72 ore</b><span>Salvo che sia improbabile un rischio per le persone. Va comunque registrata.</span></div>
+    <div class="step"><span class="sn">4</span><b>Se il rischio è elevato, avvisa le persone</b><span>Per dire cosa è successo e come proteggersi.</span></div>
+  </div>
+  <div class="ex-box"><b>Un caso reale:</b> a marzo 2023 un errore di ChatGPT ha mostrato ad alcuni utenti i titoli delle chat di altre persone e dati di pagamento di una parte degli abbonati.</div>
+  <aside class="notes">
+    Esempi in ufficio: email con dati inviata al destinatario sbagliato, PC o chiavetta persi, file dei clienti caricati su uno strumento non autorizzato.
+    Le 72 ore decorrono da quando l'azienda viene a conoscenza della violazione: per questo il primo passo del dipendente è avvisare subito.
+    Il caso di marzo 2023 era dovuto a un errore in una libreria software; il Garante ha contestato anche a OpenAI di non averlo notificato.
+    In discussione (Digital Omnibus, non ancora approvato): portare il termine a 96 ore e limitare la notifica ai casi ad alto rischio.
+  </aside>
+</section>
+
+<section class="slide" data-title="I casi del Garante">
+  <p class="kicker">Il GDPR applicato all'IA</p>
+  <h2>Il Garante italiano e l'intelligenza artificiale: alcuni casi</h2>
+  <div class="tl">
+    <div class="tl-row"><span class="tl-d">febbraio 2023</span><span class="tl-dot"></span><span class="tl-t"><b>Replika</b>, chatbot "amico virtuale": blocco temporaneo in Italia per i rischi per i minori.</span></div>
+    <div class="tl-row"><span class="tl-d">marzo 2023</span><span class="tl-dot"></span><span class="tl-t"><b>ChatGPT</b>: il Garante ne limita il trattamento dei dati; OpenAI lo rende inaccessibile in Italia fino al 28 aprile, quando aggiunge informative e verifica dell'età.</span></div>
+    <div class="tl-row"><span class="tl-d">dicembre 2024</span><span class="tl-dot"></span><span class="tl-t"><b>OpenAI</b>: sanzione di 15 milioni per base giuridica dell'addestramento, trasparenza, verifica dell'età e violazione non notificata.</span></div>
+    <div class="tl-row"><span class="tl-d">gennaio 2025</span><span class="tl-dot"></span><span class="tl-t"><b>DeepSeek</b>: bloccato in Italia per le informazioni insufficienti sui dati raccolti e conservati in Cina.</span></div>
+    <div class="tl-row"><span class="tl-d">maggio 2025</span><span class="tl-dot"></span><span class="tl-t"><b>Replika</b>: sanzione di 5 milioni all'azienda che lo sviluppa, Luka Inc.</span></div>
+    <div class="tl-row"><span class="tl-d">marzo 2026</span><span class="tl-dot"></span><span class="tl-t">Il <b>Tribunale di Roma</b> annulla la sanzione a OpenAI: la competenza era dell'autorità irlandese, perché OpenAI ha la sede europea in Irlanda.</span></div>
+  </div>
+  <p class="bottom-line" style="margin-top:16px">Il GDPR vale anche per le aziende fuori dall'UE che offrono servizi a <strong>persone che si trovano in Europa</strong>.</p>
+  <aside class="notes">
+    ChatGPT 2023: provvedimento del 30 marzo; motivi: nessuna informativa, nessuna base giuridica per l'addestramento, nessun controllo dell'età, risposte inesatte su persone.
+    Sanzione 2024: provvedimento n. 755 del 2 novembre 2024, comunicato il 20 dicembre 2024.
+    Annullamento: sentenza del Tribunale di Roma del 18 marzo 2026. Il Tribunale non è entrato nel merito delle violazioni: ha deciso che, da quando OpenAI ha aperto la sede europea in Irlanda (febbraio 2024), la competenza era dell'autorità irlandese, in base al meccanismo dello "sportello unico" del GDPR.
+    Replika: decisione dell'aprile 2025, resa pubblica il 19 maggio 2025. Motivi: basi giuridiche non indicate, informativa inadeguata, nessuna verifica dell'età.
+  </aside>
+</section>
+
+<section class="slide" data-title="Regole pratiche GDPR">
+  <p class="kicker">In pratica</p>
+  <h2>Il GDPR quando usiamo l'IA al lavoro</h2>
+  <div class="pts rules-big" style="gap:24px;margin-top:6px">
+    <div class="pt"><i>1</i><span>Usa solo gli strumenti <strong>autorizzati dall'azienda</strong>, con l'account aziendale.</span></div>
+    <div class="pt"><i>2</i><span>Prima di incollare un testo, <strong>togli i dati personali che non servono</strong> al compito.</span></div>
+    <div class="pt"><i>3</i><span>Dati sanitari e altri dati particolari: <strong>mai</strong> in strumenti non autorizzati.</span></div>
+    <div class="pt"><i>4</i><span>Controlla quello che l'IA scrive su una persona: un errore è un <strong>dato inesatto</strong>.</span></div>
+    <div class="pt"><i>5</i><span>Le decisioni che riguardano una persona le prende <strong>una persona</strong>, dopo aver esaminato il caso.</span></div>
+    <div class="pt"><i>6</i><span>Se hai inserito dati per errore, <strong>avvisa subito</strong> il referente privacy.</span></div>
+  </div>
+  <aside class="notes">
+    Ogni regola corrisponde a un pezzo di GDPR visto prima: 1 titolare e responsabile; 2 minimizzazione; 3 dati particolari; 4 esattezza; 5 art. 22; 6 data breach e 72 ore.
+  </aside>
+</section>
+
+<section class="slide s-lab" data-title="Posso incollarlo?">
+  <p class="kicker lab-kicker"><svg class="ic"><use href="#i-users"/></svg>Pratica · in coppia · 15 minuti</p>
+  <h2>Possiamo incollarlo in un assistente IA?</h2>
+  <div class="cases c3">
+    <div class="case"><p>Il testo di un comunicato stampa già pubblicato sul sito dell'azienda</p><div class="ans g f"><b>Sì</b>È pubblico e non contiene dati personali.</div></div>
+    <div class="case"><p>L'email di un cliente arrabbiato, da riscrivere con un tono più calmo</p><div class="ans y f"><b>Sì, ma prima togli i dati</b>Nome, indirizzo e numero d'ordine non servono a cambiare il tono.</div></div>
+    <div class="case"><p>Il certificato medico di un collega, da riassumere</p><div class="ans r f"><b>No</b>Sono dati sulla salute: dati particolari.</div></div>
+    <div class="case"><p>Il file Excel con nome, email e acquisti di 2.000 clienti, per un'analisi delle vendite</p><div class="ans y f"><b>Solo con lo strumento aziendale</b>E togliendo prima nomi ed email, che per l'analisi non servono.</div></div>
+    <div class="case"><p>I CV dei candidati, per farsi dire chi assumere</p><div class="ans r f"><b>No</b>Decisione importante su persone: serve un esame umano reale. L'AI Act considera ad alto rischio l'IA usata per selezionare il personale.</div></div>
+    <div class="case"><p>Una bozza di contratto con i prezzi riservati di un fornitore</p><div class="ans o f"><b>Solo con lo strumento aziendale</b>Mai su un account personale. Non è un problema di GDPR ma di riservatezza aziendale.</div></div>
+  </div>
+  <aside class="notes">
+    Le risposte compaiono una alla volta (freccia avanti). Far discutere ogni coppia prima di mostrarle.
+    Caso 4: anche con lo strumento aziendale vale la minimizzazione.
+    Caso 5: anche togliendo i nomi, la decisione resta una valutazione di persone. L'IA può aiutare a confrontare i requisiti, la scelta la fa chi seleziona. Se un'azienda usa un assistente generico apposta per selezionare il personale, per l'AI Act quell'uso rientra tra quelli ad alto rischio.
+    Caso 6: esempio reale. Nel 2023 Samsung ha vietato ai dipendenti gli assistenti IA pubblici dopo che alcuni ingegneri avevano incollato in ChatGPT codice sorgente riservato.
+  </aside>
+</section>
+
+<section class="slide s-lab" data-title="Togliere i dati personali">
+  <p class="kicker lab-kicker"><svg class="ic"><use href="#i-users"/></svg>Pratica · da soli · Duck.ai · 20 minuti</p>
+  <h2>Togliamo i dati personali prima di usare l'IA</h2>
+  <div class="lab-grid" style="grid-template-columns: 1.25fr 1fr">
+    <div class="lstep">
+      <h3><span>1</span>Copia questa email in Blocco note, non nella chat</h3>
+      <div class="prompt small mail"><span class="prompt-text">Buongiorno, sono Marta Zanella, cliente n. 44817. Vi scrivo per la terza volta: gli occhiali ordinati il 3 ottobre non sono ancora arrivati in via Feltre 21 a Belluno. Il mio numero è 347 112 2334. Ho anche un problema agli occhi e il medico mi ha detto di non usare quelli vecchi. Se non ricevo risposta entro venerdì mi rivolgerò a un avvocato.</span></div>
+      <p class="obs">Quali dati personali contiene? Quale è un dato particolare?</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="lstep">
+        <h3><span>2</span>Sostituisci i dati</h3>
+        <p class="lstep-text">Usa segnaposto tra parentesi quadre: <strong>[CLIENTE]</strong>, <strong>[N. ORDINE]</strong>, <strong>[INDIRIZZO]</strong>, <strong>[TELEFONO]</strong>. Togli la frase sulla salute.</p>
+      </div>
+      <div class="lstep">
+        <h3><span>3</span>Incolla in Duck.ai solo la versione modificata</h3>
+        <div class="prompt small"><span class="prompt-text">Scrivi una risposta cortese a questa email di un cliente di Occhialeria Dolomiti. Mantieni i segnaposto tra parentesi quadre.</span></div>
+      </div>
+      <div class="lstep">
+        <h3><span>4</span>Rimetti tu i dati veri</h3>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    Dati personali: nome, numero cliente, data dell'ordine collegata a lei, indirizzo, telefono. Dato particolare: il problema agli occhi (salute).
+    La frase sulla salute non serve a rispondere: la si toglie del tutto, non basta un segnaposto.
+    Conclusione attesa: la risposta è buona anche senza dati veri. Quasi sempre all'IA non servono i dati personali per fare il lavoro.
+    Precisazione: per l'azienda, che sa a chi corrispondono i segnaposto, il testo resta un dato "pseudonimizzato", non anonimo. Ma il fornitore dell'IA riceve un testo da cui non può risalire alla persona, e il rischio scende molto.
+    Non usare l'IA per togliere i dati: vorrebbe dire incollare proprio i dati che vogliamo proteggere.
+  </aside>
+</section>
+
+<!-- ============ Parte 3 · AI Act ============ -->
+<section class="slide s-section" data-title="L'AI Act">
+  <p class="kicker">Parte 3</p>
+  <h2>L'AI Act: le regole europee sui sistemi di IA</h2>
+  <p class="section-q">Regolamento (UE) 2024/1689. In vigore dal 1° agosto 2024, si applica a tappe. Le scadenze sono state modificate nel luglio 2026.</p>
+  <aside class="notes">
+    È la prima legge generale sull'IA al mondo. È un regolamento: vale direttamente in tutti gli Stati membri, senza bisogno di leggi nazionali di recepimento.
+    Il Regolamento (UE) 2026/1744 ("Digital Omnibus sull'IA"), pubblicato il 24 luglio 2026 e in vigore dal 27 luglio 2026, ha rinviato gli obblighi per i sistemi ad alto rischio e cambiato alcune regole. Le date in queste slide sono già aggiornate.
+  </aside>
+</section>
+
+<section class="slide" data-title="GDPR e AI Act">
+  <p class="kicker">Due leggi diverse</p>
+  <h2>Il GDPR protegge i dati, l'AI Act regola i sistemi di IA</h2>
+  <div class="vs">
+    <div class="vs-box">
+      <h3>GDPR</h3>
+      <p class="sub">Regolamento (UE) 2016/679</p>
+      <dl>
+        <dt>Cosa regola</dt><dd>Ogni uso di dati personali, con o senza IA</dd>
+        <dt>Obiettivo</dt><dd>Proteggere le persone a cui i dati si riferiscono</dd>
+        <dt>Approccio</dt><dd>Principi generali che il titolare applica e deve dimostrare</dd>
+        <dt>Chi controlla</dt><dd>In Italia il Garante privacy</dd>
+      </dl>
+    </div>
+    <div class="vs-box b2">
+      <h3>AI Act</h3>
+      <p class="sub">Regolamento (UE) 2024/1689</p>
+      <dl>
+        <dt>Cosa regola</dt><dd>I sistemi e i modelli di IA, in base al rischio dell'uso</dd>
+        <dt>Obiettivo</dt><dd>Sistemi sicuri e rispettosi dei diritti fondamentali</dd>
+        <dt>Approccio</dt><dd>Come la sicurezza dei prodotti: requisiti, controlli, marcatura CE</dd>
+        <dt>Chi controlla</dt><dd>In Italia AgID e ACN; l'Ufficio europeo per l'IA per i grandi modelli</dd>
+      </dl>
+    </div>
+  </div>
+  <p class="bottom-line">Si applicano insieme: un sistema di IA che usa dati personali deve <strong>rispettare entrambe</strong> le leggi.</p>
+  <aside class="notes">
+    ACN = Agenzia per la cybersicurezza nazionale; AgID = Agenzia per l'Italia digitale. Le ha indicate la legge italiana 132/2025. Restano le competenze di Garante privacy, Banca d'Italia, CONSOB e IVASS nei rispettivi settori.
+    L'Ufficio europeo per l'IA (AI Office) fa parte della Commissione europea.
+    L'AI Act riguarda anche sistemi che non usano dati personali (es. IA in un macchinario).
+  </aside>
+</section>
+
+<section class="slide" data-title="Chi deve rispettarlo">
+  <p class="kicker">Ambito</p>
+  <h2>Chi deve rispettare l'AI Act</h2>
+  <div class="roles" style="grid-template-columns: repeat(3, 1fr)">
+    <div class="role c3"><span class="re">🛠️</span><b>Il fornitore</b><p>Sviluppa un sistema o un modello di IA e lo mette sul mercato con il proprio nome.</p><small>OpenAI, Google, Anthropic, ma anche un'azienda che sviluppa un proprio software con IA.</small></div>
+    <div class="role c2"><span class="re">🏢</span><b>Il deployer</b><p>Usa un sistema di IA sotto la propria autorità per un'attività professionale.</p><small>L'azienda che usa un'IA per il servizio clienti o per analizzare documenti.</small></div>
+    <div class="role c4"><span class="re">🚫</span><b>Chi è escluso</b><p>Chi usa l'IA per scopi personali e non professionali.</p><small>Esclusi anche ricerca scientifica, difesa e sicurezza nazionale.</small></div>
+  </div>
+  <p class="bottom-line">Quando usiamo l'IA al lavoro, il deployer è <strong>l'azienda per cui lavoriamo</strong>. Ci sono regole anche per importatori e distributori.</p>
+  <aside class="notes">
+    "Deployer" è il termine usato anche nella versione italiana ufficiale del regolamento; in alcuni testi si trova "utilizzatore".
+    L'AI Act vale anche per i fornitori fuori dall'UE, se il sistema è usato nell'UE.
+    Attenzione: chi modifica in modo sostanziale un sistema, o lo usa per uno scopo ad alto rischio diverso da quello previsto, può diventare a sua volta fornitore (art. 25).
+  </aside>
+</section>
+
+<section class="slide" data-title="Livelli di rischio">
+  <p class="kicker">L'idea centrale</p>
+  <h2>L'AI Act divide gli usi dell'IA in quattro livelli di rischio</h2>
+  <div class="pyr-wrap">
+    <div class="pyr">
+      <div class="lvl l1"><b>Inaccettabile</b><span>Vietati. Esempio: punteggio sociale delle persone.</span></div>
+      <div class="lvl l2"><b>Alto</b><span>Ammessi con obblighi rigorosi. Esempio: selezione del personale.</span></div>
+      <div class="lvl l3"><b>Trasparenza</b><span>Bisogna dire che c'è un'IA. Esempio: chatbot, deepfake.</span></div>
+      <div class="lvl l4"><b>Minimo</b><span>Nessun obbligo specifico. Esempio: filtri antispam, videogiochi.</span></div>
+    </div>
+    <div class="gpai">
+      <b>In più: i modelli di uso generale</b>
+      <p>GPT, Gemini, Claude e simili hanno regole proprie, perché possono essere usati per moltissimi scopi diversi.</p>
+    </div>
+  </div>
+  <aside class="notes">
+    La maggior parte dei sistemi di IA in uso oggi rientra nel rischio minimo.
+    Esempio: lo stesso modello linguistico usato per scrivere una email (minimo), per un chatbot sul sito (trasparenza), per valutare candidati (alto).
+    Per tutti, fornitori e deployer, vale l'obbligo di alfabetizzazione (lo vediamo più avanti).
+  </aside>
+</section>
+
+<section class="slide" data-title="Pratiche vietate">
+  <p class="kicker">Articolo 5 · dal 2 febbraio 2025</p>
+  <h2>Le pratiche di IA vietate in Europa</h2>
+  <div class="cards c3 big" style="gap:12px">
+    <div class="card red"><b>Manipolare</b><span>con tecniche subliminali o ingannevoli che causano danni significativi</span></div>
+    <div class="card red"><b>Sfruttare le vulnerabilità</b><span>dovute a età, disabilità o situazione sociale ed economica</span></div>
+    <div class="card red"><b>Punteggio sociale</b><span>che porta a trattamenti sfavorevoli ingiustificati o sproporzionati</span></div>
+    <div class="card red"><b>Prevedere i reati</b><span>di una persona solo in base al suo profilo o alla sua personalità</span></div>
+    <div class="card red"><b>Raccogliere volti a tappeto</b><span>da internet o telecamere per creare database di riconoscimento facciale</span></div>
+    <div class="card red"><b>Riconoscere le emozioni</b><span>sul luogo di lavoro e a scuola, salvo motivi medici o di sicurezza</span></div>
+    <div class="card red"><b>Dedurre dati sensibili dal corpo</b><span>etnia, opinioni politiche, religione, sindacato, orientamento sessuale</span></div>
+    <div class="card red"><b>Identificare in tempo reale</b><span>le persone nei luoghi pubblici a fini di polizia, salvo eccezioni strette</span></div>
+    <div class="card new"><b>Nuovo, dal 2 dicembre 2026</b><span>creare immagini intime o sessuali realistiche di persone reali senza consenso, e materiale pedopornografico</span></div>
+  </div>
+  <aside class="notes">
+    Sanzione per le pratiche vietate: fino a 35 milioni di euro o 7% del fatturato mondiale.
+    Riconoscimento delle emozioni: vietato solo al lavoro e nelle scuole; altrove è un sistema ad alto rischio con obblighi di trasparenza.
+    Identificazione biometrica in tempo reale: le eccezioni sono la ricerca di vittime di rapimento o tratta e di persone scomparse, la prevenzione di una minaccia imminente o di un attacco terroristico, la ricerca di sospettati di reati gravi, con autorizzazione di un giudice o di un'autorità indipendente.
+    Il nuovo divieto (app che "spogliano" le persone nelle foto) è stato aggiunto dal Regolamento 2026/1744.
+    La Commissione ha pubblicato linee guida con molti esempi (febbraio 2025).
+  </aside>
+</section>
+
+<section class="slide" data-title="Alto rischio">
+  <p class="kicker">Allegati I e III</p>
+  <h2>Quali sistemi di IA sono ad alto rischio</h2>
+  <div class="cards c4 big" style="gap:12px">
+    <div class="card"><b>Lavoro</b><span>selezione dei CV, promozioni, licenziamenti, valutazione e controllo dei lavoratori</span></div>
+    <div class="card"><b>Istruzione</b><span>ammissioni, voti, controllo durante gli esami</span></div>
+    <div class="card"><b>Servizi essenziali</b><span>affidabilità creditizia, premi di assicurazioni vita e salute, accesso a prestazioni pubbliche</span></div>
+    <div class="card"><b>Emergenze</b><span>smistamento delle chiamate di emergenza e dei pazienti</span></div>
+    <div class="card"><b>Biometria</b><span>identificazione a distanza, riconoscimento delle emozioni dove ammesso</span></div>
+    <div class="card"><b>Infrastrutture critiche</b><span>traffico, acqua, gas, elettricità</span></div>
+    <div class="card"><b>Polizia, migrazione, frontiere</b><span>valutazione delle prove, domande di asilo e visti</span></div>
+    <div class="card"><b>Giustizia ed elezioni</b><span>supporto ai giudici, influenza sul voto</span></div>
+  </div>
+  <p style="font-size:19px;margin-top:16px;line-height:1.4">Sono ad alto rischio anche i sistemi di IA dentro <strong>prodotti già regolati</strong>: dispositivi medici, macchinari, giocattoli, ascensori.</p>
+  <p class="bottom-line">Obblighi dal <strong>2 dicembre 2027</strong> per gli ambiti in elenco e dal <strong>2 agosto 2028</strong> per i prodotti regolati.</p>
+  <aside class="notes">
+    Le schede riassumono gli otto ambiti dell'Allegato III (le emergenze fanno parte dei servizi essenziali; polizia e migrazione sono due ambiti distinti). Un sistema in questi ambiti non è ad alto rischio se svolge solo un compito limitato e non influisce davvero sulla decisione (es. ordina documenti, controlla la formattazione): art. 6, paragrafo 3. Chi lo sostiene deve documentarlo. La profilazione di persone resta sempre ad alto rischio.
+    Credito: escluso il rilevamento delle frodi.
+    Le date erano 2 agosto 2026 e 2 agosto 2027: le ha spostate il Regolamento 2026/1744.
+  </aside>
+</section>
+
+<section class="slide" data-title="Obblighi alto rischio">
+  <p class="kicker">Articoli 9-27</p>
+  <h2>Gli obblighi per i sistemi ad alto rischio</h2>
+  <div class="vs">
+    <div class="vs-box">
+      <h3>Il fornitore deve</h3>
+      <ul class="vs-list" style="margin-top:12px">
+        <li>gestire i rischi per tutta la vita del sistema</li>
+        <li>usare dati di addestramento <b>di qualità e il più possibile senza distorsioni</b></li>
+        <li>preparare la documentazione tecnica e le istruzioni d'uso</li>
+        <li>registrare automaticamente gli eventi (log)</li>
+        <li>progettare il sistema per la <b>sorveglianza umana</b></li>
+        <li>garantire accuratezza e sicurezza informatica</li>
+        <li>apporre la marcatura CE e registrarlo nella banca dati UE</li>
+      </ul>
+    </div>
+    <div class="vs-box b2">
+      <h3>Il deployer deve</h3>
+      <ul class="vs-list" style="margin-top:12px">
+        <li>usarlo secondo le istruzioni del fornitore</li>
+        <li>affidare la sorveglianza a <b>persone competenti e autorizzate</b></li>
+        <li>controllare che i dati che inserisce siano pertinenti</li>
+        <li>sorvegliarne il funzionamento e <b>sospenderlo</b> se crea rischi</li>
+        <li>conservare i log per almeno sei mesi</li>
+        <li><b>informare i lavoratori</b> prima di usarlo sul lavoro</li>
+        <li><b>informare le persone</b> su cui il sistema decide o aiuta a decidere</li>
+      </ul>
+    </div>
+  </div>
+  <p class="bottom-line">Chi subisce una decisione presa con un sistema ad alto rischio ha diritto a <strong>una spiegazione</strong> (art. 86).</p>
+  <aside class="notes">
+    Obblighi del deployer: art. 26. Gli enti pubblici, e le aziende private che erogano servizi pubblici, banche e assicurazioni per credito e polizze vita e salute, devono anche fare una valutazione d'impatto sui diritti fondamentali (art. 27).
+    La sorveglianza umana richiede che chi controlla capisca i limiti del sistema e non si fidi automaticamente dei risultati: l'AI Act nomina esplicitamente il rischio di "distorsione dell'automazione" (art. 14).
+    Si collega all'art. 22 del GDPR visto prima.
+  </aside>
+</section>
+
+<section class="slide" data-title="Trasparenza">
+  <p class="kicker">Articolo 50 · dal 2 agosto 2026</p>
+  <h2>Le persone devono sapere quando c'è di mezzo un'IA</h2>
+  <div class="cards big c2" style="gap:14px">
+    <div class="card"><span class="an">fornitore</span><b>Chatbot e assistenti</b><span>Chi parla con un sistema di IA deve saperlo, a meno che non sia evidente dal contesto.</span></div>
+    <div class="card"><span class="an">fornitore</span><b>Contenuti generati</b><span>Testi, immagini, audio e video prodotti dall'IA devono avere una marcatura leggibile dai computer. Per i sistemi già sul mercato: dal 2 dicembre 2026.</span></div>
+    <div class="card"><span class="an">deployer</span><b>Deepfake</b><span>Chi pubblica immagini, audio o video falsi ma realistici di persone, luoghi o eventi deve dichiarare che sono artificiali. Per opere artistiche o satiriche basta un'indicazione che non rovini l'opera.</span></div>
+    <div class="card"><span class="an">deployer</span><b>Testi di interesse pubblico</b><span>Chi pubblica testi generati con l'IA per informare il pubblico deve dichiararlo, a meno che una persona li abbia rivisti e se ne assuma la responsabilità editoriale.</span></div>
+  </div>
+  <p class="bottom-line">Una email scritta con l'IA e rivista da noi <strong>non va etichettata</strong> per l'AI Act. Regola diversa per i professionisti (avvocati, commercialisti, consulenti, ingegneri): la legge italiana sull'IA li obbliga a dire al cliente, in modo chiaro, quali strumenti di IA usano nel lavoro che fanno per lui.</p>
+  <aside class="notes">
+    Regole analoghe per chi usa sistemi di riconoscimento delle emozioni o categorizzazione biometrica: deve informare le persone esposte.
+    Il 10 giugno 2026 l'Ufficio europeo per l'IA ha pubblicato il codice di buone pratiche sulla trasparenza dei contenuti generati dall'IA (marcatura ed etichettatura). È volontario: gli obblighi restano quelli dell'articolo 50.
+    Sanzioni per la violazione degli obblighi di trasparenza: fino a 15 milioni o 3% del fatturato.
+    Esempio pratico: il chatbot del servizio clienti di un'azienda deve presentarsi come assistente automatico.
+  </aside>
+</section>
+
+<section class="slide" data-title="Modelli di uso generale">
+  <p class="kicker">Articoli 51-55 · dal 2 agosto 2025</p>
+  <h2>Le regole per i modelli come GPT, Gemini e Claude</h2>
+  <div class="vs">
+    <div class="vs-box">
+      <h3>Tutti i modelli di uso generale</h3>
+      <ul class="vs-list" style="margin-top:14px">
+        <li>documentazione tecnica per le autorità</li>
+        <li>informazioni per chi costruisce prodotti sul modello</li>
+        <li>una politica per rispettare il <b>diritto d'autore</b>, compreso il rifiuto degli autori all'uso delle loro opere</li>
+        <li>una <b>sintesi pubblica dei contenuti</b> usati per l'addestramento</li>
+      </ul>
+    </div>
+    <div class="vs-box b2">
+      <h3>I modelli con rischio sistemico</h3>
+      <p style="font-size:17px;color:var(--muted);margin:6px 0 12px">i più grandi: addestrati con più di 10<sup>25</sup> operazioni di calcolo</p>
+      <ul class="vs-list">
+        <li>valutazioni e test, anche per cercare comportamenti pericolosi</li>
+        <li>misure per ridurre i rischi</li>
+        <li>segnalazione degli incidenti gravi all'Ufficio europeo per l'IA</li>
+        <li>protezione informatica del modello</li>
+      </ul>
+    </div>
+  </div>
+  <p class="bottom-line">Gli obblighi sono dei <strong>fornitori dei modelli</strong>. La Commissione può sanzionarli dal 2 agosto 2026.</p>
+  <aside class="notes">
+    10^25 operazioni (FLOP) = la soglia oltre la quale si presume il rischio sistemico; la Commissione può designare anche altri modelli.
+    Codice di buone pratiche per i modelli di uso generale (luglio 2025): volontario, firmato dai principali sviluppatori tra cui OpenAI, Google, Anthropic, Microsoft, Mistral. Meta non l'ha firmato. Chi lo firma ha un modo riconosciuto per dimostrare di rispettare le regole.
+    I modelli già sul mercato prima del 2 agosto 2025 hanno tempo fino al 2 agosto 2027.
+    Sanzioni: fino a 15 milioni o 3% del fatturato mondiale.
+    Diritto d'autore: in Europa è permesso estrarre testi e dati da opere accessibili legalmente, ma gli autori possono riservarsi i diritti (opt-out); i fornitori devono rispettare queste riserve.
+  </aside>
+</section>
+
+<section class="slide" data-title="Alfabetizzazione">
+  <p class="kicker">Articolo 4</p>
+  <h2>Chi usa l'IA al lavoro deve essere formato</h2>
+  <div class="two" style="align-items:start">
+    <div class="pts">
+      <div class="pt"><i>1</i><span>Dal <strong>2 febbraio 2025</strong> fornitori e deployer devono curare le competenze sull'IA del personale e di chi usa i sistemi per loro conto.</span></div>
+      <div class="pt"><i>2</i><span>Dal <strong>27 luglio 2026</strong> la regola è più flessibile: le aziende devono prendere misure per <strong>sostenere</strong> queste competenze, senza garantire un livello preciso.</span></div>
+      <div class="pt"><i>3</i><span>Commissione e Stati membri devono aiutare le aziende, soprattutto le piccole e medie.</span></div>
+    </div>
+    <div class="vs-box b2">
+      <h3 style="font-size:22px;margin-bottom:12px">Cosa vuol dire in pratica</h3>
+      <ul class="vs-list">
+        <li>formazione adatta al ruolo e agli strumenti usati</li>
+        <li>conoscere limiti e rischi: errori, dati personali, distorsioni</li>
+        <li>regole interne chiare su cosa si può fare</li>
+        <li>vale per tutti i livelli di rischio</li>
+      </ul>
+    </div>
+  </div>
+  <p class="bottom-line">Un corso come questo è <strong>una delle misure</strong> che un'azienda può prendere per rispettare l'articolo 4.</p>
+  <aside class="notes">
+    Testo originale: misure per garantire "nella misura del possibile un livello sufficiente di alfabetizzazione". Il Regolamento 2026/1744 ha sostituito l'articolo: ora l'obbligo è sostenere lo sviluppo delle competenze, e il testo precisa che non serve garantire un livello specifico per ogni persona.
+    Non ci sono sanzioni specifiche per l'articolo 4, ma la mancanza di formazione può pesare se qualcosa va storto.
+    Conviene tenere traccia della formazione fatta (date, contenuti, partecipanti).
+  </aside>
+</section>
+
+<section class="slide" data-title="Le tappe">
+  <p class="kicker">Calendario aggiornato al Regolamento (UE) 2026/1744</p>
+  <h2>Le tappe dell'AI Act</h2>
+  <div class="tl">
+    <div class="tl-row"><span class="tl-d">1 agosto 2024</span><span class="tl-dot"></span><span class="tl-t">Entrata in vigore</span></div>
+    <div class="tl-row"><span class="tl-d">2 febbraio 2025</span><span class="tl-dot"></span><span class="tl-t"><b>Pratiche vietate</b> e <b>alfabetizzazione</b> sull'IA</span></div>
+    <div class="tl-row"><span class="tl-d">2 agosto 2025</span><span class="tl-dot"></span><span class="tl-t">Regole per i <b>modelli di uso generale</b>, autorità nazionali, sanzioni</span></div>
+    <div class="tl-row"><span class="tl-d">2 agosto 2026</span><span class="tl-dot"></span><span class="tl-t">Applicazione generale: obblighi di <b>trasparenza</b>, poteri della Commissione sui modelli</span></div>
+    <div class="tl-row fut"><span class="tl-d">2 dicembre 2026</span><span class="tl-dot"></span><span class="tl-t">Nuovo divieto sulle immagini intime false; marcatura dei contenuti per i sistemi già sul mercato</span></div>
+    <div class="tl-row fut"><span class="tl-d">2 dicembre 2027</span><span class="tl-dot"></span><span class="tl-t">Obblighi per i sistemi <b>ad alto rischio</b> negli ambiti in elenco (lavoro, credito, istruzione…)</span></div>
+    <div class="tl-row fut"><span class="tl-d">2 agosto 2028</span><span class="tl-dot"></span><span class="tl-t">Obblighi per l'IA ad alto rischio dentro <b>prodotti regolati</b></span></div>
+  </div>
+  <div class="tl-leg"><span><i></i>già in vigore</span><span><i class="o"></i>prossime scadenze</span></div>
+  <aside class="notes">
+    Aggiornato al 5 novembre 2026.
+    Le date in arancione sono quelle fissate dal Regolamento 2026/1744 (in vigore dal 27 luglio 2026). In origine gli obblighi per l'alto rischio partivano il 2 agosto 2026 e il 2 agosto 2027.
+    Altre scadenze: 2 agosto 2027 per i modelli di uso generale già sul mercato prima di agosto 2025 e per le sandbox nazionali; 2 agosto 2030 per i sistemi ad alto rischio usati dalle pubbliche amministrazioni già in uso.
+  </aside>
+</section>
+
+<section class="slide" data-title="Sanzioni">
+  <p class="kicker">Il confronto</p>
+  <h2>Le sanzioni massime del GDPR e dell'AI Act</h2>
+  <table class="cmp-t">
+    <tr><th style="width:300px">Legge</th><th>Violazione</th><th style="width:330px">Sanzione massima</th></tr>
+    <tr><td>GDPR</td><td>Principi, basi giuridiche, diritti, trasferimenti fuori UE</td><td><b>20 milioni €</b> o <b>4%</b> del fatturato mondiale</td></tr>
+    <tr><td>GDPR</td><td>Altri obblighi, ad esempio sicurezza e notifica delle violazioni</td><td><b>10 milioni €</b> o <b>2%</b></td></tr>
+    <tr><td>AI Act</td><td>Pratiche vietate</td><td><b>35 milioni €</b> o <b>7%</b></td></tr>
+    <tr><td>AI Act</td><td>Obblighi per alto rischio, trasparenza, modelli di uso generale</td><td><b>15 milioni €</b> o <b>3%</b></td></tr>
+    <tr><td>AI Act</td><td>Informazioni false o incomplete alle autorità</td><td><b>7,5 milioni €</b> o <b>1%</b></td></tr>
+  </table>
+  <p class="bottom-line">Si applica l'importo <strong>più alto</strong> dei due. Per l'AI Act, alle piccole e medie imprese si applica <strong>il più basso</strong>.</p>
+  <aside class="notes">
+    Il fatturato è quello mondiale annuo dell'esercizio precedente.
+    GDPR: le persone danneggiate possono anche chiedere il risarcimento del danno (art. 82). Il Garante può inoltre ordinare di sospendere un trattamento, come è successo a ChatGPT nel 2023.
+    AI Act: dopo il Regolamento 2026/1744 il valore più basso vale anche per le "piccole mid-cap" (aziende appena sopra la soglia delle PMI).
+    Sono massimi: l'autorità decide l'importo in base a gravità, durata, collaborazione, dimensione dell'azienda.
+  </aside>
+</section>
+
+<section class="slide s-lab" data-title="Quale livello di rischio">
+  <p class="kicker lab-kicker"><svg class="ic"><use href="#i-users"/></svg>Pratica · in coppia · 15 minuti</p>
+  <h2>In quale livello di rischio rientra?</h2>
+  <div class="cases c4">
+    <div class="case"><p>Il chatbot del servizio clienti sul sito di un'azienda</p><div class="ans y f"><b>Trasparenza</b>Deve dire che è un'IA.</div></div>
+    <div class="case"><p>Un software che legge i CV e scarta i candidati</p><div class="ans o f"><b>Alto rischio</b>Ambito lavoro.</div></div>
+    <div class="case"><p>Il filtro antispam della posta aziendale</p><div class="ans g f"><b>Minimo</b>Nessun obbligo specifico.</div></div>
+    <div class="case"><p>Una telecamera che rileva le emozioni dei dipendenti in riunione</p><div class="ans r f"><b>Vietato</b>Emozioni sul luogo di lavoro.</div></div>
+    <div class="case"><p>Un sistema che decide se concedere un prestito a un privato</p><div class="ans o f"><b>Alto rischio</b>Affidabilità creditizia.</div></div>
+    <div class="case"><p>Uno spot con un attore famoso ricreato con l'IA</p><div class="ans y f"><b>Trasparenza</b>È un deepfake: va dichiarato.</div></div>
+    <div class="case"><p>Un assistente che riassume i verbali delle riunioni interne</p><div class="ans g f"><b>Minimo</b>Ma vale il GDPR se ci sono dati personali.</div></div>
+    <div class="case"><p>Un programma che corregge le prove d'esame e dà il voto</p><div class="ans o f"><b>Alto rischio</b>Ambito istruzione.</div></div>
+  </div>
+  <aside class="notes">
+    Le risposte compaiono una alla volta. Chiedere sempre il perché.
+    Spot con attore: oltre alla trasparenza serve il consenso dell'attore (diritto all'immagine); diffondere un deepfake che danneggia una persona senza consenso è reato in Italia (legge 132/2025).
+    Verbali: il riassunto è rischio minimo per l'AI Act, ma nei verbali ci sono nomi e opinioni dei colleghi: vale il GDPR, e va usato lo strumento aziendale.
+    Chatbot: se il chatbot desse anche decisioni sul credito, diventerebbe alto rischio. Conta l'uso.
+  </aside>
+</section>
+
+<!-- ============ Parte 4 · Italia e azienda ============ -->
+<section class="slide s-section" data-title="Italia e azienda">
+  <p class="kicker">Parte 4</p>
+  <h2>La legge italiana e le regole in azienda</h2>
+  <p class="section-q">L'Italia è stato il primo paese dell'Unione ad approvare una legge nazionale sull'IA.</p>
+  <aside class="notes">La legge italiana non ripete l'AI Act: lo completa in alcuni punti lasciati agli Stati e aggiunge regole su lavoro, professioni, minori, reati e diritto d'autore.</aside>
+</section>
+
+<section class="slide" data-title="Legge 132/2025">
+  <p class="kicker">Legge 23 settembre 2025, n. 132 · in vigore dal 10 ottobre 2025</p>
+  <h2>Cosa prevede la legge italiana sull'IA</h2>
+  <div class="cards big c3" style="gap:14px">
+    <div class="card"><span class="an">art. 11</span><b>Lavoro</b><span>Il datore di lavoro deve informare i lavoratori quando usa sistemi di IA nella gestione del lavoro.</span></div>
+    <div class="card"><span class="an">art. 13</span><b>Professioni intellettuali</b><span>L'IA solo come supporto: deve prevalere il lavoro del professionista, che deve informare il cliente in modo chiaro.</span></div>
+    <div class="card"><span class="an">art. 4</span><b>Minori</b><span>Sotto i 14 anni l'uso dell'IA richiede il consenso dei genitori.</span></div>
+    <div class="card"><span class="an">art. 612-quater c.p.</span><b>Deepfake</b><span>Diffondere senza consenso immagini, video o voci falsificati con l'IA, causando un danno, è reato: da 1 a 5 anni.</span></div>
+    <div class="card"><span class="an">diritto d'autore</span><b>Opere create con l'IA</b><span>Sono protette solo se sono il risultato del lavoro intellettuale di una persona.</span></div>
+    <div class="card"><span class="an">art. 20</span><b>Autorità</b><span>AgID e ACN vigilano sull'IA. Il Garante privacy resta competente per i dati personali.</span></div>
+  </div>
+  <p class="bottom-line">La legge italiana <strong>non aggiunge obblighi</strong> ai sistemi di IA oltre a quelli dell'AI Act.</p>
+  <aside class="notes">
+    Pubblicata in Gazzetta Ufficiale n. 223 del 25 settembre 2025.
+    Professioni (art. 13): vale per avvocati, commercialisti, consulenti, ingegneri e per tutte le professioni intellettuali, anche senza albo. Sono già circolati modelli di informativa per i clienti.
+    Lavoro (art. 11): l'informativa si collega agli obblighi già previsti dal decreto trasparenza (d.lgs. 152/1997, art. 1-bis). La legge istituisce anche un osservatorio sull'IA nel lavoro presso il Ministero del lavoro.
+    Minori: tra i 14 e i 18 anni il minore può dare il consenso da solo, se le informazioni sono chiare e comprensibili.
+    Diritto d'autore: le opere create con l'aiuto dell'IA sono protette se c'è un contributo creativo umano. La legge ammette l'estrazione di testi e dati per addestrare i modelli nei limiti della legge sul diritto d'autore.
+    Altre parti: sanità, pubblica amministrazione, giustizia (le decisioni restano sempre al magistrato), deleghe al governo.
+  </aside>
+</section>
+
+<section class="slide s-lab" data-title="Policy aziendale">
+  <p class="kicker lab-kicker"><svg class="ic"><use href="#i-users"/></svg>Pratica · in gruppo · 40 minuti</p>
+  <h2>Scriviamo le regole sull'IA per un'azienda</h2>
+  <div class="lab-grid" style="grid-template-columns:1fr;grid-template-rows:auto;max-width:900px">
+    <div class="lstep">
+      <h3><span>1</span>Rispondete a tre domande</h3>
+      <p class="lstep-text" style="font-size:20px">Per <strong>Occhialeria Dolomiti Srl</strong>, 40 dipendenti:</p>
+      <ul class="vs-list" style="gap:10px;padding-left:24px;margin-top:8px">
+        <li style="font-size:22px">Quali strumenti si usano, e con quale account?</li>
+        <li style="font-size:22px">Quali dati non si inseriscono mai?</li>
+        <li style="font-size:22px">Quando si dichiara di aver usato l'IA?</li>
+      </ul>
+    </div>
+  </div>
+  <aside class="notes">
+    Occhialeria Dolomiti Srl è l'azienda di fantasia usata negli esercizi del corso.
+    Cosa dovrebbe esserci: strumenti e account autorizzati; niente dati particolari, niente dati di clienti su account personali, niente documenti riservati; dichiarazione dell'uso dell'IA dove serve (clienti dei professionisti, deepfake, chatbot).
+  </aside>
+</section>
+
+<section class="slide" data-title="Cosa ricordare">
+  <p class="kicker">In sintesi</p>
+  <h2>Cosa ricordare di oggi</h2>
+  <div class="take">
+    <div class="tk-card"><span class="n">1</span><p>Quello che scrivi in chat arriva a un'azienda esterna, che può <strong>conservarlo e riusarlo</strong>.</p></div>
+    <div class="tk-card"><span class="n">2</span><p>Al lavoro usa solo <strong>strumenti e account autorizzati</strong> dall'azienda.</p></div>
+    <div class="tk-card"><span class="n">3</span><p>Un dato personale è qualsiasi informazione su una persona identificabile: <strong>toglilo se non serve</strong>.</p></div>
+    <div class="tk-card"><span class="n">4</span><p>Le decisioni importanti su una persona richiedono <strong>un esame umano reale</strong>.</p></div>
+    <div class="tk-card"><span class="n">5</span><p>L'AI Act <strong>vieta alcuni usi</strong>, impone obblighi per quelli ad alto rischio e chiede trasparenza su chatbot e deepfake.</p></div>
+    <div class="tk-card"><span class="n">6</span><p>Se hai dubbi o hai inserito dati per errore, <strong>chiedi al referente privacy</strong>.</p></div>
+  </div>
+  <aside class="notes">
+    Ogni punto riprende una parte della lezione: 1-2 parte 1 (dove vanno i dati, tipo di account); 3-4 GDPR (dato personale, minimizzazione, art. 22); 5 AI Act; 6 violazione dei dati e 72 ore.
+  </aside>
+</section>
+
+<section class="slide" data-title="Fonti">
+  <p class="kicker">Per approfondire · aggiornato al 5 novembre 2026</p>
+  <h2>Le fonti ufficiali</h2>
+  <div class="src">
+    <div><b>GDPR · Regolamento (UE) 2016/679</b><span>eur-lex.europa.eu</span></div>
+    <div><b>AI Act · Regolamento (UE) 2024/1689</b><span>eur-lex.europa.eu · artificialintelligenceact.eu</span></div>
+    <div><b>Modifiche all'AI Act · Regolamento (UE) 2026/1744</b><span>eur-lex.europa.eu</span></div>
+    <div><b>Legge italiana sull'IA · Legge 132/2025</b><span>gazzettaufficiale.it · G.U. n. 223 del 25/9/2025</span></div>
+    <div><b>Garante per la protezione dei dati personali</b><span>garanteprivacy.it</span></div>
+    <div><b>Comitato europeo per la protezione dei dati (EDPB)</b><span>edpb.europa.eu · parere 28/2024 sui modelli di IA</span></div>
+    <div><b>Ufficio europeo per l'IA</b><span>digital-strategy.ec.europa.eu</span></div>
+    <div><b>Proposta di modifica del GDPR (Digital Omnibus)</b><span>in discussione, non ancora in vigore</span></div>
+  </div>
+  <aside class="notes">Le regole su questi temi cambiano spesso: prima di ogni edizione del corso ricontrollare date e impostazioni degli strumenti.</aside>
+</section>
+
+</main>
+
+<div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
+<nav class="controls" aria-label="Navigazione slide">
+  <button type="button" id="btn-prev" aria-label="Slide precedente">&#8249;</button>
+  <span id="counter">1 / 38</span>
+  <button type="button" id="btn-next" aria-label="Slide successiva">&#8250;</button>
+  <button type="button" id="btn-help" aria-label="Comandi da tastiera">?</button>
+</nav>
+<div class="notes-panel" id="notes-panel" hidden></div>
+<div class="help-panel" id="help-panel" hidden>
+  <h3>Comandi</h3>
+  <dl>
+    <dt>→ ↓ Spazio PagGiù</dt><dd>Avanti</dd>
+    <dt>← ↑ PagSu</dt><dd>Indietro</dd>
+    <dt>Home / Fine</dt><dd>Prima / ultima slide</dd>
+    <dt>F</dt><dd>Schermo intero</dd>
+    <dt>O</dt><dd>Panoramica</dd>
+    <dt>N</dt><dd>Note per il docente</dd>
+  </dl>
+</div>
+
+</body>
+</html>
